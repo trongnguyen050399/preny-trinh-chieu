@@ -301,7 +301,7 @@
     return new Promise(res => {
       window.KICH_BAN = undefined;
       const sc = document.createElement('script');
-      sc.src = `kich-ban/${encodeURIComponent(k)}.js`;
+      sc.src = `kich-ban/${encodeURIComponent(k)}.js?v=${window.PRENY_V || ''}`;
       sc.onload = sc.onerror = () => { sc.parentNode && sc.parentNode.removeChild(sc); res(); };
       document.head.appendChild(sc);
     });
@@ -338,7 +338,7 @@
   }
 
   /* ---------- Demo chat (iframe) ---------- */
-  function loadDemo() { demoReady = false; demoStarted = false; demo.src = `index.html?kb=${encodeURIComponent(kb)}&present=1&embed=1`; }
+  function loadDemo() { demoReady = false; demoStarted = false; demo.src = `index.html?kb=${encodeURIComponent(kb)}&present=1&embed=1&v=${window.PRENY_V || ''}`; }
   demo.addEventListener('load', () => { demoReady = true; if (wantStart) startDemo(); });
   function startDemo() {
     wantStart = false; demoStarted = true;

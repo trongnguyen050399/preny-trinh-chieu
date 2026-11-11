@@ -6,7 +6,7 @@
 <title>Preny AI · Trình chiếu</title>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="trinh-chieu.css">
+<link rel="stylesheet" href="trinh-chieu.css?v=202611111554">
 </head>
 <body>
 <!-- Trang trình chiếu: menu chọn ngành → 6 slide mở đầu → demo AI chat (index.html nhúng bên dưới).
@@ -448,7 +448,9 @@
 
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
 
-<script src="kich-ban/danh-sach.js"></script>
-<script src="trinh-chieu.js"></script>
+<!-- Mã phiên bản ?v=…: đổi mỗi lần đẩy lên mạng (preny-demo/doi-phien-ban.sh) để trình duyệt không dùng file cũ trong bộ nhớ đệm -->
+<script>window.PRENY_V = '202611111554';</script>
+<script src="kich-ban/danh-sach.js?v=202611111554"></script>
+<script src="trinh-chieu.js?v=202611111554"></script>
 </body>
 </html>
