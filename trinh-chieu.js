@@ -162,9 +162,9 @@
       if (!v) { el._run = false; cancelAnimationFrame(el._raf); el.textContent = zero(el); }
     });
     $$('.rfg', s).forEach(c => { c.style.strokeDashoffset = visible(c) ? 527.79 * (1 - c.dataset.pct / 100) : 527.79; });
-    if ($('.track .fill', s)) s.style.setProperty('--p', Math.max(0, Math.min(1, (fi - 1) / 5)) * 100 + '%');
+    if ($('.track .fill', s)) s.style.setProperty('--p', s.classList.contains('on') ? '100%' : '0%');
   }
-  function resetLive(s) { $$('.count', s).forEach(el => { el._run = false; cancelAnimationFrame(el._raf); el.textContent = zero(el); }); }
+  function resetLive(s) { $$('.count', s).forEach(el => { el._run = false; cancelAnimationFrame(el._raf); el.textContent = zero(el); }); if ($('.track .fill', s)) s.style.setProperty('--p', '0%'); }
 
   /* ---------- Nội dung theo ngành: phần deck trong file kịch bản ----------
      data-d="a.b.0"  → innerHTML lấy từ deck (mảng → các <li>); không có dữ liệu thì giữ nội dung gốc trong HTML.

@@ -148,7 +148,6 @@ body.menu-on .progress, body.menu-on #counter { display: none; }
 .gi { flex: none; width: 70px; height: 70px; border-radius: 22px; display: grid; place-items: center; font-size: 34px; background: var(--gradBtn); box-shadow: 0 10px 30px rgba(168, 85, 247, .45); }
 .gt { flex: 1; font-size: 31px; font-weight: 700; }
 .gn { font-size: 26px; font-weight: 800; color: rgba(255, 255, 255, .25); }
-.goal.now { border-color: rgba(244, 114, 182, .75); box-shadow: 0 0 0 1px rgba(244, 114, 182, .5), 0 24px 70px rgba(236, 72, 153, .32); }
 
 /* ---------- SLIDE 2: logo ---------- */
 .logos { position: absolute; left: 145px; top: 452px; width: 1630px; display: grid; grid-template-columns: repeat(6, 250px); gap: 26px; }
@@ -164,7 +163,7 @@ body.menu-on .progress, body.menu-on #counter { display: none; }
 .chips span { display: inline-flex; gap: 10px; align-items: center; padding: 11px 22px; border-radius: 999px; font-size: 22px; font-weight: 600; color: #E9D5FF; background: var(--card); border: 1px solid var(--line); }
 .chips i { color: #F0ABFC; }
 .track { position: absolute; left: 235px; top: 470px; width: 1450px; height: 6px; border-radius: 6px; background: rgba(255, 255, 255, .1); }
-.track .fill { display: block; height: 100%; width: var(--p, 0%); border-radius: 6px; background: var(--gradBtn); box-shadow: 0 0 20px rgba(236, 72, 153, .7); transition: width .9s var(--ease); }
+.track .fill { display: block; height: 100%; width: var(--p, 0%); border-radius: 6px; background: var(--gradBtn); box-shadow: 0 0 20px rgba(236, 72, 153, .7); transition: width 1.4s var(--ease) .2s; }
 .nodes { position: absolute; left: 101px; top: 413px; width: 1718px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 22px; }
 .node { text-align: center; }
 .nc { position: relative; width: 120px; height: 120px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; font-size: 50px;
