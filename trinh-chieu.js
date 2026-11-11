@@ -39,6 +39,8 @@
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
     call: '<path d="M6.6 3.5h2.6l1.6 4.4-2.1 1.4a11.5 11.5 0 0 0 5.9 5.9l1.4-2.1 4.4 1.6v2.6a2 2 0 0 1-2.1 2A16.5 16.5 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/>',
     mail: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>',
+    eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    eyeoff: '<path d="M3 3l18 18"/><path d="M10.6 5.1A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.7 8.4 2 12 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
   };
   const paint = (root = document) => $$('i[data-i]', root).forEach(el => { el.innerHTML = `<svg viewBox="0 0 24 24">${ICON[el.dataset.i] || ''}</svg>`; });
   paint();
@@ -112,6 +114,7 @@
 
   function setView(v) {
     view = v;
+    if (v !== 'deck') closePanel();
     $('#vMenu').classList.toggle('on', v === 'menu');
     $('#vDeck').classList.toggle('on', v === 'deck');
     document.body.classList.toggle('menu-on', v === 'menu');
@@ -124,7 +127,9 @@
   function renderProgress() {
     const pos = view === 'demo' ? DEMO_AFTER : (si < DEMO_AFTER ? si : si + 1);
     $$('span', prog).forEach((s, i) => { s.classList.toggle('on', i === pos); s.classList.toggle('done', i < pos); });
-    $('#counter').textContent = view === 'deck' ? `${String(si + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')}` : (view === 'demo' ? 'DEMO CHAT' : '');
+    const nh = typeSlides.length - N;
+    $('#counter').textContent = view === 'deck' ? `${String(si + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')}${nh > 0 ? ' · ẩn ' + nh : ''}` : (view === 'demo' ? 'DEMO CHAT' : '');
+    $('#btnHide').classList.toggle('has', nh > 0);
   }
 
   /* ---------- Nhãn theo loại ngành (slide thống kê) ---------- */
@@ -233,11 +238,65 @@
     const K = window.KICH_BAN || {};
     D = Object.assign({ shop: K.shop }, K.deck || {});
     bind(); fillStats(); renderPipe(); renderTags(); applyType(loai);
-    slides = ALL.filter(s => (!s.dataset.loai || s.dataset.loai === loai) && (!s.dataset.need || get(D, s.dataset.need) != null));
+    typeSlides = ALL.filter(s => (!s.dataset.loai || s.dataset.loai === loai) && (!s.dataset.need || get(D, s.dataset.need) != null));
+    applyHidden();
+  }
+
+  /* ---------- Ẩn slide trong phiên này ----------
+     Lưu trong sessionStorage của tab đang mở: tải lại trang vẫn giữ, đóng tab là mất, máy khác không bị ảnh hưởng.
+     Ghi theo vị trí slide trong HTML nên ẩn một lần là áp dụng cho mọi ngành trong phiên. */
+  const HKEY = 'preny-an-slide';
+  let typeSlides = ALL.slice(), hidden = new Set();
+  try { hidden = new Set(JSON.parse(sessionStorage.getItem(HKEY) || '[]')); } catch (_) {}
+  const saveHidden = () => { try { sessionStorage.setItem(HKEY, JSON.stringify([...hidden])); } catch (_) {} };
+  const idOf = s => ALL.indexOf(s);
+  function applyHidden() {
+    slides = typeSlides.filter(s => !hidden.has(idOf(s)));
+    if (!slides.length) slides = typeSlides.slice();
     N = slides.length;
-    DEMO_AFTER = Math.max(1, slides.indexOf($('#vDeck .slide[data-demo-after]')) + 1);
+    const d6 = idOf($('#vDeck .slide[data-demo-after]'));
+    DEMO_AFTER = slides.filter(s => idOf(s) <= d6).length;   // số slide đứng trước demo chat
     buildProgress();
   }
+  function toggleHide(id) {
+    const cur = slides[si];
+    if (hidden.has(id)) hidden.delete(id);
+    else if (typeSlides.filter(s => !hidden.has(idOf(s))).length > 1) hidden.add(id);   // luôn chừa lại ít nhất 1 slide
+    afterHide(cur);
+  }
+  function afterHide(cur) {   // lưu lại, dựng lại danh sách slide, đứng yên ở slide đang chiếu (bị ẩn thì sang slide kế)
+    saveHidden(); applyHidden();
+    let k = slides.indexOf(cur);
+    if (k < 0) { k = slides.findIndex(s => idOf(s) > idOf(cur)); if (k < 0) k = slides.length - 1; fi = 0; }
+    si = k;
+    if (view === 'deck') render(); else renderProgress();
+    renderPanel();
+  }
+  const panel = $('#hidePanel');
+  function renderPanel() {
+    const d6 = idOf($('#vDeck .slide[data-demo-after]'));
+    let html = '', n = 0;
+    typeSlides.forEach(s => {
+      const id = idOf(s), off = hidden.has(id), h = $('h1, h2', s);
+      if (!off) n++;
+      html += `<button class="hp-row${off ? ' off' : ''}${s === slides[si] && view === 'deck' ? ' cur' : ''}" data-id="${id}">`
+        + `<span class="hp-n">${off ? '–' : String(n).padStart(2, '0')}</span><span class="hp-t">${esc(h ? headText(h) : 'Slide')}</span>`
+        + `<span class="hp-s"><i data-i="${off ? 'eyeoff' : 'eye'}"></i>${off ? 'Đã ẩn' : 'Đang hiện'}</span></button>`;
+      if (id === d6) html += '<div class="hp-demo">Demo chat</div>';
+    });
+    $('#hpList').innerHTML = html; paint($('#hpList'));
+    $('#hpCount').textContent = typeSlides.length > N ? `Đang ẩn ${typeSlides.length - N} slide · bấm vào slide để ẩn / hiện` : 'Bấm vào slide để ẩn / hiện';
+  }
+  function openPanel() { if (view !== 'deck') return; renderPanel(); panel.classList.add('on'); }
+  function closePanel() { panel.classList.remove('on'); }
+  const panelOpen = () => panel.classList.contains('on');
+  $('#btnHide').addEventListener('click', e => { e.stopPropagation(); panelOpen() ? closePanel() : openPanel(); });
+  panel.addEventListener('click', e => {
+    e.stopPropagation();
+    const r = e.target.closest('.hp-row'); if (r) return toggleHide(+r.dataset.id);
+    if (e.target.closest('#hpAll')) { const cur = slides[si]; hidden.clear(); afterHide(cur); }
+    if (e.target.closest('.hp-x')) closePanel();
+  });
   function loadKB(k) {   // nạp file kịch bản vào trang này để đọc phần deck (demo chat vẫn chạy riêng trong iframe)
     return new Promise(res => {
       window.KICH_BAN = undefined;
@@ -290,7 +349,7 @@
   function resumeDemo() { if (!kb) return; if (!demoStarted) return enterDemo(); setView('demo'); }   // quay lại demo: giữ nguyên chỗ đang dừng
   addEventListener('message', e => {
     const m = e.data && e.data.preny;
-    if (m === 'back') goSlideFull(DEMO_AFTER - 1);
+    if (m === 'back') { if (DEMO_AFTER > 0) goSlideFull(DEMO_AFTER - 1); else showMenu(); }
     else if (m === 'end') goSlide(DEMO_AFTER, 0);
     else if (m === 'menu') showMenu();
     else if (m === 'fullscreen') toggleFS();
@@ -308,7 +367,7 @@
     loadKB(k).then(() => {
       if (seq !== chooseSeq) return;
       applyDeck(it);
-      if (direct) enterDemo(); else goSlide(0, 0);
+      if (direct || DEMO_AFTER === 0) enterDemo(); else goSlide(0, 0);
     });
   }
   function showMenu() {
@@ -338,6 +397,8 @@
       else if (!typing && k.length === 1) search.focus();   // gõ chữ bất kỳ là tìm luôn
       return;
     }
+    if (panelOpen()) { if (k === 'Escape' || k === 's' || k === 'S') { e.preventDefault(); closePanel(); } return; }
+    if (k === 's' || k === 'S') return openPanel();
     if (k === 'f' || k === 'F') return toggleFS();
     if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter' || k === 'ArrowDown') { e.preventDefault(); next(); }
     else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); prev(); }

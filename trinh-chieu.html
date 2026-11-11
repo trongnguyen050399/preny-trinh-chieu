@@ -16,7 +16,7 @@
 
   <div class="topbar">
     <img class="tlogo" src="assets/img/logo-white.png" alt="Preny">
-    <div class="tright"><span id="kbName"></span><span id="counter"></span></div>
+    <div class="tright"><span id="kbName"></span><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button></div>
   </div>
 
   <!-- ============ MENU ============ -->
@@ -31,7 +31,7 @@
       <label class="toggle"><input type="checkbox" id="optSlides" checked><span class="sw"></span>Bắt đầu bằng slide mở đầu</label>
     </div>
     <div class="m-list" id="mList"><div class="m-grid" id="mGrid"></div><div class="m-empty" id="mEmpty">Không tìm thấy ngành phù hợp</div></div>
-    <div class="m-keys">Gõ để tìm · <b>↑ ↓ ← →</b> chọn · <b>Enter</b> mở · Khi trình chiếu: <b>→</b> tiếp · <b>←</b> lùi · <b>F</b> toàn màn hình · <b>M</b> về menu</div>
+    <div class="m-keys">Gõ để tìm · <b>↑ ↓ ← →</b> chọn · <b>Enter</b> mở · Khi trình chiếu: <b>→</b> tiếp · <b>←</b> lùi · <b>F</b> toàn màn hình · <b>S</b> ẩn slide · <b>M</b> về menu</div>
   </section>
 
   <!-- ============ CÁC SLIDE (slide có data-loai chỉ hiện cho loại ngành đó; data-need: chỉ hiện khi kịch bản có dữ liệu đó) ============ -->
@@ -437,6 +437,13 @@
   </section>
 
   <div class="progress" id="progress"></div>
+
+  <!-- Bảng ẩn slide trong phiên này (nút con mắt góc trên phải hoặc phím S) -->
+  <div class="hp glass" id="hidePanel">
+    <div class="hp-h"><div><b>Ẩn slide trong phiên này</b><small id="hpCount"></small></div><button class="hp-x" title="Đóng (Esc)">✕</button></div>
+    <div class="hp-list" id="hpList"></div>
+    <div class="hp-f"><button id="hpAll">Hiện lại tất cả</button><small>Chỉ áp dụng trên tab trình duyệt này: tải lại trang vẫn giữ, đóng tab là hết. Đồng nghiệp mở ở máy khác không bị ảnh hưởng.</small></div>
+  </div>
 </div>
 
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
