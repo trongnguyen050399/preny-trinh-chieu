@@ -108,9 +108,12 @@ body.menu-on .progress, body.menu-on #counter { display: none; }
   background: linear-gradient(140deg, rgba(236, 72, 153, .35), rgba(99, 102, 241, .35)); border: 1px solid rgba(255, 255, 255, .18); }
 .mc .mt { font-size: 26px; font-weight: 700; line-height: 1.2; }
 .mc .mg { display: block; font-size: 18px; color: var(--dim); margin-top: 8px; font-weight: 500; }
-.mc .direct { position: absolute; right: 16px; top: 18px; font-size: 15px; color: var(--mut); padding: 5px 12px; border-radius: 99px; border: 1px solid var(--line); opacity: 0; transition: opacity .25s; }
+/* Nút "Vào thẳng chat": luôn hiện (mờ), to hơn; vùng bấm rộng hơn nút 10px mỗi phía để bấm chuột không trượt sang thẻ */
+.mc .direct { position: absolute; right: 16px; top: 16px; font-size: 17px; font-weight: 600; color: var(--mut); padding: 8px 16px; border-radius: 99px;
+  border: 1px solid var(--line); background: rgba(255, 255, 255, .04); opacity: .6; transition: opacity .25s, color .2s, border-color .2s, background .2s; }
+.mc .direct::before { content: ''; position: absolute; inset: -10px; border-radius: 99px; }
 .mc:hover .direct, .mc.sel .direct { opacity: 1; }
-.mc .direct:hover { color: #fff; border-color: #F472B6; }
+.mc .direct:hover { color: #fff; border-color: #F472B6; background: rgba(236, 72, 153, .2); }
 .m-keys { position: absolute; left: 0; right: 0; bottom: 56px; text-align: center; font-size: 21px; color: var(--dim); }
 .m-keys b { color: #E9D5FF; padding: 2px 10px; border-radius: 8px; background: rgba(255, 255, 255, .08); }
 @keyframes pop { from { opacity: 0; transform: translateY(26px) scale(.92); } to { opacity: 1; transform: none; } }

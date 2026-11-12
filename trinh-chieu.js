@@ -79,9 +79,14 @@
   }
   filtersEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; filter = b.dataset.k; sel = 0; renderFilters(); renderMenu(); });
   search.addEventListener('input', () => { sel = 0; renderMenu(); });
+  // Bấm chuột: tính theo chỗ NHẤN xuống. Nhấn trên nút "Vào thẳng chat" mà nhả chuột lệch ra ngoài nút vẫn vào thẳng chat.
+  let downDirect = false;
+  grid.addEventListener('pointerdown', e => { downDirect = !!e.target.closest('[data-direct]'); });
   grid.addEventListener('click', e => {
     const c = e.target.closest('.mc'); if (!c) return;
-    choose(c.dataset.kb, !!e.target.closest('[data-direct]') || !$('#optSlides').checked);
+    const direct = downDirect || !!e.target.closest('[data-direct]');
+    downDirect = false;
+    choose(c.dataset.kb, direct || !$('#optSlides').checked);
   });
   renderFilters(); renderMenu();
 
