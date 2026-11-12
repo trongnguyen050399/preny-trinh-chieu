@@ -8,6 +8,7 @@ window.DANH_SACH = [
   { kb: 'thiet-bi-ve-sinh-tc', ten: 'Thiết bị vệ sinh', loai: 'tmdt', icon: '🚽' },
   { kb: 've-sinh-o-to-tc', ten: 'Dung dịch vệ sinh ô tô', loai: 'tmdt', icon: '🚗' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨' },
+  { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },

@@ -608,3 +608,6 @@ body.menu-on .hp, body.demo-on .hp { display: none; }
 .hp-f { padding: 16px 26px 22px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 10px; }
 .hp-f button { align-self: flex-start; padding: 10px 20px; border-radius: 99px; cursor: pointer; font: inherit; font-size: 17px; font-weight: 700; color: #fff; background: var(--gradBtn); border: 0; }
 .hp-f small { font-size: 15px; line-height: 1.45; color: var(--dim); }
+
+/* Tiêu đề slide định nghĩa chốt đơn: tên ngành dài vẫn nằm 1 dòng */
+.s3c .t2 { font-size: 62px; white-space: nowrap; }
