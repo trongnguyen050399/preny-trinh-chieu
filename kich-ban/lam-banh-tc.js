@@ -67,12 +67,12 @@
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
     deck: {
       tieuDe6: 'Hệ thống AI chatbot giúp tăng<br><span class="grad">tỷ lệ chốt SĐT học viên</span>',
+      // Không bán hàng vật lý, không lên đơn → 5 tính năng (ngành có lên đơn thì giữ 6 như thường)
       tinhNang: [
-        ['AI tư vấn khóa học 24/7', 'Hiểu đúng nhu cầu từng học viên'],
-        ['AI xử lý băn khoăn, lấy SĐT', 'Lead nóng chuyển ngay tư vấn viên'],
+        ['AI tư vấn, chủ động lấy lead', 'Lead chất lượng, rủ học thử, chốt khóa'],
         ['Soft follow-up nuôi học viên', 'Gửi video lớp, thành phẩm học viên'],
-        ['Nhắc lịch học thử, khai giảng', 'Giảm học viên bỏ lỡ buổi đầu'],
-        ['Bộ công cụ Remarketing FMM và ZBS', 'Mời học viên cũ học khóa nâng cao'],
+        ['AI chăm sóc học viên sau bán', 'Nhắc lịch học, mời học khóa nâng cao'],
+        ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu học viên cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
       ],
 

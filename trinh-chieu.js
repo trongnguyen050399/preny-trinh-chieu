@@ -238,11 +238,24 @@
       + p.nhom.map(([n, cs]) => `<div class="tp-g"><span>${esc(n)}</span><div>${cs.map(tchip).join('')}</div></div>`).join('')
       + (p.ghiChu ? `<div class="tp-note"><b>AI tóm tắt</b>${esc(p.ghiChu)}</div>` : '');
   }
+  /* Slide 6: ngành bán hàng vật lý / có lên đơn → 6 tính năng (mặc định).
+     Ngành không lên đơn (khóa học, dịch vụ…) → kịch bản chỉ ghi 5 tính năng: ô 6 ẩn, ô 4–5 dời vào giữa cột phải. */
+  const CONN = { c4: ['M1090 640 C 1160 640, 1170 450, 1260 450', 'M1090 640 C 1160 640, 1170 542, 1260 542'],
+                 c5: ['M1120 640 C 1180 640, 1200 635, 1260 635', 'M1090 640 C 1160 640, 1170 727, 1260 727'] };
+  function layoutFeats() {
+    const s = $('#vDeck .s6'); if (!s) return;
+    const n5 = Array.isArray(D.tinhNang) && D.tinhNang.length === 5;
+    s.classList.toggle('n5', n5);
+    $('.core-n', s).innerHTML = `${n5 ? 5 : 6} tính năng<br>tăng doanh số`;
+    [$('.feat.k6', s), $('.conn.c6', s)].forEach(e => n5 ? e.removeAttribute('data-f') : e.setAttribute('data-f', '6'));
+    $('.cta', s).dataset.f = n5 ? '6' : '7';
+    Object.keys(CONN).forEach(k => $('.conn.' + k, s).setAttribute('d', CONN[k][n5 ? 1 : 0]));
+  }
   function applyDeck(it) {
     loai = (it && it.loai) || 'tmdt';
     const K = window.KICH_BAN || {};
     D = Object.assign({ shop: K.shop }, K.deck || {});
-    bind(); fillStats(); renderPipe(); renderTags(); applyType(loai);
+    bind(); fillStats(); renderPipe(); renderTags(); layoutFeats(); applyType(loai);
     typeSlides = ALL.filter(s => (!s.dataset.loai || s.dataset.loai === loai) && (!s.dataset.need || get(D, s.dataset.need) != null));
     applyHidden();
   }

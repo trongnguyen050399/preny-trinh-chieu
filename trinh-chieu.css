@@ -232,6 +232,10 @@ body.menu-on .progress, body.menu-on #counter { display: none; }
 .feat.now { border-color: rgba(244, 114, 182, .75); box-shadow: 0 0 0 1px rgba(244, 114, 182, .5), 0 24px 70px rgba(236, 72, 153, .32); }
 .s6 .cta-wrap { bottom: 92px; }
 .s6t { font-size: 62px; }
+/* 5 tính năng (ngành không lên đơn): cột phải còn 2 ô, dời vào giữa */
+.s6.n5 .feat.k6, .s6.n5 .conn.c6 { display: none; }
+.s6.n5 .feat.k4 { top: 472px !important; }
+.s6.n5 .feat.k5 { top: 657px !important; }
 .cta { display: inline-flex; gap: 14px; align-items: center; padding: 18px 40px; border-radius: 999px; font-size: 27px; font-weight: 700; background: var(--gradBtn);
   box-shadow: 0 16px 50px rgba(168, 85, 247, .55); }
 .cta.in { animation: breath 2.2s ease-in-out infinite .8s; }
