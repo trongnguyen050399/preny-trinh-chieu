@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202611121335">
+<link rel="stylesheet" href="style.css?v=202611121406">
 </head>
 <body>
 <div id="stage">
@@ -56,17 +56,17 @@
 
 <div id="hint">Nhấn <b>Space</b> hoặc bấm chuột để bắt đầu · <b>Space</b> tạm dừng / tiếp tục · <b>R</b> chạy lại</div>
 
-<script src="assets/offline.js?v=202611121335"></script><!-- ảnh tải sẵn về máy (tai-offline.py); thiếu file thì dùng ảnh trên mạng -->
+<script src="assets/offline.js?v=202611121406"></script><!-- ảnh tải sẵn về máy (tai-offline.py); thiếu file thì dùng ảnh trên mạng -->
 <script>
   // Mở link gốc của trang web (không có ?kb=…) → sang trang trình chiếu. Video, iframe demo luôn có ?kb= nên không bị ảnh hưởng.
   if (!location.search && location.protocol !== 'file:') location.replace('trinh-chieu.html' + location.hash);
   // Chọn kịch bản qua ?kb=ten-file (mặc định: thoi-trang)
   (function () {
     var kb = (new URLSearchParams(location.search).get('kb') || 'thoi-trang').replace(/[^a-z0-9-]/gi, '');
-    var PRENY_V = '202611121335';   // mã phiên bản, đổi mỗi lần đẩy lên mạng
+    var PRENY_V = '202611121406';   // mã phiên bản, đổi mỗi lần đẩy lên mạng
     document.write('<script src="kich-ban/' + kb + '.js?v=' + PRENY_V + '"><\/script>');
   })();
 </script>
-<script src="engine.js?v=202611121335"></script>
+<script src="engine.js?v=202611121406"></script>
 </body>
 </html>

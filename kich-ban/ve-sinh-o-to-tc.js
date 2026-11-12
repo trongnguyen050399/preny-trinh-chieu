@@ -1,8 +1,8 @@
 /* Kịch bản: DUNG DỊCH VỆ SINH Ô TÔ — BẢN TRÌNH CHIẾU, nhóm THƯƠNG MẠI ĐIỆN TỬ. Khung ngang 16:9.
-   Làm theo bộ mẫu thời trang (TRINH-CHIEU.md). Hai tình huống:
-     1. Anh Phong gửi ảnh ghế da bẩn hỏi dùng chai nào → AI tư vấn đúng loại, cách dùng, combo dưỡng da → chốt → lên đơn
-        → (Meta CAPI ở cột trái) → chăm sóc sau bán → nhắc mua lại khi chai sắp hết → remarketing khách cũ.
-     2. Xóa chat → anh Quân hỏi giá rửa xe bọt tuyết rồi im → bám đuổi theo thẻ #RuaXeBotTuyet, #HoiGia → anh quay lại mua.
+   Demo chat theo chuẩn thương mại điện tử (TRINH-CHIEU.md mục 3), một mạch:
+     anh Phong gửi ảnh ghế da bẩn hỏi dùng chai nào → AI tư vấn đúng loại, cách dùng, combo dưỡng da → anh im
+     → bám đuổi 2 tin theo thẻ #NoiThatDa, #HoiGia → anh quay lại chốt → lên đơn tự động → chăm sóc sau bán, nhắc mua lại.
+   Không có tin cập nhật vận chuyển. Không có bước kết thúc: bấm → là sang slide kế.
    Tên shop, sản phẩm, giá, SĐT: dữ liệu minh họa (không dùng tên hãng thật). Ảnh: Unsplash (ảnh thật). */
 (function () {
   const U = id => 'https://images.unsplash.com/photo-' + id + '?w=800&h=800&fit=crop&q=80&auto=format';
@@ -30,27 +30,24 @@
 
     images: Object.fromEntries(Object.entries(IMG).map(([k, id]) => [k, U(id)])),
 
+    // Cột trái demo: đúng 4 tính năng được diễn, theo thứ tự diễn (chuẩn thương mại điện tử lần 22)
     features: [
       { title: 'AI chatbot chốt đơn tự động 100%', desc: 'Tăng trung bình 62% tỷ lệ chốt đơn.',
         kws: ['Trả lời ngay tức thì, 24/7', 'Xem ảnh, tư vấn đúng loại dung dịch', 'Hướng dẫn cách dùng, an toàn bề mặt', 'Trả lời băn khoăn: mùi, số lần dùng', 'Gợi ý combo, chủ động chốt đơn'] },
-      { title: 'AI Agent tự động lên đơn và gửi sang đơn vị vận chuyển', desc: 'Tiết kiệm hơn 90% thời gian xử lý đơn.',
-        kws: ['Thu đủ tên, SĐT, địa chỉ', 'Gửi tin xác nhận đơn đầy đủ', 'Tự tạo đơn, đẩy sang đơn vị vận chuyển', 'Tự cập nhật trạng thái giao hàng'] },
       { title: 'AI tự động bám đuổi khách hàng trong 7 ngày', desc: 'Tăng thêm khoảng 35% tỷ lệ chốt đơn.',
         kws: ['~65% khách nhắn tin rồi im lặng', 'Tự gắn thẻ sản phẩm khách xem, lý do im', 'Nhắc đúng sản phẩm, cách dùng hiệu quả', 'Báo giá xong im → ưu đãi giá đúng lúc'] },
+      { title: 'AI Agent tự động lên đơn và gửi sang đơn vị vận chuyển', desc: 'Tiết kiệm hơn 90% thời gian xử lý đơn.',
+        kws: ['Thu đủ tên, SĐT, địa chỉ', 'Gửi tin xác nhận đơn đầy đủ', 'Tự tạo đơn, đẩy sang đơn vị vận chuyển'] },
       { title: 'AI tự động chăm sóc khách hàng sau bán', desc: 'Tăng doanh thu từ khách hàng cũ.',
         kws: ['Hỏi kết quả sau lần dùng đầu', 'Nhắc lịch dưỡng da, phủ bóng định kỳ', 'Nhắc mua lại khi chai sắp hết'] },
-      { title: 'Bộ công cụ Remarketing FMM và ZBS', desc: 'Khai thác hiệu quả dữ liệu khách hàng.',
-        kws: ['AI tự phân loại và gắn thẻ khách', 'Mini CRM lưu toàn bộ dữ liệu khách', 'Gửi chiến dịch qua Messenger và Zalo', 'Khách cũ quay lại mua tiếp'] },
-      { title: 'AI tự động gửi sự kiện mua hàng qua Meta CAPI', desc: 'Hỗ trợ tối ưu quảng cáo Facebook.',
-        kws: ['Gửi sự kiện mua hàng + giá trị đơn về Meta', 'Meta tối ưu quảng cáo theo người mua thật', 'Hướng tới giảm chi phí mỗi đơn (CPO)'] },
     ],
 
     steps: [
       { intro: true, hold: 1800 },
 
-      /* ===== TÌNH HUỐNG 1: gửi ảnh hỏi → tư vấn đúng loại → combo → lên đơn → sau bán → mua lại → remarketing ===== */
+      /* ---- 1. Tư vấn: xem ảnh, đúng loại, cách dùng, combo ---- */
       { feature: 1 },
-      { sep: 'Tình huống 1 · Khách nhắn tin từ quảng cáo Facebook', style: 'time', hold: 800 },
+      { sep: 'Khách nhắn tin từ quảng cáo Facebook', style: 'time', hold: 800 },
       { img: 'ghe-da', hold: 1500 },
       { kh: 'Ghế da xe anh bị bẩn với xỉn màu vậy, dùng chai nào shop?' },
       { ai: 'Dạ shop xem ảnh rồi ạ anh! 🚗', fast: true, meta: '⚡ Preny AI trả lời sau 2 giây', kw: 0 },
@@ -63,15 +60,26 @@
           { name: 'Dưỡng da ghế', sub: 'Chai 250ml', price: '169.000đ', old: '', tag: 'Ghế da', art: 'duong-da' },
           { name: 'Khăn microfiber', sub: 'Bộ 3 khăn', price: '79.000đ', old: '', tag: 'Combo −15%', art: 'khan' },
         ], hold: 4000 },
-      { kh: 'Lấy anh combo 3 món nha' },
+      { kh: 'Để anh xem lại đã' },
 
+      /* ---- 2. Khách im → bám đuổi 2 tin theo thẻ ---- */
       { feature: 2 },
+      { sep: 'Khách chưa phản hồi… · AI gắn thẻ #NoiThatDa #HoiGia', style: 'silent', kw: [0, 1], hold: 1800 },
+      { sep: '— 1 ngày sau —' },
+      { ai: 'Anh Phong ơi, ghế da xỉn màu như xe anh chỉ cần **lau bằng xịt đa năng rồi dưỡng da** là lên màu lại, làm tại nhà **khoảng 15 phút** ạ 👇', meta: '🔁 Tự động · Bám đuổi theo thẻ #NoiThatDa', kw: 2 },
+      { aiImg: 'lau-noi-that', hold: 1600 },
+      { sep: '— 2 ngày sau —' },
+      { ai: 'Combo 3 món anh hỏi giá hôm nay **giảm 20% còn 349.000đ + freeship**, chỉ đến 23h tối nay thôi ạ 🎁', meta: '🔁 Tự động · Bám đuổi theo thẻ #HoiGia', kw: 3 },
+      { kh: 'Ok lấy anh combo 3 món nha' },
+
+      /* ---- 3. Lên đơn tự động (không có tin cập nhật vận chuyển) ---- */
+      { feature: 3 },
       { ai: 'Dạ anh cho em xin **tên, SĐT và địa chỉ** nhận hàng nha.', kw: 0 },
       { kh: 'Lê Phong – 0912 888 246\n88 Nguyễn Văn Linh, Q.7, TP.HCM' },
       { card: {
           tag: '✓ Tin xác nhận đơn',
           intro: 'Dạ anh kiểm tra lại đơn giúp em nhé:',
-          lines: ['Combo nội thất 3 món: xịt đa năng, dưỡng da, khăn microfiber', 'Tổng cộng: **371.000đ** (đã giảm 15%, freeship)', 'Người nhận: Lê Phong · 0912 888 246', 'Địa chỉ: 88 Nguyễn Văn Linh, Q.7, TP.HCM'],
+          lines: ['Combo nội thất 3 món: xịt đa năng, dưỡng da, khăn microfiber', 'Tổng cộng: **349.000đ** (đã giảm 20%, freeship)', 'Người nhận: Lê Phong · 0912 888 246', 'Địa chỉ: 88 Nguyễn Văn Linh, Q.7, TP.HCM'],
           button: 'Quản lý đơn hàng',
         }, kw: 1, hold: 4500 },
       { kh: 'Ok em' },
@@ -79,12 +87,8 @@
           tag: '✓ Đã tạo đơn & gửi vận chuyển', ok: true,
           lines: ['Mã đơn: **#XS51836**', 'Mã vận đơn: **VD60418275**', 'Dự kiến giao: 1–2 ngày'],
         }, kw: 2, hold: 3500 },
-      { sep: '— 1 ngày sau —' },
-      { ai: '📦 Đơn **#XS51836** đang được giao, dự kiến tới tay anh chiều nay ạ!', meta: '🚚 Tự động · Cập nhật vận chuyển', kw: 3 },
 
-      // Meta CAPI: chỉ bật thẻ ở cột trái để bạn tự nói, điện thoại đứng yên
-      { feature: 6, kw: [0, 1, 2], hold: 3000 },
-
+      /* ---- 4. Chăm sóc sau bán, nhắc mua lại ---- */
       { feature: 4 },
       { sep: '— 3 ngày sau —' },
       { ai: 'Anh Phong ơi, ghế da lau xong có sạch, lên màu lại không ạ? Anh **dưỡng da 2–3 tuần/lần** để da mềm, không nứt nha 🚗', meta: '💙 Tự động · Chăm sóc sau bán', kw: [0, 1] },
@@ -96,48 +100,8 @@
           { name: 'Rửa xe bọt tuyết', sub: 'Can 1 lít', price: '143.100đ', old: '159.000đ', tag: 'Hay mua kèm', art: 'bot-tuyet' },
           { name: 'Phủ bóng nano', sub: 'Chai 500ml', price: '224.100đ', old: '249.000đ', tag: '-10%', art: 'phu-bong' },
         ], hold: 4000 },
-      { kh: 'Lấy anh 1 xịt nội thất với 1 rửa xe bọt tuyết' },
-
-      { feature: 5 },
-      { screen: { title: 'Preny · Mini CRM', sub: 'Dữ liệu khách hàng của shop' }, hold: 600 },
-      { tags: { title: 'AI tự gắn thẻ theo nội dung chat', tags: [
-          { t: 'Hỏi giá chưa mua', n: '1.032', c: 'amber' },
-          { t: 'Đã đặt hàng', n: '688', c: 'green' },
-          { t: 'Sắp hết sản phẩm', n: '219', c: 'purple' },
-          { t: 'Cần tư vấn thêm', n: '96', c: 'blue' },
-        ] }, kw: 0, hold: 3000 },
-      { customers: { title: 'Khách hàng', rows: [
-          { name: 'Lê Phong', note: '2 đơn · Combo nội thất, rửa xe bọt tuyết', tag: 'Khách cũ', c: 'purple' },
-          { name: 'Võ Minh Quân', note: 'Hỏi giá rửa xe bọt tuyết', tag: 'Hỏi giá chưa mua', c: 'amber' },
-          { name: 'Đặng Tiến Đạt', note: 'Mua phủ bóng nano 6 tuần trước', tag: 'Sắp hết sản phẩm', c: 'purple' },
-        ] }, kw: 1, hold: 3000 },
-      { campaign: { title: 'Tạo chiến dịch remarketing', name: 'Cuối tuần mua 2 tặng 1 khăn microfiber', audience: 'Sắp hết sản phẩm · 219 khách',
-          channels: [{ t: 'Messenger · FMM', k: 'mess' }, { t: 'Zalo · ZBS', k: 'zalo' }], button: 'Gửi chiến dịch' }, kw: 2, hold: 3200 },
-      { status: { tag: '✓ Đã gửi chiến dịch', ok: true, lines: ['Đã gửi **219** tin qua Messenger và Zalo'] }, hold: 2200 },
-      { screen: 'chat', hold: 500 },
-      { sep: 'Tin nhắn chiến dịch · Messenger', style: 'time', hold: 700 },
-      { aiImg: 'phu-bong', hold: 1000 },
-      { ai: '🔥 **Cuối tuần mua 2 tặng 1 khăn microfiber**: phủ bóng nano chỉ **224.100đ/chai** cho khách cũ ạ anh Đạt!', meta: '📣 Tự động · Chiến dịch FMM' },
-      { kh: 'Lấy anh 2 chai phủ bóng nha', kw: 3 },
-
-      /* ===== TÌNH HUỐNG 2: hỏi giá rồi im → bám đuổi theo thẻ → quay lại mua ===== */
-      { screen: 'chat', hold: 600 },
-      { feature: 3 },
-      { sep: 'Tình huống 2 · Khách hỏi giá rồi im lặng', style: 'time', hold: 900 },
-      { img: 'bot-tuyet', hold: 1400 },
-      { kh: 'Rửa xe bọt tuyết 1 lít giá bao nhiêu shop?' },
-      { ai: 'Dạ **Rửa xe bọt tuyết can 1 lít** giá **159.000đ**, pha **1:100**, rửa được khoảng 20 lần ạ. Anh rửa tại nhà bằng bình phun bọt hay máy xịt áp lực ạ?', fast: true, meta: '⚡ Preny AI trả lời sau 2 giây' },
-      { kh: 'Để anh xem thêm' },
-      { sep: 'Khách chưa phản hồi… · AI gắn thẻ #RuaXeBotTuyet #HoiGia', style: 'silent', kw: [0, 1], hold: 1800 },
-      { sep: '— 1 ngày sau —' },
-      { ai: 'Anh Quân ơi, **rửa xe bọt tuyết** anh xem hôm qua bọt dày, bám lâu, xả nước là sạch bụi, **không cần chà mạnh** nên không xước sơn ạ 👇', meta: '🔁 Tự động · Bám đuổi theo thẻ #RuaXeBotTuyet', kw: 2 },
-      { aiImg: 'rua-xe', hold: 1600 },
-      { sep: '— 2 ngày sau —' },
-      { ai: 'Hôm nay **mua 2 can chỉ 139.000đ/can + freeship**, chỉ đến 23h tối nay thôi ạ 🎁', meta: '🔁 Tự động · Bám đuổi theo thẻ #HoiGia', kw: 3 },
-      { kh: 'Ok lấy anh 2 can nha' },
-      { ai: 'Dạ anh cho em xin **tên, SĐT và địa chỉ** nhận hàng, em lên đơn ngay cho anh ạ! 🚗', fast: true },
-
-      { end: true, hold: 600 },
+      { kh: 'Lấy anh 1 xịt nội thất với 1 rửa xe bọt tuyết', hold: 1500 },
+      // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
