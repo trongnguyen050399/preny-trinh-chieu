@@ -10,6 +10,7 @@ window.DANH_SACH = [
   { kb: 'servo-thao-may-tc', ten: 'Servo tháo máy', loai: 'tmdt', icon: '⚙️' },
   { kb: 'qua-tang-dn-tc', ten: 'Quà tặng doanh nghiệp', loai: 'tmdt', icon: '🎁' },
   { kb: 'noi-that-sofa-tc', ten: 'Nội thất, Sofa', loai: 'tmdt', icon: '🛋️' },
+  { kb: 'in-ao-tc', ten: 'In áo theo yêu cầu', loai: 'tmdt', icon: '👚' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂' },
 
