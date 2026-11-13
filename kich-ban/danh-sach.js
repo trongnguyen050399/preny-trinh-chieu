@@ -15,6 +15,7 @@ window.DANH_SACH = [
   { kb: 'duoc-pham-tc', ten: 'Dược phẩm', loai: 'tmdt', icon: '💊' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂' },
+  { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
