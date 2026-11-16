@@ -68,7 +68,7 @@
     shown = LIST.filter(x => (filter === 'all' || x.loai === filter) && (!q || norm(x.ten).includes(q) || norm(LOAI[x.loai]).includes(q)));
     sel = Math.min(sel, Math.max(0, shown.length - 1));
     grid.innerHTML = shown.map((x, i) => `<button class="mc glass" style="--i:${i}" data-kb="${x.kb}"><span class="mi">${x.icon || '💬'}</span>`
-      + `<span><span class="mt">${x.ten.replace(/ (\S+)$/, ' $1')}</span><span class="mg ${x.loai}">${LOAI[x.loai] || ''}</span></span>`
+      + `<span><span class="mt">${x.ten.replace(/ (\S+)$/, ' $1')}</span><span class="mg ${x.loai}" data-loai="${x.loai}" title="${filter === x.loai ? 'Bấm để hiện lại tất cả ngành' : 'Bấm để lọc ngành ' + (LOAI[x.loai] || '')}">${LOAI[x.loai] || ''}</span></span>`
       + `<span class="direct" data-direct="1">Vào thẳng chat ▸</span></button>`).join('');
     empty.classList.toggle('on', !shown.length);
     markSel();
@@ -83,6 +83,9 @@
   let downDirect = false;
   grid.addEventListener('pointerdown', e => { downDirect = !!e.target.closest('[data-direct]'); });
   grid.addEventListener('click', e => {
+    // Bấm nhãn loại ngành trên thẻ (Thương mại điện tử / Cân nhắc nhiều) → lọc theo loại đó; bấm lại lần nữa → hiện tất cả
+    const tag = e.target.closest('.mg[data-loai]');
+    if (tag) { downDirect = false; filter = filter === tag.dataset.loai ? 'all' : tag.dataset.loai; sel = 0; renderFilters(); renderMenu(); return; }
     const c = e.target.closest('.mc'); if (!c) return;
     const direct = downDirect || !!e.target.closest('[data-direct]');
     downDirect = false;
