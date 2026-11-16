@@ -132,6 +132,8 @@
     $('#vDeck').classList.toggle('on', v === 'deck');
     document.body.classList.toggle('menu-on', v === 'menu');
     document.body.classList.toggle('demo-on', v === 'demo');
+    $('#vDoc').classList.toggle('on', v === 'doc');
+    document.body.classList.toggle('doc-on', v === 'doc');
     if (v === 'demo') { demo.focus(); try { demo.contentWindow.focus(); } catch (_) {} }
     else { demo.blur(); window.focus(); }
     if (v === 'menu') setTimeout(() => search.focus(), 50);
@@ -343,6 +345,29 @@
     });
     return { html: h, t, marks };
   }
+  // Mỗi tin một lần bấm: tin thứ k có data-f = f0 + k; tin AI hiện dấu "đang nhập…" 0,7 giây rồi mới hiện; vạch thời gian đi kèm tin kế tiếp.
+  function chatSteps(items, f0, o = {}) {
+    let f = f0 - 1, h = '', ai = 0, seps = [];
+    const marks = {};
+    const el = (cls, inner, t, tx) => `<div class="${cls}" data-f="${f}" data-t="${t}"${tx != null ? ` data-tx="${tx}"` : ''}>${inner}</div>`;
+    items.forEach(m => {
+      if (m.sep) { seps.push(m.sep); return; }
+      f++;
+      seps.forEach(x => { h += el('mtag', md(x), 0); }); seps = [];
+      if (m.kh) h += el('mb me', md(m.kh), 0);
+      else if (m.ai) {
+        h += el('mty', '<i></i><i></i><i></i>', 0, 700);
+        marks['ai' + (++ai)] = f;
+        h += el('mb bot', md(m.ai), 700);
+        if (m.meta) h += el('mmeta', md(m.meta), 700);
+      }
+      else if (m.don) marks.don = f;
+      else if (m.ok) { const d = m.ok === true ? (o.lead || o.don) : m.ok; h += el('mok', d.sp ? okCard(d) : leadCard(d), 0); }
+      else if (m.pill) h += el('mpill ' + (m.mau || 'green'), md(m.pill), 0);
+      else if (m.anh) h += el('mpic', `<img src="${esc(m.anh)}" alt="">`, 0);
+    });
+    return { html: h, marks, last: f };
+  }
   const phoneHead = (sub, tag) => `<div class="mh"><span class="av">${esc((D.shop || {}).initials)}</span><div><b>${esc((D.shop || {}).name)}</b><small>${sub}</small></div>${tag ? `<em class="htag green">${tag}</em>` : ''}</div>`;
 
   // --- Màn hình Tạo đơn của Preny, AI tự điền từ cuộc chat (giống form người dùng gửi 16/11/2026). T: lúc màn hình hiện ---
@@ -385,13 +410,16 @@
     const c = D.chatbot, M = $('#cbMsgs'); if (!c || !M) return;
     const first = c.chat[0] && c.chat[0].ref ? [c.chat[0]] : [];
     const s0 = chatSeq([{ sep: c.gio || 'Khách nhắn lúc 22:47 · ngoài giờ làm việc' }, ...first], { ts: 0, t0: 500 });
-    const sq = chatSeq(c.chat.slice(first.length), { ts: 1, t0: 300, don: c.don, lead: c.lead }), T = sq.marks.don;
+    // Mỗi lần bấm 1 tin (người dùng chọn 17/11/2026), điện thoại đứng yên. Màn hình Tạo đơn / lưu khách là 1 lần bấm riêng,
+    // tiếp theo thẻ đã tạo đơn, rồi case khách gửi hình, bấm thêm là sang slide kế.
+    const sq = chatSteps(c.chat.slice(first.length), 1, { don: c.don, lead: c.lead }), F = sq.marks.don, IMGF = sq.last + 1;
     M.innerHTML = s0.html + sq.html; paint(M);
-    const P = $('#cbDon'); P.innerHTML = c.lead ? leadPanel(c.lead, T) : donPanel(c.don, T); P.dataset.t = T; paint(P);
-    const rows = $$('#vDeck .scb .cbf');   // 3 ý bên trái sáng dần theo cuộc chat, ý 4 sáng ở bấm 2
-    [sq.marks.ai1, sq.marks.ai2, T].forEach((t, i) => { if (rows[i]) { rows[i].dataset.t = t || 0; rows[i].dataset.ts = 1; } });
-    if (rows[3]) rows[3].dataset.t = 700;
-    const a = c.anh, I = $('#cbImg');
+    const P = $('#cbDon'); P.innerHTML = c.lead ? leadPanel(c.lead, 0) : donPanel(c.don, 0);
+    P.dataset.t = 0; P.dataset.f = F; P.dataset.out = IMGF; paint(P);
+    const rows = $$('#vDeck .scb .cbf');   // ý bên trái sáng dần theo cuộc chat
+    [sq.marks.ai1, sq.marks.ai2, F].forEach((f, i) => { if (rows[i]) { rows[i].dataset.t = 0; rows[i].dataset.ts = f || 1; } });
+    if (rows[3]) { rows[3].dataset.f = IMGF; rows[3].dataset.t = 700; }
+    const a = c.anh, I = $('#cbImg'); I.dataset.f = IMGF;
     const sq2 = chatSeq([{ sep: a.nhan || 'Khách gửi ảnh, không ghi tên mẫu' }, { anh: a.img }, { kh: a.kh }, { ai: a.ai }, { pill: a.pill || '🔍 AI nhìn ảnh, nhận ra đúng mẫu khách hỏi' }], { t0: 700 });
     I.innerHTML = `<div class="scr">${phoneHead('Đang hoạt động', 'Preny AI')}<div class="msgs">${sq2.html}</div></div>`;
   }
@@ -614,8 +642,29 @@
     demo.contentWindow.postMessage({ preny: 'start' }, '*');
     setTimeout(() => demo.contentWindow.postMessage({ preny: 'focus' }, '*'), 400);
   }
-  function enterDemo() { if (!kb) return; setView('demo'); if (demoReady) startDemo(); else wantStart = true; }
-  function resumeDemo() { if (!kb) return; if (!demoStarted) return enterDemo(); setView('demo'); }   // quay lại demo: giữ nguyên chỗ đang dừng
+  function enterDemo() { openDoc(); }    // từ 17/11/2026 mọi lối vào demo đều mở demo chat dọc (demo-doc.js); iframe cũ chỉ còn để xuất video
+  function resumeDemo() { openDoc(); }
+
+  /* ---------- Demo chat dọc (demo-doc.js) ----------
+     Mở bất cứ lúc nào (nút "Demo chat" cạnh tên ngành, phím D, "Vào thẳng chat" ở menu). Thoát: nút "Về slide", Esc, M,
+     hoặc bấm → sau tin cuối. Thoát xong quay lại đúng slide, đúng bước đang chiếu; mở từ menu thì về slide 1. */
+  let docFrom = null;
+  function openDoc() {
+    if (!kb || !window.DemoDoc || !window.KICH_BAN) return;
+    if (view !== 'doc') docFrom = { view, si, fi };
+    setView('doc');
+    window.DemoDoc.open(window.KICH_BAN, $('#vDoc'), { onExit: closeDoc });
+  }
+  function closeDoc() {
+    if (view !== 'doc') return;
+    window.DemoDoc.close();
+    const f = docFrom || { view: 'menu' }; docFrom = null;
+    if (f.view !== 'deck') return goSlide(0, 0);
+    si = Math.min(f.si, N - 1); fi = f.fi;
+    const t = slides[si]; t.classList.add('instant'); setView('deck'); render();
+    requestAnimationFrame(() => requestAnimationFrame(() => t.classList.remove('instant')));
+  }
+  $('#btnDemo').addEventListener('click', e => { e.stopPropagation(); openDoc(); });
   addEventListener('message', e => {
     const m = e.data && e.data.preny;
     if (m === 'back') { if (DEMO_AFTER > 0) goSlideFull(DEMO_AFTER - 1); else showMenu(); }
@@ -632,7 +681,6 @@
     $('#kbName').textContent = it ? it.ten : k;
     $('#ctaKb').textContent = it ? it.ten : '';
     history.replaceState(null, '', '#kb=' + k + (direct ? '&demo' : ''));
-    loadDemo();
     loadKB(k).then(() => {
       if (seq !== chooseSeq) return;
       applyDeck(it);
@@ -653,6 +701,13 @@
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || view === 'demo') return;
     const k = e.key;
+    if (view === 'doc') {   // demo chat dọc: → tin kế, ← lùi, Esc / M về slide, F toàn màn hình
+      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter' || k === 'ArrowDown') { e.preventDefault(); window.DemoDoc.next(); }
+      else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); window.DemoDoc.prev(); }
+      else if (k === 'Escape' || k === 'm' || k === 'M') { e.preventDefault(); window.DemoDoc.exit(); }
+      else if (k === 'f' || k === 'F') toggleFS();
+      return;
+    }
     if (view === 'menu') {
       const typing = document.activeElement === search;
       const count = shown.length;

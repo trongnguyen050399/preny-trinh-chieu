@@ -97,6 +97,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Lan Phạm',
+        sanPham: 'Giỏ trái cây nhập khẩu',
+        binhLuan: 'Xin báo giá số lượng lớn',
+        post: {
+          tieuDe: 'QUÀ TẾT DOANH NGHIỆP – IN LOGO, XUẤT VAT 🎁',
+          dong: ['Giỏ trái cây nhập khẩu', 'Hộp quà gỗ cao cấp', 'In logo lên thiệp', 'Giao tận tay đối tác'],
+          anh: ['gio-trai-cay', 'hop-go', 'hop-den', 'gio-hoa'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Quà Tết <span class="grad">doanh nghiệp</span>', den: '21/12/2026', khach: 9, tyLe: 0.55 },

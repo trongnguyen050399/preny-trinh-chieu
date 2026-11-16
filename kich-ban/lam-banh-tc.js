@@ -66,6 +66,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Hồng Ngọc',
+        sanPham: 'Khóa bánh kem căn bản',
+        binhLuan: 'Xin lịch học',
+        post: {
+          tieuDe: 'KHAI GIẢNG LỚP BÁNH KEM HOA BUTTERCREAM 🎂',
+          dong: ['Lớp tối cho người đi làm', 'Học bù miễn phí', 'Học lại miễn phí 6 tháng', 'Mang bánh về mỗi buổi'],
+          anh: ['banh-hoa', 'banh-hoa-2', 'lop-hoc', 'bat-kem'],
+        },
+      },
       /* Pipeline mới 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot (lead = AI chốt là lấy SĐT), afterSale. */
       dashboard: [
         { ten: 'Khóa học <span class="grad">làm bánh</span>', den: '21/07/2026', khach: 8, tyLe: 0.55 },

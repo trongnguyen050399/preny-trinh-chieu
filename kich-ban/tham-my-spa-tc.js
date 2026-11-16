@@ -118,6 +118,17 @@
 
     /* ===== Nội dung các slide trình chiếu (trinh-chieu.html đọc phần này) ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: ['Linh Nguyễn', 'Vy Trần'],
+        sanPham: 'Liệu trình trị mụn chuẩn y khoa',
+        binhLuan: 'Tư vấn',
+        post: {
+          tieuDe: 'LIỆU TRÌNH TRỊ MỤN CHUẨN Y KHOA 🌸',
+          dong: ['Soi da miễn phí', 'Chuyên viên tư vấn 1–1', 'Công nghệ hiện đại', 'Không ép mua thêm'],
+          anh: ['cham-soc-da', 'may-soi-da', 'massage-mat', 'dap-mat-na'],
+        },
+      },
       /* Pipeline mới 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot (lead = AI chốt là lấy SĐT), afterSale. */
       dashboard: [
         { ten: 'Spa <span class="grad">trị mụn</span>', den: '21/07/2026', khach: 9, tyLe: 0.55 },

@@ -106,6 +106,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Lê Phong',
+        sanPham: 'Xịt nội thất đa năng 500ml',
+        binhLuan: 'Xin giá',
+        post: {
+          tieuDe: 'DUNG DỊCH VỆ SINH NỘI THẤT Ô TÔ – SẠCH NHƯ MỚI 🚗',
+          dong: ['Dùng cho da, nỉ, nhựa', 'Không bạc màu', '10–12 lần cho toàn xe', 'Freeship toàn quốc'],
+          anh: ['xit-da-nang', 'duong-da', 'khan', 'phu-bong'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Chăm sóc xe <span class="grad">tại nhà</span>', den: '21/07/2026', khach: 12, tyLe: 0.56 },

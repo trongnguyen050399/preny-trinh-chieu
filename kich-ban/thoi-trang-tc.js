@@ -100,6 +100,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Phần nào không ghi thì slide dùng sẵn nội dung thời trang trong HTML. ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Trần Minh',
+        sanPham: 'Áo Polo Cotton Classic',
+        binhLuan: 'Tư vấn size giúp mình',
+        post: {
+          tieuDe: 'ÁO POLO COTTON CLASSIC – MẶC MÁT CẢ NGÀY 👕',
+          dong: ['Cotton cá sấu 100%', 'Đủ size S – XXL', 'Đổi size miễn phí 7 ngày', 'Freeship toàn quốc'],
+          anh: ['polo-den', 'polo-trang', 'polo-xam', 'kaki-be'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1).
          dashboard: 3 case, mỗi case 1 slide vẽ như trang Thống kê Preny. Số minh họa sinh theo tên case:
            khach = khách mới trung bình mỗi ngày, tyLe = tỷ lệ chốt đơn nhắm tới (tổng luôn nằm trong 50–60%), den = ngày cuối bảng. */

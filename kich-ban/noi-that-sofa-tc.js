@@ -104,6 +104,18 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Thu Hà',
+        sanPham: 'Sofa góc chữ L Milano',
+        binhLuan: 'Tư vấn',
+        gio: '22:10',
+        post: {
+          tieuDe: 'SOFA GÓC CHỮ L NHẬP KHẨU CHÂU ÂU 🛋️',
+          dong: ['Vải chống thấm, chống cào', 'Bảo hành khung 5 năm', 'Kệ tivi làm theo kích thước', 'Giao lắp miễn phí'],
+          anh: ['sofa-l', 'ke-tivi-am', 'ban-tra', 'phong-khach-1'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Sofa <span class="grad">nhập khẩu</span>', den: '21/07/2026', khach: 6, tyLe: 0.55 },

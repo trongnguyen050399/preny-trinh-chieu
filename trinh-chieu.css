@@ -906,3 +906,119 @@ body.menu-on .hp, body.demo-on .hp { display: none; }
 .cp-l span { flex: none; }
 .cp-l b { text-align: right; }
 .cp-l b.v.sm { font-size: 19px; }
+
+/* =====================================================================
+   DEMO CHAT DỌC (demo-doc.js): quay màn hình điện thoại, 9:16 giữa khung, 2 bên đen. Người dùng chốt 16/11/2026.
+   ===================================================================== */
+#vDoc { z-index: 20; background: #000; }
+body.doc-on .topbar, body.doc-on .progress, body.doc-on .hp { display: none !important; }
+.dd-side { position: absolute; left: 56px; top: 56px; width: 520px; display: grid; gap: 14px; justify-items: start; }
+.dd-btn { display: inline-flex; align-items: center; gap: 12px; padding: 14px 26px; border-radius: 99px; cursor: pointer; font: inherit; font-size: 22px; font-weight: 700;
+  color: #fff; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .22); transition: background .2s, border-color .2s; }
+.dd-btn:hover { background: rgba(236, 72, 153, .25); border-color: rgba(244, 114, 182, .7); }
+.dd-btn span { font-size: 24px; }
+.dd-btn em { font-style: normal; }
+.dd-hint { margin-top: 8px; font-size: 18px; line-height: 1.6; color: rgba(255, 255, 255, .45); }
+.dd-hint b { color: rgba(255, 255, 255, .8); }
+.dd-screen { position: absolute; left: 656px; top: 0; width: 608px; height: 1080px; overflow: hidden; background: #fff; color: #050505; cursor: pointer;
+  font-family: -apple-system, 'SF Pro Text', system-ui, 'Segoe UI', Roboto, 'Be Vietnam Pro', sans-serif; -webkit-font-smoothing: antialiased; }
+.dd-screen svg { display: block; width: 1em; height: 1em; }
+.dd-badge { position: absolute; left: 16px; bottom: 10px; z-index: 5; padding: 6px 14px; border-radius: 99px; font-size: 14px; font-weight: 800; letter-spacing: .5px; color: #fff; background: rgba(60, 60, 67, .75); }
+
+/* ----- Facebook ----- */
+.dd-fb { position: absolute; inset: 0; background: #fff; }
+.dd-fbh { height: 84px; display: flex; align-items: center; gap: 10px; padding: 0 22px; border-bottom: 1px solid #E4E6EB; }
+.dd-fbh b { margin-right: auto; font-family: Helvetica, Arial, sans-serif; font-size: 40px; font-weight: 800; letter-spacing: -1.4px; color: #0866FF; }
+.dd-fbh i { width: 44px; height: 44px; border-radius: 50%; background: #E4E6EB; }
+.dd-post { padding: 16px 0 0; border-bottom: 1px solid #E4E6EB; }
+.dd-ph { display: flex; align-items: center; gap: 12px; padding: 0 18px; }
+.dd-ph b { display: block; font-size: 20px; }
+.dd-ph small { display: flex; align-items: center; gap: 5px; font-size: 15px; color: #65676B; }
+.dd-pav { flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font-size: 18px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #3BA99C, #22766D); }
+.dd-pt { padding: 12px 18px 4px; font-size: 19px; font-weight: 800; line-height: 1.3; }
+.dd-pl { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; padding: 4px 18px 12px; font-size: 16px; line-height: 1.35; }
+.dd-pl span { display: flex; gap: 6px; align-items: flex-start; }
+.dd-pl svg { flex: none; margin-top: 2px; font-size: 15px; color: #2E8B83; }
+.dd-pimgs { display: grid; grid-template-columns: repeat(4, 1fr); }
+.dd-pimgs img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.dd-pact { display: flex; justify-content: space-around; padding: 12px 0; font-size: 18px; font-weight: 600; color: #65676B; }
+.dd-cmts { padding: 16px 16px 0; display: grid; gap: 14px; }
+.dd-cmt { display: flex; gap: 10px; align-items: flex-start; }
+.dd-cmt.rep { margin-left: 54px; }
+.dd-cmt.rep .dd-pav { width: 40px; height: 40px; font-size: 14px; }
+.dd-cav { flex: none; width: 46px; height: 46px; font-size: 46px; }
+.dd-cbx { padding: 10px 16px 12px; border-radius: 20px; background: #F0F2F5; }
+.dd-cbx b { display: flex; align-items: center; gap: 8px; font-size: 16px; }
+.dd-cbx em { font-style: normal; font-size: 13px; font-weight: 700; color: #0866FF; background: #E7F0FF; padding: 2px 8px; border-radius: 6px; }
+.dd-cbx span { display: block; font-size: 18px; margin-top: 2px; }
+.dd-cmeta { display: flex; gap: 18px; padding: 5px 14px 0; font-size: 14px; color: #65676B; }
+.dd-cmt:not(.sh) { display: none; }
+.dd-cmt.sh:not(.nz) { animation: pop .45s var(--ease) both; }
+
+/* ----- Messenger ----- */
+.dd-ms { position: absolute; inset: 0; display: flex; flex-direction: column; background: #fff; transform: translateX(100%); transition: transform .45s cubic-bezier(.3, .8, .3, 1); }
+.dd-ms.on { transform: none; }
+.dd-ms.nz { transition: none; }
+.dd-sb { flex: none; height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px 0 40px; font-size: 19px; }
+.dd-sb b { font-weight: 600; }
+.dd-sb span { display: flex; gap: 7px; align-items: center; font-size: 19px; }
+.dd-sb span svg:last-child { width: 27px; }
+.dd-mh { flex: none; height: 76px; display: flex; align-items: center; gap: 12px; padding: 0 18px 0 12px; border-bottom: 1px solid #E4E6EB; }
+.dd-back { font-size: 28px; color: #0866FF; }
+.dd-mav { position: relative; flex: none; width: 46px; height: 46px; font-size: 46px; }
+.dd-mav i { position: absolute; right: 0; bottom: 0; width: 13px; height: 13px; border-radius: 50%; background: #31A24C; border: 2.5px solid #fff; }
+.dd-mn { flex: 1; min-width: 0; }
+.dd-mn b { display: block; font-size: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dd-mn small { font-size: 15px; color: #65676B; }
+.dd-mi { display: flex; gap: 20px; font-size: 27px; color: #0866FF; }
+.dd-body { flex: 1; min-height: 0; overflow-y: auto; scrollbar-width: none; padding: 14px 14px 18px; }
+.dd-body::-webkit-scrollbar { display: none; }
+.dd-conv { display: flex; flex-direction: column; gap: 6px; min-height: 100%; justify-content: flex-end; }
+.dd-conv > [data-b]:not(.sh) { display: none; }
+.dd-conv > [data-b].sh:not(.nz) { animation: ddPop .32s ease-out both; }
+@keyframes ddPop { from { opacity: 0; transform: translateY(14px) scale(.97); } to { opacity: 1; transform: none; } }
+.dd-stamp { align-self: center; margin: 12px 0 6px; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #65676B; }
+.dd-stamp em { font-style: normal; font-size: 13px; font-weight: 700; padding: 2px 9px; border-radius: 99px; color: #6D28D9; background: #F3EEFF; }
+.dd-ad { align-self: center; width: 80%; margin-bottom: 8px; border: 1px solid #E4E6EB; border-radius: 16px; overflow: hidden; }
+.dd-adt { display: flex; gap: 12px; align-items: center; padding: 12px 14px; }
+.dd-adt img { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+.dd-adt b { display: block; font-size: 16px; }
+.dd-adt small { font-size: 14px; color: #65676B; }
+.dd-adf { padding: 8px; text-align: center; font-size: 14px; color: #65676B; background: #F7F8FA; border-top: 1px solid #E4E6EB; }
+.dd-row { display: flex; align-items: flex-end; gap: 8px; max-width: 100%; }
+.dd-row.l { align-self: flex-start; padding-right: 64px; }
+.dd-row.r { align-self: flex-end; padding-left: 64px; }
+.dd-row.wide { padding-left: 0; align-self: stretch; justify-content: flex-end; }
+.dd-av { flex: none; width: 34px; height: 34px; font-size: 34px; }
+.dd-bub { padding: 10px 15px; border-radius: 20px; font-size: 18px; line-height: 1.35; background: #F0F0F0; color: #050505; overflow-wrap: anywhere; }
+.dd-bub.b { background: #0866FF; color: #fff; }
+.dd-bub.b b { color: #fff; }
+.dd-bub.t { display: flex; gap: 5px; padding: 15px 16px; background: #F0F0F0; }
+.dd-bub.t i { width: 9px; height: 9px; border-radius: 50%; background: #8A8D91; animation: tdot 1s infinite; }
+.dd-bub.t i:nth-child(2) { animation-delay: .15s; } .dd-bub.t i:nth-child(3) { animation-delay: .3s; }
+.dd-pic { display: block; width: 250px; height: 250px; object-fit: cover; border-radius: 18px; }
+.dd-pics { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; width: 340px; }
+.dd-pics img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; }
+.dd-pics img:first-child { border-top-left-radius: 18px; } .dd-pics img:nth-child(2) { border-top-right-radius: 18px; }
+.dd-car { display: flex; gap: 10px; overflow: hidden; max-width: 100%; }
+.dd-cc { flex: none; width: 236px; border: 1px solid #E4E6EB; border-radius: 16px; overflow: hidden; background: #fff; }
+.dd-cc img { width: 100%; height: 170px; object-fit: cover; display: block; }
+.dd-ccb { padding: 10px 14px 12px; }
+.dd-ccb b { display: block; font-size: 16px; line-height: 1.3; min-height: 42px; }
+.dd-ccb small { display: block; font-size: 13px; color: #65676B; margin-top: 4px; }
+.dd-ccb span { display: block; font-size: 18px; font-weight: 800; }
+.dd-ccb s { font-size: 14px; font-weight: 500; color: #8A8D91; }
+.dd-ccb em { display: block; margin-top: 10px; padding: 9px; border-radius: 10px; text-align: center; font-style: normal; font-size: 15px; font-weight: 700; color: #050505; background: #E4E6EB; }
+.dd-in { flex: none; height: 112px; display: flex; align-items: center; gap: 12px; padding: 0 16px 44px; }   /* chừa vạch home iPhone, nhãn DEMO nằm ở đó */
+.dd-ib { display: flex; gap: 16px; font-size: 27px; color: #0866FF; }
+.dd-aa { flex: 1; padding: 11px 18px; border-radius: 99px; font-size: 18px; color: #8A8D91; background: #F0F2F5; }
+.dd-like { font-size: 28px; color: #0866FF; }
+/* nút Demo chat ở góc trên phải, cạnh tên ngành */
+.tb-demo { display: inline-flex; align-items: center; gap: 10px; padding: 9px 20px; border-radius: 999px; cursor: pointer; font: inherit; font-size: 21px; font-weight: 700;
+  color: #fff; background: var(--gradBtn); border: 0; box-shadow: 0 10px 28px rgba(236, 72, 153, .4); }
+.tb-demo:hover { filter: brightness(1.1); }
+.tb-demo i[data-i] { font-size: 20px; }
+body.menu-on .tb-demo { display: none; }
+
+/* 17/11/2026: điện thoại ở slide chatbot và after sale đứng yên một chỗ (người dùng không muốn chuyển cảnh) */
+.cb-stage, .scb:has(#cbDon.sh) .cb-stage, .scb:has(#cbImg.in) .cb-stage, .sas:has(#asZalo.in) .cb-stage { transform: none; transition: none; }

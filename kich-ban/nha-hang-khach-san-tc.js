@@ -109,6 +109,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Trần Đăng Khoa',
+        sanPham: 'Family Suite view biển',
+        binhLuan: 'Còn phòng dịp Giáng sinh không?',
+        post: {
+          tieuDe: 'FAMILY SUITE VIEW BIỂN – ĐÀ NẴNG 🌊',
+          dong: ['Phòng cho gia đình 4 người', 'Buffet sáng hải sản', 'Hồ bơi, khu vui chơi cho bé', 'Đón sân bay miễn phí'],
+          anh: ['phong-family', 'ban-cong', 'ho-boi', 'buffet-sang'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Khách sạn <span class="grad">biển</span>', den: '21/07/2026', khach: 10, tyLe: 0.55 },

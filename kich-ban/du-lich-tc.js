@@ -108,6 +108,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Phạm Minh Tuấn',
+        sanPham: 'Du thuyền 2 ngày 1 đêm',
+        binhLuan: 'Tư vấn',
+        post: {
+          tieuDe: 'DU THUYỀN 2 NGÀY 1 ĐÊM VỊNH HẠ LONG 🛳️',
+          dong: ['Cabin ban công, bồn tắm', 'Chèo kayak hang Luồn', 'Xe limousine đón phố cổ', 'Bữa tối trên boong'],
+          anh: ['du-thuyen', 'cabin', 'kayak-hang', 'hoang-hon'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Du thuyền <span class="grad">Hạ Long</span>', den: '21/07/2026', khach: 9, tyLe: 0.55 },

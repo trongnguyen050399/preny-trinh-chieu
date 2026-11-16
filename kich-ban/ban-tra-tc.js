@@ -105,6 +105,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Lê Quang',
+        sanPham: 'Bàn trà gỗ me tây có bếp đun',
+        binhLuan: 'Xin giá',
+        post: {
+          tieuDe: 'BÀN TRÀ GỖ ME TÂY NGUYÊN KHỐI 🍵',
+          dong: ['Có bếp đun, bơm tự động', 'Không cần đi đường nước', 'Gỗ sấy, ít co ngót', 'Giao lắp miễn phí'],
+          anh: ['ban-tra', 'van-go-1', 'am-chen', 'don-go'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Bàn trà <span class="grad">gỗ nguyên khối</span>', den: '21/07/2026', khach: 6, tyLe: 0.55 },

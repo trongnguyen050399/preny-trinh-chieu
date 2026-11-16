@@ -6,7 +6,7 @@
 <title>Preny AI · Trình chiếu</title>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="trinh-chieu.css?v=202611162336">
+<link rel="stylesheet" href="trinh-chieu.css?v=202611170008">
 </head>
 <body>
 <!-- Trang trình chiếu: menu chọn ngành → 6 slide mở đầu → demo AI chat (index.html nhúng bên dưới).
@@ -16,7 +16,7 @@
 
   <div class="topbar">
     <img class="tlogo" src="assets/img/logo-white.png" alt="Preny">
-    <div class="tright"><span id="kbName"></span><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button></div>
+    <div class="tright"><span id="kbName"></span><button id="btnDemo" class="tb-demo" title="Mở demo chat bất cứ lúc nào (phím D)"><i data-i="chat"></i>Demo chat</button><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button></div>
   </div>
 
   <!-- ============ MENU ============ -->
@@ -134,8 +134,8 @@
     </div>
 
     <!-- SLIDE (cả 2 nhóm, ngay sau slide 6; cân nhắc nhiều dùng deck.chatbot.lead → màn hình lưu khách thay cho Tạo đơn): Giới thiệu AI chatbot (deck.chatbot, dựng bằng renderBot).
-         Vào: 3 ý trả lời ngay tức thì, giữ chân khách, chốt đơn 24/7. Bấm 1: tin nhắn tự chạy (khách hỏi → AI tư vấn → khách hỏi thêm
-         → chốt đơn → AI lên đơn), hiện thêm màn hình Tạo đơn tự động. Bấm 2: bên cạnh hiện case khách gửi hình. Bấm 3: slide kế. -->
+         Vào: 3 ý trả lời ngay tức thì, giữ chân khách, chốt đơn 24/7. Từ 17/11/2026 mỗi lần bấm hiện 1 tin (khách hỏi → AI tư vấn → khách hỏi thêm
+         → chốt đơn → AI lên đơn), rồi 1 lần bấm hiện màn hình Tạo đơn tự động, 1 lần thẻ đã tạo đơn, 1 lần case khách gửi hình. Điện thoại đứng yên. -->
     <div class="slide scb" data-need="chatbot">
       <div class="cb-left">
         <div class="eyebrow" data-f="0"><i data-i="robot"></i>AI chatbot Preny</div>
@@ -449,6 +449,9 @@
     </div>
   </section>
 
+  <!-- Demo chat dọc kiểu quay màn hình (demo-doc.js): mở bằng nút "Demo chat", phím D, hoặc "Vào thẳng chat" ở menu -->
+  <section id="vDoc" class="view"></section>
+
   <div class="progress" id="progress"></div>
 
   <!-- Bảng ẩn slide trong phiên này (nút con mắt góc trên phải hoặc phím S) -->
@@ -462,8 +465,10 @@
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
 
 <!-- Mã phiên bản ?v=…: đổi mỗi lần đẩy lên mạng (preny-demo/doi-phien-ban.sh) để trình duyệt không dùng file cũ trong bộ nhớ đệm -->
-<script>window.PRENY_V = '202611162336';</script>
-<script src="kich-ban/danh-sach.js?v=202611162336"></script>
-<script src="trinh-chieu.js?v=202611162336"></script>
+<script>window.PRENY_V = '202611170008';</script>
+<script src="kich-ban/danh-sach.js?v=202611170008"></script>
+<script src="assets/offline.js?v=202611170008"></script>
+<script src="demo-doc.js?v=202611170008"></script>
+<script src="trinh-chieu.js?v=202611170008"></script>
 </body>
 </html>

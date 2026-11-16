@@ -96,6 +96,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Hùng Nguyễn',
+        sanPham: 'Driver servo tháo máy Nhật',
+        binhLuan: 'Tư vấn',
+        post: {
+          tieuDe: 'DRIVER, SERVO THÁO MÁY NHẬT – ĐÃ TEST CÓ TẢI ⚙️',
+          dong: ['Panasonic, Yaskawa', 'Bảo hành 3 tháng', 'Lỗi 1 đổi 1', 'Giao nhanh KCN trong ngày'],
+          anh: ['tu-driver', 'lo-servo', 'tu-dien', 'may-cnc'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Servo <span class="grad">tháo máy Nhật</span>', den: '21/07/2026', khach: 6, tyLe: 0.56 },

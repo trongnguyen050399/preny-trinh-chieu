@@ -108,6 +108,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Nguyễn Tuấn',
+        sanPham: 'Bồn cầu một khối AP-1688',
+        binhLuan: 'Tư vấn',
+        post: {
+          tieuDe: 'BỒN CẦU MỘT KHỐI – NẮP ĐÓNG ÊM, XẢ XOÁY 🚽',
+          dong: ['Men sứ bảo hành 5 năm', 'Giao và lắp miễn phí', 'Tư vấn đúng tâm xả', 'Combo lavabo giảm thêm'],
+          anh: ['bon-cau', 'lavabo-vuong', 'voi', 'sen-tam'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'Thiết bị vệ sinh <span class="grad">showroom</span>', den: '21/07/2026', khach: 8, tyLe: 0.55 },

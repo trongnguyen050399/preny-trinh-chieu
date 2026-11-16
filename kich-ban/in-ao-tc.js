@@ -104,6 +104,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Ngọc Anh',
+        sanPham: 'Áo lớp in tên, số',
+        binhLuan: 'Tư vấn áo lớp',
+        post: {
+          tieuDe: 'IN ÁO LỚP, ÁO NHÓM – LÊN MẪU MIỄN PHÍ 👕',
+          dong: ['In DTF tên, số riêng', 'Size S tới 3XL', 'In nhanh 3–4 ngày', 'Freeship từ 20 áo'],
+          anh: ['ao-nhom', 'ao-den', 'hoodie', 'polo'],
+        },
+      },
       /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
       dashboard: [
         { ten: 'In áo <span class="grad">đồng phục</span>', den: '21/07/2026', khach: 9, tyLe: 0.56 },

@@ -68,6 +68,17 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Demo chat dọc (demo-doc.js, 17/11/2026): tên khách trên Messenger, bài đăng Facebook (anh = khóa trong images), câu bình luận. */
+      demoDoc: {
+        khach: 'Hùng Trần',
+        sanPham: 'Cabin mái chữ A 24m²',
+        binhLuan: 'Xin giá',
+        post: {
+          tieuDe: 'CABIN CHỮ A CHO HOMESTAY, RESORT 🏡',
+          dong: ['Làm tại xưởng 35–45 ngày', 'Lắp tại đất 3–5 ngày', 'Chịu gió bão cấp 10', 'Khảo sát đất miễn phí'],
+          anh: ['cabin-chu-a', 'cabin-co', 'khu-cabin', 'phong-ngu'],
+        },
+      },
       /* Pipeline mới 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot (lead = AI chốt là lấy SĐT), afterSale. */
       dashboard: [
         { ten: 'Nhà di động <span class="grad">homestay</span>', den: '21/07/2026', khach: 5, tyLe: 0.55 },
