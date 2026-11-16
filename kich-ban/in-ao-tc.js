@@ -17,6 +17,9 @@
     'hoodie': '1556821840-3a63f95609a7',
     'ao-xep': '1716951735063-3d60c2c288e4',
     'polo': '1625910513399-c9fcba54338c',
+    'mu': '1588850561407-ed78c282e89b',
+    'tui-tote': '1574365569389-a10d488ca3fb',
+    'coc': '1616241673111-508b4662c707',
   };
 
   window.KICH_BAN = {
@@ -99,8 +102,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'In áo <span class="grad">đồng phục</span>', den: '21/07/2026', khach: 9, tyLe: 0.56 },
+        { ten: 'Áo lớp, <span class="grad">áo nhóm</span>', den: '18/08/2026', khach: 13, tyLe: 0.54 },
+        { ten: 'Áo thun <span class="grad">in theo yêu cầu</span>', den: '26/09/2026', khach: 10, tyLe: 0.57 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['ao-nhom']), ten: 'Áo lớp in tên, số' } },
+          { kh: 'Lớp mình cần 35 áo như này, sau lưng in tên với số từng bạn. In gì đẹp, giá sao shop?' },
+          {
+            ai: 'Dạ áo có **tên, số riêng từng bạn** em khuyên in **DTF** ạ, in lụa phải làm khuôn cho mỗi tên nên không hợp. Áo **cotton 250gsm**, in trước + sau: **129.000đ/áo**, lên mẫu miễn phí trong 2 tiếng.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Có bạn nam 95kg mặc vừa không em? Thứ 7 tuần sau lớp đi rồi' },
+          {
+            ai: 'Dạ áo có **từ S tới 3XL**, bạn 95kg mặc **3XL** thoải mái ạ. In **3–4 ngày**, kịp trước thứ 7. 35 áo em để **119.000đ/áo** nha chị.',
+          },
+          { kh: 'Chốt 35 áo đen nha. Ngọc Anh, 0976 135 246, KTX khu B ĐHQG, Dĩ An, Bình Dương' },
+          { ai: 'Dạ em lên đơn cho chị ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Ngọc Anh',
+          sdt: '0976 135 246',
+          diaChi: 'KTX khu B, ĐHQG, Dĩ An, Bình Dương',
+          ma: '#AV31528',
+          phi: 'freeship',
+          sp: [{ img: L(IMG['ao-den']), ten: 'Áo cotton đen · in DTF tên, số', sl: 35, gia: 119000 }],
+        },
+        anh: {
+          img: L(IMG['hoodie']),
+          kh: 'Hoodie như hình này in logo lớp được không shop?',
+          ai: 'Dạ mẫu chị gửi là **hoodie nỉ bông có mũ** ạ, in logo lớp được, giá **249.000đ/áo**. Đà Lạt tối lạnh, nhiều lớp đặt kèm áo thun luôn nha chị.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn chị Ngọc Anh đã chọn An Vy 💜 Lớp đi chơi hay đặt thêm mấy món in cùng mẫu áo cho đồng bộ ạ:',
+        sp: [
+          { img: L(IMG['hoodie']), ten: 'Hoodie nỉ bông in logo', gia: 249000 },
+          { img: L(IMG['mu']), ten: 'Mũ lưỡi trai in logo', gia: 79000 },
+          { img: L(IMG['tui-tote']), ten: 'Túi tote canvas in hình', gia: 59000 },
+          { img: L(IMG['coc']), ten: 'Cốc sứ in tên từng bạn', gia: 69000 },
+          { img: L(IMG['polo']), ten: 'Áo polo đồng phục', gia: 169000 },
+        ],
+        khach: 'Lấy thêm 35 mũ in logo lớp nha shop',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 4.165.000đ lên 6.930.000đ',
+        fmm: {
+          chao: 'Chào chị Ngọc Anh 👋 Mùa kỷ yếu tới rồi, shop gửi chị mẫu áo mới nha!',
+          img: L(IMG['ao-xep']),
+          nhan: 'MẪU KỶ YẾU MỚI',
+          ten: 'Áo kỷ yếu, hoodie lớp 2027',
+          mo: 'Khách cũ giảm 10%, shop lưu sẵn file thiết kế của lớp.',
+          nut: 'Xem mẫu',
+        },
+        zbs: {
+          ten: 'Tặng lớp chị Ngọc Anh voucher 10%',
+          mo: 'Cảm ơn chị đã in áo tại Xưởng In Áo An Vy. Gửi lớp mình ưu đãi cho đơn kỷ yếu:',
+          dong: [['Mã voucher', '**ANVY10**'], ['Ưu đãi', 'Giảm 10% đơn từ 20 áo'], ['Hạn dùng', '31/05/2027']],
+          nut: 'Dùng voucher ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng nhu cầu khách hỏi (thẻ <b>#AoLop</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi số lượng, quà tặng (thẻ <b>#HoiGia</b>)',

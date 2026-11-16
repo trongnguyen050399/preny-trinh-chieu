@@ -8,7 +8,7 @@
      mời đặt tiệc ở nhà hàng, khách đặt tiệc tất niên.
    Không có tin báo trước 1 ngày khách đến: Preny chưa có tính năng này (người dùng dặn 16/11/2026).
    Không có tin cập nhật vận chuyển. Không có bước kết thúc: bấm → là sang slide kế.
-   Slide 3 và slide 6 đổi chữ "vận chuyển" thành đặt phòng qua deck.quyTrinh, deck.tinhNang.
+   Slide 6 đổi chữ "vận chuyển" thành đặt phòng qua deck.tinhNang (slide 3 tự động hoá đã bỏ 16/11/2026).
    Tên khách sạn, giá phòng, chính sách, tên khách, SĐT: dữ liệu minh họa. Ảnh: Unsplash (ảnh thật, không phải khách sạn của khách). */
 (function () {
   const U = id => 'https://images.unsplash.com/photo-' + id + '?w=800&h=800&fit=crop&q=80&auto=format';
@@ -107,18 +107,83 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
-      // Slide 3: khách sạn không giao hàng → đổi bước "Gửi vận chuyển" thành lên đơn đặt phòng
-      quyTrinh: {
-        m1: '<span class="mb">Còn phòng không ạ?</span><span class="mb ok">Đặt phòng ngay</span>',
-        nc2: '<i data-i="calendar"></i><em>2</em>',
-        t2: 'Lên đơn đặt phòng tự động',
-        d2: 'Tự tạo đơn đặt phòng, đặt bàn, xếp xe đón, đỡ nhập tay.',
-        m2: '<span class="ck"><i data-i="check"></i>Tạo đơn</span><span class="ck"><i data-i="check"></i>Xếp xe đón</span>',
-        d6: 'Hỏi thăm sau khi trả phòng, mời nhà hàng, mời quay lại.',
-        banner: '<i data-i="layers"></i>Từ chốt đơn, đặt phòng, tối ưu quảng cáo đến <b>chăm sóc và bán lại</b>',
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Khách sạn <span class="grad">biển</span>', den: '21/07/2026', khach: 10, tyLe: 0.55 },
+        { ten: 'Resort <span class="grad">nghỉ dưỡng</span>', den: '18/08/2026', khach: 8, tyLe: 0.53 },
+        { ten: 'Nhà hàng, <span class="grad">tiệc</span>', den: '26/09/2026', khach: 12, tyLe: 0.57 },
+      ],
+      chatbot: {
+        y: [
+          ['Trả lời ngay tức thì, 24/7', 'Khách nhắn lúc nào, AI trả lời sau 2 giây'],
+          ['Hỏi lịch trình, giữ chân khách', 'Chủ động hỏi ngày đến, số đêm, giờ tới'],
+          ['Chốt phòng và tự lên đơn đặt phòng', 'Khách đồng ý là AI tạo đơn ngay trên Preny'],
+          ['Hiểu hình ảnh khách gửi', 'Khách gửi ảnh, AI biết đúng phòng, khu nào'],
+        ],
+        chat: [
+          { ref: { img: L(IMG['phong-family']), ten: 'Family Suite view biển' } },
+          { kh: 'Phòng này còn ko em? Nhà a 2 người lớn 2 bé, muốn đi Đà Nẵng dịp Giáng sinh' },
+          {
+            ai: 'Dạ còn phòng ạ anh! 🌊 Anh cho em xin **lịch trình**: ngày đến, ở mấy đêm, **mấy giờ tới nơi** và tuổi 2 bé để em xếp phòng hợp nhất nha.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: '24/12 a bay vào, hạ cánh 11h40, ở 3 đêm. 2 bé 6t với 10t' },
+          {
+            ai: 'Dạ **Family Suite view biển** hợp nhà mình ạ: bé 6 tuổi miễn phí, bé 10 tuổi phụ thu nhẹ. Em ghi chú **nhận phòng sớm** và **đón sân bay 11:40** miễn phí. Giá **2.450.000đ/đêm** gồm buffet sáng.',
+          },
+          { kh: 'Ok chốt cho a. Trần Đăng Khoa, 0905 678 123' },
+          { ai: 'Dạ em lên đơn đặt phòng và xếp xe đón cho anh ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Trần Đăng Khoa',
+          sdt: '0905 678 123',
+          diaChi: 'Nhận phòng 24/12 · trả phòng 27/12/2026',
+          ma: '#BL24127',
+          phi: 'gồm buffet sáng',
+          ghiChu: 'Đón sân bay **11:40 ngày 24/12** · nhận phòng sớm · 2 người lớn, 2 bé (6 và 10 tuổi)',
+          sp: [{ img: L(IMG['phong-family']), ten: 'Family Suite view biển', sl: 3, dv: 'đêm', gia: 2450000 }],
+        },
+        anh: {
+          img: L(IMG['ho-boi']),
+          kh: 'Hồ bơi như hình này có mở buổi tối không em?',
+          ai: 'Dạ hình anh gửi là **hồ bơi ngoài trời** của Biển Lam ạ, mở **6h–21h**, có **khu riêng cho bé** và cứu hộ trực cả ngày nha anh.',
+        },
       },
+      afterSale: {
+        y1: 'AI gửi tiếp 5 dịch vụ đi kèm để bán thêm (upsell)',
+        y2: 'Tiệc tất niên, voucher, ưu đãi phòng',
+        loi: 'Cảm ơn anh Khoa đã đặt phòng tại Biển Lam 💜 Nhiều gia đình đặt thêm mấy dịch vụ này cho chuyến đi trọn vẹn ạ:',
+        sp: [
+          { img: L(IMG['giang-sinh']), ten: 'Tiệc tối Giáng sinh 24/12', gia: 1290000, nut: 'Đặt thêm' },
+          { img: L(IMG['hai-san']), ten: 'Set hải sản tối 2 người', gia: 890000, nut: 'Đặt thêm' },
+          { img: L(IMG['buffet-sang']), ten: 'Buffet sáng thêm khách', gia: 250000, nut: 'Đặt thêm' },
+          { img: L(IMG['nha-hang']), ten: 'Bàn ăn view biển', gia: 1500000, nut: 'Đặt thêm' },
+          { img: L(IMG['ho-boi']), ten: 'Cabana hồ bơi nửa ngày', gia: 600000, nut: 'Đặt thêm' },
+        ],
+        khach: 'Đặt thêm cho a tiệc tối Giáng sinh 24/12 nhé',
+        pill: '🛍 Khách đặt thêm ngay: đơn tăng từ 7.350.000đ lên 8.640.000đ',
+        gio: 'Khách vừa đặt phòng',
+        fmm: {
+          sep: '1 tuần sau khi trả phòng · tin Facebook FMM',
+          chao: 'Chào anh Khoa 👋 Cuối năm nhà hàng Biển Lam nhận tiệc tất niên, gửi anh xem trước nha!',
+          img: L(IMG['tiec']),
+          nhan: 'ƯU ĐÃI TẤT NIÊN',
+          ten: 'Tiệc tất niên công ty 2026',
+          mo: 'Khách cũ giảm 15%, phòng riêng cho 30–100 khách.',
+          nut: 'Xem thực đơn',
+        },
+        zbs: {
+          ten: 'Tặng anh Khoa voucher 15%',
+          mo: 'Cảm ơn gia đình anh đã nghỉ tại Khách Sạn Biển Lam. Gửi anh ưu đãi cho lần nghỉ tiếp theo:',
+          dong: [['Mã voucher', '**BIENLAM15**'], ['Ưu đãi', 'Giảm 15% giá phòng'], ['Hạn dùng', '30/06/2027']],
+          nut: 'Đặt phòng ngay',
+        },
+      },
+      // Slide 3: khách sạn không giao hàng → đổi bước "Gửi vận chuyển" thành lên đơn đặt phòng
       // Slide 6: có lên đơn (đặt phòng) → giữ 6 tính năng, chỉ đổi chữ "vận chuyển"
       tinhNang: [
         ['AI chatbot chốt đơn tự động 100%', 'Tăng trung bình 62% tỷ lệ chốt đơn'],

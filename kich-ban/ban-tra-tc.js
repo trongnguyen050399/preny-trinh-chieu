@@ -19,6 +19,8 @@
     'am-chen': '1548386581-23b700b33be0',
     'khay-tra': '1577016029703-cc22a7c0c28c',
     'phong-tra': '1610375233775-6e0166927193',
+    'tra-o-long': '1627894006066-b45786537103',
+    'tra-shan': '1543060895-03f57478a710',
   };
 
   window.KICH_BAN = {
@@ -101,8 +103,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Bàn trà <span class="grad">gỗ nguyên khối</span>', den: '21/07/2026', khach: 6, tyLe: 0.55 },
+        { ten: 'Đồ gỗ <span class="grad">phòng trà</span>', den: '18/08/2026', khach: 7, tyLe: 0.53 },
+        { ten: 'Bàn trà <span class="grad">điện thông minh</span>', den: '26/09/2026', khach: 8, tyLe: 0.57 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['ban-tra']), ten: 'Bàn trà gỗ me tây có bếp đun' } },
+          { kh: 'Bàn này giá sao shop? Phòng khách 4x5m, hay tiếp 5-6 khách. Có phải đi đường nước không?' },
+          {
+            ai: 'Dạ phòng 4×5m tiếp 5–6 khách anh chọn bản **1m6** là vừa ạ. Bàn có **bơm nước tự động** hút từ bình 19 lít dưới gầm, **không cần đi đường nước**. Giá **12.900.000đ**, bếp và bơm **bảo hành 12 tháng**.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Gỗ nguyên khối để phòng máy lạnh có nứt không em?' },
+          {
+            ai: 'Dạ gỗ **sấy tới độ ẩm 10–12%** rồi mới làm nên rất ít co ngót ạ. Anh lau **dầu dưỡng gỗ 3–4 tháng/lần** là bền đẹp nha.',
+          },
+          { kh: 'Ok chốt anh bản 1m6. Lê Quang, 0909 112 358, 27 Trần Não, TP. Thủ Đức. Nhà phố' },
+          { ai: 'Dạ em lên đơn, xếp người khiêng và lắp bếp cho anh ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Lê Quang',
+          sdt: '0909 112 358',
+          diaChi: '27 Trần Não, TP. Thủ Đức · nhà phố, tầng trệt',
+          ma: '#GM62014',
+          phi: 'giao lắp miễn phí',
+          sp: [{ img: L(IMG['ban-tra']), ten: 'Bàn trà gỗ me tây 1m6 · bếp, bơm', sl: 1, gia: 12900000 }],
+        },
+        anh: {
+          img: L(IMG['am-chen']),
+          kh: 'Bộ ấm chén như hình này shop có không?',
+          ai: 'Dạ mẫu anh gửi là **bộ ấm tử sa** kèm 6 chén ạ, giá **890.000đ**. Anh lấy kèm bàn trà em **giảm còn 690.000đ** nha.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn anh Quang đã chọn Gia Mộc 🍵 Khách mua bàn trà hay lấy kèm mấy món này để tiếp khách trọn bộ ạ:',
+        sp: [
+          { img: L(IMG['don-go']), ten: 'Bộ 6 đôn gỗ me tây', gia: 3600000 },
+          { img: L(IMG['am-chen']), ten: 'Bộ ấm chén gốm', gia: 890000 },
+          { img: L(IMG['khay-tra']), ten: 'Khay trà gỗ', gia: 650000 },
+          { img: L(IMG['tra-shan']), ten: 'Trà Shan tuyết 500g', gia: 450000 },
+          { img: L(IMG['tra-o-long']), ten: 'Trà Ô long 500g', gia: 320000 },
+        ],
+        khach: 'Lấy anh thêm bộ 6 đôn với 1 gói trà Shan tuyết nha',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 12.900.000đ lên 16.950.000đ',
+        fmm: {
+          chao: 'Chào anh Quang 👋 Gia Mộc vừa về trà mới vụ đông, gửi anh xem trước nha!',
+          img: L(IMG['tra-o-long']),
+          nhan: 'TRÀ MỚI VỀ',
+          ten: 'Trà Shan tuyết, Ô long vụ đông',
+          mo: 'Khách cũ giảm 10%, giao tận nhà.',
+          nut: 'Xem sản phẩm',
+        },
+        zbs: {
+          ten: 'Tặng anh Quang voucher 200.000đ',
+          mo: 'Cảm ơn anh đã tin chọn Bàn Trà Gia Mộc. Gửi anh ưu đãi cho lần mua tiếp theo:',
+          dong: [['Mã voucher', '**GIAMOC200**'], ['Ưu đãi', 'Giảm 200.000đ đơn từ 1.000.000đ'], ['Hạn dùng', '31/12/2026']],
+          nut: 'Dùng voucher ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng mẫu bàn khách xem (thẻ <b>#BanTraNguyenKhoi</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi combo, quà tặng (thẻ <b>#HoiGia</b>)',

@@ -18,6 +18,8 @@
     'ban-tra': '1777513538143-8525eb3943f6',
     'showroom': '1687180498602-5a1046defaa4',
     'xuong-go': '1788296817269-8df0458ab799',
+    'tham': '1534889156217-d643df14f14a',
+    'goi-tua': '1696774276390-6ce82111140f',
   };
 
   window.KICH_BAN = {
@@ -100,8 +102,72 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Sofa <span class="grad">nhập khẩu</span>', den: '21/07/2026', khach: 6, tyLe: 0.55 },
+        { ten: 'Nội thất <span class="grad">gỗ công nghiệp</span>', den: '18/08/2026', khach: 8, tyLe: 0.53 },
+        { ten: 'Nội thất <span class="grad">phòng khách</span>', den: '26/09/2026', khach: 7, tyLe: 0.57 },
+      ],
+      chatbot: {
+        gio: 'Khách nhắn lúc 22:15 · chủ shop đã nghỉ',
+        chat: [
+          { ref: { img: L(IMG['sofa-l']), ten: 'Sofa góc chữ L Milano' } },
+          { kh: 'Sofa này giá sao shop? Phòng khách ngang 3m6, nhà có 2 bé với 1 bé mèo' },
+          {
+            ai: 'Dạ tường 3m6 chị chọn bản **2m4** là cân đối ạ. Nhà có bé và mèo em gợi ý **vải chống thấm, chống cào**, đổ sữa lau là sạch. Bản 2m4 giá **28.900.000đ**, **bảo hành khung 5 năm**.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Có giao lắp không em? Nhà mình chung cư tầng 12' },
+          {
+            ai: 'Dạ **giao lắp miễn phí nội thành** ạ. Chị cho em hỏi tòa nhà **có thang máy** không để em xếp xe và người khiêng sofa nha.',
+          },
+          { kh: 'Có thang máy. Chốt nhé: Thu Hà, 0938 246 135, Căn 12.05 Tòa B, 45 Nguyễn Thị Thập, Q.7' },
+          { ai: 'Dạ em lên đơn và xếp lịch giao cho chị ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Thu Hà',
+          sdt: '0938 246 135',
+          diaChi: 'Căn 12.05, Tòa B, 45 Nguyễn Thị Thập, Q.7, TP.HCM · có thang máy',
+          ma: '#CM40719',
+          phi: 'giao lắp miễn phí',
+          sp: [{ img: L(IMG['sofa-l']), ten: 'Sofa chữ L Milano 2m4 · vải chống cào', sl: 1, gia: 28900000 }],
+        },
+        anh: {
+          img: L(IMG['ke-tivi-am']),
+          kh: 'Kệ tivi như hình này làm được không em? Tường nhà mình 3m2',
+          ai: 'Dạ mẫu chị gửi là **kệ tivi âm tường** ạ. Xưởng bên em làm **đúng 3m2**, gỗ **MDF lõi xanh chống ẩm**, màu đồng bộ sofa, giá **7.500.000đ**, làm **7–10 ngày** nha chị.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn chị Hà đã chọn Casa Mộc 💛 Khách mua sofa Milano hay phối thêm mấy món này cho phòng khách đồng bộ ạ:',
+        sp: [
+          { img: L(IMG['ke-tivi-am']), ten: 'Kệ tivi âm tường 3m2', gia: 7500000 },
+          { img: L(IMG['ban-tra']), ten: 'Bàn trà gỗ mộc', gia: 3200000 },
+          { img: L(IMG['tham']), ten: 'Thảm phòng khách 2m x 3m', gia: 2400000, cu: 2900000 },
+          { img: L(IMG['goi-tua']), ten: 'Bộ gối tựa sofa', gia: 890000 },
+          { img: L(IMG['ke-tivi-thap']), ten: 'Kệ tivi thấp', gia: 5900000 },
+        ],
+        khach: 'Lấy thêm bàn trà gỗ mộc với thảm nhé em, giao cùng sofa luôn',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 28.900.000đ lên 34.500.000đ',
+        fmm: {
+          chao: 'Chào chị Hà 👋 Showroom Casa Mộc vừa về mẫu sofa mới, gửi chị xem trước nha!',
+          img: L(IMG['showroom']),
+          nhan: 'SẢN PHẨM MỚI VỀ',
+          ten: 'Sofa da mẫu mới 2027 vừa về showroom',
+          mo: 'Khách cũ giảm 5%, mời anh chị ghé ngồi thử cuối tuần.',
+          nut: 'Xem mẫu',
+        },
+        zbs: {
+          ten: 'Tặng chị Hà voucher 1.000.000đ',
+          mo: 'Cảm ơn chị đã tin chọn Casa Mộc. Gửi chị ưu đãi cho món nội thất tiếp theo:',
+          dong: [['Mã voucher', '**CASA1TR**'], ['Ưu đãi', 'Giảm 1.000.000đ đơn từ 10.000.000đ'], ['Hạn dùng', '31/01/2027']],
+          nut: 'Dùng voucher ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng mẫu sofa khách xem (thẻ <b>#SofaMilano</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi combo, quà tặng (thẻ <b>#HoiGia</b>)',

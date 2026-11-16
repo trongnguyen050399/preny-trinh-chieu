@@ -104,8 +104,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Chăm sóc xe <span class="grad">tại nhà</span>', den: '21/07/2026', khach: 12, tyLe: 0.56 },
+        { ten: 'Dung dịch <span class="grad">rửa xe</span>', den: '18/08/2026', khach: 15, tyLe: 0.53 },
+        { ten: 'Phụ kiện <span class="grad">ô tô</span>', den: '26/09/2026', khach: 9, tyLe: 0.57 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['xit-da-nang']), ten: 'Xịt vệ sinh nội thất đa năng' } },
+          { kh: 'Ghế da xe anh bị bẩn với xỉn màu, dùng chai này được không shop?' },
+          {
+            ai: 'Dạ được ạ anh! **Xịt nội thất đa năng 500ml** dùng cho **da, nỉ, nhựa taplo**, không bạc màu, giá **189.000đ**. Ghế đã xỉn anh nên lau xong **dưỡng da** thêm cho lên màu nha 🚗',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: '1 chai dùng được bao lâu? Có mùi hắc không em?' },
+          {
+            ai: 'Dạ 1 chai dùng **10–12 lần toàn xe**, mùi nhẹ, không hắc ạ. Combo **xịt + dưỡng da + khăn microfiber** đang còn **349.000đ**, freeship nha anh.',
+          },
+          { kh: 'Ok lấy anh combo. Lê Phong, 0912 888 246, 88 Nguyễn Văn Linh, Q.7, TP.HCM' },
+          { ai: 'Dạ em lên đơn cho anh ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Lê Phong',
+          sdt: '0912 888 246',
+          diaChi: '88 Nguyễn Văn Linh, Q.7, TP. Hồ Chí Minh',
+          ma: '#XS51836',
+          phi: 'freeship',
+          sp: [{ img: L(IMG['xit-da-nang']), ten: 'Combo xịt đa năng, dưỡng da, khăn', sl: 1, gia: 349000 }],
+        },
+        anh: {
+          img: L(IMG['bot-tuyet']),
+          kh: 'Rửa xe bọt tuyết như hình này bên em có dung dịch không?',
+          ai: 'Dạ hình anh gửi là rửa xe bằng **bọt tuyết** ạ. Bên em có **Nước rửa xe bọt tuyết 1 lít**, pha 1:100 rửa được **20–25 lần**, giá **159.000đ**. Anh lấy kèm combo nội thất em **freeship** luôn nha.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn anh Phong đã ủng hộ Xe Sạch 🚗 Anh em hay lấy thêm mấy món này để chăm xe trọn bộ ạ:',
+        sp: [
+          { img: L(IMG['bot-tuyet']), ten: 'Nước rửa xe bọt tuyết 1L', gia: 159000 },
+          { img: L(IMG['phu-bong']), ten: 'Phủ bóng nano', gia: 249000, cu: 289000 },
+          { img: L(IMG['lau-noi-that']), ten: 'Dung dịch lau taplo', gia: 129000 },
+          { img: L(IMG['khan']), ten: 'Bộ 3 khăn microfiber', gia: 99000 },
+          { img: L(IMG['rua-xe']), ten: 'Combo rửa xe tại nhà', gia: 399000, cu: 459000 },
+        ],
+        khach: 'Lấy anh thêm 1 rửa xe bọt tuyết với phủ bóng nha',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 349.000đ lên 757.000đ',
+        fmm: {
+          chao: 'Chào anh Phong 👋 Chai xịt nội thất của anh chắc sắp hết rồi ạ!',
+          img: L(IMG['xit-da-nang']),
+          nhan: 'MUA LẠI GIẢM 10%',
+          ten: 'Xịt nội thất đa năng 500ml',
+          mo: 'Khách cũ mua lại giảm 10%, freeship toàn quốc.',
+          nut: 'Mua lại ngay',
+        },
+        zbs: {
+          ten: 'Tặng anh Phong voucher 15%',
+          mo: 'Cảm ơn anh đã chăm xe cùng Xe Sạch Store. Shop gửi anh ưu đãi cho lần mua tiếp theo:',
+          dong: [['Mã voucher', '**XESACH15**'], ['Ưu đãi', 'Giảm 15% đơn từ 300.000đ'], ['Hạn dùng', '31/12/2026']],
+          nut: 'Dùng voucher ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng sản phẩm khách đã xem (thẻ <b>#RuaXeBotTuyet</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: mua 2 giảm, freeship (thẻ <b>#HoiGia</b>)',

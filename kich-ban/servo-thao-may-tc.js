@@ -13,6 +13,9 @@
     'tu-dien': '1780034766295-43db0f2a0fb7',
     'tho-lap': '1649038780045-235e4b6e40b4',
     'may-cnc': '1717386255773-a456c611dc4e',
+    'plc': '1697071612388-1d1a86fb8cc1',
+    'bien-tan': '1661593073138-db1b788304e3',
+    'cap-encoder': '1741626270900-a0a606876f5a',
   };
 
   window.KICH_BAN = {
@@ -91,8 +94,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Servo <span class="grad">tháo máy Nhật</span>', den: '21/07/2026', khach: 6, tyLe: 0.56 },
+        { ten: 'Linh kiện <span class="grad">tự động hóa</span>', den: '18/08/2026', khach: 8, tyLe: 0.54 },
+        { ten: 'Phụ tùng <span class="grad">máy CNC</span>', den: '26/09/2026', khach: 5, tyLe: 0.57, dung: 296 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['tu-driver']), ten: 'Driver servo tháo máy Nhật' } },
+          { kh: 'Driver servo máy cắt xưởng a báo lỗi alarm. Có driver tháo máy thay k shop?' },
+          {
+            ai: 'Dạ có ạ anh! Để lấy đúng loại, anh đọc giúp em **mã trên tem motor** nha. Driver phải **cùng đời, cùng công suất** với motor mới chạy ạ.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Tem ghi MSME042G1U. Lắp con A6 rẻ hơn được k em?' },
+          {
+            ai: 'Dạ đây là motor **Panasonic A5 400W**. Driver **A6 khác chuẩn encoder**, lắp vào sẽ báo lỗi ạ. Anh lấy đúng **driver A5 400W**: **2.400.000đ**, đã **test có tải**, **bảo hành 3 tháng**.',
+          },
+          { kh: 'Chốt a 1 con. Cty Bao Bì Minh Phát, a Hùng 0987 654 321, Lô C5 KCN Quế Võ, Bắc Ninh' },
+          { ai: 'Dạ em lên đơn, giao nhanh trong ngày cho anh ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Hùng · Cty Bao Bì Minh Phát',
+          sdt: '0987 654 321',
+          diaChi: 'Lô C5, KCN Quế Võ, Bắc Ninh · xuất VAT',
+          ma: '#KS10842',
+          phi: 'giao nhanh trong ngày',
+          sp: [{ img: L(IMG['tu-driver']), ten: 'Driver Panasonic A5 400W (tháo máy)', sl: 1, gia: 2400000 }],
+        },
+        anh: {
+          img: L(IMG['lo-servo']),
+          kh: 'Mấy con motor như hình này bên em còn không?',
+          ai: 'Dạ hình anh gửi là **servo motor tháo máy Nhật** đời A5, A6 ạ, bên em còn sẵn từ **200W tới 1kW**, đã test, **bảo hành 3 tháng**. Anh chụp giúp em **tem motor** để em báo đúng giá con anh cần nha.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn anh Hùng đã tin Kho Servo 💙 Xưởng dùng servo Panasonic, anh em kỹ thuật hay lấy kèm mấy món này ạ:',
+        sp: [
+          { img: L(IMG['cap-encoder']), ten: 'Cáp encoder dự phòng', gia: 450000 },
+          { img: L(IMG['plc']), ten: 'Bộ PLC tháo máy, đã test', gia: 3200000, cu: 3600000 },
+          { img: L(IMG['bien-tan']), ten: 'Biến tần 1.5kW tháo máy', gia: 2800000 },
+          { img: L(IMG['lo-servo']), ten: 'Servo motor A5 400W', gia: 2900000 },
+          { img: L(IMG['tu-dien']), ten: 'Lắp tủ điện servo trọn gói', gia: 8500000, nut: 'Nhận báo giá' },
+        ],
+        khach: 'Lấy thêm a 1 cáp encoder với bộ PLC nha, xưởng đang cần',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 2.400.000đ lên 6.050.000đ',
+        fmm: {
+          chao: 'Chào anh Hùng 👋 Kho vừa về lô servo tháo máy Nhật mới, gửi anh xem trước nha!',
+          img: L(IMG['lo-servo']),
+          nhan: 'HÀNG MỚI VỀ',
+          ten: 'Lô servo Panasonic, Yaskawa mới về',
+          mo: 'Đã test có tải, bảo hành 3 tháng. Khách cũ giảm 5%.',
+          nut: 'Xem hàng mới',
+        },
+        zbs: {
+          ten: 'Ưu đãi riêng cho Cty Bao Bì Minh Phát',
+          mo: 'Cảm ơn anh Hùng đã mua hàng tại Kho Servo Bắc Ninh. Gửi anh mã giảm giá cho đơn tiếp theo:',
+          dong: [['Mã giảm giá', '**SERVO5**'], ['Ưu đãi', 'Giảm 5%, tối đa 1.000.000đ'], ['Hạn dùng', '31/12/2026']],
+          nut: 'Dùng mã ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng mã hàng khách hỏi (thẻ <b>#ServoA5_400W</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi, quà tặng (thẻ <b>#HoiGia</b>)',

@@ -106,8 +106,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Thiết bị vệ sinh <span class="grad">showroom</span>', den: '21/07/2026', khach: 8, tyLe: 0.55 },
+        { ten: 'Sen vòi, <span class="grad">lavabo</span>', den: '18/08/2026', khach: 10, tyLe: 0.53 },
+        { ten: 'Bồn cầu <span class="grad">thông minh</span>', den: '26/09/2026', khach: 7, tyLe: 0.57 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['bon-cau']), ten: 'Bồn cầu một khối AP-1688' } },
+          { kh: 'Mẫu bồn cầu này còn không shop? Giá sao ạ?' },
+          {
+            ai: 'Dạ còn hàng ạ anh! **Bồn cầu một khối AP-1688** nắp đóng êm, xả xoáy, giá **4.290.000đ**. Anh cho em xin **tâm xả** (từ tường tới tâm lỗ thoát) để em chọn đúng loại nha.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Tâm xả 305mm, nhà anh ở Thủ Đức. Có lắp luôn không em?' },
+          {
+            ai: 'Dạ tâm **305mm** lắp vừa mẫu này ạ. Thủ Đức bên em **giao và lắp đặt miễn phí**, men sứ **bảo hành 5 năm** nha anh.',
+          },
+          { kh: 'Ok lấy anh 1 bồn. Nguyễn Tuấn, 0903 456 789, 12 Võ Văn Ngân, TP. Thủ Đức' },
+          { ai: 'Dạ em lên đơn và hẹn lịch lắp cho anh ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Nguyễn Tuấn',
+          sdt: '0903 456 789',
+          diaChi: '12 Võ Văn Ngân, TP. Thủ Đức, TP. Hồ Chí Minh',
+          ma: '#AP30217',
+          phi: 'miễn phí lắp đặt',
+          sp: [{ img: L(IMG['bon-cau']), ten: 'Bồn cầu một khối AP-1688', sl: 1, gia: 4290000 }],
+        },
+        anh: {
+          img: L(IMG['lavabo-tron']),
+          kh: 'Lavabo như hình này bên em có không?',
+          ai: 'Dạ mẫu anh gửi là **Lavabo đặt bàn tròn AP-L08**, sứ trắng men nano, giá **990.000đ** ạ. Lắp chung với bồn cầu AP-1688 bên em **giảm thêm 300.000đ** nha anh.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn anh Tuấn đã tin chọn An Phát 💙 Làm lại phòng tắm, khách hay lấy kèm mấy món hợp tông với bồn cầu AP-1688 ạ:',
+        sp: [
+          { img: L(IMG['lavabo-vuong']), ten: 'Lavabo đặt bàn vuông', gia: 1150000, cu: 1350000 },
+          { img: L(IMG['lavabo-tron']), ten: 'Lavabo đặt bàn tròn', gia: 990000 },
+          { img: L(IMG['voi']), ten: 'Vòi lavabo nóng lạnh', gia: 890000 },
+          { img: L(IMG['sen-tam']), ten: 'Sen tắm nóng lạnh', gia: 1990000, cu: 2290000 },
+          { img: L(IMG['guong']), ten: 'Gương phòng tắm', gia: 1190000 },
+        ],
+        khach: 'Lấy thêm anh lavabo vuông với vòi nha, lắp chung 1 lần luôn',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 4.290.000đ lên 6.330.000đ',
+        fmm: {
+          chao: 'Chào anh Tuấn 👋 Showroom vừa về mẫu sen tắm mới, gửi anh xem trước nha!',
+          img: L(IMG['sen-tam']),
+          nhan: 'SẢN PHẨM MỚI VỀ',
+          ten: 'Sen tắm nóng lạnh dòng mới',
+          mo: 'Khách cũ giảm thêm 10%, lắp đặt miễn phí.',
+          nut: 'Xem sản phẩm',
+        },
+        zbs: {
+          ten: 'Tặng anh Tuấn voucher 300.000đ',
+          mo: 'Cảm ơn anh đã mua sắm tại TBVS An Phát. Shop gửi anh ưu đãi cho lần mua tiếp theo:',
+          dong: [['Mã voucher', '**ANPHAT300**'], ['Ưu đãi', 'Giảm 300.000đ đơn từ 2.000.000đ'], ['Hạn dùng', '31/12/2026']],
+          nut: 'Dùng voucher ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng mẫu khách đã xem (thẻ <b>#BonCauMotKhoi</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi, quà tặng (thẻ <b>#HoiGia</b>)',

@@ -66,7 +66,7 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có deck.dashboard nên không có slide thống kê. ===== */
     deck: {
       tieuDe6: 'Hệ thống AI chatbot giúp tăng<br><span class="grad">tỷ lệ chốt SĐT khách hàng</span>',
       // Không lên đơn tự động (ký hợp đồng thi công với sale) → 5 tính năng, giống khóa học

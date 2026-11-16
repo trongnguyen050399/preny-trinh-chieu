@@ -106,8 +106,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Nhà thuốc <span class="grad">online</span>', den: '21/07/2026', khach: 12, tyLe: 0.55 },
+        { ten: 'Thực phẩm <span class="grad">bảo vệ sức khỏe</span>', den: '18/08/2026', khach: 14, tyLe: 0.53 },
+        { ten: 'Mỹ phẩm <span class="grad">dược</span>', den: '26/09/2026', khach: 10, tyLe: 0.57 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['lo-vien']), ten: 'Viên bổ gan Minh Châu' } },
+          { kh: 'Viên bổ gan này giá bao nhiêu em? Chồng chị hay nhậu, đi khám men gan hơi cao' },
+          {
+            ai: 'Dạ **Viên bổ gan Minh Châu** chiết xuất **actiso, cà gai leo**, giá **380.000đ/hộp** ạ. Đây là **thực phẩm bảo vệ sức khỏe, không phải thuốc**, men gan cao anh nhà vẫn cần theo dõi với bác sĩ nha chị.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Ông đang uống thuốc huyết áp, uống chung được không em?' },
+          {
+            ai: 'Dạ chị hỏi thêm bác sĩ cho chắc ạ. Nếu dùng, anh uống **cách thuốc huyết áp 2 tiếng**. Liệu trình đang **mua 3 tặng 1**: **1.140.000đ cho 4 hộp**, freeship.',
+          },
+          { kh: 'Ok chị lấy liệu trình 3 tặng 1. Thu Hương, 0912 345 678, 35 Nguyễn Trãi, Thanh Xuân, HN' },
+          { ai: 'Dạ em lên đơn cho chị ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Nguyễn Thu Hương',
+          sdt: '0912 345 678',
+          diaChi: '35 Nguyễn Trãi, P. Thanh Xuân, Hà Nội',
+          ma: '#MC51207',
+          phi: 'mua 3 tặng 1, freeship',
+          sp: [{ img: L(IMG['lo-vien']), ten: 'Viên bổ gan Minh Châu (tặng 1 hộp)', sl: 3, dv: 'hộp', gia: 380000 }],
+        },
+        anh: {
+          img: L(IMG['kem-chong-nang']),
+          kh: 'Kem chống nắng như hình này nhà thuốc có không em?',
+          ai: 'Dạ mẫu chị gửi là **kem chống nắng dạng gel SPF 45 PA+++**, giá **310.000đ** ạ. Da chị dầu hay da khô để em tư vấn đúng loại nha.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn chị Hương đã tin Nhà Thuốc Minh Châu 🌿 Cuối năm nhiều tiệc, khách hay dùng kèm mấy sản phẩm này ạ:',
+        sp: [
+          { img: L(IMG['omega']), ten: 'Dầu cá Omega-3', gia: 350000 },
+          { img: L(IMG['vitamin']), ten: 'Vitamin tổng hợp', gia: 280000, cu: 320000 },
+          { img: L(IMG['kem-chong-nang']), ten: 'Kem chống nắng SPF 45', gia: 310000 },
+          { img: L(IMG['lo-trang']), ten: 'Canxi + D3', gia: 260000 },
+          { img: L(IMG['vien-nang']), ten: 'Men vi sinh dạng viên', gia: 230000 },
+        ],
+        khach: 'Lấy thêm chị 1 hộp vitamin tổng hợp nha',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 1.140.000đ lên 1.420.000đ',
+        fmm: {
+          chao: 'Chào chị Hương 👋 Liệu trình của anh nhà sắp hết rồi ạ, em gửi chị ưu đãi mua lại nha!',
+          img: L(IMG['lo-vien']),
+          nhan: 'MUA LẠI GIẢM 10%',
+          ten: 'Liệu trình Viên bổ gan 3 tặng 1',
+          mo: 'Khách cũ giảm thêm 10%, freeship toàn quốc.',
+          nut: 'Mua lại ngay',
+        },
+        zbs: {
+          ten: 'Tặng chị Hương voucher 50.000đ',
+          mo: 'Cảm ơn chị đã tin dùng sản phẩm tại Nhà Thuốc Minh Châu. Gửi chị ưu đãi cho lần mua tiếp theo:',
+          dong: [['Mã voucher', '**MINHCHAU50**'], ['Ưu đãi', 'Giảm 50.000đ đơn từ 300.000đ'], ['Hạn dùng', '31/12/2026']],
+          nut: 'Dùng voucher ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng sản phẩm khách hỏi (thẻ <b>#BoGan</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi liệu trình, quà tặng (thẻ <b>#HoiGia</b>)',

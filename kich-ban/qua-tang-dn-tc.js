@@ -95,8 +95,71 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Quà Tết <span class="grad">doanh nghiệp</span>', den: '21/12/2026', khach: 9, tyLe: 0.55 },
+        { ten: 'Giỏ trái cây <span class="grad">cao cấp</span>', den: '18/08/2026', khach: 11, tyLe: 0.53 },
+        { ten: 'Quà tặng <span class="grad">in logo</span>', den: '26/09/2026', khach: 6, tyLe: 0.57 },
+      ],
+      chatbot: {
+        chat: [
+          { ref: { img: L(IMG['gio-trai-cay']), ten: 'Giỏ trái cây nhập khẩu' } },
+          { kh: 'Cty mình cần 30 giỏ như này tặng đối tác, tầm 800k/giỏ. Có in logo, xuất VAT k shop?' },
+          {
+            ai: 'Dạ có ạ chị! Mẫu chị gửi là **giỏ trái cây nhập khẩu**, giá **790.000đ/giỏ**, vừa ngân sách. Shop **in logo lên thiệp, ruy băng** và **xuất VAT** cho công ty mình ạ.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Có giao nhiều địa chỉ không em? 30 người nhận khác nhau' },
+          {
+            ai: 'Dạ shop **giao tận tay từng đối tác**, gửi ảnh xác nhận từng nơi ạ. Đơn từ **30 phần giảm 10%**, còn **711.000đ/giỏ** nha chị.',
+          },
+          { kh: 'Ok chốt 30 giỏ. Cty CP Minh An, chị Lan 0904 223 456, 25 Lý Thường Kiệt, Hoàn Kiếm, HN' },
+          { ai: 'Dạ em lên đơn cho chị ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Lan · Cty CP Minh An',
+          sdt: '0904 223 456',
+          diaChi: '25 Lý Thường Kiệt, P. Hoàn Kiếm, Hà Nội · xuất VAT',
+          ma: '#MA20512',
+          phi: 'giao 30 địa chỉ',
+          sp: [{ img: L(IMG['gio-trai-cay']), ten: 'Giỏ trái cây nhập khẩu · in logo', sl: 30, gia: 711000 }],
+        },
+        anh: {
+          img: L(IMG['hop-go']),
+          kh: 'Hộp quà như hình này còn không em?',
+          ai: 'Dạ mẫu chị gửi là **Hộp quà gỗ bánh & mứt**, giá **850.000đ**, để được **2–3 tuần** nên hợp gửi tỉnh xa ạ. Shop **in logo công ty lên nắp hộp** miễn phí nha chị.',
+        },
+      },
+      afterSale: {
+        loi: 'Cảm ơn chị Lan đã chọn Mộc An 💙 Dịp này công ty hay đặt thêm quà cho nhân viên, đối tác thân thiết ạ:',
+        sp: [
+          { img: L(IMG['hop-go']), ten: 'Hộp quà gỗ bánh & mứt', gia: 850000 },
+          { img: L(IMG['hop-den']), ten: 'Hộp quà trà & hạt', gia: 690000 },
+          { img: L(IMG['hop-trang']), ten: 'Hộp quà Tết sang trọng', gia: 990000, cu: 1150000 },
+          { img: L(IMG['gio-hoa']), ten: 'Giỏ hoa chúc mừng', gia: 1200000 },
+          { img: L(IMG['gio-trai-cay-2']), ten: 'Giỏ trái cây mini', gia: 490000 },
+        ],
+        khach: 'Đặt thêm 10 hộp trà & hạt cho nhân viên nhé em',
+        pill: '🛍 Khách mua thêm ngay: thêm 10 hộp quà, +6.900.000đ',
+        fmm: {
+          chao: 'Chào chị Lan 👋 Mộc An vừa ra bộ quà Tết 2027, gửi chị xem trước nha!',
+          img: L(IMG['hop-trang']),
+          nhan: 'QUÀ TẾT 2027',
+          ten: 'Bộ sưu tập quà Tết doanh nghiệp',
+          mo: 'Đặt trước 15/12 giảm 15%, in logo miễn phí.',
+          nut: 'Xem bộ sưu tập',
+        },
+        zbs: {
+          ten: 'Ưu đãi riêng cho Cty CP Minh An',
+          mo: 'Cảm ơn chị Lan đã đặt quà tại Mộc An. Em đã lưu sẵn logo, mẫu thiệp của công ty mình:',
+          dong: [['Mã ưu đãi', '**MOCAN5**'], ['Ưu đãi', 'Giảm thêm 5% đơn quà Tết'], ['Hạn dùng', '15/01/2027']],
+          nut: 'Đặt quà Tết ngay',
+        },
+      },
       bamDuoi: {
         cmpDung: ['Khách nhắn xong im → nhắc đúng mẫu quà khách xem (thẻ <b>#GioTraiCay</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi số lượng (thẻ <b>#HoiGia</b>)',

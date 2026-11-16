@@ -7,6 +7,7 @@
    Tên, SĐT, giá, mã đơn: dữ liệu minh họa. Ảnh: Unsplash. */
 (function () {
   const U = id => 'https://images.unsplash.com/photo-' + id + '?w=800&h=800&fit=crop&q=80&auto=format';
+  const L = id => 'assets/img/u/' + id + '_800x800.jpg';   // ảnh đã tải về máy (slide trình chiếu)
 
   window.KICH_BAN = {
     logo: 'https://preny.ai/images/logo.svg',
@@ -24,6 +25,8 @@
       'polo-trang': U('1671438118097-479e63198629'),
       'polo-xam': U('1586363090844-099253d6a1cb'),
       'vay-den': U('1522218296581-1244648997fb'),
+      'that-lung': U('1666723043169-22e29545675c'),
+      'giay': U('1544441892-794166f1e3be'),
     },
 
     // Cột trái demo: đúng 4 tính năng được diễn, theo thứ tự diễn (chuẩn thương mại điện tử lần 22)
@@ -97,13 +100,49 @@
 
     /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Phần nào không ghi thì slide dùng sẵn nội dung thời trang trong HTML. ===== */
     deck: {
-      // Slide 4–5: số liệu thật từ trang Thống kê của khách Preny (người dùng cung cấp). Không có thì bỏ trống → slide tự ẩn.
-      thongKe: [
-        { ten: 'Thời trang <span class="grad">theo trend</span>', ngay: '01/07 – 31/07/2026', khachMoi: 237, chot: 162, khachCu: 27, tinNhan: 2034,
-          banner: 'Gần <b>7/10</b> khách mới <span class="lbl-act">chốt đơn với shop</span>' },
-        { ten: 'Thời trang <span class="grad">brand local</span>', ngay: '15/07 – 22/07/2026', khachMoi: 359, chot: 139, khachCu: 243, tinNhan: 8168,
-          banner: '<b>243</b> khách cũ quay lại tương tác · hơn <b>8.000</b> tin nhắn chỉ trong 1 tuần' },
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1).
+         dashboard: 3 case, mỗi case 1 slide vẽ như trang Thống kê Preny. Số minh họa sinh theo tên case:
+           khach = khách mới trung bình mỗi ngày, tyLe = tỷ lệ chốt đơn nhắm tới (tổng luôn nằm trong 50–60%), den = ngày cuối bảng. */
+      dashboard: [
+        { ten: 'Thời trang <span class="grad">local brand</span>', den: '21/07/2026', khach: 11, tyLe: 0.56 },
+        { ten: 'Thời trang <span class="grad">theo trend</span>', den: '14/08/2026', khach: 14, tyLe: 0.53 },
+        { ten: 'Thời trang <span class="grad">công sở</span>', den: '25/09/2026', khach: 9, tyLe: 0.58, dung: 412 },
       ],
+      // Slide giới thiệu chatbot. chat: ref (khách nhắn từ quảng cáo), kh, ai (+meta), don: true (màn hình Tạo đơn tự điền), ok: true (thẻ đã tạo đơn).
+      chatbot: {
+        chat: [
+          { ref: { img: L('1625910513399-c9fcba54338c'), ten: 'Áo Polo Cotton Classic' } },
+          { kh: 'Áo này còn không shop? Giá bao nhiêu vậy?' },
+          { ai: 'Dạ còn hàng ạ anh! **Áo Polo Cotton Classic** màu đen giá **279.000đ**, freeship. Anh cao, nặng bao nhiêu để em tư vấn size nha?', meta: '⚡ Preny AI trả lời sau 2 giây' },
+          { kh: '1m72, 68kg. Vải có nóng không em?' },
+          { ai: 'Dạ anh mặc **size L** là vừa đẹp ạ. Áo **cotton cá sấu 100%**, thấm hút tốt nên mặc mát. Shop **đổi size miễn phí 7 ngày** nha anh.' },
+          { kh: 'Ok lấy anh 1 áo size L. Trần Minh, 0901 234 567, 456 Cao Thắng, P. Hòa Hưng, TP.HCM' },
+          { ai: 'Dạ em lên đơn cho anh ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: { ten: 'Trần Minh', sdt: '0901 234 567', diaChi: '456 Cao Thắng, P. Hòa Hưng, TP. Hồ Chí Minh', ma: '#SM24118', phi: 'freeship',
+          sp: [{ img: L('1625910513399-c9fcba54338c'), ten: 'Áo Polo Cotton Classic · Đen · L', sl: 1, gia: 279000 }] },
+        anh: { img: L('1522218296581-1244648997fb'), kh: 'Mẫu này còn size M không shop?',
+          ai: 'Dạ mẫu chị gửi là **Váy Midi Đen Xếp Ly**, giá **389.000đ** ạ. Size M còn 3 chiếc, chị cao, nặng bao nhiêu để em chọn size chuẩn nha?' },
+      },
+      // Slide after sale: bấm 1 thẻ đã tạo đơn → 5 sản phẩm đi kèm; bấm 2 tin Facebook FMM + Zalo ZBS.
+      afterSale: {
+        loi: 'Cảm ơn anh Minh đã ủng hộ shop 💜 Mấy món này phối cực hợp với áo polo đen, khách hay mua kèm nhất ạ:',
+        sp: [
+          { img: L('1473966968600-fa801b869a1a'), ten: 'Quần Kaki Jogger Be', gia: 350000, cu: 389000 },
+          { img: L('1671438118097-479e63198629'), ten: 'Áo Polo Classic Trắng', gia: 251000, cu: 279000 },
+          { img: L('1586363090844-099253d6a1cb'), ten: 'Áo Polo Classic Xám', gia: 251000, cu: 279000 },
+          { img: L('1666723043169-22e29545675c'), ten: 'Thắt Lưng Da Bò', gia: 199000 },
+          { img: L('1544441892-794166f1e3be'), ten: 'Giày Sneaker Trắng', gia: 459000, cu: 520000 },
+        ],
+        khach: 'Lấy thêm anh quần kaki be size 31 nha',
+        pill: '🛍 Khách mua thêm ngay: đơn tăng từ 279.000đ lên 629.000đ',
+        fmm: { chao: 'Chào anh Minh 👋 Shop vừa về bộ sưu tập mới, gửi anh xem trước nha!', img: L('1671438118097-479e63198629'),
+          nhan: 'SẢN PHẨM MỚI VỀ', ten: 'Bộ sưu tập Polo Thu 2026', mo: 'Khách cũ được giảm thêm 10% trong tuần này.', nut: 'Xem sản phẩm' },
+        zbs: { ten: 'Tặng anh Minh voucher 10%', mo: 'Cảm ơn anh đã mua sắm tại Thời Trang Smart. Shop gửi anh ưu đãi cho lần mua tiếp theo:',
+          dong: [['Mã voucher', '**SMART10**'], ['Ưu đãi', 'Giảm 10% đơn từ 300.000đ'], ['Hạn dùng', '30/11/2026']], nut: 'Dùng voucher ngay' },
+      },
     },
   };
 })();

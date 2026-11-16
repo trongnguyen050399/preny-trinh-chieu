@@ -92,18 +92,21 @@
 
   /* ---------- Trạng thái ---------- */
   // ALL: mọi slide trong HTML. slides: các slide của ngành đang chọn (lọc theo data-loai / data-need).
-  // DEMO_AFTER: demo chat chen sau slide có data-demo-after (slide 6 tính năng).
+  // DEMO_AFTER: demo chat chen sau slide có data-demo-after (slide 6 tính năng). Thương mại điện tử (pipeline 16/11/2026) không có demo chat: DEMO_AFTER = -1.
   const ALL = $$('#vDeck .slide');
   let slides = ALL.slice(), N = slides.length, DEMO_AFTER = 6, D = {}, loai = 'tmdt';
   const maxF = s => Math.max(0, ...$$('[data-f]', s).map(e => +e.dataset.f));
   let view = 'menu', si = 0, fi = 0, kb = null, demoReady = false, wantStart = false, demoStarted = false;
   const prog = $('#progress');
+  const hasDemo = () => DEMO_AFTER >= 0;
+  const segOf = i => (hasDemo() && i >= DEMO_AFTER ? i + 1 : i);          // vạch của slide i trên thanh tiến độ
+  const slideOfSeg = p => (hasDemo() && p > DEMO_AFTER ? p - 1 : p);
   // Thanh tiến độ: N slide + 1 vạch Demo chat (nằm sau slide DEMO_AFTER). Bấm vạch nào nhảy thẳng tới đó.
   const headText = h => { const d = document.createElement('div'); d.innerHTML = h.innerHTML.replace(/<br\s*\/?>/gi, ' '); return d.textContent.replace(/\s+/g, ' ').trim(); };
   const slideTitle = (s, i) => { const h = $('h1, h2', s); return String(i + 1).padStart(2, '0') + ' · ' + (h ? headText(h) : 'Slide ' + (i + 1)); };
   function buildProgress() {
-    prog.innerHTML = Array.from({ length: N + 1 }, (_, p) => {
-      const tip = p === DEMO_AFTER ? 'Demo chat' : slideTitle(slides[p < DEMO_AFTER ? p : p - 1], p < DEMO_AFTER ? p : p - 1);
+    prog.innerHTML = Array.from({ length: N + (hasDemo() ? 1 : 0) }, (_, p) => {
+      const tip = hasDemo() && p === DEMO_AFTER ? 'Demo chat' : slideTitle(slides[slideOfSeg(p)], slideOfSeg(p));
       return `<span data-p="${p}" data-tip="${tip.replace(/"/g, '&quot;')}"></span>`;
     }).join('');
   }
@@ -113,8 +116,8 @@
     if (!s) { if (view === 'demo') { demo.focus(); try { demo.contentWindow.focus(); } catch (_) {} } return; }   // bấm trượt vào nền thanh: trả phím lại cho demo
     e.stopPropagation();
     const p = +s.dataset.p;
-    if (p === DEMO_AFTER) resumeDemo();
-    else goSlide(p < DEMO_AFTER ? p : p - 1, 0);
+    if (hasDemo() && p === DEMO_AFTER) resumeDemo();
+    else goSlide(slideOfSeg(p), 0);
   });
 
   function setView(v) {
@@ -130,7 +133,7 @@
     renderProgress();
   }
   function renderProgress() {
-    const pos = view === 'demo' ? DEMO_AFTER : (si < DEMO_AFTER ? si : si + 1);
+    const pos = view === 'demo' ? DEMO_AFTER : segOf(si);
     $$('span', prog).forEach((s, i) => { s.classList.toggle('on', i === pos); s.classList.toggle('done', i < pos); });
     const nh = typeSlides.length - N;
     $('#counter').textContent = view === 'deck' ? `${String(si + 1).padStart(2, '0')} / ${String(N).padStart(2, '0')}${nh > 0 ? ' · ẩn ' + nh : ''}` : (view === 'demo' ? 'DEMO CHAT' : '');
@@ -193,18 +196,6 @@
       el.setAttribute('src', get(D, el.dataset.dsrc) || el._def);
     });
   }
-  function fillStats() {
-    $$('.stat[data-stat]').forEach(s => {
-      const st = (D.thongKe || [])[+s.dataset.stat]; if (!st) return;
-      const pct = st.tyLe != null ? st.tyLe : Math.round(st.chot / st.khachMoi * 10000) / 100;
-      $('.st-ten', s).innerHTML = st.ten; $('.st-ngay', s).textContent = st.ngay;
-      $('.rfg', s).dataset.pct = pct; $('.rtxt .count', s).dataset.to = pct;
-      $('.rnote', s).innerHTML = `${nf(st.chot, 0)} <span class="lbl-unit"></span> / ${nf(st.khachMoi, 0)} khách hàng mới`;
-      const k = $$('.kpi .count', s);
-      [st.khachMoi, st.chot, st.khachCu, st.tinNhan].forEach((v, i) => { if (k[i]) k[i].dataset.to = v; });
-      $('.st-banner', s).innerHTML = st.banner || '';
-    });
-  }
   function renderPipe() {   // slide "Định nghĩa chốt đơn" (nhóm cân nhắc nhiều)
     const c = D.chotDon, el = $('#pipe'); if (!c || !el) return;
     const sh = D.shop || { name: '', initials: '' };
@@ -239,6 +230,188 @@
       + p.nhom.map(([n, cs]) => `<div class="tp-g"><span>${esc(n)}</span><div>${cs.map(tchip).join('')}</div></div>`).join('')
       + (p.ghiChu ? `<div class="tp-note"><b>AI tóm tắt</b>${esc(p.ghiChu)}</div>` : '');
   }
+
+  /* ========== Pipeline thương mại điện tử (người dùng chốt 16/11/2026, TRINH-CHIEU.md mục 1) ==========
+     Slide thống kê kiểu trang Thống kê Preny (deck.dashboard), giới thiệu chatbot (deck.chatbot), 50% khách cũ,
+     Meta CAPI (đơn lấy từ deck.chatbot.don), after sale (deck.afterSale). Chữ trong dữ liệu được dùng **đậm** và \n xuống dòng. */
+  const md = v => String(v == null ? '' : v).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+  const vnd = n => nf(n, 0) + 'đ';
+  const pct = v => +v.toFixed(2) + '%';   // như trang Thống kê: 66.67%, 75%
+  const donTong = d => d.sp.reduce((a, p) => a + p.sl * p.gia, 0);
+
+  // --- Slide thống kê: số minh họa sinh cố định theo tên case (cùng tên → cùng số), tỷ lệ tổng nằm trong [min, max] (mặc định 51–59%) ---
+  function rng(str) {
+    let a = 0; for (const ch of String(str)) a = (Math.imul(a, 31) + ch.charCodeAt(0)) | 0;
+    return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+  function dashData(c) {
+    const r = rng(c.ten + (c.seed || '')), base = c.khach || 10, rate = c.tyLe || 0.55, n = c.soNgay || 7, lo = c.min || 0.51, hi = c.max || 0.59;   // tránh số tròn 50%, 60%
+    const sum = (rows, i) => rows.reduce((a, x) => a + x[i], 0);
+    let rows = c.rows || null, last;
+    for (let k = 0; !rows && k < 200; k++) {
+      last = Array.from({ length: n }, () => {
+        const kh = Math.max(3, Math.round(base * (0.55 + r() * 0.9)));
+        const don = Math.min(kh, Math.max(1, Math.round(kh * (rate - 0.2 + r() * 0.4))));
+        const cu = Math.round(base * (0.08 + r() * 0.42));
+        const blk = r() < 0.45 ? 0 : 1 + Math.floor(r() * 5);
+        const blt = blk ? blk + Math.floor(r() * 3) : 0;
+        return [kh, don, cu, blk, blt, Math.round(kh * (3.2 + r() * 1.8) + cu * 1.6)];
+      });
+      const tr = sum(last, 1) / sum(last, 0);
+      if (tr >= lo && tr <= hi) rows = last;
+    }
+    rows = rows || last;
+    const tot = [0, 1, 2, 3, 4, 5].map(i => sum(rows, i));
+    return { rows, tot, rate: tot[1] / tot[0] * 100, tinMoi: Math.round(tot[5] * (1.9 + r() * 0.3)), tang: [0, 1, 2, 3].map(() => 18 + Math.round(r() * 46)) };
+  }
+  const SIDE = [['robot', 'Đào tạo Bot'], ['chat', 'Chat đa kênh', 'Miễn phí'], ['', 'Tin nhắn đa kênh'], ['', 'Tích hợp nền tảng'], ['users', 'AI Mini CRM', 'Miễn phí'],
+    ['megaphone', 'Remarketing'], ['layers', 'Đơn hàng', 'HOT'], ['chart', 'Thống kê'], ['clock', 'Hạn mức sử dụng'], ['trend', 'Nâng cấp'], ['message', 'Bài viết'], ['shield', 'Cài đặt']];
+  function renderDash() {
+    const L = loai === 'cnn' ? { don: 'Số điện thoại mới', kpi: 'Số điện thoại mới', unit: 'Số điện thoại', rate: 'Tỷ lệ chốt SĐT' }
+      : { don: 'Đơn hàng mới', kpi: 'Số đơn hàng mới', unit: 'Đơn hàng', rate: 'Tỷ lệ chốt đơn' };
+    $$('#vDeck .sdash').forEach(s => {
+      const c = (D.dashboard || [])[+s.dataset.dash];
+      if (!c) { s.innerHTML = ''; return; }
+      const d = dashData(c), [dd, mm, yy] = String(c.den || '21/07/2026').split('/').map(Number);
+      const day = i => new Date(yy, mm - 1, dd - i);
+      const f2 = x => String(x).padStart(2, '0');
+      const dmy = (x, sep) => [f2(x.getDate()), f2(x.getMonth() + 1), x.getFullYear()].join(sep);
+      const kpi = [['chat', d.tot[0], 'Số hội thoại mới'], ['phone', d.tot[1], L.kpi], ['refresh', d.tot[2], 'Khách hàng cũ tương tác qua tin nhắn'], ['users', d.tinMoi, 'Tổng số tin nhắn mới']];
+      const cell = (v, u) => `<span><b>${nf(v, 0)}</b><small>${u}</small></span>`;
+      s.innerHTML = `<div class="head" data-f="0"><div class="eyebrow"><i data-i="chart"></i>Thống kê trên hệ thống Preny</div><h2 class="t2">${c.ten}</h2></div>`
+        + `<div class="pw" data-f="0" data-a="zoom" style="--d:.12s">`
+        + `<aside class="pw-side"><img src="assets/img/logo-white.png" alt="Preny"><div class="pw-use"><span>Cuộc hội thoại</span><b>${nf(c.dung || 387, 0)} / 5.000</b><i style="--w:${Math.round((c.dung || 387) / 50)}%"></i></div>`
+        + SIDE.map(([ic, t, tag]) => `<div class="pw-mi${ic ? '' : ' ss'}${t === 'Thống kê' ? ' on' : ''}">${ic ? `<i data-i="${ic}"></i>` : ''}<span>${t}</span>${tag ? `<em class="${tag === 'HOT' ? 'hot' : ''}">${tag}</em>` : ''}</div>`).join('')
+        + `</aside><nav class="pw-sub">${[['globe', 'Trang'], ['chat', 'Tương tác'], ['layers', 'Thẻ'], ['target', 'Thẻ hiện tại'], ['users', 'Trạng thái']]
+          .map(([ic, t]) => `<div class="${t === 'Tương tác' ? 'on' : ''}"><i data-i="${ic}"></i>${t}</div>`).join('')}</nav>`
+        + `<main class="pw-main"><div class="pw-top"><h3>Thống kê</h3><span class="pw-date">${dmy(day(d.rows.length - 1), '/')} - ${dmy(day(0), '/')}<i data-i="calendar"></i></span>`
+        + `<span class="pw-sel">Lọc theo sale</span><span class="pw-sel">Lọc theo trang</span></div>`
+        + `<div class="pw-kpis">${kpi.map(([ic, v, t], i) => `<div class="pk"><span class="pk-i k${i}"><i data-i="${ic}"></i></span><div><b>${nf(v, 0)}</b><em>↗ ${d.tang[i]}%</em><small>${t}</small></div></div>`).join('')}</div>`
+        + `<div class="pw-card"><h4>Thống kê chi tiết</h4><div class="pw-tb">`
+        + `<div class="pr ph"><span>Thời gian</span><span>Khách hàng mới</span><span>${L.don}</span><span>Khách cũ tương tác lại</span><span>Bình luận bởi khách hàng</span><span>Bình luận bởi trang</span><span>Tin nhắn bởi trang</span><span>${L.rate}</span></div>`
+        + d.rows.map((x, i) => `<div class="pr" style="--i:${i}"><span>${dmy(day(i), '-')}</span>${x.map(v => `<span>${nf(v, 0)}</span>`).join('')}<span><b>${pct(x[1] / x[0] * 100)}</b></span></div>`).join('')
+        + `<div class="pr pt"><span>Tổng</span>${cell(d.tot[0], 'Khách hàng mới')}${cell(d.tot[1], L.unit)}${cell(d.tot[2], 'Khách hàng')}${cell(d.tot[3], 'Bình luận')}${cell(d.tot[4], 'Bình luận')}${cell(d.tot[5], 'Tin nhắn')}`
+        + `<span class="pc"><b>${pct(d.rate)}</b><svg class="pw-ring" viewBox="0 0 200 100" preserveAspectRatio="none"><path pathLength="1" d="M48 12 C 110 -2, 192 8, 194 46 C 196 82, 140 96, 96 95 C 44 94, 6 80, 6 50 C 6 24, 40 10, 92 8 C 120 7, 150 9, 168 16"/></svg></span></div>`
+        + `</div></div></main></div>`;
+      paint(s);
+    });
+  }
+
+  // --- Mẩu chat hiện dần trong 1 lần bấm. Trả về html + mốc thời gian (marks.ai1, ai2…: lúc AI trả lời; marks.don: lúc hiện màn hình Tạo đơn) ---
+  const okCard = d => `<span class="mok-t"><i data-i="check"></i>Đã tạo đơn <b>${esc(d.ma)}</b></span>`
+    + d.sp.map(p => `<span>${p.dv ? `${esc(p.ten)} · ${p.sl} ${esc(p.dv)}` : `${p.sl} ${esc(p.ten)}`}</span>`).join('')   // dv: đơn vị (đêm, khách, hộp) + `<span>Tổng: <b>${vnd(donTong(d))}</b>${d.phi ? ' · ' + esc(d.phi) : ''}</span>`;
+  const carHTML = sp => `<div class="car-tr">${sp.map(p => `<div class="cc"><img src="${esc(p.img)}" alt=""><div class="cc-b"><b>${esc(p.ten)}</b>`
+    + `<span>${p.cu ? `<s>${vnd(p.cu)}</s>` : ''}${vnd(p.gia)}</span></div><span class="cc-btn">${esc(p.nut || 'Mua kèm')}</span></div>`).join('')}</div>`;
+  const fmmHTML = f => `<div class="fmm-img"><img src="${esc(f.img)}" alt="">${f.nhan ? `<span class="fmm-tag">${esc(f.nhan)}</span>` : ''}</div>`
+    + `<div class="fmm-b"><b>${md(f.ten)}</b><span>${md(f.mo)}</span></div><div class="fmm-btn"><span class="pri">${esc(f.nut || 'Xem sản phẩm')}</span><span>Liên hệ CSKH</span></div>`;
+  const zbsHTML = z => (z.img ? `<div class="zbs-img"><img src="${esc(z.img)}" alt=""></div>` : '')
+    + `<div class="zbs-b"><div class="zbs-oa"><span class="av">${esc((D.shop || {}).initials)}</span><b>${esc((D.shop || {}).name)}</b></div><b class="zbs-t">${md(z.ten)}</b><p>${md(z.mo)}</p>`
+    + `<div class="zbs-tb">${z.dong.map(([k, v]) => `<span>${esc(k)}</span><b>${md(v)}</b>`).join('')}</div></div>`
+    + `<div class="zbs-btn"><span class="pri">${esc(z.nut || 'Dùng voucher ngay')}</span><span>Liên hệ CSKH</span></div>`;
+  function chatSeq(items, o = {}) {
+    let t = o.t0 == null ? 400 : o.t0, h = '', ai = 0;
+    const ts = o.ts != null ? ` data-ts="${o.ts}"` : '', marks = {};
+    const put = (cls, inner) => { h += `<div class="${cls}" data-t="${t}"${ts}>${inner}</div>`; };
+    items.forEach(m => {
+      if (m.sep) { put('mtag', md(m.sep)); t += 700; }
+      else if (m.ref) { put('mref', `<img src="${esc(m.ref.img)}" alt=""><span>${md(m.ref.nhan || 'Khách nhắn từ quảng cáo')}<b>${md(m.ref.ten)}</b></span>`); t += 1000; }
+      else if (m.anh) { put('mpic', `<img src="${esc(m.anh)}" alt="">`); t += 1000; }
+      else if (m.kh) { put('mb me', md(m.kh)); t += 800 + Math.min(1500, m.kh.length * 13); }
+      else if (m.ai) {
+        h += `<div class="mty" data-t="${t}" data-tx="${t + 800}"${ts}><i></i><i></i><i></i></div>`; t += 800;
+        marks['ai' + (++ai)] = t;
+        put('mb bot', md(m.ai));
+        if (m.meta) put('mmeta', md(m.meta));
+        t += 1000 + Math.min(2400, m.ai.length * 15);
+      }
+      else if (m.pill) { put('mpill ' + (m.mau || 'green'), md(m.pill)); t += 900; }
+      else if (m.don) { marks.don = t; t += 3500; }                      // màn hình Tạo đơn tự điền xong mới hiện tin kế
+      else if (m.ok) { put('mok', okCard(m.ok === true ? o.don : m.ok)); t += 1400; }   // ok: true → đơn của slide (o.don)
+      else if (m.car) { put('car', carHTML(m.car)); t += 3600; }
+      else if (m.fmm) { put('fmm', fmmHTML(m.fmm)); t += 1200; }
+      else if (m.zbs) { put('zbs', zbsHTML(m.zbs)); t += 1200; }
+    });
+    return { html: h, t, marks };
+  }
+  const phoneHead = (sub, tag) => `<div class="mh"><span class="av">${esc((D.shop || {}).initials)}</span><div><b>${esc((D.shop || {}).name)}</b><small>${sub}</small></div>${tag ? `<em class="htag green">${tag}</em>` : ''}</div>`;
+
+  // --- Màn hình Tạo đơn của Preny, AI tự điền từ cuộc chat (giống form người dùng gửi 16/11/2026). T: lúc màn hình hiện ---
+  function donPanel(d, T) {
+    const v = (ms, txt, cls) => `<i class="od-v${cls ? ' ' + cls : ''}" data-t="${T + ms}">${txt}</i>`;
+    const sl = d.sp.reduce((a, p) => a + p.sl, 0);
+    return `<div class="od-badge"><i data-i="robot"></i>AI tự điền từ cuộc chat</div>`
+      + `<div class="od-tabs"><span>Thông tin</span><span class="on">Tạo đơn</span></div>`
+      + `<div class="od-sec"><h5>Thông tin khách hàng</h5><div class="od-2"><span class="od-in">${v(500, esc(d.ten))}</span><span class="od-in">${v(800, esc(d.sdt))}</span></div>`
+      + `<div class="od-in tall">${v(1100, esc(d.diaChi))}</div></div>`
+      + `<div class="od-sec"><div class="od-h"><h5>Sản phẩm</h5><span class="od-sel">Kho mặc định</span></div>`
+      + `<div class="od-tb"><div class="od-th"><span>Tên sản phẩm</span><span>Số lượng</span><span>Đơn giá</span><span>Thành tiền</span></div>`
+      + d.sp.map((p, i) => `<div class="od-tr" data-t="${T + 1500 + i * 250}"><span class="od-p"><img src="${esc(p.img)}" alt=""><b>${esc(p.ten)}</b></span>`
+        + `<span class="od-box">${p.sl}</span><span class="od-box">${nf(p.gia, 0)}</span><b>${vnd(p.sl * p.gia)}</b></div>`).join('') + `</div>`
+      + `<div class="od-search"><i data-i="search"></i><span>Tìm kiếm sản phẩm bằng tên</span><span class="od-chk">Còn hàng</span><span class="od-plus">+</span></div>`
+      + `<div class="od-sum">Tổng khối lượng sản phẩm: <b>${sl} sản phẩm</b></div></div>`
+      + (d.ghiChu ? `<div class="od-sec"><h5>Ghi chú đơn</h5><div class="od-in tall">${v(1900, md(d.ghiChu))}</div></div>`
+        : `<div class="od-sec"><div class="od-h"><h5>Vận chuyển</h5><span class="od-sel w">Chọn đơn vị vận chuyển</span></div><div class="od-2"><span class="od-in ph">Mã vận đơn</span><span class="od-in ph">Phí<b>0</b></span></div></div>`)
+      + `<div class="od-tot">${v(2100, vnd(donTong(d)))}</div>`
+      + `<div class="od-btns"><span class="od-b sq"><i data-i="refresh"></i></span><span class="od-b">Xem chi tiết</span><span class="od-b pri" data-t="${T + 2600}">Tạo đơn</span></div>`
+      + `<div class="od-toast" data-t="${T + 2900}"><i data-i="check"></i>Đã tạo đơn <b>${esc(d.ma)}</b></div>`;
+  }
+
+  // --- Slide giới thiệu AI chatbot ---
+  function renderBot() {
+    const c = D.chatbot, M = $('#cbMsgs'); if (!c || !M) return;
+    const first = c.chat[0] && c.chat[0].ref ? [c.chat[0]] : [];
+    const s0 = chatSeq([{ sep: c.gio || 'Khách nhắn lúc 22:47 · ngoài giờ làm việc' }, ...first], { ts: 0, t0: 500 });
+    const sq = chatSeq(c.chat.slice(first.length), { ts: 1, t0: 300, don: c.don }), T = sq.marks.don;
+    M.innerHTML = s0.html + sq.html; paint(M);
+    const P = $('#cbDon'); P.innerHTML = donPanel(c.don, T); P.dataset.t = T; paint(P);
+    const rows = $$('#vDeck .scb .cbf');   // 3 ý bên trái sáng dần theo cuộc chat, ý 4 sáng ở bấm 2
+    [sq.marks.ai1, sq.marks.ai2, T].forEach((t, i) => { if (rows[i]) { rows[i].dataset.t = t || 0; rows[i].dataset.ts = 1; } });
+    if (rows[3]) rows[3].dataset.t = 700;
+    const a = c.anh, I = $('#cbImg');
+    const sq2 = chatSeq([{ sep: a.nhan || 'Khách gửi ảnh, không ghi tên mẫu' }, { anh: a.img }, { kh: a.kh }, { ai: a.ai }, { pill: a.pill || '🔍 AI nhìn ảnh, nhận ra đúng mẫu khách hỏi' }], { t0: 700 });
+    I.innerHTML = `<div class="scr">${phoneHead('Đang hoạt động', 'Preny AI')}<div class="msgs">${sq2.html}</div></div>`;
+  }
+
+  // --- Slide 50%: vẽ đúng 2 cột khoanh đỏ trên trang Thống kê Preny (ảnh người dùng gửi, 8 ngày) ---
+  const S50 = { moi: [17, 37, 51, 62, 46, 37, 62, 47], cu: [23, 44, 30, 23, 29, 23, 40, 31] };
+  function renderS50() {
+    const el = $('#s50Tab'); if (!el || el.innerHTML) return;
+    const col = (h, a, u, k) => `<div class="s5c" style="--k:${k}"><div class="s5h">${h}</div>${a.map((v, i) => `<div class="s5r" style="--i:${i}">${v}</div>`).join('')}`
+      + `<div class="s5t"><b>${nf(a.reduce((x, y) => x + y, 0), 0)}</b><small>${u}</small></div></div>`;
+    el.innerHTML = col('Khách hàng mới', S50.moi, 'Khách hàng mới', 0) + col('Khách cũ tương tác lại', S50.cu, 'Khách hàng', 1) + '<div class="s5cap">Trích trang Thống kê trên Preny</div>';
+  }
+
+  // --- Slide Meta CAPI: đơn vừa tạo → Preny → Meta nhận sự kiện Purchase ---
+  function renderCapi() {
+    const c = D.chatbot, el = $('#cpRow'); if (!c || !el) return;
+    const d = c.don, tot = donTong(d), p = d.sp[0];
+    const ev = (cls, t, val, khi) => `<div class="cp-ev${cls}"${t != null ? ` data-t="${t}"` : ''}><span class="ei"><i data-i="check"></i></span><div><b>Purchase</b><small>Mua hàng · ${nf(val, 0)} VND · ${khi}</small></div><em>Đã nhận</em></div>`;
+    el.innerHTML = `<div class="cp-card cp-don" data-t="0"><div class="cp-h"><i data-i="check"></i>Đơn mới trên Preny</div>`
+      + `<div class="cp-p"><img src="${esc(p.img)}" alt=""><b>${esc(p.ten)}</b></div>`
+      + `<div class="cp-l"><span>Mã đơn</span><b>${esc(d.ma)}</b></div><div class="cp-l"><span>Khách hàng</span><b>${esc(d.ten)}</b></div>`
+      + `<div class="cp-l"><span>Giá trị</span><b class="v">${vnd(tot)}</b></div></div>`
+      + `<div class="cp-arr" data-t="700"><span>gửi ngay</span></div>`
+      + `<div class="cp-hub" data-t="1000"><span class="hub-ring"></span><div class="hub-core"><img src="assets/img/logo-white.png" alt=""><small>Conversions API</small></div></div>`
+      + `<div class="cp-arr" data-t="1600"><span>Purchase</span></div>`
+      + `<div class="cp-card cp-meta" data-t="1900"><div class="cp-h meta"><b class="mlogo">∞</b>Meta · Trình quản lý sự kiện</div>`
+      + ev(' new', 2500, tot, 'vừa xong') + ev('', null, Math.round(tot * 1.6 / 1000) * 1000, '12 phút trước') + ev('', null, Math.round(tot * 0.7 / 1000) * 1000, '41 phút trước')
+      + `<div class="cp-src">Nguồn: máy chủ (Conversions API) · khớp với khách nhắn từ quảng cáo</div></div>`;
+    paint(el);
+  }
+
+  // --- Slide after sale: bấm 1 upsell 5 thẻ sản phẩm, bấm 2 tin Facebook FMM + Zalo ZBS ---
+  function renderAfter() {
+    const a = D.afterSale; if (!a || !$('#asMsg1')) return;
+    const don = a.don || (D.chatbot || {}).don;
+    $('#asMsg1').innerHTML = chatSeq([{ sep: a.gio || 'Khách vừa chốt đơn' }, ...(don ? [{ ok: don }] : [])], { ts: 0, t0: 500 }).html
+      + chatSeq([{ ai: a.loi }, { car: a.sp }, { kh: a.khach }, ...(a.pill ? [{ pill: a.pill }] : [])], { ts: 1, t0: 300 }).html;
+    $('#asMsg2').innerHTML = chatSeq([{ sep: a.fmm.sep || '1 tuần sau · tin Facebook FMM' }, { ai: a.fmm.chao }, { fmm: a.fmm }], { t0: 500 }).html;
+    $('#asZalo').innerHTML = `<div class="scr zscr"><div class="zh"><span class="zb">‹</span><span class="av">${esc((D.shop || {}).initials)}</span>`
+      + `<div><b>${esc((D.shop || {}).name)}</b><small>Official Account</small></div></div>`
+      + `<div class="msgs zmsgs">${chatSeq([{ sep: a.zbs.sep || 'Cùng lúc · tin Zalo ZBS' }, { zbs: a.zbs }], { t0: 1100 }).html}</div></div>`;
+    paint($('#vDeck .sas'));
+  }
+
   /* Slide 6: ngành bán hàng vật lý / có lên đơn → 6 tính năng (mặc định).
      Ngành không lên đơn (khóa học, dịch vụ…) → kịch bản chỉ ghi 5 tính năng: ô 6 ẩn, ô 4–5 dời vào giữa cột phải. */
   const CONN = { c4: ['M1090 640 C 1160 640, 1170 450, 1260 450', 'M1090 640 C 1160 640, 1170 542, 1260 542'],
@@ -249,14 +422,18 @@
     s.classList.toggle('n5', n5);
     $('.core-n', s).innerHTML = `${n5 ? 5 : 6} tính năng<br>tăng doanh số`;
     [$('.feat.k6', s), $('.conn.c6', s)].forEach(e => n5 ? e.removeAttribute('data-f') : e.setAttribute('data-f', '6'));
-    $('.cta', s).dataset.f = n5 ? '6' : '7';
+    const cta = $('.cta', s), noDemo = loai === 'tmdt';
+    cta.parentNode.hidden = noDemo;
+    if (noDemo) cta.removeAttribute('data-f'); else cta.dataset.f = n5 ? '6' : '7';
+    const bd = $('#vDeck .sbd .bd-stat');
+    if (bd) { bd.hidden = noDemo; if (noDemo) bd.removeAttribute('data-f'); else bd.dataset.f = '10'; }
     Object.keys(CONN).forEach(k => $('.conn.' + k, s).setAttribute('d', CONN[k][n5 ? 1 : 0]));
   }
   function applyDeck(it) {
     loai = (it && it.loai) || 'tmdt';
     const K = window.KICH_BAN || {};
     D = Object.assign({ shop: K.shop }, K.deck || {});
-    bind(); fillStats(); renderPipe(); renderTags(); layoutFeats(); applyType(loai);
+    bind(); renderPipe(); renderTags(); renderDash(); renderBot(); renderS50(); renderCapi(); renderAfter(); layoutFeats(); applyType(loai);
     typeSlides = ALL.filter(s => (!s.dataset.loai || s.dataset.loai === loai) && (!s.dataset.need || get(D, s.dataset.need) != null));
     applyHidden();
   }
@@ -274,7 +451,7 @@
     if (!slides.length) slides = typeSlides.slice();
     N = slides.length;
     const d6 = idOf($('#vDeck .slide[data-demo-after]'));
-    DEMO_AFTER = slides.filter(s => idOf(s) <= d6).length;   // số slide đứng trước demo chat
+    DEMO_AFTER = loai === 'tmdt' ? -1 : slides.filter(s => idOf(s) <= d6).length;   // số slide đứng trước demo chat
     buildProgress();
   }
   function toggleHide(id) {
@@ -301,7 +478,7 @@
       html += `<button class="hp-row${off ? ' off' : ''}${s === slides[si] && view === 'deck' ? ' cur' : ''}" data-id="${id}">`
         + `<span class="hp-n">${off ? '–' : String(n).padStart(2, '0')}</span><span class="hp-t">${esc(h ? headText(h) : 'Slide')}</span>`
         + `<span class="hp-s"><i data-i="${off ? 'eyeoff' : 'eye'}"></i>${off ? 'Đã ẩn' : 'Đang hiện'}</span></button>`;
-      if (id === d6) html += '<div class="hp-demo">Demo chat</div>';
+      if (id === d6 && hasDemo()) html += '<div class="hp-demo">Demo chat</div>';
     });
     $('#hpList').innerHTML = html; paint($('#hpList'));
     $('#hpCount').textContent = typeSlides.length > N ? `Đang ẩn ${typeSlides.length - N} slide · bấm vào slide để ẩn / hiện` : 'Bấm vào slide để ẩn / hiện';
@@ -326,6 +503,27 @@
     });
   }
 
+  /* ---------- Hiện theo nhịp thời gian trong một lần bấm (data-t) ----------
+     data-t="ms": phần tử hiện (thêm class .sh) sau ms kể từ lúc tới bước của nó; data-tx="ms": ẩn lại lúc đó (dấu "đang nhập…").
+     Bước của phần tử: data-ts nếu có, không thì data-f của chính nó hoặc thẻ cha gần nhất.
+     Lùi lại hay nhảy về slide trước thì hiện hết ngay (.nz: không chạy hiệu ứng). Bấm → khi đang chạy dở: hiện xong ngay. */
+  const tTimers = new Set();
+  let tLast = { s: null, fi: -1 };
+  window.__tBusy = () => tTimers.size;   // dùng khi kiểm tra tự động
+  const tStep = e => { if (e.dataset.ts != null) return +e.dataset.ts; const h = e.closest('[data-f]'); return h ? +h.dataset.f : 0; };
+  function runT(s, animate) {
+    tTimers.forEach(clearTimeout); tTimers.clear();
+    const later = (ms, fn) => { const id = setTimeout(() => { tTimers.delete(id); fn(); }, ms); tTimers.add(id); };
+    $$('[data-t]', s).forEach(e => {
+      const f = tStep(e), tx = e.dataset.tx != null ? +e.dataset.tx : null;
+      if (f > fi) { e.classList.toggle('sh', false); e.classList.toggle('nz', false); return; }
+      if (f < fi || !animate) { e.classList.toggle('sh', tx == null); e.classList.add('nz'); return; }
+      e.classList.toggle('sh', false); e.classList.toggle('nz', false);
+      later(+e.dataset.t, () => e.classList.add('sh'));
+      if (tx != null) later(tx, () => e.classList.toggle('sh', false));
+    });
+  }
+
   /* ---------- Slide ---------- */
   function render() {
     const s = slides[si];
@@ -337,6 +535,8 @@
       e.classList.toggle('now', f === fi && f > 0);
     });
     updateLive(s);
+    const animate = !s.classList.contains('instant') && (tLast.s !== s || fi > tLast.fi);
+    runT(s, animate); tLast = { s, fi };
     renderProgress();
   }
   function goSlide(i, f = 0) { si = Math.max(0, Math.min(N - 1, i)); fi = f; setView('deck'); render(); }
@@ -345,13 +545,14 @@
     requestAnimationFrame(() => requestAnimationFrame(() => t.classList.remove('instant')));
   }
   function next() {
+    if (tTimers.size) return runT(slides[si], false);   // đang chạy dở: hiện xong bước này trước
     if (fi < maxF(slides[si])) { fi++; render(); }
-    else if (si === DEMO_AFTER - 1) enterDemo();
+    else if (hasDemo() && si === DEMO_AFTER - 1) enterDemo();
     else if (si < N - 1) goSlide(si + 1, 0);
   }
   function prev() {
     if (fi > 0) { fi--; render(); }
-    else if (si === DEMO_AFTER) resumeDemo();
+    else if (hasDemo() && si === DEMO_AFTER) resumeDemo();
     else if (si > 0) goSlideFull(si - 1);
     else showMenu();
   }
@@ -369,7 +570,7 @@
   addEventListener('message', e => {
     const m = e.data && e.data.preny;
     if (m === 'back') { if (DEMO_AFTER > 0) goSlideFull(DEMO_AFTER - 1); else showMenu(); }
-    else if (m === 'end') goSlide(DEMO_AFTER, 0);
+    else if (m === 'end') { if (hasDemo()) goSlide(DEMO_AFTER, 0); else showMenu(); }   // thương mại điện tử: demo chỉ mở thẳng từ menu
     else if (m === 'menu') showMenu();
     else if (m === 'fullscreen') toggleFS();
   });

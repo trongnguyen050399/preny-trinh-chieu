@@ -7,7 +7,7 @@
      #CabinPremium, #HoiGia (ảnh thật cabin, giữ cabin; ưu đãi đặt trong ngày) → anh quay lại chốt → lên đơn đặt chỗ tự động
      (AI nhớ sẵn nơi đón), xếp xe đón → chăm sóc sau chuyến đi, mời hành trình mới, khách đặt tiếp cho cả nhà.
    Không có tin báo trước ngày khởi hành (Preny chưa có tính năng này). Không có tin cập nhật vận chuyển.
-   Không có bước kết thúc: bấm → là sang slide kế. Slide 3 và slide 6 đổi chữ "vận chuyển" thành đặt chỗ qua deck.quyTrinh, deck.tinhNang.
+   Không có bước kết thúc: bấm → là sang slide kế. Slide 6 đổi chữ "vận chuyển" thành đặt chỗ qua deck.tinhNang (slide 3 tự động hoá đã bỏ 16/11/2026).
    Tên du thuyền, hành trình, giá, chính sách, tên khách, SĐT: dữ liệu minh họa. Ảnh: Unsplash (ảnh thật, không phải tàu của khách). */
 (function () {
   const U = id => 'https://images.unsplash.com/photo-' + id + '?w=800&h=800&fit=crop&q=80&auto=format';
@@ -106,18 +106,83 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có số liệu thống kê thật → 2 slide thống kê tự ẩn. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
-      // Slide 3: du lịch không giao hàng → đổi bước "Gửi vận chuyển" thành lên đơn đặt chỗ
-      quyTrinh: {
-        m1: '<span class="mb">Còn cabin không ạ?</span><span class="mb ok">Đặt chỗ ngay</span>',
-        nc2: '<i data-i="calendar"></i><em>2</em>',
-        t2: 'Lên đơn đặt chỗ tự động',
-        d2: 'Tự tạo đơn đặt tour, xếp xe đón, đỡ nhập tay.',
-        m2: '<span class="ck"><i data-i="check"></i>Tạo đơn</span><span class="ck"><i data-i="check"></i>Xếp xe đón</span>',
-        d6: 'Hỏi thăm sau chuyến đi, mời hành trình mới, rủ thêm khách.',
-        banner: '<i data-i="layers"></i>Từ chốt đơn, đặt chỗ, tối ưu quảng cáo đến <b>chăm sóc và bán lại</b>',
+      /* Pipeline thương mại điện tử 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot, afterSale. */
+      dashboard: [
+        { ten: 'Du thuyền <span class="grad">Hạ Long</span>', den: '21/07/2026', khach: 9, tyLe: 0.55 },
+        { ten: 'Tour <span class="grad">trong nước</span>', den: '18/08/2026', khach: 13, tyLe: 0.53 },
+        { ten: 'Combo <span class="grad">nghỉ dưỡng</span>', den: '26/09/2026', khach: 8, tyLe: 0.57 },
+      ],
+      chatbot: {
+        y: [
+          ['Trả lời ngay tức thì, 24/7', 'Khách nhắn lúc nào, AI trả lời sau 2 giây'],
+          ['Hỏi lịch trình, giữ chân khách', 'Chủ động hỏi ngày đi, đi từ đâu, cần xe đón'],
+          ['Chốt chỗ và tự lên đơn đặt tour', 'Khách đồng ý là AI tạo đơn ngay trên Preny'],
+          ['Hiểu hình ảnh khách gửi', 'Khách gửi ảnh, AI biết đúng điểm đến nào'],
+        ],
+        chat: [
+          { ref: { img: L(IMG['du-thuyen']), ten: 'Du thuyền 2 ngày 1 đêm vịnh Hạ Long' } },
+          { kh: 'Du thuyền này đi 2 ngày 1 đêm giá sao em? Vợ chồng a đi kỷ niệm 10 năm cưới' },
+          {
+            ai: 'Dạ em chúc mừng anh chị ạ! 🎉 Anh cho em xin **lịch trình**: **ngày đi**, đi từ đâu và có cần **xe đón** không để em giữ cabin đẹp nha.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Thứ 7 ngày 5/12, đi từ Hà Nội, đón ở phố cổ. Phòng nào có bồn tắm ko?' },
+          {
+            ai: 'Dạ anh chị chọn **cabin Premium ban công**, có **bồn tắm nhìn ra vịnh** ạ. Giá **4.900.000đ/khách**, gồm **xe limousine đón phố cổ**, các bữa ăn, chèo kayak hang Luồn. Em tặng thêm **trang trí kỷ niệm** nha.',
+          },
+          { kh: 'Ok chốt cho a chị. Phạm Minh Tuấn, 0912 888 246, 18 Hàng Bè, Hoàn Kiếm' },
+          { ai: 'Dạ em lên đơn đặt chỗ và xếp xe đón anh chị ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        don: {
+          ten: 'Phạm Minh Tuấn',
+          sdt: '0912 888 246',
+          diaChi: '18 Hàng Bè, P. Hoàn Kiếm, Hà Nội (điểm đón)',
+          ma: '#HA51205',
+          phi: 'gồm xe đón',
+          ghiChu: 'Khởi hành **Thứ Bảy 5/12** · xe limousine đón 18 Hàng Bè · trang trí kỷ niệm 10 năm cưới',
+          sp: [{ img: L(IMG['cabin']), ten: 'Cabin Premium ban công', sl: 2, dv: 'khách', gia: 4900000 }],
+        },
+        anh: {
+          img: L(IMG['kayak-hang']),
+          kh: 'Chỗ chèo kayak như hình này có trong lịch trình không em?',
+          ai: 'Dạ hình anh gửi là **điểm chèo kayak hang Luồn**, chiều ngày 1 ạ. Đã có trong giá tour, có hướng dẫn viên đi kèm, anh chị chưa chèo bao giờ vẫn đi được nha.',
+        },
       },
+      afterSale: {
+        y1: 'AI gửi tiếp 5 dịch vụ đi kèm để bán thêm (upsell)',
+        y2: 'Hành trình mới, voucher, ưu đãi dịp lễ',
+        gio: 'Khách vừa đặt chỗ',
+        loi: 'Cảm ơn anh Tuấn đã đặt chỗ tại Hải Âu 💜 Nhiều cặp đôi đặt thêm mấy dịch vụ này cho chuyến kỷ niệm trọn vẹn ạ:',
+        sp: [
+          { img: L(IMG['hoang-hon']), ten: 'Bữa tối hoàng hôn trên boong', gia: 1200000, nut: 'Đặt thêm' },
+          { img: L(IMG['bon-tam']), ten: 'Trang trí bồn tắm hoa hồng', gia: 450000, nut: 'Đặt thêm' },
+          { img: L(IMG['vinh']), ten: 'Nâng lên 3 ngày 2 đêm', gia: 3200000, nut: 'Đặt thêm' },
+          { img: L(IMG['tour-ngay']), ten: 'Tour trong ngày trên vịnh', gia: 1445000, nut: 'Đặt thêm' },
+          { img: L(IMG['tau-tiec']), ten: 'Tiệc riêng trên du thuyền', gia: 1275000, nut: 'Đặt thêm' },
+        ],
+        khach: 'Đặt thêm cho a bữa tối hoàng hôn với trang trí bồn tắm nhé',
+        pill: '🛍 Khách đặt thêm ngay: đơn tăng từ 9.800.000đ lên 11.450.000đ',
+        fmm: {
+          sep: '1 tuần sau chuyến đi · tin Facebook FMM',
+          chao: 'Chào anh Tuấn 👋 Tết này Hải Âu mở hành trình mới, gửi anh xem trước nha!',
+          img: L(IMG['vinh']),
+          nhan: 'HÀNH TRÌNH MỚI',
+          ten: 'Du thuyền 3 ngày 2 đêm dịp Tết',
+          mo: 'Khách cũ giảm 15%, trẻ em dưới 5 tuổi miễn phí.',
+          nut: 'Xem lịch trình',
+        },
+        zbs: {
+          ten: 'Tặng anh Tuấn voucher 15%',
+          mo: 'Cảm ơn anh chị đã đồng hành cùng Du Thuyền Hải Âu. Gửi anh ưu đãi cho hành trình tiếp theo:',
+          dong: [['Mã voucher', '**HAIAU15**'], ['Ưu đãi', 'Giảm 15% mọi hành trình'], ['Hạn dùng', '30/06/2027']],
+          nut: 'Đặt chỗ ngay',
+        },
+      },
+      // Slide 3: du lịch không giao hàng → đổi bước "Gửi vận chuyển" thành lên đơn đặt chỗ
       // Slide 6: có lên đơn (đặt chỗ) → giữ 6 tính năng, chỉ đổi chữ "vận chuyển"
       tinhNang: [
         ['AI chatbot chốt đơn tự động 100%', 'Tăng trung bình 62% tỷ lệ chốt đơn'],
