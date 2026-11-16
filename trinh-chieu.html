@@ -6,7 +6,7 @@
 <title>Preny AI · Trình chiếu</title>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="trinh-chieu.css?v=202611131325">
+<link rel="stylesheet" href="trinh-chieu.css?v=202611161325">
 </head>
 <body>
 <!-- Trang trình chiếu: menu chọn ngành → 6 slide mở đầu → demo AI chat (index.html nhúng bên dưới).
@@ -97,16 +97,17 @@
       </div>
       <div class="track"><span class="fill"></span></div>
       <div class="nodes">
-        <div class="node" data-f="0" style="--d:0.25s"><div class="nc"><i data-i="chat"></i><em>1</em></div><h3>Chốt đơn tự động</h3><p>AI tư vấn và chốt đơn 100% tự động, trả lời ngay 24/7.</p><div class="mini"><span class="mb">Còn hàng không ạ?</span><span class="mb ok">Đặt hàng ngay</span></div></div>
-        <div class="node" data-f="0" style="--d:0.43s"><div class="nc"><i data-i="truck"></i><em>2</em></div><h3>Gửi vận chuyển tự động</h3><p>Đơn hàng tự tạo và gửi sang đơn vị vận chuyển, đỡ nhập tay.</p><div class="mini"><span class="ck"><i data-i="check"></i>Tạo đơn</span><span class="ck"><i data-i="check"></i>Gửi ĐVVC</span></div></div>
+        <div class="node" data-f="0" style="--d:0.25s"><div class="nc"><i data-i="chat"></i><em>1</em></div><h3>Chốt đơn tự động</h3><p>AI tư vấn và chốt đơn 100% tự động, trả lời ngay 24/7.</p><div class="mini" data-d="quyTrinh.m1"><span class="mb">Còn hàng không ạ?</span><span class="mb ok">Đặt hàng ngay</span></div></div>
+        <div class="node" data-f="0" style="--d:0.43s"><div class="nc" data-d="quyTrinh.nc2"><i data-i="truck"></i><em>2</em></div><h3 data-d="quyTrinh.t2">Gửi vận chuyển tự động</h3><p data-d="quyTrinh.d2">Đơn hàng tự tạo và gửi sang đơn vị vận chuyển, đỡ nhập tay.</p><div class="mini" data-d="quyTrinh.m2"><span class="ck"><i data-i="check"></i>Tạo đơn</span><span class="ck"><i data-i="check"></i>Gửi ĐVVC</span></div></div>
         <div class="node" data-f="0" style="--d:0.61s"><div class="nc"><i data-i="send"></i><em>3</em></div><h3>Gửi sự kiện mua hàng</h3><p>Tự gửi sự kiện mua hàng về Facebook để tối ưu quảng cáo.</p><div class="mini"><span class="mb ev">Purchase Event</span></div></div>
         <div class="node" data-f="0" style="--d:0.79s"><div class="nc"><i data-i="magnet"></i><em>4</em></div><h3>Kéo khách quay lại</h3><p>Khách chưa mua: AI nhắc lại sản phẩm, gợi ý ưu đãi phù hợp.</p><div class="mini"><span class="mb">Nhắc lại sản phẩm</span><span class="mb">Ưu đãi riêng</span></div></div>
         <div class="node" data-f="0" style="--d:0.97s"><div class="nc"><i data-i="bell"></i><em>5</em></div><h3>Bám đuổi khách im lặng</h3><p>Tự nhắn theo lịch khi khách đã xem nhưng chưa chốt đơn.</p><div class="mini"><span class="day">Ngày 1</span><span class="day">Ngày 2</span><span class="day">Ngày 3</span></div></div>
-        <div class="node" data-f="0" style="--d:1.15s"><div class="nc"><i data-i="heart"></i><em>6</em></div><h3>Chăm sóc sau bán</h3><p>Hỏi thăm sau giao hàng, tăng tái mua, giới thiệu sản phẩm mới.</p><div class="mini"><span class="mb ok">Tái mua</span><span class="mb">Sản phẩm mới</span></div></div>
+        <div class="node" data-f="0" style="--d:1.15s"><div class="nc"><i data-i="heart"></i><em>6</em></div><h3>Chăm sóc sau bán</h3><p data-d="quyTrinh.d6">Hỏi thăm sau giao hàng, tăng tái mua, giới thiệu sản phẩm mới.</p><div class="mini"><span class="mb ok">Tái mua</span><span class="mb">Sản phẩm mới</span></div></div>
       </div>
-      <div class="banner-wrap"><div class="banner" data-f="0" data-a="zoom" style="--d:1.5s"><i data-i="layers"></i>Từ chốt đơn, vận chuyển, tối ưu quảng cáo đến <b>chăm sóc và bán lại</b></div></div>
+      <div class="banner-wrap"><div class="banner" data-f="0" data-a="zoom" style="--d:1.5s" data-d="quyTrinh.banner"><i data-i="layers"></i>Từ chốt đơn, vận chuyển, tối ưu quảng cáo đến <b>chăm sóc và bán lại</b></div></div>
     </div>
 
+    <!-- Slide 3 thương mại điện tử: ngành không giao hàng (khách sạn…) đổi chữ qua deck.quyTrinh {m1, nc2, t2, d2, m2, d6, banner} -->
     <!-- SLIDE 3 (cân nhắc nhiều): Định nghĩa chốt đơn — pipeline bán hàng của ngành (nội dung: deck.chotDon trong kịch bản) -->
     <div class="slide s3c" data-loai="cnn" data-need="chotDon">
       <div class="head c" data-f="0">
@@ -449,8 +450,8 @@
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
 
 <!-- Mã phiên bản ?v=…: đổi mỗi lần đẩy lên mạng (preny-demo/doi-phien-ban.sh) để trình duyệt không dùng file cũ trong bộ nhớ đệm -->
-<script>window.PRENY_V = '202611131325';</script>
-<script src="kich-ban/danh-sach.js?v=202611131325"></script>
-<script src="trinh-chieu.js?v=202611131325"></script>
+<script>window.PRENY_V = '202611161325';</script>
+<script src="kich-ban/danh-sach.js?v=202611161325"></script>
+<script src="trinh-chieu.js?v=202611161325"></script>
 </body>
 </html>

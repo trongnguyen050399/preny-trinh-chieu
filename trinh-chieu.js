@@ -186,6 +186,7 @@
       if (el._def === undefined) el._def = el.innerHTML;
       const v = get(D, el.dataset.d);
       el.innerHTML = v == null ? el._def : Array.isArray(v) ? v.map(x => `<li>${x}</li>`).join('') : v;
+      paint(el);   // chữ theo ngành có thể kèm icon <i data-i>
     });
     $$('#vDeck [data-dsrc]').forEach(el => {
       if (el._def === undefined) el._def = el.getAttribute('src');
