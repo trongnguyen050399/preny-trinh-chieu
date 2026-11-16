@@ -1,11 +1,12 @@
 /* Kịch bản: NHÀ HÀNG, KHÁCH SẠN (khách sạn biển có nhà hàng: đặt phòng, đặt bàn, tiệc) — BẢN TRÌNH CHIẾU,
    nhóm THƯƠNG MẠI ĐIỆN TỬ. Khung ngang 16:9.
    Demo chat theo chuẩn thương mại điện tử (TRINH-CHIEU.md mục 3), một mạch; "lên đơn" ở đây là đơn đặt phòng:
-     anh Khoa gửi ảnh phòng hỏi dồn (ca khó: 2 người lớn 2 bé 6 và 10 tuổi, bé có tính tiền không, đón sân bay,
-     hạ cánh 11:40 có nhận phòng sớm được không) → AI tư vấn đúng hạng phòng, chính sách trẻ em, đưa đón, báo giá
+     anh Khoa gửi ảnh phòng hỏi (2 người lớn 2 bé, dịp Giáng sinh) → AI chủ động hỏi lịch trình: ngày đến, số đêm,
+     giờ tới, tuổi 2 bé → tư vấn đúng hạng phòng, chính sách trẻ em, xếp nhận phòng sớm và đón sân bay theo giờ hạ cánh, báo giá
      → anh im → bám đuổi 2 tin theo thẻ #FamilySuite, #HoiGia (ảnh thật phòng, giữ phòng view biển; ưu đãi đặt trong ngày)
-     → anh quay lại chốt → lên đơn đặt phòng tự động, xếp xe đón → chăm sóc: nhắc trước ngày đến, tối Giáng sinh
-     mời buffet ở nhà hàng tầng thượng, khách đặt bàn.
+     → anh quay lại chốt → lên đơn đặt phòng tự động (AI nhớ sẵn giờ hạ cánh), xếp xe đón → chăm sóc sau khi trả phòng,
+     mời đặt tiệc ở nhà hàng, khách đặt tiệc tất niên.
+   Không có tin báo trước 1 ngày khách đến: Preny chưa có tính năng này (người dùng dặn 16/11/2026).
    Không có tin cập nhật vận chuyển. Không có bước kết thúc: bấm → là sang slide kế.
    Slide 3 và slide 6 đổi chữ "vận chuyển" thành đặt phòng qua deck.quyTrinh, deck.tinhNang.
    Tên khách sạn, giá phòng, chính sách, tên khách, SĐT: dữ liệu minh họa. Ảnh: Unsplash (ảnh thật, không phải khách sạn của khách). */
@@ -39,13 +40,13 @@
     // Cột trái demo: đúng 4 tính năng được diễn, theo thứ tự diễn
     features: [
       { title: 'AI chatbot tư vấn, chốt đơn đặt phòng 24/7', desc: 'Tăng trung bình 62% tỷ lệ chốt đơn.',
-        kws: ['Trả lời ngay tức thì, 24/7', 'Tư vấn đúng hạng phòng theo số người', 'Nói rõ chính sách trẻ em, phụ thu', 'Giải đáp: đón sân bay, nhận phòng sớm', 'Báo giá rõ, chủ động mời đặt'] },
+        kws: ['Trả lời ngay tức thì, 24/7', 'Chủ động hỏi lịch trình: ngày đến, số đêm, giờ tới', 'Tư vấn đúng hạng phòng, chính sách trẻ em', 'Xếp nhận phòng sớm, đón sân bay theo giờ tới', 'Báo giá rõ, chủ động mời đặt'] },
       { title: 'AI tự động bám đuổi khách hàng trong 7 ngày', desc: 'Tăng thêm khoảng 35% tỷ lệ chốt đơn.',
         kws: ['~65% khách nhắn tin rồi im lặng', 'Tự gắn thẻ hạng phòng khách xem, lý do im', 'Gửi ảnh thật phòng, giữ phòng view biển', 'Báo giá xong im → ưu đãi đặt trong ngày'] },
       { title: 'AI Agent tự động lên đơn đặt phòng', desc: 'Tiết kiệm hơn 90% thời gian xử lý đơn.',
-        kws: ['Thu đủ tên, SĐT, giờ hạ cánh', 'Gửi tin xác nhận đặt phòng đầy đủ', 'Tự tạo đơn, xếp xe đón sân bay'] },
-      { title: 'AI tự động chăm sóc khách trước và trong lưu trú', desc: 'Tăng doanh thu từ mỗi khách.',
-        kws: ['Nhắc trước ngày đến: xe đón, thời tiết', 'Mời nhà hàng, dịch vụ đúng dịp', 'Khách đặt thêm bàn, tăng doanh thu'] },
+        kws: ['Thu tên, SĐT, nhớ sẵn lịch trình khách', 'Gửi tin xác nhận đặt phòng đầy đủ', 'Tự tạo đơn, xếp xe đón sân bay'] },
+      { title: 'AI tự động chăm sóc khách hàng sau bán', desc: 'Tăng doanh thu từ khách hàng cũ.',
+        kws: ['Hỏi thăm sau khi khách trả phòng', 'Mời nhà hàng: tiệc, buffet cho khách cũ', 'Khách đặt thêm, tăng giá trị vòng đời'] },
     ],
 
     steps: [
@@ -55,10 +56,12 @@
       { feature: 1 },
       { sep: 'Khách nhắn tin từ quảng cáo Facebook', style: 'time', hold: 800 },
       { img: 'phong-family', hold: 1500 },
-      { kh: 'Phòng này còn ko em? Nhà a 2 người lớn 2 bé (6t và 10t) đi Đà Nẵng 3 đêm 24-27/12. Bé có tính tiền ko, có đón sân bay ko, a hạ cánh 11h40 nhận phòng sớm đc ko' },
+      { kh: 'Phòng này còn ko em? Nhà a 2 người lớn 2 bé, muốn đi Đà Nẵng dịp Giáng sinh' },
       { ai: 'Dạ còn phòng ạ anh! Em kiểm tra cho gia đình mình ngay 🌊', fast: true, meta: '⚡ Preny AI trả lời sau 2 giây', kw: 0 },
-      { ai: 'Anh gửi là phòng **Family Suite view biển** (45m², 1 giường đôi + 1 giường đơn), ở vừa 2 người lớn 2 bé ạ. Bé 6 tuổi **miễn phí**, bé 10 tuổi **phụ thu ăn sáng 150.000đ/đêm**, không cần kê thêm giường.', kw: [1, 2] },
-      { ai: 'Đặt từ 3 đêm khách sạn **đón sân bay miễn phí** ạ. Nhận phòng chuẩn 14h, anh tới khoảng 12h15 em **ưu tiên nhận phòng sớm** nếu phòng trống; chưa có thì gia đình mình gửi hành lý, ăn trưa hoặc ra hồ bơi trước nha.', kw: 3 },
+      { ai: 'Anh cho em hỏi **lịch trình** để em giữ đúng phòng nha: gia đình mình **đến ngày nào, ở mấy đêm**, khoảng **mấy giờ tới Đà Nẵng**, và **2 bé mấy tuổi** ạ?', kw: 1 },
+      { kh: '24/12 a bay vào, hạ cánh 11h40, ở 3 đêm. 2 bé 6t với 10t, bé có tính tiền ko em?' },
+      { ai: 'Dạ 3 đêm 24–27/12 em gợi ý phòng **Family Suite view biển** (45m², 1 giường đôi + 1 giường đơn), ở vừa 2 người lớn 2 bé ạ. Bé 6 tuổi **miễn phí**, bé 10 tuổi **phụ thu ăn sáng 150.000đ/đêm**, không cần kê thêm giường.', kw: 2 },
+      { ai: 'Anh hạ cánh 11h40 thì khoảng **12h15** tới khách sạn ạ. Nhận phòng chuẩn 14h, em **ghi chú nhận phòng sớm** cho nhà mình, phòng trống sớm là vào luôn; chưa có thì gửi hành lý, ăn trưa hoặc ra hồ bơi trước. Ở từ 3 đêm còn được **đón sân bay miễn phí** nha anh.', kw: 3 },
       { ai: 'Giá đêm 24–27/12 là **2.450.000đ/đêm**, gồm buffet sáng ạ. Dịp Giáng sinh phòng view biển kín nhanh, anh đặt để em giữ phòng luôn nha? 😊', kw: 4 },
       { kh: 'Để a bàn với vợ đã' },
 
@@ -75,8 +78,8 @@
 
       /* ---- 3. Lên đơn đặt phòng tự động, xếp xe đón (không có tin cập nhật vận chuyển) ---- */
       { feature: 3 },
-      { ai: 'Dạ anh cho em xin **họ tên, SĐT** và **giờ hạ cánh** để em xếp xe đón nha.', kw: 0 },
-      { kh: 'Trần Đăng Khoa – 0905 678 123\nHạ cánh 11:40 ngày 24/12, sân bay Đà Nẵng' },
+      { ai: 'Dạ anh cho em xin **họ tên, SĐT** người đặt nha. Xe đón em xếp theo giờ anh hạ cánh **11:40 ngày 24/12** luôn ạ.', kw: 0 },
+      { kh: 'Trần Đăng Khoa – 0905 678 123' },
       { card: {
           tag: '✓ Tin xác nhận đặt phòng',
           intro: 'Dạ anh kiểm tra lại đơn đặt phòng giúp em nhé:',
@@ -89,19 +92,18 @@
           lines: ['Mã đặt phòng: **#BL24127**', 'Nhận phòng: **Thứ Năm, 24/12**', 'Đã xếp xe đón sân bay lúc 11:40'],
         }, kw: 2, hold: 3500 },
 
-      /* ---- 4. Chăm sóc trước và trong lưu trú, mời nhà hàng ---- */
+      /* ---- 4. Chăm sóc sau bán (sau khi trả phòng), mời nhà hàng. Không có tin báo trước ngày khách đến (Preny chưa có). ---- */
       { feature: 4 },
-      { sep: '— 1 ngày trước khi đến —' },
-      { ai: 'Anh Khoa ơi, mai xe khách sạn đón gia đình mình ở **sảnh ga quốc nội lúc 11:40**, tài xế cầm bảng tên anh nha. Đà Nẵng mai khoảng 24°C, anh nhớ mang áo khoác mỏng cho bé ạ 🌊', meta: '💜 Tự động · Chăm sóc khách', kw: 0 },
-      { kh: 'Ok em, cảm ơn em nhé' },
-      { sep: '— Tối 24/12, khách đang lưu trú —' },
-      { ai: 'Tối nay nhà hàng tầng thượng có **buffet hải sản Giáng sinh**, khách đang ở khách sạn được **giảm 15%** ạ:', kw: 1 },
+      { sep: '— Sau khi khách trả phòng —' },
+      { ai: 'Anh Khoa ơi, gia đình mình nghỉ ở Biển Lam có vui không ạ? Có gì chưa hài lòng anh cứ nhắn em nha 💜', meta: '💜 Tự động · Chăm sóc sau bán', kw: 0 },
+      { kh: 'Vui lắm em, 2 bé mê hồ bơi luôn 👍' },
+      { ai: 'Dạ vui quá ạ! Cuối năm nhà hàng bên em nhận **tiệc tất niên, tiệc gia đình**, khách cũ được **giảm 15%** ạ:', kw: 1 },
       { catalog: [
-          { name: 'Buffet hải sản Giáng sinh', sub: '19:00 · tầng thượng', price: '552.000đ', old: '650.000đ', tag: 'Tối nay', art: 'hai-san' },
-          { name: 'Bàn tiệc Giáng sinh gia đình', sub: '4 người · có bánh cho bé', price: '2.380.000đ', old: '2.800.000đ', tag: 'Gia đình', art: 'giang-sinh' },
-          { name: 'Set tối tầng thượng', sub: '2 người lớn', price: '1.190.000đ', old: '1.400.000đ', tag: 'Lãng mạn', art: 'nha-hang' },
+          { name: 'Tiệc tất niên công ty', sub: 'Giá mỗi khách · phòng riêng', price: '382.000đ', old: '450.000đ', tag: 'Tất niên', art: 'tiec' },
+          { name: 'Buffet hải sản cuối tuần', sub: '18:30 · tầng thượng', price: '552.000đ', old: '650.000đ', tag: 'Bán chạy', art: 'hai-san' },
+          { name: 'Bàn tiệc gia đình', sub: '4 người · có bánh cho bé', price: '2.380.000đ', old: '2.800.000đ', tag: 'Gia đình', art: 'giang-sinh' },
         ], hold: 4000 },
-      { kh: 'Giữ anh bàn buffet 4 người lúc 19h nha em', kw: 2, hold: 1500 },
+      { kh: 'Tất niên công ty anh 30 người, đặt bên em luôn nhé', kw: 2, hold: 1500 },
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
@@ -114,7 +116,7 @@
         t2: 'Lên đơn đặt phòng tự động',
         d2: 'Tự tạo đơn đặt phòng, đặt bàn, xếp xe đón, đỡ nhập tay.',
         m2: '<span class="ck"><i data-i="check"></i>Tạo đơn</span><span class="ck"><i data-i="check"></i>Xếp xe đón</span>',
-        d6: 'Nhắc trước ngày đến, mời nhà hàng, dịch vụ, mời quay lại.',
+        d6: 'Hỏi thăm sau khi trả phòng, mời nhà hàng, mời quay lại.',
         banner: '<i data-i="layers"></i>Từ chốt đơn, đặt phòng, tối ưu quảng cáo đến <b>chăm sóc và bán lại</b>',
       },
       // Slide 6: có lên đơn (đặt phòng) → giữ 6 tính năng, chỉ đổi chữ "vận chuyển"
@@ -122,7 +124,7 @@
         ['AI chatbot chốt đơn tự động 100%', 'Tăng trung bình 62% tỷ lệ chốt đơn'],
         ['AI Agent tự lên đơn đặt phòng', 'Tiết kiệm hơn 90% thời gian xử lý đơn'],
         ['AI tự bám đuổi khách trong 7 ngày', 'Tăng thêm khoảng 35% tỷ lệ chốt đơn'],
-        ['AI tự chăm sóc khách lưu trú', 'Mời nhà hàng, dịch vụ, mời quay lại'],
+        ['AI tự chăm sóc khách sau bán', 'Mời nhà hàng, dịch vụ, mời quay lại'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác hiệu quả dữ liệu khách hàng'],
         ['Tự gửi sự kiện mua hàng qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
       ],
