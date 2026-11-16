@@ -64,8 +64,90 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có deck.dashboard nên không có slide thống kê. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline mới 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot (lead = AI chốt là lấy SĐT), afterSale. */
+      dashboard: [
+        { ten: 'Khóa học <span class="grad">làm bánh</span>', den: '21/07/2026', khach: 8, tyLe: 0.55 },
+        { ten: 'Lớp <span class="grad">bánh kem hoa</span>', den: '18/08/2026', khach: 6, tyLe: 0.53 },
+        { ten: 'Khóa <span class="grad">bánh mở tiệm</span>', den: '26/09/2026', khach: 5, tyLe: 0.57 },
+      ],
+      chatbot: {
+        y: [
+          ['Trả lời ngay tức thì, 24/7', 'Khách nhắn lúc nào, AI trả lời sau 2 giây'],
+          ['Tư vấn đúng khóa, xử lý băn khoăn', 'Học phí, học bù, lớp tối'],
+          ['Chốt đơn = lấy SĐT học viên', 'AI giữ chỗ, chuyển ngay cho tư vấn viên'],
+          ['Hiểu hình ảnh khách gửi', 'Khách gửi ảnh bánh, AI biết đúng kiểu bánh'],
+        ],
+        chat: [
+          { ref: { img: L(IMG['banh-hoa-2']), ten: 'Khai giảng lớp bánh kem tháng 11' } },
+          { kh: 'Em chưa biết gì, đi làm giờ hành chính thì học được không ạ? Có lớp tối k?' },
+          {
+            ai: 'Dạ được ạ chị! Người **mới bắt đầu** học **Khóa bánh kem căn bản & hoa buttercream** 8 buổi. Có **lớp tối thứ 3 – thứ 5, 18h30–21h**, học phí **3.900.000đ** gồm nguyên liệu, dụng cụ ạ.',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Lỡ e bận nghỉ 1 buổi, hoặc học xong vẫn làm k đẹp thì sao ạ?' },
+          {
+            ai: 'Dạ nghỉ buổi nào được **học bù miễn phí**, học xong chưa vững được **học lại miễn phí 6 tháng** ạ. Lớp 24/11 còn **3 chỗ**, chị cho em xin **SĐT** để em giữ chỗ, chưa cần đóng tiền nha 😊',
+          },
+          { kh: 'Ngọc - 0912 345 678' },
+          { ai: 'Dạ em giữ chỗ và hẹn chị học thử ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        lead: {
+          ten: 'Chị Ngọc',
+          sdt: '0912 345 678',
+          nhuCau: 'Mới bắt đầu, đi làm giờ hành chính · muốn **học lớp tối, bán online**',
+          the: [['FB Ads · Lớp bánh kem T11', 'ng'], ['#BanhKemHoa', 'qt'], ['#LopToi', 'qt'], ['Đã cho SĐT', 'ht']],
+          lich: ['Học thử miễn phí', '18:30 · Thứ Ba 24/11'],
+          sale: 'Tư vấn viên Thảo',
+          nut: 'Chuyển cho tư vấn viên',
+          xong: 'Đã chuyển cho tư vấn viên Thảo',
+          okTieuDe: 'Đã giữ chỗ lớp tối 24/11',
+        },
+        anh: {
+          img: L(IMG['banh-hoa']),
+          kh: 'Muốn làm được bánh như này thì học khóa nào ạ?',
+          ai: 'Dạ mẫu chị gửi là **bánh kem trang trí hoa buttercream** kiểu Hàn ạ 🌸 Bắt hoa như mẫu này học ở **Khóa bánh kem căn bản & hoa buttercream**, tới buổi 5–6 là làm được nha chị.',
+          pill: '🔍 AI nhìn ảnh, nhận ra đúng kiểu bánh khách muốn học',
+        },
+      },
+      afterSale: {
+        y1: 'AI gửi tiếp 5 khóa học, dụng cụ đi kèm để bán thêm',
+        y2: 'Khai giảng mới, voucher, khóa nâng cao',
+        gio: 'Tư vấn viên vừa chốt khóa học',
+        don: { ma: '#BM24110', phi: 'đóng 2 lần', sp: [{ ten: 'Khóa bánh kem căn bản & hoa buttercream', sl: 1, gia: 3900000 }] },
+        loi: 'Chúc mừng chị Ngọc đã đăng ký lớp 💜 Học viên lớp căn bản hay đăng ký thêm mấy khóa, bộ dụng cụ này ạ:',
+        sp: [
+          { img: L(IMG['bat-kem']), ten: 'Bộ dụng cụ bắt hoa', gia: 450000 },
+          { img: L(IMG['banh-hoa-2']), ten: 'Khóa hoa buttercream nâng cao', gia: 2900000, cu: 3400000, nut: 'Đăng ký' },
+          { img: L(IMG['thanh-pham']), ten: 'Khóa bánh mở tiệm', gia: 6500000, nut: 'Đăng ký' },
+          { img: L(IMG['giao-vien']), ten: 'Học 1 kèm 1 với giáo viên', gia: 1200000, nut: 'Đăng ký' },
+          { img: L(IMG['lop-hoc']), ten: 'Lớp làm bánh cho mẹ và bé', gia: 690000, nut: 'Đăng ký' },
+        ],
+        khach: 'Lấy thêm em bộ dụng cụ bắt hoa nha',
+        pill: '🛍 Học viên mua thêm ngay: đơn tăng từ 3.900.000đ lên 4.350.000đ',
+        fmm: {
+          sep: '1 tuần sau khi học xong · tin Facebook FMM',
+          chao: 'Chào chị Ngọc 👋 Lớp Bánh Mây khai giảng khóa nâng cao tháng 12, gửi chị xem trước nha!',
+          img: L(IMG['banh-hoa-2']),
+          nhan: 'KHAI GIẢNG MỚI',
+          ten: 'Khóa hoa buttercream nâng cao',
+          mo: 'Học viên cũ giảm 15%, lớp tối thứ 3 – thứ 5.',
+          nut: 'Xem lịch học',
+        },
+        zbs: {
+          ten: 'Tặng chị Ngọc voucher 300.000đ',
+          mo: 'Cảm ơn chị đã học tại Lớp Bánh Mây. Gửi chị ưu đãi cho khóa học tiếp theo:',
+          dong: [
+            ['Mã voucher', '**BANHMAY300**'],
+            ['Ưu đãi', 'Giảm 300.000đ khóa từ 2.000.000đ'],
+            ['Hạn dùng', '31/01/2027'],
+          ],
+          nut: 'Đăng ký ngay',
+        },
+      },
       tieuDe6: 'Hệ thống AI chatbot giúp tăng<br><span class="grad">tỷ lệ chốt SĐT học viên</span>',
       // Không bán hàng vật lý, không lên đơn → 5 tính năng (ngành có lên đơn thì giữ 6 như thường)
       tinhNang: [

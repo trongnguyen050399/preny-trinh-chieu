@@ -886,3 +886,23 @@ body.menu-on .hp, body.demo-on .hp { display: none; }
 .mphone .mh > div { min-width: 0; }
 .mphone .mh b, .zh b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .htag { flex: none; white-space: nowrap; }
+
+/* Màn hình lưu khách (nhóm cân nhắc nhiều): thẻ khách hàng, lịch hẹn */
+.od-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.od-tags .tg { padding: 6px 13px; border-radius: 99px; font-size: 15px; font-weight: 700; color: rgb(var(--t)); background: rgba(var(--t), .12); border: 1px solid rgba(var(--t), .45); filter: brightness(.8) saturate(1.2); }
+.od-tags .tg:not(.sh) { opacity: 0; }
+.od-tags .tg.sh:not(.nz) { animation: pop .4s var(--ease) both; }
+.od-cal { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 14px; border: 1px solid #E3E0EB; background: #FAF8FF; }
+.od-cal i[data-i] { font-size: 30px; color: #7C3AED; }
+.od-cal b { display: block; font-size: 19px; }
+.od-cal small { font-size: 16px; color: #6B6585; }
+.od-cal:not(.sh) { opacity: 0; }
+.od-cal.sh:not(.nz) { animation: pop .45s var(--ease) both; }
+.cp-ben em { font-style: normal; }
+/* nút chính dài (Chuyển cho tư vấn viên) vẫn nằm gọn; dòng thẻ CAPI có nhãn dài không dính chữ */
+.od-btns { grid-template-columns: 56px 1fr 1.3fr; }
+.od-b { padding: 0 10px; white-space: nowrap; font-size: 17px; }
+.cp-l { gap: 16px; }
+.cp-l span { flex: none; }
+.cp-l b { text-align: right; }
+.cp-l b.v.sm { font-size: 19px; }

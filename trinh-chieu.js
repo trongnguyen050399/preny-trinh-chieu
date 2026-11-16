@@ -102,6 +102,8 @@
   let view = 'menu', si = 0, fi = 0, kb = null, demoReady = false, wantStart = false, demoStarted = false;
   const prog = $('#progress');
   const hasDemo = () => DEMO_AFTER >= 0;
+  // Demo chat (iframe) chen sau slide 6 hay không, theo nhóm ngành. Từ 16/11/2026 cả 2 nhóm dùng pipeline mới: không chen, chỉ mở thẳng từ menu.
+  const CO_DEMO = { tmdt: false, cnn: false };
   const segOf = i => (hasDemo() && i >= DEMO_AFTER ? i + 1 : i);          // vạch của slide i trên thanh tiến độ
   const slideOfSeg = p => (hasDemo() && p > DEMO_AFTER ? p - 1 : p);
   // Thanh tiến độ: N slide + 1 vạch Demo chat (nằm sau slide DEMO_AFTER). Bấm vạch nào nhảy thẳng tới đó.
@@ -211,8 +213,9 @@
       if (b.mock === 'img') return `<div class="pm img"><img src="${esc(b.img)}" alt="">${b.cap ? `<span>${esc(b.cap)}</span>` : ''}</div>`;
       return '';
     };
-    el.innerHTML = c.buoc.map((b, i) => (i ? `<span class="parr" data-f="${i + 1}"></span>` : '')
-      + `<div class="pcard ${b.ai ? 'ai' : b.own ? 'dn' : 'hu'}${b.chot ? ' chot' : ''}" data-f="${i + 1}">`
+    const dl = i => ` style="--d:${(0.25 + i * 0.16).toFixed(2)}s"`;   // vào là hiện hết (người dùng dặn 16/11/2026), không bấm từng ô
+    el.innerHTML = c.buoc.map((b, i) => (i ? `<span class="parr" data-f="0"${dl(i - 0.5)}></span>` : '')
+      + `<div class="pcard ${b.ai ? 'ai' : b.own ? 'dn' : 'hu'}${b.chot ? ' chot' : ''}" data-f="0"${dl(i)}>`
       + (b.chot ? `<span class="pchot">★ ${esc(c.chotLa || 'AI chốt đơn = chốt lịch hẹn')}</span>` : '')
       + `<div class="pc-top"><em>${i + 1}</em><i data-i="${esc(b.icon || 'sparkles')}"></i></div>`
       + `<h3>${esc(b.t)}</h3><p>${esc(b.d)}</p>${mock(b)}`
@@ -302,7 +305,11 @@
 
   // --- Mẩu chat hiện dần trong 1 lần bấm. Trả về html + mốc thời gian (marks.ai1, ai2…: lúc AI trả lời; marks.don: lúc hiện màn hình Tạo đơn) ---
   const okCard = d => `<span class="mok-t"><i data-i="check"></i>Đã tạo đơn <b>${esc(d.ma)}</b></span>`
-    + d.sp.map(p => `<span>${p.dv ? `${esc(p.ten)} · ${p.sl} ${esc(p.dv)}` : `${p.sl} ${esc(p.ten)}`}</span>`).join('')   // dv: đơn vị (đêm, khách, hộp) + `<span>Tổng: <b>${vnd(donTong(d))}</b>${d.phi ? ' · ' + esc(d.phi) : ''}</span>`;
+    + d.sp.map(p => `<span>${p.dv ? `${esc(p.ten)} · ${p.sl} ${esc(p.dv)}` : `${p.sl} ${esc(p.ten)}`}</span>`).join('')   // dv: đơn vị (đêm, khách, hộp)
+    + `<span>Tổng: <b>${vnd(donTong(d))}</b>${d.phi ? ' · ' + esc(d.phi) : ''}</span>`;
+  // Nhóm cân nhắc nhiều: AI chốt = lấy SĐT → thẻ "đã lưu khách" thay cho thẻ "đã tạo đơn"
+  const leadCard = d => `<span class="mok-t"><i data-i="check"></i>${esc(d.okTieuDe || 'Đã lưu khách, chuyển cho sale')}</span>`
+    + `<span>${esc(d.ten)} · ${esc(d.sdt)}</span>` + (d.lich ? `<span>${esc(d.lich[0])}: <b>${esc(d.lich[1])}</b></span>` : '') + `<span>Phụ trách: <b>${esc(d.sale)}</b></span>`;
   const carHTML = sp => `<div class="car-tr">${sp.map(p => `<div class="cc"><img src="${esc(p.img)}" alt=""><div class="cc-b"><b>${esc(p.ten)}</b>`
     + `<span>${p.cu ? `<s>${vnd(p.cu)}</s>` : ''}${vnd(p.gia)}</span></div><span class="cc-btn">${esc(p.nut || 'Mua kèm')}</span></div>`).join('')}</div>`;
   const fmmHTML = f => `<div class="fmm-img"><img src="${esc(f.img)}" alt="">${f.nhan ? `<span class="fmm-tag">${esc(f.nhan)}</span>` : ''}</div>`
@@ -329,7 +336,7 @@
       }
       else if (m.pill) { put('mpill ' + (m.mau || 'green'), md(m.pill)); t += 900; }
       else if (m.don) { marks.don = t; t += 3500; }                      // màn hình Tạo đơn tự điền xong mới hiện tin kế
-      else if (m.ok) { put('mok', okCard(m.ok === true ? o.don : m.ok)); t += 1400; }   // ok: true → đơn của slide (o.don)
+      else if (m.ok) { const d = m.ok === true ? (o.lead || o.don) : m.ok; put('mok', d.sp ? okCard(d) : leadCard(d)); t += 1400; }   // ok: true → đơn (hoặc khách) của slide
       else if (m.car) { put('car', carHTML(m.car)); t += 3600; }
       else if (m.fmm) { put('fmm', fmmHTML(m.fmm)); t += 1200; }
       else if (m.zbs) { put('zbs', zbsHTML(m.zbs)); t += 1200; }
@@ -359,14 +366,28 @@
       + `<div class="od-toast" data-t="${T + 2900}"><i data-i="check"></i>Đã tạo đơn <b>${esc(d.ma)}</b></div>`;
   }
 
+  // --- Nhóm cân nhắc nhiều: màn hình Thông tin khách hàng trên Preny, AI tự điền, gắn thẻ, xếp lịch, chuyển cho sale ---
+  function leadPanel(d, T) {
+    const v = (ms, txt) => `<i class="od-v" data-t="${T + ms}">${txt}</i>`;
+    return `<div class="od-badge"><i data-i="robot"></i>AI tự điền từ cuộc chat</div>`
+      + `<div class="od-tabs"><span class="on">Thông tin</span><span>Tạo đơn</span></div>`
+      + `<div class="od-sec"><h5>Thông tin khách hàng</h5><div class="od-2"><span class="od-in">${v(500, esc(d.ten))}</span><span class="od-in">${v(800, esc(d.sdt))}</span></div>`
+      + `<div class="od-in tall">${v(1100, md(d.nhuCau))}</div></div>`
+      + `<div class="od-sec"><h5>Thẻ khách hàng</h5><div class="od-tags">${d.the.map(([t, k], i) => `<span class="tg ${esc(k)}" data-t="${T + 1400 + i * 220}">${esc(t)}</span>`).join('')}</div></div>`
+      + (d.lich ? `<div class="od-sec"><h5>${esc(d.lichNhan || 'Lịch hẹn')}</h5><div class="od-cal" data-t="${T + 2300}"><i data-i="calendar"></i><div><b>${esc(d.lich[0])}</b><small>${esc(d.lich[1])}</small></div></div></div>` : '')
+      + `<div class="od-sec"><div class="od-h"><h5>Phụ trách</h5><span class="od-sel w">${v(2500, esc(d.sale))}</span></div></div>`
+      + `<div class="od-btns"><span class="od-b sq"><i data-i="refresh"></i></span><span class="od-b">Xem chi tiết</span><span class="od-b pri" data-t="${T + 2800}">${esc(d.nut || 'Chuyển cho sale')}</span></div>`
+      + `<div class="od-toast" data-t="${T + 3100}"><i data-i="check"></i>${esc(d.xong || 'Đã chuyển cho sale')}</div>`;
+  }
+
   // --- Slide giới thiệu AI chatbot ---
   function renderBot() {
     const c = D.chatbot, M = $('#cbMsgs'); if (!c || !M) return;
     const first = c.chat[0] && c.chat[0].ref ? [c.chat[0]] : [];
     const s0 = chatSeq([{ sep: c.gio || 'Khách nhắn lúc 22:47 · ngoài giờ làm việc' }, ...first], { ts: 0, t0: 500 });
-    const sq = chatSeq(c.chat.slice(first.length), { ts: 1, t0: 300, don: c.don }), T = sq.marks.don;
+    const sq = chatSeq(c.chat.slice(first.length), { ts: 1, t0: 300, don: c.don, lead: c.lead }), T = sq.marks.don;
     M.innerHTML = s0.html + sq.html; paint(M);
-    const P = $('#cbDon'); P.innerHTML = donPanel(c.don, T); P.dataset.t = T; paint(P);
+    const P = $('#cbDon'); P.innerHTML = c.lead ? leadPanel(c.lead, T) : donPanel(c.don, T); P.dataset.t = T; paint(P);
     const rows = $$('#vDeck .scb .cbf');   // 3 ý bên trái sáng dần theo cuộc chat, ý 4 sáng ở bấm 2
     [sq.marks.ai1, sq.marks.ai2, T].forEach((t, i) => { if (rows[i]) { rows[i].dataset.t = t || 0; rows[i].dataset.ts = 1; } });
     if (rows[3]) rows[3].dataset.t = 700;
@@ -385,8 +406,18 @@
   }
 
   // --- Slide Meta CAPI: đơn vừa tạo → Preny → Meta nhận sự kiện Purchase ---
+  const CAPI_TXT = {
+    don: { h2: 'Chốt đơn xong, AI <span class="grad">tự gửi sự kiện mua hàng</span><br>lên Facebook',
+      ben: ['Facebook biết chính xác ai đã mua', 'Tìm thêm khách giống người đã mua', 'Tối ưu quảng cáo theo đơn thật, không chỉ tin nhắn'] },
+    lead: { h2: 'Có SĐT xong, AI <span class="grad">tự gửi sự kiện Lead</span><br>lên Facebook',
+      ben: ['Facebook biết chính xác ai để lại SĐT', 'Tìm thêm khách giống khách tiềm năng', 'Tối ưu quảng cáo theo lead thật, không chỉ tin nhắn'] },
+  };
   function renderCapi() {
     const c = D.chatbot, el = $('#cpRow'); if (!c || !el) return;
+    const s = $('#vDeck .scapi'), tx = CAPI_TXT[c.lead ? 'lead' : 'don'];
+    $('h2', s).innerHTML = tx.h2;
+    $$('.cp-ben em', s).forEach((e, i) => { e.textContent = tx.ben[i]; });
+    if (c.lead) return renderCapiLead(c, el);
     const d = c.don, tot = donTong(d), p = d.sp[0];
     const ev = (cls, t, val, khi) => `<div class="cp-ev${cls}"${t != null ? ` data-t="${t}"` : ''}><span class="ei"><i data-i="check"></i></span><div><b>Purchase</b><small>Mua hàng · ${nf(val, 0)} VND · ${khi}</small></div><em>Đã nhận</em></div>`;
     el.innerHTML = `<div class="cp-card cp-don" data-t="0"><div class="cp-h"><i data-i="check"></i>Đơn mới trên Preny</div>`
@@ -398,6 +429,21 @@
       + `<div class="cp-arr" data-t="1600"><span>Purchase</span></div>`
       + `<div class="cp-card cp-meta" data-t="1900"><div class="cp-h meta"><b class="mlogo">∞</b>Meta · Trình quản lý sự kiện</div>`
       + ev(' new', 2500, tot, 'vừa xong') + ev('', null, Math.round(tot * 1.6 / 1000) * 1000, '12 phút trước') + ev('', null, Math.round(tot * 0.7 / 1000) * 1000, '41 phút trước')
+      + `<div class="cp-src">Nguồn: máy chủ (Conversions API) · khớp với khách nhắn từ quảng cáo</div></div>`;
+    paint(el);
+  }
+  function renderCapiLead(c, el) {
+    const d = c.lead, ref = (c.chat[0] || {}).ref || {}, sdt = String(d.sdt).replace(/(\d{4})\s?(\d{3})\s?(\d{3})/, '$1 *** $3');
+    const ev = (cls, t, ten, mo, khi) => `<div class="cp-ev${cls}"${t != null ? ` data-t="${t}"` : ''}><span class="ei"><i data-i="check"></i></span><div><b>${ten}</b><small>${mo} · ${khi}</small></div><em>Đã nhận</em></div>`;
+    el.innerHTML = `<div class="cp-card cp-don" data-t="0"><div class="cp-h"><i data-i="check"></i>Khách mới để lại SĐT trên Preny</div>`
+      + (ref.img ? `<div class="cp-p"><img src="${esc(ref.img)}" alt=""><b>${esc(ref.ten)}</b></div>` : '')
+      + `<div class="cp-l"><span>Khách hàng</span><b>${esc(d.ten)}</b></div><div class="cp-l"><span>SĐT</span><b>${esc(sdt)}</b></div>`
+      + `<div class="cp-l"><span>${d.lich ? esc(d.lich[0]) : 'Phụ trách'}</span><b class="v sm">${esc(d.lich ? d.lich[1] : d.sale)}</b></div></div>`
+      + `<div class="cp-arr" data-t="700"><span>gửi ngay</span></div>`
+      + `<div class="cp-hub" data-t="1000"><span class="hub-ring"></span><div class="hub-core"><img src="assets/img/logo-white.png" alt=""><small>Conversions API</small></div></div>`
+      + `<div class="cp-arr" data-t="1600"><span>Lead</span></div>`
+      + `<div class="cp-card cp-meta" data-t="1900"><div class="cp-h meta"><b class="mlogo">∞</b>Meta · Trình quản lý sự kiện</div>`
+      + ev(' new', 2500, 'Lead', 'Khách để lại SĐT', 'vừa xong') + ev('', null, 'Schedule', 'Đặt lịch hẹn', '12 phút trước') + ev('', null, 'Lead', 'Khách để lại SĐT', '41 phút trước')
       + `<div class="cp-src">Nguồn: máy chủ (Conversions API) · khớp với khách nhắn từ quảng cáo</div></div>`;
     paint(el);
   }
@@ -425,7 +471,7 @@
     s.classList.toggle('n5', n5);
     $('.core-n', s).innerHTML = `${n5 ? 5 : 6} tính năng<br>tăng doanh số`;
     [$('.feat.k6', s), $('.conn.c6', s)].forEach(e => n5 ? e.removeAttribute('data-f') : e.setAttribute('data-f', '6'));
-    const cta = $('.cta', s), noDemo = loai === 'tmdt';
+    const cta = $('.cta', s), noDemo = !CO_DEMO[loai];
     cta.parentNode.hidden = noDemo;
     if (noDemo) cta.removeAttribute('data-f'); else cta.dataset.f = n5 ? '6' : '7';
     const bd = $('#vDeck .sbd .bd-stat');
@@ -454,7 +500,7 @@
     if (!slides.length) slides = typeSlides.slice();
     N = slides.length;
     const d6 = idOf($('#vDeck .slide[data-demo-after]'));
-    DEMO_AFTER = loai === 'tmdt' ? -1 : slides.filter(s => idOf(s) <= d6).length;   // số slide đứng trước demo chat
+    DEMO_AFTER = CO_DEMO[loai] ? slides.filter(s => idOf(s) <= d6).length : -1;   // số slide đứng trước demo chat
     buildProgress();
   }
   function toggleHide(id) {

@@ -118,6 +118,88 @@
 
     /* ===== Nội dung các slide trình chiếu (trinh-chieu.html đọc phần này) ===== */
     deck: {
+      /* Pipeline mới 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot (lead = AI chốt là lấy SĐT), afterSale. */
+      dashboard: [
+        { ten: 'Spa <span class="grad">trị mụn</span>', den: '21/07/2026', khach: 9, tyLe: 0.55 },
+        { ten: 'Thẩm mỹ <span class="grad">trẻ hóa da</span>', den: '18/08/2026', khach: 7, tyLe: 0.53 },
+        { ten: 'Spa <span class="grad">chăm sóc da</span>', den: '26/09/2026', khach: 11, tyLe: 0.57 },
+      ],
+      chatbot: {
+        y: [
+          ['Trả lời ngay tức thì, 24/7', 'Khách nhắn lúc nào, AI trả lời sau 2 giây'],
+          ['Tư vấn đúng tình trạng, giữ chân khách', 'Hỏi tình trạng da, mong muốn của khách'],
+          ['Chốt đơn = lấy SĐT, hẹn lịch', 'AI lưu khách, chuyển ngay cho chuyên viên'],
+          ['Hiểu hình ảnh khách gửi', 'Khách gửi ảnh da, AI biết tình trạng da'],
+        ],
+        chat: [
+          { ref: { img: L(IMG['cham-soc-da']), ten: 'Liệu trình trị mụn chuẩn y khoa' } },
+          { kh: 'Spa ơi bên mình có trị mụn không, giá sao ạ?' },
+          {
+            ai: 'Dạ có ạ chị! 🌸 Liệu trình **trị mụn chuẩn y khoa** **từ 450.000đ/buổi**, tùy tình trạng da ạ. Chị bị mụn **bao lâu rồi**, muốn cải thiện **mụn viêm hay vết thâm** ạ?',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'Khoảng 1 năm, nổi ở má với cằm. Tự bôi thuốc mà không đỡ' },
+          {
+            ai: 'Dạ mụn lâu ngày cần **soi da trực tiếp** để chuyên viên lên liệu trình đúng ạ. Tuần này spa **soi da miễn phí**, chị cho em xin **tên, SĐT** để em giữ lịch nha.',
+          },
+          { kh: 'Linh - 0909 876 543. Chiều thứ Năm 5h được không em?' },
+          { ai: 'Dạ được ạ! Em lưu thông tin và giữ lịch cho chị ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        lead: {
+          ten: 'Chị Linh',
+          sdt: '0909 876 543',
+          nhuCau: 'Mụn viêm ở má, cằm khoảng 1 năm · muốn **hết mụn, mờ thâm**',
+          the: [['FB Ads · Trị mụn', 'ng'], ['#TriMun', 'qt'], ['Đã cho SĐT', 'ht'], ['Hẹn soi da', 'ht']],
+          lich: ['Soi da miễn phí', '17:00 · Thứ Năm 19/11'],
+          sale: 'Chuyên viên Mai',
+          nut: 'Chuyển cho chuyên viên',
+          xong: 'Đã chuyển cho chuyên viên Mai',
+          okTieuDe: 'Đã giữ lịch soi da miễn phí',
+        },
+        anh: {
+          img: L(IMG['da-mun']),
+          kh: 'Da em đang như này thì làm liệu trình nào ạ?',
+          ai: 'Dạ trong ảnh da chị đang có **mụn viêm đỏ ở má**, kèm **vết thâm** ạ. Tình trạng này hợp **liệu trình trị mụn 10 buổi** kết hợp mờ thâm, chuyên viên sẽ soi da để chốt số buổi cho chị nha.',
+          pill: '🔍 AI nhìn ảnh da, nhận ra đúng tình trạng',
+        },
+      },
+      afterSale: {
+        y1: 'AI gửi tiếp 5 dịch vụ đi kèm để bán thêm (upsell)',
+        y2: 'Liệu trình mới, voucher, ưu đãi khách cũ',
+        gio: 'Chuyên viên vừa chốt liệu trình tại spa',
+        don: { ma: '#AN11904', phi: 'chốt tại spa', sp: [{ ten: 'Liệu trình trị mụn 10 buổi', sl: 1, gia: 4500000 }] },
+        loi: 'Cảm ơn chị Linh đã tin An Nhiên Spa 💜 Khách làm liệu trình trị mụn hay kết hợp thêm mấy dịch vụ này để da phục hồi nhanh ạ:',
+        sp: [
+          { img: L(IMG['dap-mat-na']), ten: 'Đắp mặt nạ phục hồi', gia: 250000, nut: 'Đặt thêm' },
+          { img: L(IMG['massage-mat']), ten: 'Massage mặt nâng cơ', gia: 350000, nut: 'Đặt thêm' },
+          { img: L(IMG['cham-soc-da']), ten: 'Chăm sóc da chuyên sâu', gia: 450000, nut: 'Đặt thêm' },
+          { img: L(IMG['may-soi-da']), ten: 'Soi da định kỳ 3 lần', gia: 150000, nut: 'Đặt thêm' },
+          { img: L(IMG['phong-dv']), ten: 'Trẻ hóa da RF', gia: 890000, cu: 1090000, nut: 'Đặt thêm' },
+        ],
+        khach: 'Thêm cho chị đắp mặt nạ phục hồi sau mỗi buổi nha',
+        pill: '🛍 Khách đặt thêm ngay: đơn tăng từ 4.500.000đ lên 7.000.000đ',
+        fmm: {
+          sep: '1 tuần sau · tin Facebook FMM',
+          chao: 'Chào chị Linh 👋 Spa vừa ra liệu trình trẻ hóa da mới, gửi chị xem trước nha!',
+          img: L(IMG['massage-mat']),
+          nhan: 'LIỆU TRÌNH MỚI',
+          ten: 'Trẻ hóa da RF 5 buổi',
+          mo: 'Khách cũ giảm 20%, tặng 1 buổi soi da.',
+          nut: 'Xem liệu trình',
+        },
+        zbs: {
+          ten: 'Tặng chị Linh voucher 200.000đ',
+          mo: 'Cảm ơn chị đã tin chọn An Nhiên Spa. Gửi chị ưu đãi cho liệu trình tiếp theo:',
+          dong: [
+            ['Mã voucher', '**ANNHIEN200**'],
+            ['Ưu đãi', 'Giảm 200.000đ liệu trình từ 1.000.000đ'],
+            ['Hạn dùng', '31/12/2026'],
+          ],
+          nut: 'Đặt lịch ngay',
+        },
+      },
       // Slide 6 + cột trái demo: 6 tính năng (tiêu đề ngắn cho slide)
       tieuDe6: 'Hệ thống AI chatbot giúp tăng<br><span class="grad">tỷ lệ chốt SĐT và lịch hẹn</span>',
       tinhNang: [

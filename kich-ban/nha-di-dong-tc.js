@@ -66,8 +66,91 @@
       // Không có { end: true }: bấm → thêm một lần là sang thẳng slide kế.
     ],
 
-    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Chưa có deck.dashboard nên không có slide thống kê. ===== */
+    /* ===== Nội dung slide trình chiếu (trinh-chieu.html). Slide thống kê dùng số minh họa (deck.dashboard). ===== */
     deck: {
+      /* Pipeline mới 16/11/2026 (TRINH-CHIEU.md mục 1): dashboard, chatbot (lead = AI chốt là lấy SĐT), afterSale. */
+      dashboard: [
+        { ten: 'Nhà di động <span class="grad">homestay</span>', den: '21/07/2026', khach: 5, tyLe: 0.55 },
+        { ten: 'Cabin <span class="grad">resort</span>', den: '18/08/2026', khach: 4, tyLe: 0.54 },
+        { ten: 'Nhà lắp ghép <span class="grad">nghỉ dưỡng</span>', den: '26/09/2026', khach: 6, tyLe: 0.56 },
+      ],
+      chatbot: {
+        y: [
+          ['Trả lời ngay tức thì, 24/7', 'Khách nhắn lúc nào, AI trả lời sau 2 giây'],
+          ['Tư vấn đúng nhu cầu, không trả lời bừa', 'Số căn theo đất, chi phí, pháp lý'],
+          ['Chốt đơn = lấy SĐT khách', 'AI chuyển ngay cho chuyên viên gọi lại'],
+          ['Hiểu hình ảnh khách gửi', 'Khách gửi ảnh mẫu, AI biết đúng mẫu nhà'],
+        ],
+        chat: [
+          { ref: { img: L(IMG['cabin-chu-a']), ten: 'Cabin mái chữ A 24m²' } },
+          { kh: 'a có 1200m2 đất ở Ba Vì, muốn làm 5-6 phòng cho thuê. mẫu này giá bn 1 căn, làm mất bao lâu?' },
+          {
+            ai: 'Dạ đất 1.200m² anh làm **5–6 căn** là vừa ạ. **Cabin chữ A 24m²** giá **từ 215 triệu/căn** gồm nội thất cơ bản, **làm tại xưởng 35–45 ngày**, lắp tại đất **3–5 ngày**/căn 🏡',
+            meta: '⚡ Preny AI trả lời sau 2 giây',
+          },
+          { kh: 'đất a là đất nông nghiệp thì làm đc k e? sợ phát sinh nữa' },
+          {
+            ai: 'Dạ pháp lý đất còn tùy **quy hoạch địa phương**, em không dám trả lời bừa ạ. Anh cho em xin **SĐT**, kỹ sư bên em gọi anh **xem sổ đất**, gửi **bản bố trí 5 căn** và báo giá **trọn gói** miễn phí nha.',
+          },
+          { kh: 'Hùng - 0983 456 789' },
+          { ai: 'Dạ em chuyển thông tin cho chuyên viên ngay ạ ⚡' },
+          { don: true },
+          { ok: true },
+        ],
+        lead: {
+          ten: 'Anh Hùng',
+          sdt: '0983 456 789',
+          nhuCau: '1.200m² đất nông nghiệp ở Ba Vì · làm **5–6 căn cabin** cho thuê cuối tuần',
+          the: [['FB Ads · Cabin chữ A', 'ng'], ['#Homestay_5Can', 'qt'], ['Đã cho SĐT', 'ht'], ['Cần xem sổ đất', 'sa']],
+          lichNhan: 'Hẹn gọi lại',
+          lich: ['Kỹ sư gọi xem sổ đất', 'Trong 15 phút'],
+          sale: 'Sale Tuấn',
+          nut: 'Chuyển cho sale',
+          xong: 'Đã chuyển cho Sale Tuấn',
+          okTieuDe: 'Đã chuyển SĐT cho sale',
+        },
+        anh: {
+          img: L(IMG['cabin-co']),
+          kh: 'Mẫu như hình này làm trên đất dốc được không em?',
+          ai: 'Dạ mẫu anh gửi là **cabin chữ A sơn đen có sân gỗ**, bản 30m² ạ. Đất dốc vẫn làm được, bên em đổ **móng trụ cao thấp theo địa hình**, kỹ sư khảo sát đất trước rồi mới báo giá nha anh.',
+          pill: '🔍 AI nhìn ảnh, nhận ra đúng mẫu nhà khách hỏi',
+        },
+      },
+      afterSale: {
+        y1: 'AI gửi tiếp 5 hạng mục đi kèm để bán thêm (upsell)',
+        y2: 'Mẫu nhà mới, ưu đãi khách cũ, giới thiệu bạn bè',
+        gio: 'Sale vừa ký hợp đồng thi công',
+        don: { ma: '#TX05112', phi: 'hợp đồng trọn gói', sp: [{ ten: 'Cabin chữ A 24m²', sl: 5, gia: 215000000 }] },
+        loi: 'Cảm ơn anh Hùng đã chọn Thông Xanh 🏡 Khu lưu trú 5 căn, các chủ homestay hay làm thêm mấy hạng mục này ạ:',
+        sp: [
+          { img: L(IMG['phong-ngu']), ten: 'Nâng cấp nội thất phòng ngủ', gia: 28000000, nut: 'Nhận báo giá' },
+          { img: L(IMG['cabin-chu-a']), ten: 'Sân gỗ, bồn tắm ngoài trời', gia: 45000000, nut: 'Nhận báo giá' },
+          { img: L(IMG['khu-cabin']), ten: 'Cảnh quan, lối đi chung', gia: 60000000, nut: 'Nhận báo giá' },
+          { img: L(IMG['thi-cong']), ten: 'Móng, điện nước trọn gói', gia: 35000000, nut: 'Nhận báo giá' },
+          { img: L(IMG['cabin-co']), ten: 'Cabin chữ A 30m² sơn đen', gia: 260000000, nut: 'Nhận báo giá' },
+        ],
+        khach: 'Báo giá a thêm phần nâng cấp nội thất cho 5 căn nhé',
+        pill: '🛍 Khách lấy thêm ngay: +140.000.000đ nội thất cho 5 căn',
+        fmm: {
+          sep: '1 tháng sau bàn giao · tin Facebook FMM',
+          chao: 'Chào anh Hùng 👋 Thông Xanh vừa ra mẫu cabin mới, gửi anh xem trước nha!',
+          img: L(IMG['cabin-co']),
+          nhan: 'MẪU NHÀ MỚI',
+          ten: 'Cabin chữ A 30m² sơn đen',
+          mo: 'Khách cũ giảm 5%, giới thiệu bạn được tặng 10 triệu.',
+          nut: 'Xem mẫu',
+        },
+        zbs: {
+          ten: 'Ưu đãi giới thiệu cho anh Hùng',
+          mo: 'Cảm ơn anh đã tin chọn Nhà Di Động Thông Xanh. Anh giới thiệu bạn bè làm nhà được nhận ưu đãi:',
+          dong: [
+            ['Mã giới thiệu', '**THONGXANH10**'],
+            ['Ưu đãi', 'Tặng 10.000.000đ mỗi hợp đồng'],
+            ['Hạn dùng', '30/06/2027'],
+          ],
+          nut: 'Gửi cho bạn bè',
+        },
+      },
       tieuDe6: 'Hệ thống AI chatbot giúp tăng<br><span class="grad">tỷ lệ chốt SĐT khách hàng</span>',
       // Không lên đơn tự động (ký hợp đồng thi công với sale) → 5 tính năng, giống khóa học
       tinhNang: [

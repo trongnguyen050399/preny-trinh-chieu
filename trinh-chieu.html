@@ -6,7 +6,7 @@
 <title>Preny AI · Trình chiếu</title>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="trinh-chieu.css?v=202611161821">
+<link rel="stylesheet" href="trinh-chieu.css?v=202611162336">
 </head>
 <body>
 <!-- Trang trình chiếu: menu chọn ngành → 6 slide mở đầu → demo AI chat (index.html nhúng bên dưới).
@@ -96,7 +96,7 @@
         <div class="own"><span class="o-ai"><i data-i="robot"></i>Preny AI tự động</span><span class="o-hu"><i data-i="users"></i><span data-d="chotDon.nguoi">Nhân viên</span> (người thật)</span></div>
       </div>
       <div class="pipe" id="pipe"></div>
-      <div class="ploop" data-f="7"><span class="pl-arr l"></span><span class="pl-arr r"></span>
+      <div class="ploop" data-f="0" style="--d:1.3s"><span class="pl-arr l"></span><span class="pl-arr r"></span>
         <div class="pl-box glass"><em>7</em><i data-i="refresh"></i><div><b data-d="chotDon.vong.t">Chăm sóc lại &amp; Remarketing</b><small data-d="chotDon.vong.d"></small></div>
           <span class="pl-ch"><s class="ch fb">f</s><s class="ch zalo">Z</s><s class="ch mail">✉</s></span><span class="pl-ai"><i data-i="robot"></i>Preny AI</span></div>
       </div>
@@ -133,10 +133,10 @@
       <div class="cta-wrap"><div class="cta" data-f="7">Xem AI chat thực tế · <span id="ctaKb"></span><b>→</b></div></div>
     </div>
 
-    <!-- SLIDE (thương mại điện tử, ngay sau slide 6): Giới thiệu AI chatbot (deck.chatbot, dựng bằng renderBot).
+    <!-- SLIDE (cả 2 nhóm, ngay sau slide 6; cân nhắc nhiều dùng deck.chatbot.lead → màn hình lưu khách thay cho Tạo đơn): Giới thiệu AI chatbot (deck.chatbot, dựng bằng renderBot).
          Vào: 3 ý trả lời ngay tức thì, giữ chân khách, chốt đơn 24/7. Bấm 1: tin nhắn tự chạy (khách hỏi → AI tư vấn → khách hỏi thêm
          → chốt đơn → AI lên đơn), hiện thêm màn hình Tạo đơn tự động. Bấm 2: bên cạnh hiện case khách gửi hình. Bấm 3: slide kế. -->
-    <div class="slide scb" data-loai="tmdt" data-need="chatbot">
+    <div class="slide scb" data-need="chatbot">
       <div class="cb-left">
         <div class="eyebrow" data-f="0"><i data-i="robot"></i>AI chatbot Preny</div>
         <h2 class="t2" data-f="0">Trả lời ngay tức thì,<br>giữ chân khách,<br><span class="grad">chốt đơn 24/7</span></h2>
@@ -157,12 +157,12 @@
 
     <!-- SLIDE (thương mại điện tử): 50% khách mua hôm nay đã tương tác hôm trước. Vẽ đúng 2 cột "Khách hàng mới", "Khách cũ tương tác lại"
          trên trang Thống kê Preny (ảnh người dùng gửi 16/11/2026, khoanh đỏ). Vào là hiện hết. Slide bám đuổi ngay sau đó bỏ ô ~50%. -->
-    <div class="slide s50" data-loai="tmdt">
+    <div class="slide s50">
       <div class="s50-left">
         <div class="eyebrow" data-f="0"><i data-i="refresh"></i>Khách quay lại mua</div>
         <div class="s50-num" data-f="0" style="--d:.15s"><b class="grad">50%</b></div>
         <h2 class="t2" data-f="0" style="--d:.3s">Khách hàng mua hàng hôm nay là <span class="grad">khách hàng đã tương tác ngày hôm trước</span></h2>
-        <p class="s50-p" data-f="0" style="--d:.45s">Khách hiếm khi mua ngay lần đầu nhắn tin. AI nhắc lại <b>đúng lúc, đúng sản phẩm</b> là kéo được khách quay lại chốt đơn.</p>
+        <p class="s50-p" data-f="0" style="--d:.45s">Khách hiếm khi chốt ngay lần đầu nhắn tin. AI nhắc lại <b>đúng lúc, đúng nhu cầu</b> là kéo được khách quay lại chốt đơn.</p>
       </div>
       <div class="s50-tab" data-f="0" data-a="right" style="--d:.2s" id="s50Tab"></div>
     </div>
@@ -287,22 +287,22 @@
 
     <!-- SLIDE (thương mại điện tử): Gửi sự kiện mua hàng lên Facebook (Meta CAPI). Vào là chạy hết một lượt, 1 lần bấm.
          Đơn lấy từ deck.chatbot.don (renderCapi). -->
-    <div class="slide scapi" data-loai="tmdt" data-need="chatbot">
+    <div class="slide scapi" data-need="chatbot">
       <div class="head c" data-f="0">
         <div class="eyebrow"><i data-i="send"></i>Meta Conversions API</div>
         <h2 class="t2">Chốt đơn xong, AI <span class="grad">tự gửi sự kiện mua hàng</span><br>lên Facebook</h2>
       </div>
       <div class="cp-row" id="cpRow" data-f="0"></div>
       <div class="cp-ben" data-f="0">
-        <span data-t="3100"><i data-i="target"></i>Facebook biết chính xác ai đã mua</span>
-        <span data-t="3300"><i data-i="users"></i>Tìm thêm khách giống người đã mua</span>
-        <span data-t="3500"><i data-i="trend"></i>Tối ưu quảng cáo theo đơn thật, không chỉ tin nhắn</span>
+        <span data-t="3100"><i data-i="target"></i><em>Facebook biết chính xác ai đã mua</em></span>
+        <span data-t="3300"><i data-i="users"></i><em>Tìm thêm khách giống người đã mua</em></span>
+        <span data-t="3500"><i data-i="trend"></i><em>Tối ưu quảng cáo theo đơn thật, không chỉ tin nhắn</em></span>
       </div>
     </div>
 
     <!-- SLIDE (thương mại điện tử): After sale (deck.afterSale, renderAfter). 1 bên mô tả, 1 bên demo chat.
          Bấm 1: khách mua xong → AI gửi ngay 5 thẻ sản phẩm đi kèm để upsell. Bấm 2: chương trình hằng tuần qua Facebook FMM + Zalo ZBS. -->
-    <div class="slide sas" data-loai="tmdt" data-need="afterSale">
+    <div class="slide sas" data-need="afterSale">
       <div class="cb-left">
         <div class="eyebrow" data-f="0"><i data-i="heart"></i>Chăm sóc sau bán · After sale</div>
         <h2 class="t2" data-f="0">Khách đã mua,<br><span class="grad">bán thêm</span> ngay<br>và mỗi tuần</h2>
@@ -462,8 +462,8 @@
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
 
 <!-- Mã phiên bản ?v=…: đổi mỗi lần đẩy lên mạng (preny-demo/doi-phien-ban.sh) để trình duyệt không dùng file cũ trong bộ nhớ đệm -->
-<script>window.PRENY_V = '202611161821';</script>
-<script src="kich-ban/danh-sach.js?v=202611161821"></script>
-<script src="trinh-chieu.js?v=202611161821"></script>
+<script>window.PRENY_V = '202611162336';</script>
+<script src="kich-ban/danh-sach.js?v=202611162336"></script>
+<script src="trinh-chieu.js?v=202611162336"></script>
 </body>
 </html>
