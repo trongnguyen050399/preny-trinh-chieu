@@ -2,7 +2,8 @@
    Video MP4 cũ vẫn dùng kich-ban/tham-my-spa.js; file này cho phần demo chat + nội dung slide (deck) khi thuyết trình.
    Hai tình huống:
      1. Chị Linh từ quảng cáo hỏi trị mụn → AI khai thác tình trạng, xin hình → xin SĐT → mời soi da miễn phí, chốt lịch
-        → nhắc lịch → (Meta CAPI ở cột trái) → chăm sóc sau buổi làm, nhắc buổi tiếp theo → (Remarketing ở cột trái).
+        → (Meta CAPI ở cột trái) → chăm sóc sau buổi làm, nhắc buổi tiếp theo → (Remarketing ở cột trái).
+        Không có tin nhắc lịch trước giờ hẹn: Preny chưa có tính năng này (người dùng dặn 16/11/2026).
      2. Xóa chat → chị Vy hỏi giá, cho SĐT rồi "để tham khảo thêm" → SOFT FOLLOW-UP vài ngày 1 tin:
         giới thiệu cơ sở + công nghệ, feedback khách thật, giải thích quy trình + ưu đãi → chị Vy đặt lịch làm thử.
    Tên spa, khách, giá, SĐT: dữ liệu minh họa. Ảnh: Unsplash (ảnh thật). Không có ảnh before–after thật nên phần
@@ -26,7 +27,7 @@
     badge: 'AI CHATBOT · THẨM MỸ & SPA',
     shop: { name: 'An Nhiên Spa', initials: 'AN' },
     headline: { pre: 'AI chatbot tư vấn, lấy SĐT và', em: 'chốt lịch hẹn ngành Spa' },
-    sub: 'Lọc khách, mời soi da, nhắc lịch và nuôi khách cân nhắc lâu bằng soft follow-up.',
+    sub: 'Lọc khách, mời soi da, chốt lịch hẹn và nuôi khách cân nhắc lâu bằng soft follow-up.',
     cta: 'Dùng thử miễn phí tại **preny.ai**\nHotline **0389 647 778**',
     speed: 1.13,
     timing: { read0: 1000, readPerChar: 28, readMax: 4500, type0: 800, typePerChar: 3, typeMax: 1500, fastType: 500,
@@ -38,7 +39,7 @@
       { title: 'AI tư vấn và lọc khách 24/7', desc: 'Trả lời ngay, không bỏ lỡ khách nào.',
         kws: ['Trả lời ngay giá, dịch vụ', 'Xin hình, hỏi tình trạng da, bị bao lâu', 'Hỏi đã điều trị chưa, mong muốn gì'] },
       { title: 'AI lấy SĐT và chốt lịch hẹn', desc: 'Lead nóng chuyển ngay cho chuyên viên.',
-        kws: ['Xin SĐT để chuyên viên tư vấn kỹ', 'Mời ghé soi da miễn phí', 'Gửi xác nhận lịch hẹn', 'Tự nhắc lịch trước giờ hẹn'] },
+        kws: ['Xin SĐT để chuyên viên tư vấn kỹ', 'Mời ghé soi da miễn phí', 'Gửi xác nhận lịch hẹn'] },
       { title: 'Soft follow-up: nuôi khách cân nhắc lâu', desc: 'Spa nằm đầu danh sách khi khách quyết định.',
         kws: ['Khách cho SĐT nhưng chưa đặt lịch', 'Giới thiệu cơ sở, công nghệ', 'Gửi feedback, kết quả khách thật', 'Giải thích quy trình, ưu đãi đúng lúc'] },
       { title: 'AI tự động chăm sóc sau liệu trình', desc: 'Tăng tỷ lệ khách quay lại.',
@@ -52,7 +53,7 @@
     steps: [
       { intro: true, hold: 1800 },
 
-      /* ===== TÌNH HUỐNG 1: hỏi → khai thác → SĐT → chốt lịch soi da → nhắc lịch → chăm sóc sau buổi làm ===== */
+      /* ===== TÌNH HUỐNG 1: hỏi → khai thác → SĐT → chốt lịch soi da → chăm sóc sau buổi làm ===== */
       { feature: 1 },
       { sep: 'Tình huống 1 · Khách nhắn tin từ quảng cáo Facebook', style: 'time', hold: 800 },
       { kh: 'Spa ơi bên mình có trị mụn không, giá sao ạ?' },
@@ -72,9 +73,6 @@
           tag: '✓ Xác nhận lịch hẹn',
           lines: ['Khách hàng: Chị Linh · 0909 876 543', 'Dịch vụ: Soi da miễn phí & tư vấn trị mụn', 'Thời gian: **17h00 thứ Năm, 19/11**', 'Địa chỉ: An Nhiên Spa, 56 Hai Bà Trưng, Q.1'],
         }, kw: 2, hold: 4500 },
-      { sep: '— Thứ Năm, trước giờ hẹn 2 tiếng —' },
-      { ai: '⏰ Chị Linh ơi, **17h00 chiều nay** chị có lịch soi da ở An Nhiên Spa nha. Chị nhớ **không trang điểm đậm** để soi da chính xác hơn ạ 🌸', meta: '⏰ Tự động · Nhắc lịch hẹn', kw: 3 },
-      { kh: 'Ok em, chị tới đúng giờ' },
 
       // Meta CAPI: chỉ bật thẻ ở cột trái để bạn tự nói, điện thoại đứng yên
       { feature: 6, kw: [0, 1, 2], hold: 3000 },
