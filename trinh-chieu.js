@@ -245,7 +245,7 @@
   const md = v => String(v == null ? '' : v).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
   const vnd = n => nf(n, 0) + 'đ';
   const pct = v => +v.toFixed(2) + '%';   // như trang Thống kê: 66.67%, 75%
-  const donTong = d => d.sp.reduce((a, p) => a + p.sl * p.gia, 0);
+  const donTong = d => d.sp.reduce((a, p) => a + p.sl * p.gia, 0) + (d.ship || 0);   // ship: phí giao (nếu có), cộng vào tổng
 
   // --- Slide thống kê: số minh họa sinh cố định theo tên case (cùng tên → cùng số), tỷ lệ tổng nằm trong [min, max] (mặc định 51–59%) ---
   function rng(str) {
@@ -385,7 +385,7 @@
       + `<div class="od-search"><i data-i="search"></i><span>Tìm kiếm sản phẩm bằng tên</span><span class="od-chk">Còn hàng</span><span class="od-plus">+</span></div>`
       + `<div class="od-sum">Tổng khối lượng sản phẩm: <b>${sl} sản phẩm</b></div></div>`
       + (d.ghiChu ? `<div class="od-sec"><h5>Ghi chú đơn</h5><div class="od-in tall">${v(1900, md(d.ghiChu))}</div></div>`
-        : `<div class="od-sec"><div class="od-h"><h5>Vận chuyển</h5><span class="od-sel w">Chọn đơn vị vận chuyển</span></div><div class="od-2"><span class="od-in ph">Mã vận đơn</span><span class="od-in ph">Phí<b>0</b></span></div></div>`)
+        : `<div class="od-sec"><div class="od-h"><h5>Vận chuyển</h5><span class="od-sel w">Chọn đơn vị vận chuyển</span></div><div class="od-2"><span class="od-in ph">Mã vận đơn</span><span class="od-in ph">Phí<b>${nf(d.ship || 0, 0)}</b></span></div></div>`)
       + `<div class="od-tot">${v(2100, vnd(donTong(d)))}</div>`
       + `<div class="od-btns"><span class="od-b sq"><i data-i="refresh"></i></span><span class="od-b">Xem chi tiết</span><span class="od-b pri" data-t="${T + 2600}">Tạo đơn</span></div>`
       + `<div class="od-toast" data-t="${T + 2900}"><i data-i="check"></i>Đã tạo đơn <b>${esc(d.ma)}</b></div>`;

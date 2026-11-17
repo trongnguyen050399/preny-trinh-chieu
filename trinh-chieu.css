@@ -1037,3 +1037,60 @@ body.menu-on .tb-demo { display: none; }
 .tb-demo { gap: 6px; padding: 6px 14px; font-size: 16px; font-weight: 600; color: var(--dim); background: transparent; border: 1px solid var(--line); box-shadow: none; opacity: .55; transition: opacity .2s; }
 .tb-demo:hover { filter: none; opacity: 1; color: #fff; }
 .tb-demo i[data-i] { font-size: 15px; }
+
+/* Demo dọc: cảnh quảng cáo có nút Gửi tin nhắn, đã xem, khách đang nhập, ô thông số, màn hình Meta CAPI, màn kết (17/11/2026, kịch bản đèn trang trí) */
+.dd-qc { position: absolute; inset: 0; background: #fff; transform: translateY(100%); transition: transform .45s cubic-bezier(.3, .8, .3, 1); }
+.dd-qc.sh { transform: none; }
+.dd-qc.nz { transition: none; }
+.dd-qmo { padding: 0 18px 10px; font-size: 16px; color: #1c1e21; }
+.dd-qimg { display: block; width: 100%; height: 560px; object-fit: cover; }
+.dd-qcta { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #F0F2F5; }
+.dd-qcta div { flex: 1; min-width: 0; }
+.dd-qcta small { display: block; font-size: 13px; color: #65676B; }
+.dd-qcta b { display: block; font-size: 17px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dd-qbtn { position: relative; flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border-radius: 10px; font-size: 17px; font-weight: 700; color: #050505; background: #E4E6EB; transition: background .2s, transform .2s; }
+.dd-qc.bam .dd-qbtn { background: #CFD3DA; transform: scale(.95); }
+.dd-tap { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: rgba(8, 102, 255, .35); opacity: 0; pointer-events: none; }
+.dd-qc.bam:not(.bamnz) .dd-tap { animation: ddTap .9s ease-out both; }
+@keyframes ddTap { 0% { opacity: .9; transform: scale(.4); } 100% { opacity: 0; transform: scale(2.2); } }
+.dd-seenrow { align-items: center; gap: 4px; margin-top: -2px; }
+.dd-seen { width: 16px; height: 16px; font-size: 16px; }
+.dd-seenrow small { font-size: 12px; color: #8A8D91; }
+.dd-spec { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 12px; border-radius: 6px; background: #F4F1EA; color: #3a3226; font-size: 12px; }
+.dd-pics .dd-spec:nth-child(4) { border-bottom-right-radius: 18px; }
+.dd-spec b { font-size: 13px; letter-spacing: .5px; margin-bottom: 2px; }
+.dd-spec span { display: flex; justify-content: space-between; gap: 6px; border-bottom: 1px dashed rgba(58, 50, 38, .25); padding-bottom: 3px; }
+.dd-spec em { font-style: normal; font-weight: 700; }
+.dd-capi, .dd-ket { position: absolute; inset: 0; z-index: 4; opacity: 0; pointer-events: none; transition: opacity .5s; color: #fff; font-family: 'Be Vietnam Pro', system-ui, sans-serif; }
+.dd-capi.sh, .dd-ket.sh { opacity: 1; }
+.dd-capi.nz, .dd-ket.nz { transition: none; }
+.dd-capi { display: flex; flex-direction: column; align-items: center; gap: 22px; padding: 70px 30px 0; background: linear-gradient(170deg, #0E1A3A, #101633 55%, #0B0F24); }
+.dd-capi > *, .dd-cpnode, .dd-cpl, .dd-cpbox p, .dd-ket > *, .dd-ket li { opacity: 0; transform: translateY(12px); }
+.dd-capi.sh > *, .dd-capi.sh .dd-cpnode, .dd-capi.sh .dd-cpl, .dd-capi.sh .dd-cpbox p, .dd-ket.sh > *, .dd-ket.sh li { animation: ddIn .5s ease-out var(--d, 0s) forwards; }
+.dd-capi.nz > *, .dd-capi.nz .dd-cpnode, .dd-capi.nz .dd-cpl, .dd-capi.nz .dd-cpbox p, .dd-ket.nz > *, .dd-ket.nz li { animation: none; opacity: 1; transform: none; }
+@keyframes ddIn { to { opacity: 1; transform: none; } }
+.dd-cpn { --d: 0s; padding: 8px 18px; border-radius: 99px; font-size: 15px; font-weight: 600; background: rgba(255, 255, 255, .1); border: 1px solid rgba(255, 255, 255, .18); }
+.dd-cpflow { display: flex; align-items: flex-start; gap: 6px; opacity: 1 !important; transform: none !important; animation: none !important; }
+.dd-cpnode { width: 120px; text-align: center; }
+.dd-cpnode span { display: grid; place-items: center; width: 66px; height: 66px; margin: 0 auto 8px; border-radius: 18px; font-size: 30px; font-weight: 800; }
+.dd-cpnode .pn { background: linear-gradient(135deg, #A855F7, #6D28D9); }
+.dd-cpnode .mt { background: linear-gradient(135deg, #3B82F6, #1D4ED8); }
+.dd-cpnode .ld { background: linear-gradient(135deg, #34D399, #059669); }
+.dd-cpnode b { display: block; font-size: 16px; }
+.dd-cpnode small { font-size: 12px; color: #A5B4D8; }
+.dd-cpl { flex: none; width: 34px; height: 3px; margin-top: 32px; border-radius: 3px; background: #7C9CFF; }
+.dd-cpbox { --d: 2.2s; align-self: stretch; padding: 16px 18px; border-radius: 14px; background: rgba(0, 0, 0, .35); border: 1px solid rgba(124, 156, 255, .35); font-family: ui-monospace, Menlo, monospace; }
+.dd-cpbox h6 { margin-bottom: 8px; font-size: 13px; letter-spacing: .5px; color: #A5B4FC; }
+.dd-cpbox p { margin: 4px 0; font-size: 14px; color: #CBD5F5; }
+.dd-cpbox p b { color: #86EFAC; font-weight: 600; }
+.dd-cpnote { align-self: stretch; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.45; color: #CBD5F5; background: rgba(255, 255, 255, .06); }
+.dd-cpnote b { color: #fff; }
+.dd-cpno { align-self: stretch; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.45; color: #FECACA; background: rgba(239, 68, 68, .14); border: 1px solid rgba(248, 113, 113, .45); }
+.dd-ket { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 40px 44px 80px; background: radial-gradient(600px 500px at 30% 20%, rgba(168, 85, 247, .45), transparent 60%), radial-gradient(500px 500px at 80% 90%, rgba(236, 72, 153, .35), transparent 60%), #120A2E; }
+.dd-ket img { height: 64px; }
+.dd-ket h5 { font-size: 24px; font-weight: 800; text-align: center; line-height: 1.3; }
+.dd-ket ul { list-style: none; align-self: stretch; display: grid; gap: 9px; padding: 18px 22px; border-radius: 18px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); opacity: 1 !important; transform: none !important; animation: none !important; }
+.dd-ket li { display: flex; align-items: center; gap: 12px; font-size: 18px; }
+.dd-ket li i { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-style: normal; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #EC4899, #A855F7); }
+.dd-kweb { font-size: 26px; font-weight: 800; background: linear-gradient(100deg, #F9A8D4, #D8B4FE, #A5B4FC); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.dd-capi { justify-content: center; padding: 40px 30px 90px; }

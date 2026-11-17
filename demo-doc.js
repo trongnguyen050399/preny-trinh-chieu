@@ -120,12 +120,14 @@
   const stamp = d => `${clock(d)}, ${THU[d.getDay()]} ${f2(d.getDate())}/${f2(d.getMonth() + 1)}/${d.getFullYear()}`;
 
   /* ---------- Dựng ---------- */
-  let root = null, K = null, beats = [], n = 0, timers = [], onExit = null, names = [], scr = null;
+  let root = null, K = null, beats = [], n = 0, timers = [], onExit = null, names = [], scr = null, dd = {};
+  let OPEN = 3, QC = -1, CAPI = -1, KET = -1;   // chỉ số beat: mở Messenger, quảng cáo, màn hình Meta CAPI, màn kết
   const AI_SIDE = new Set(['ai', 'card', 'catalog', 'aiImgs', 'aiImg']);
   const plainName = s => String(s || '').replace(/^(Anh|Chị|Em|Cô|Chú|Bác)\s+/i, '').split('·')[0].trim();
 
   function build() {
-    const D = K.deck || {}, dd = D.demoDoc || {}, shop = K.shop || { name: '', initials: '' };
+    const D = K.deck || {}, shop = K.shop || { name: '', initials: '' };
+    dd = D.demoDoc || {};
     const img = k => loc((K.images || {})[k] || k);
     const cb = D.chatbot || {};
     names = [].concat(dd.khach || plainName((cb.don || cb.lead || {}).ten) || 'Khách hàng');
@@ -136,10 +138,17 @@
     const [hh0, mi0] = String(dd.gio || '09:00').split(':').map(Number);
     let time = new Date(yy0, mm0 - 1, dd0, hh0, mi0);
 
-    // Các lần bấm: 0 bài đăng, 1 khách bình luận, 2 trang trả lời, 3 mở Messenger, sau đó mỗi bước 1 lần bấm
-    beats = [{ k: 'start', t: new Date(time) }, { k: 'cmt', t: new Date(time) }, { k: 'rep', t: new Date(time) }, { k: 'open', conv: 0, pre: [], t: new Date(time) }];
+    // Các lần bấm: bài đăng → (khách bình luận → trang trả lời) × số bình luận → [quảng cáo → bấm Gửi tin nhắn] → mở Messenger
+    // → mỗi bước trong steps 1 lần bấm → [màn hình Meta CAPI] → [màn kết]. Phần trong [] chỉ có khi demoDoc khai báo.
+    const cmts = Array.isArray(dd.binhLuan) ? dd.binhLuan : [{ ten: names[0], noiDung: dd.binhLuan || 'Tư vấn', traLoi: dd.traLoi }];
+    beats = [{ k: 'start', t: new Date(time) }];
+    cmts.forEach((c, ci) => { beats.push({ k: 'cmt', ci, t: new Date(time) }); beats.push({ k: 'rep', ci, t: new Date(time) }); });
+    QC = -1; CAPI = -1; KET = -1;
+    if (dd.quangCao) { QC = beats.length; beats.push({ k: 'qc', t: new Date(time) }, { k: 'bamqc', t: new Date(time) }); }
+    OPEN = beats.length;
+    beats.push({ k: 'open', conv: 0, pre: [], t: new Date(time) });
     let conv = 0, pend = [], firstTime = true, firstBeatOfConv = true;
-    const addPre = it => { if (firstBeatOfConv && conv === 0) beats[3].pre.push(it); else pend.push(it); };
+    const addPre = it => { if (firstBeatOfConv && conv === 0) beats[OPEN].pre.push(it); else pend.push(it); };
     for (const st of K.steps || []) {
       if (st.feature || st.intro || st.end || st.screen) continue;
       if (st.sep) {
@@ -155,12 +164,14 @@
         addPre({ k: 'stamp', t: new Date(time), chip: inf.chip });
         continue;
       }
-      const k = st.kh ? 'kh' : st.ai ? 'ai' : st.img ? 'img' : st.aiImgs ? 'aiImgs' : st.aiImg ? 'aiImg' : st.catalog ? 'catalog' : st.card ? 'card' : null;
+      const k = st.kh ? 'kh' : st.ai ? 'ai' : st.img ? 'img' : st.aiImgs ? 'aiImgs' : st.aiImg ? 'aiImg' : st.catalog ? 'catalog' : st.card ? 'card' : st.seen ? 'seen' : null;
       if (!k) continue;
       if (firstTime) { firstTime = false; addPre({ k: 'stamp', t: new Date(time) }); addPre({ k: 'ad', conv }); }
       time = new Date(time.getTime() + 60000 * (k === 'kh' ? 1 : 0.5));
       beats.push({ k, st, conv, pre: pend, t: new Date(time) }); pend = []; firstBeatOfConv = false;
     }
+    if (dd.capi) { CAPI = beats.length; beats.push({ k: 'capi', conv, pre: [], t: new Date(time) }); }
+    if (dd.ket) { KET = beats.length; beats.push({ k: 'ket', conv, pre: [], t: new Date(time) }); }
 
     // ----- Facebook -----
     const pav = `<span class="dd-pav">${esc(shop.initials)}</span>`;
@@ -172,11 +183,19 @@
       + `<div class="dd-pimgs">${anh.map(k => `<img src="${esc(img(k))}" alt="">`).join('')}</div>`
       + `<div class="dd-pact"><span>👍 Thích</span><span>💬 Bình luận</span><span>↗ Chia sẻ</span></div></div>`
       + `<div class="dd-cmts">`
-      + `<div class="dd-cmt" data-fb="1"><span class="dd-cav">${IC.person}</span><div><div class="dd-cbx"><b>${esc(names[0])}</b><span>${esc(dd.binhLuan || 'Tư vấn')}</span></div>`
-      + `<div class="dd-cmeta"><span>Vừa xong</span><b>Thích</b><b>Phản hồi</b></div></div></div>`
-      + `<div class="dd-cmt rep" data-fb="2">${pav}<div><div class="dd-cbx"><b>${esc(String(shop.name).toUpperCase())} <em>Tác giả</em></b><span>${esc(dd.traLoi || 'Dạ, mình check inbox giúp em nha!')}</span></div>`
-      + `<div class="dd-cmeta"><span>Vừa xong</span><b>Thích</b><b>Phản hồi</b></div></div></div>`
+      + cmts.map((c, ci) => `<div class="dd-cmt" data-fb="${1 + 2 * ci}"><span class="dd-cav">${IC.person}</span><div><div class="dd-cbx"><b>${esc(c.ten || names[0])}</b><span>${esc(c.noiDung || 'Tư vấn')}</span></div>`
+        + `<div class="dd-cmeta"><span>Vừa xong</span><b>Thích</b><b>Phản hồi</b></div></div></div>`
+        + `<div class="dd-cmt rep" data-fb="${2 + 2 * ci}">${pav}<div><div class="dd-cbx"><b>${esc(String(shop.name).toUpperCase())} <em>Tác giả</em></b><span>${esc(c.traLoi || 'Dạ, mình check inbox giúp em nha!')}</span></div>`
+        + `<div class="dd-cmeta"><span>Vừa xong</span><b>Thích</b><b>Phản hồi</b></div></div></div>`).join('')
       + `</div></div>`;
+    // ----- Quảng cáo Facebook có nút Gửi tin nhắn (demoDoc.quangCao) -----
+    const q = dd.quangCao;
+    const qcHTML = q ? `<div class="dd-qc"><div class="dd-fbh"><b>facebook</b><i></i><i></i><i></i></div>`
+      + `<div class="dd-post"><div class="dd-ph">${pav}<div><b>${esc(String(shop.name).toUpperCase())}</b><small>Được tài trợ · ${IC.globe}</small></div></div>`
+      + `<div class="dd-pt">${esc(q.tieuDe)}</div>${q.mo ? `<div class="dd-qmo">${esc(q.mo)}</div>` : ''}`
+      + `<img class="dd-qimg" src="${esc(img(q.anh))}" alt="">`
+      + `<div class="dd-qcta"><div><small>${esc(q.nhan || 'MESSENGER')}</small><b>${esc(q.dong || sanPham)}</b></div><span class="dd-qbtn">${IC.send2 || ''}${esc(q.nut || 'Gửi tin nhắn')}<i class="dd-tap"></i></span></div>`
+      + `<div class="dd-pact"><span>👍 Thích</span><span>💬 Bình luận</span><span>↗ Chia sẻ</span></div></div></div>` : '';
 
     // ----- Messenger -----
     const convs = [];
@@ -192,16 +211,21 @@
     };
     beats.forEach((b, i) => {
       b.i = i;
-      if (i < 3) return;
+      if (i < OPEN) return;
       (b.pre || []).forEach(it => preHTML(b, it));
-      if (i === 3) return;
+      if (i === OPEN || b.k === 'capi' || b.k === 'ket') return;
       const st = b.st;
-      if (AI_SIDE.has(b.k)) { convs[b.conv] = convs[b.conv] || ''; convs[b.conv] += `<div class="dd-row r dd-typing" data-b="${i}" data-typ="1"><div class="dd-bub t"><i></i><i></i><i></i></div></div>`; }
+      convs[b.conv] = convs[b.conv] || '';
+      if (AI_SIDE.has(b.k)) convs[b.conv] += `<div class="dd-row r dd-typing" data-b="${i}" data-typ="1"><div class="dd-bub t"><i></i><i></i><i></i></div></div>`;
+      if (b.k === 'kh' && st.typing) convs[b.conv] += `<div class="dd-row l dd-typing" data-b="${i}" data-typ="1"><span class="dd-av">${IC.person}</span><div class="dd-bub t"><i></i><i></i><i></i></div></div>`;   // khách đang nhập…
+      if (b.k === 'seen') { convs[b.conv] += `<div class="dd-row r dd-seenrow" data-b="${i}"><span class="dd-seen">${IC.person}</span><small>Đã xem</small></div>`; return; }
       if (b.k === 'kh') row(b, 'l', `<div class="dd-bub">${md(st.kh)}</div>`);
       else if (b.k === 'img') row(b, 'l', `<img class="dd-pic" src="${esc(img(st.img))}" alt="">`);
       else if (b.k === 'ai') row(b, 'r', `<div class="dd-bub b">${md(st.ai)}</div>`);
       else if (b.k === 'aiImg') row(b, 'r', `<img class="dd-pic" src="${esc(img(st.aiImg))}" alt="">`);
-      else if (b.k === 'aiImgs') row(b, 'r', `<div class="dd-pics">${st.aiImgs.map(x => `<img src="${esc(img(x.img))}" alt="">`).join('')}</div>`);
+      else if (b.k === 'aiImgs') row(b, 'r', `<div class="dd-pics">${st.aiImgs.map(x => x.spec   // ô thông số (chữ, không phải ảnh)
+          ? `<div class="dd-spec"><b>${esc(x.spec.tieuDe || 'THÔNG SỐ')}</b>${x.spec.dong.map(([k, v]) => `<span>${esc(k)}<em>${esc(v)}</em></span>`).join('')}</div>`
+          : `<img src="${esc(img(x.img))}" alt="">`).join('')}</div>`);
       else if (b.k === 'catalog') row(b, 'r', `<div class="dd-car">${st.catalog.map(c => `<div class="dd-cc"><img src="${esc(img(c.art))}" alt=""><div class="dd-ccb"><b>${esc(c.name)}${c.color ? ' ' + esc(c.color) : ''}</b>`
         + `<small>Giá</small><span>${esc(c.price)}${c.old ? ` <s>${esc(c.old)}</s>` : ''}</span><em>Thêm vào đơn</em></div></div>`).join('')}</div>`, 'wide');
       else if (b.k === 'card') {
@@ -219,12 +243,25 @@
       + `<div class="dd-in"><span class="dd-ib">${IC.plus}${IC.camera}${IC.image}${IC.mic}</span><span class="dd-aa">Aa</span><span class="dd-like">${IC.like}</span></div>`
       + `</div>`;
 
+    const cp = dd.capi;
+    const capiHTML = cp ? `<div class="dd-capi"><div class="dd-cpn">${esc(cp.nhan || '⏩ Hệ thống · Ghi nhận khách hàng tiềm năng')}</div>`
+      + `<div class="dd-cpflow"><div class="dd-cpnode" style="--d:.2s"><span class="pn">P</span><b>Preny AI</b><small>Messenger</small></div><i class="dd-cpl" style="--d:.6s"></i>`
+      + `<div class="dd-cpnode" style="--d:.9s"><span class="mt">∞</span><b>Meta CAPI</b><small>Conversions API</small></div><i class="dd-cpl" style="--d:1.3s"></i>`
+      + `<div class="dd-cpnode" style="--d:1.6s"><span class="ld">✓</span><b>${esc(cp.event || 'Lead')}</b><small>Đã nhận (demo)</small></div></div>`
+      + `<div class="dd-cpbox" style="--d:2.2s"><h6>PRENY AI → META CONVERSIONS API</h6>${(cp.dong || []).map(([k, v], i) => `<p style="--d:${(2.5 + i * 0.35).toFixed(2)}s">${esc(k)}: <b>${esc(v)}</b></p>`).join('')}</div>`
+      + (cp.chu ? `<div class="dd-cpnote" style="--d:4.8s"><b>Chống ghi nhận trùng</b> · ${esc(cp.chu)}</div>` : '')
+      + (cp.khong ? `<div class="dd-cpno" style="--d:5.4s">✕ ${esc(cp.khong)}</div>` : '') + `</div>` : '';
+    const kt = dd.ket;
+    const ketHTML = kt ? `<div class="dd-ket"><img src="assets/img/logo-white.png" alt="Preny" style="--d:.2s"><h5 style="--d:.5s">${esc(kt.tieuDe)}</h5>`
+      + `<ul>${(kt.y || []).map((x, i) => `<li style="--d:${(0.8 + i * 0.28).toFixed(2)}s"><i>✓</i>${esc(x)}</li>`).join('')}</ul>`
+      + `<b class="dd-kweb" style="--d:${(1 + (kt.y || []).length * 0.28).toFixed(2)}s">preny.ai</b></div>` : '';
+
     root.innerHTML = `<div class="dd-side">`
       + `<button class="dd-btn" data-act="exit"><span>←</span>Về slide</button>`
       + `<button class="dd-btn dd-auto" data-act="auto"></button>`
       + `<button class="dd-btn" data-act="music"><span>♪</span><em class="dd-mlbl"></em></button>`
       + `<div class="dd-hint">Bấm <b>→</b> hoặc nhấp vào màn hình để chạy từng tin<br><b>Space</b> tự chạy như video · Space lần nữa để dừng<br><b>←</b> lùi · <b>Esc</b> về slide</div></div>`
-      + `<div class="dd-screen">${fb}${ms}<div class="dd-badge">DEMO · DỮ LIỆU MINH HỌA</div></div>`;
+      + `<div class="dd-screen">${fb}${qcHTML}${ms}${capiHTML}${ketHTML}<div class="dd-badge">DEMO · DỮ LIỆU MINH HỌA</div></div>`;
     scr = root.querySelector('.dd-screen');
     root.querySelector('[data-act="exit"]').addEventListener('click', e => { e.stopPropagation(); exit(); });
     root.querySelector('[data-act="music"]').addEventListener('click', e => { e.stopPropagation(); setMusic(!musicWanted); });
@@ -250,9 +287,14 @@
       el.classList.toggle('sh', on); el.classList.toggle('nz', on && !(animate && +el.dataset.fb === n));
     });
     const ms = root.querySelector('.dd-ms');
-    ms.classList.toggle('nz', !(animate && n === 3));
-    ms.classList.toggle('on', n >= 3);
-    const conv = n >= 3 ? b.conv || 0 : 0;
+    ms.classList.toggle('nz', !(animate && n === OPEN));
+    ms.classList.toggle('on', n >= OPEN);
+    const layer = (sel, from) => { const el = root.querySelector(sel); if (!el) return;
+      el.classList.toggle('sh', from >= 0 && n >= from); el.classList.toggle('nz', !(animate && n === from)); };
+    layer('.dd-qc', QC); layer('.dd-capi', CAPI); layer('.dd-ket', KET);
+    const qcEl = root.querySelector('.dd-qc');
+    if (qcEl) { qcEl.classList.toggle('bam', n >= QC + 1); qcEl.classList.toggle('bamnz', !(animate && n === QC + 1)); }
+    const conv = n >= OPEN ? b.conv || 0 : 0;
     root.querySelectorAll('.dd-conv').forEach(c => { c.hidden = +c.dataset.c !== conv; });
     root.querySelector('.dd-name').textContent = names[conv] || names[0];
     root.querySelector('.dd-clock').textContent = clock(b.t);
@@ -272,7 +314,7 @@
       if (typing) typing.classList.remove('sh');
       scrollEnd(true);
     };
-    if (animate && typing) typingT = setTimeout(() => { typingT = null; reveal(); }, b.st && b.st.fast ? 550 : 950);
+    if (animate && typing) typingT = setTimeout(() => { typingT = null; reveal(); }, b.k === 'kh' ? 1500 : b.st && b.st.fast ? 550 : 950);
     else if (animate) { reveal(); }
     scrollEnd(animate);
     if (animate) later(120, () => scrollEnd(true));
@@ -297,13 +339,17 @@
   const plainLen = s => String(s || '').replace(/\*\*|<[^>]+>/g, '').length;
   function dwell(b, withTyping) {   // thời gian từ lúc bắt đầu hiện beat b tới lúc sang beat kế
     if (!b) return 1500;
-    const st = b.st || {}, typ = withTyping && AI_SIDE.has(b.k) ? (st.fast ? 550 : 950) : 0;
+    const st = b.st || {}, typ = withTyping ? (AI_SIDE.has(b.k) ? (st.fast ? 550 : 950) : b.k === 'kh' && st.typing ? 1500 : 0) : 0;
     const pre = (b.pre || []).length ? 500 : 0;
+    // Kịch bản có canh thời lượng (vd video 120 giây): steps ghi ddMs, các cảnh ngoài steps ghi trong demoDoc.nhip
+    if (st.ddMs) return typ + st.ddMs;
+    const nh = (dd.nhip || {})[b.k]; if (nh) return pre + typ + nh;
     const read = b.k === 'start' ? 2200 : b.k === 'cmt' || b.k === 'rep' ? 1700 : b.k === 'open' ? 2000
       : b.k === 'kh' ? Math.min(4200, 1100 + 32 * plainLen(st.kh))
       : b.k === 'ai' ? Math.min(6500, 1300 + 34 * plainLen(st.ai))
       : b.k === 'img' || b.k === 'aiImg' ? 1800 : b.k === 'aiImgs' ? 2600 : b.k === 'catalog' ? 3800
       : b.k === 'card' ? Math.min(6000, 1600 + 26 * plainLen((st.card.lines || []).join(' ') + (st.card.intro || '')))
+      : b.k === 'qc' ? 4500 : b.k === 'bamqc' ? 1800 : b.k === 'seen' ? 5000 : b.k === 'capi' ? 10000 : b.k === 'ket' ? 8000
       : 1800;
     return pre + typ + read;
   }
@@ -320,7 +366,7 @@
     if (v) {
       Music.resume();
       if (n >= beats.length - 1) { n = 0; render(false); }   // đang ở cuối: chạy lại từ đầu
-      planAuto(typingT ? 1400 : 700);
+      planAuto(typingT ? 1400 : n === 0 ? 1500 : 700);
     }
     paintAuto();
   }
@@ -342,7 +388,7 @@
     K = kb; root = el; onExit = opts.onExit || null; n = 0; auto = false;
     build(); render(false); paintAuto();
     if (musicWanted) Music.start();
-    if (autoPref) { auto = true; paintAuto(); planAuto(1200); }   // lần trước để chế độ tự chạy: mở là chạy luôn
+    if (autoPref) { auto = true; paintAuto(); planAuto(dwell(beats[0], false)); }   // lần trước để chế độ tự chạy: mở là chạy luôn
   }
   function exit() { close(); if (onExit) onExit(); }
   function close() { clearT(); auto = false; clearTimeout(autoT); autoT = null; Music.stop(); }
