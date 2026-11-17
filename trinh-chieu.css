@@ -1024,3 +1024,16 @@ body.menu-on .tb-demo { display: none; }
 .cb-stage, .scb:has(#cbDon.sh) .cb-stage, .scb:has(#cbImg.in) .cb-stage, .sas:has(#asZalo.in) .cb-stage { transform: none; transition: none; }
 /* Nút tự chạy demo dọc (17/11/2026): sáng hồng khi đang tự chạy */
 .dd-btn.dd-auto.on { background: var(--gradBtn); border-color: transparent; box-shadow: 0 10px 30px rgba(236, 72, 153, .45); }
+
+/* 17/11/2026: người dùng chia sẻ cả màn hình cho khách → nút điều khiển nhỏ, mờ, không màu nổi; rê chuột vào mới rõ */
+.dd-side { left: 36px; top: 32px; gap: 8px; opacity: .32; transition: opacity .25s; }
+.dd-side:hover, .dd-side:focus-within { opacity: .9; }
+.dd-btn { gap: 8px; padding: 6px 14px; font-size: 15px; font-weight: 600; color: rgba(255, 255, 255, .75); background: transparent; border-color: rgba(255, 255, 255, .14); }
+.dd-btn span { font-size: 15px; }
+.dd-btn:hover { background: rgba(255, 255, 255, .08); border-color: rgba(255, 255, 255, .3); }
+.dd-btn.dd-auto.on { background: transparent; border-color: rgba(255, 255, 255, .14); box-shadow: none; }
+.dd-hint { margin-top: 2px; font-size: 13px; line-height: 1.5; color: rgba(255, 255, 255, .5); }
+.dd-hint b { color: rgba(255, 255, 255, .7); }
+.tb-demo { gap: 6px; padding: 6px 14px; font-size: 16px; font-weight: 600; color: var(--dim); background: transparent; border: 1px solid var(--line); box-shadow: none; opacity: .55; transition: opacity .2s; }
+.tb-demo:hover { filter: none; opacity: 1; color: #fff; }
+.tb-demo i[data-i] { font-size: 15px; }
