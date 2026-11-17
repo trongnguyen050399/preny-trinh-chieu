@@ -93,7 +93,7 @@
 
       /* ---- 4. Chăm sóc sau bán (sau chuyến đi). Không có tin báo trước ngày khởi hành. ---- */
       { feature: 4 },
-      { sep: '— Sau chuyến đi —' },
+      { sep: '— Ngày 7/12 · sau chuyến đi —' },
       { ai: 'Anh Tuấn ơi, chuyến kỷ niệm của anh chị trên vịnh có trọn vẹn không ạ? Có gì chưa hài lòng anh cứ nhắn em nha 💜', meta: '💜 Tự động · Chăm sóc sau bán', kw: 0 },
       { kh: 'Tuyệt lắm em, vợ a thích bữa tối trên boong 👍' },
       { ai: 'Dạ vui quá ạ! Khách cũ đi lại hoặc rủ thêm người được **giảm 15%** các hành trình này ạ:', kw: 1 },

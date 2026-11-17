@@ -96,14 +96,16 @@
   /* ---------- Thời gian trong cuộc chat ---------- */
   function sepInfo(text) {
     const t = String(text).replace(/—/g, '').trim();
-    let m = t.match(/(\d+)\s*(phút|tiếng|giờ|ngày|tuần|tháng)/i);
+    // Mốc ngày cụ thể đọc trước: "— Ngày 7/12 · sau chuyến đi —" → nhảy tới đúng ngày đó, chip là phần sau dấu "·".
+    // Dùng cho tin sau một sự kiện ở tương lai (chuyến đi, trả phòng, buổi hẹn) để demo không ghi ngày trước sự kiện.
+    let m = t.match(/Ngày\s*(\d{1,2})\/(\d{1,2})/i);
+    if (m) { const c = t.split('·').slice(1).join('·').trim(); return { day: +m[1], month: +m[2], chip: c || null }; }
+    m = t.match(/(\d+)\s*(phút|tiếng|giờ|ngày|tuần|tháng)/i);
     if (m) {
       const n = +m[1], u = m[2].toLowerCase();
       const min = u === 'phút' ? n : (u === 'tiếng' || u === 'giờ') ? n * 60 : u === 'ngày' ? n * 1440 : u === 'tuần' ? n * 10080 : n * 43200;
       return { add: min, chip: t };
     }
-    m = t.match(/Ngày\s*(\d{1,2})\/(\d{1,2})/i);
-    if (m) return { day: +m[1], month: +m[2], chip: null };
     if (/sau/i.test(t)) return { add: 2 * 1440, chip: t };
     return null;
   }

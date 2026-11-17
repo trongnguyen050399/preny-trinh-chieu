@@ -95,7 +95,7 @@
 
       /* ---- 4. Chăm sóc sau bán ---- */
       { feature: 4 },
-      { sep: '— Sau chuyến đi —' },
+      { sep: '— Ngày 23/11 · sau chuyến đi —' },
       { ai: 'Chị Ngọc Anh ơi, chuyến Đà Lạt vui không ạ? Áo in DTF chị nhớ **giặt mặt trái, không ủi lên hình in** để hình bền lâu nha 💜', meta: '💜 Tự động · Chăm sóc sau bán', kw: [0, 1] },
       { kh: 'Cả lớp khen áo đẹp, chụp hình xịn lắm luôn 😍' },
       { ai: 'Dạ vui quá ạ! Shop **lưu sẵn file thiết kế** của lớp mình rồi. Cuối năm làm **áo kỷ yếu, hoodie** thì chị nhắn em, khách cũ **giảm 10%** nha 🎁', kw: 2, hold: 1500 },

@@ -78,7 +78,7 @@
       { feature: 6, kw: [0, 1, 2], hold: 3000 },
 
       { feature: 4 },
-      { sep: '— 1 ngày sau buổi làm đầu tiên —' },
+      { sep: '— Ngày 20/11 · 1 ngày sau buổi làm đầu tiên —' },
       { ai: 'Chị Linh ơi, da chị hôm nay **đỡ đỏ** chưa ạ? Chị nhớ thoa kem phục hồi như chuyên viên dặn nha 💜', meta: '💜 Tự động · Chăm sóc sau liệu trình', kw: 0 },
       { kh: 'Đỡ rồi em, mụn xẹp bớt rồi 😍' },
       { sep: '— 6 ngày sau —' },

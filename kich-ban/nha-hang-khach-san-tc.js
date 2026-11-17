@@ -94,7 +94,7 @@
 
       /* ---- 4. Chăm sóc sau bán (sau khi trả phòng), mời nhà hàng. Không có tin báo trước ngày khách đến (Preny chưa có). ---- */
       { feature: 4 },
-      { sep: '— Sau khi khách trả phòng —' },
+      { sep: '— Ngày 28/12 · sau khi khách trả phòng —' },
       { ai: 'Anh Khoa ơi, gia đình mình nghỉ ở Biển Lam có vui không ạ? Có gì chưa hài lòng anh cứ nhắn em nha 💜', meta: '💜 Tự động · Chăm sóc sau bán', kw: 0 },
       { kh: 'Vui lắm em, 2 bé mê hồ bơi luôn 👍' },
       { ai: 'Dạ vui quá ạ! Cuối năm nhà hàng bên em nhận **tiệc tất niên, tiệc gia đình**, khách cũ được **giảm 15%** ạ:', kw: 1 },
