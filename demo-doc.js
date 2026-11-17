@@ -32,52 +32,87 @@
     check: SVG('<path d="M4.5 12.5l4.5 4.5L19.5 6.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'),
   };
 
-  /* ---------- Nhạc nền nhẹ (Web Audio): pad hợp âm + nốt rải, nhịp chậm, âm lượng thấp ---------- */
-  const Music = (() => {
-    let ac = null, master = null, bus = null, timer = null, nextBar = 0, bar = 0, on = false;
-    const CH = [[48, 55, 64, 71], [45, 52, 60, 67], [41, 48, 57, 64], [43, 50, 59, 65]];   // Cmaj7 · Am7 · Fmaj7 · G7 (thấp)
-    const BAR = 3.6;   // giây mỗi ô nhịp
+  /* ---------- Nhạc nền (Web Audio): pop sáng 116 BPM, vòng C · G · Am · F ----------
+     Trống nhẹ (kick, clap, hi-hat) + bass móc đơn + giai điệu pluck lặp 2 ô nhịp + pad. Ô nhịp đầu chỉ có pad, pluck, hi-hat;
+     ô thứ 8 mỗi vòng có đoạn nối trống. Score dùng chung cho demo trực tiếp (Music) và bản quay MP4 (quay-demo-doc.py). */
+  const Score = (() => {
+    const BPM = 116, BEAT = 60 / BPM, BAR = BEAT * 4, E = BEAT / 2;
+    const CH = [[60, 64, 67], [59, 62, 67], [57, 60, 64], [57, 60, 65]];   // C · G/B · Am · F
+    const ROOT = [48, 43, 45, 41];
+    const BASS = [0, 0, 12, 0, 0, 12, 0, 7];                                 // bass mỗi móc đơn: gốc, quãng tám, quãng năm
+    const HOOK = [[2, null, 1, 2, 3, null, 2, 1], [0, 1, 2, null, 4, 3, 2, null]];   // chỉ số nốt trong hợp âm (lên quãng tám), null = nghỉ
     const hz = m => 440 * Math.pow(2, (m - 69) / 12);
-    function tone(midi, t, dur, type, vol, att) {
-      const o = ac.createOscillator(), g = ac.createGain();
-      o.type = type; o.frequency.value = hz(midi);
-      g.gain.setValueAtTime(0.0001, t);
-      g.gain.exponentialRampToValueAtTime(vol, t + att);
-      g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-      o.connect(g); g.connect(bus); o.start(t); o.stop(t + dur + 0.05);
+    function setup(ac, dest) {
+      const x = { ac, mel: ac.createGain(), pad: ac.createGain(), low: ac.createGain(), drum: ac.createGain() };
+      const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 5200;
+      const lpPad = ac.createBiquadFilter(); lpPad.type = 'lowpass'; lpPad.frequency.value = 1500;
+      const dly = ac.createDelay(1); dly.delayTime.value = BEAT * 0.75;
+      const fb = ac.createGain(); fb.gain.value = 0.25;
+      const wet = ac.createGain(); wet.gain.value = 0.3;
+      x.mel.connect(lp); lp.connect(dest); lp.connect(dly); dly.connect(fb); fb.connect(dly); dly.connect(wet); wet.connect(dest);
+      x.pad.connect(lpPad); lpPad.connect(dest); x.low.connect(dest); x.drum.connect(dest);
+      x.noise = ac.createBuffer(1, ac.sampleRate, ac.sampleRate);
+      const d = x.noise.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      return x;
     }
-    function schedule() {
-      while (nextBar < ac.currentTime + 1.5) {
-        const ch = CH[bar % CH.length], t = nextBar;
-        ch.forEach(m => tone(m, t, BAR + 1.2, 'triangle', 0.018, 0.9));            // pad
-        tone(ch[0] - 12, t, BAR, 'sine', 0.05, 0.05);                                 // bass
-        for (let i = 0; i < 6; i++) {                                                  // nốt rải
-          if (i === 3 && bar % 2) continue;
-          const m = ch[(i * 2 + bar) % 4] + 12;
-          tone(m, t + i * BAR / 6, 1.6, 'sine', 0.022, 0.015);
-        }
-        nextBar += BAR; bar++;
+    function env(g, t, vol, att, dur) {
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + att); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    }
+    function tone(x, out, m, t, dur, type, vol, att) {
+      const o = x.ac.createOscillator(), g = x.ac.createGain();
+      o.type = type; o.frequency.value = hz(m); env(g, t, vol, att, dur);
+      o.connect(g); g.connect(out); o.start(t); o.stop(t + dur + 0.05);
+    }
+    function kick(x, t, vol) {
+      const o = x.ac.createOscillator(), g = x.ac.createGain();
+      o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12);
+      env(g, t, vol, 0.004, 0.28); o.connect(g); g.connect(x.drum); o.start(t); o.stop(t + 0.32);
+    }
+    function hit(x, t, type, f, vol, dur) {
+      const s = x.ac.createBufferSource(), b = x.ac.createBiquadFilter(), g = x.ac.createGain();
+      s.buffer = x.noise; b.type = type; b.frequency.value = f; b.Q.value = 0.8;
+      env(g, t, vol, 0.002, dur); s.connect(b); b.connect(g); g.connect(x.drum);
+      s.start(t, Math.random() * 0.5, dur + 0.05);
+    }
+    function bar(x, t, n) {
+      const k = n % 4, ch = CH[k], full = n >= 1, fill = n % 8 === 7;
+      ch.forEach(m => tone(x, x.pad, m, t, BAR + 0.3, 'sawtooth', 0.016, 0.25));
+      const lead = [ch[0] + 12, ch[1] + 12, ch[2] + 12, ch[0] + 24, ch[1] + 24];
+      HOOK[n % 2].forEach((i, j) => {
+        if (i == null) return;
+        tone(x, x.mel, lead[i], t + j * E, 0.38, 'triangle', 0.075, 0.006);
+        tone(x, x.mel, lead[i] + 12, t + j * E, 0.18, 'sine', 0.02, 0.004);
+      });
+      for (let j = 0; j < 8; j++) hit(x, t + j * E, 'highpass', 7500, j % 2 ? 0.06 : 0.035, 0.045);
+      if (!full) return;
+      BASS.forEach((s, j) => tone(x, x.low, ROOT[k] + s, t + j * E, E * 0.9, 'triangle', 0.11, 0.008));
+      for (let b = 0; b < 4; b++) {
+        if (!(fill && b === 3)) kick(x, t + b * BEAT, 0.42);
+        if (b % 2) hit(x, t + b * BEAT, 'bandpass', 1700, 0.2, 0.17);
       }
+      if (fill) for (let j = 0; j < 4; j++) hit(x, t + 3 * BEAT + j * BEAT / 4, 'bandpass', 1900, 0.07 + j * 0.04, 0.1);
+    }
+    return { BAR, setup, bar };
+  })();
+  const Music = (() => {
+    let ac = null, master = null, x = null, timer = null, nextBar = 0, bar = 0, on = false;
+    function schedule() {
+      while (nextBar < ac.currentTime + 1.2) { Score.bar(x, nextBar, bar++); nextBar += Score.BAR; }
     }
     function start() {
       try {
         if (!ac) {
           ac = new (window.AudioContext || window.webkitAudioContext)();
-          master = ac.createGain(); master.gain.value = 0;
-          const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200;
-          const dly = ac.createDelay(); dly.delayTime.value = 0.34;
-          const fb = ac.createGain(); fb.gain.value = 0.28;
-          bus = ac.createGain();
-          bus.connect(lp); lp.connect(master); lp.connect(dly); dly.connect(fb); fb.connect(dly); dly.connect(master);
-          master.connect(ac.destination);
+          master = ac.createGain(); master.gain.value = 0; master.connect(ac.destination);
+          x = Score.setup(ac, master);
         }
         if (ac.state === 'suspended') ac.resume();
         if (on) return;
-        on = true; nextBar = ac.currentTime + 0.1;
+        on = true; nextBar = ac.currentTime + 0.1; bar = 0;
         master.gain.cancelScheduledValues(ac.currentTime);
         master.gain.setValueAtTime(master.gain.value, ac.currentTime);
-        master.gain.linearRampToValueAtTime(0.9, ac.currentTime + 2.5);
-        schedule(); timer = setInterval(schedule, 300);
+        master.gain.linearRampToValueAtTime(0.5, ac.currentTime + 1.2);
+        schedule(); timer = setInterval(schedule, 250);
       } catch (_) {}
     }
     function stop() {
@@ -383,7 +418,7 @@
     if (v) Music.start(); else Music.stop();
     paintMusic();
   }
-  function paintMusic() { const l = root && root.querySelector('.dd-mlbl'); if (l) l.textContent = musicWanted ? 'Nhạc nhẹ: bật' : 'Nhạc nhẹ: tắt'; }
+  function paintMusic() { const l = root && root.querySelector('.dd-mlbl'); if (l) l.textContent = musicWanted ? 'Nhạc nền: bật' : 'Nhạc nền: tắt'; }
   function open(kb, el, opts = {}) {
     K = kb; root = el; onExit = opts.onExit || null; n = 0; auto = false;
     build(); render(false); paintAuto();
@@ -393,5 +428,5 @@
   function exit() { close(); if (onExit) onExit(); }
   function close() { clearT(); auto = false; clearTimeout(autoT); autoT = null; Music.stop(); }
 
-  window.DemoDoc = { open, close, next, prev, exit, toggleAuto, get auto() { return auto; }, get step() { return n; }, get steps() { return beats.length; } };
+  window.DemoDoc = { Score, open, close, next, prev, exit, toggleAuto, get auto() { return auto; }, get step() { return n; }, get steps() { return beats.length; } };
 })();
