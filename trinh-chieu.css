@@ -1022,3 +1022,5 @@ body.menu-on .tb-demo { display: none; }
 
 /* 17/11/2026: điện thoại ở slide chatbot và after sale đứng yên một chỗ (người dùng không muốn chuyển cảnh) */
 .cb-stage, .scb:has(#cbDon.sh) .cb-stage, .scb:has(#cbImg.in) .cb-stage, .sas:has(#asZalo.in) .cb-stage { transform: none; transition: none; }
+/* Nút tự chạy demo dọc (17/11/2026): sáng hồng khi đang tự chạy */
+.dd-btn.dd-auto.on { background: var(--gradBtn); border-color: transparent; box-shadow: 0 10px 30px rgba(236, 72, 153, .45); }

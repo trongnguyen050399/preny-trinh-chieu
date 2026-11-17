@@ -221,12 +221,14 @@
 
     root.innerHTML = `<div class="dd-side">`
       + `<button class="dd-btn" data-act="exit"><span>←</span>Về slide</button>`
+      + `<button class="dd-btn dd-auto" data-act="auto"></button>`
       + `<button class="dd-btn" data-act="music"><span>♪</span><em class="dd-mlbl"></em></button>`
-      + `<div class="dd-hint">Bấm <b>→</b> hoặc nhấp vào màn hình để chạy tin<br><b>←</b> lùi · <b>Esc</b> về slide</div></div>`
+      + `<div class="dd-hint">Bấm <b>→</b> hoặc nhấp vào màn hình để chạy từng tin<br><b>Space</b> tự chạy như video · Space lần nữa để dừng<br><b>←</b> lùi · <b>Esc</b> về slide</div></div>`
       + `<div class="dd-screen">${fb}${ms}<div class="dd-badge">DEMO · DỮ LIỆU MINH HỌA</div></div>`;
     scr = root.querySelector('.dd-screen');
     root.querySelector('[data-act="exit"]').addEventListener('click', e => { e.stopPropagation(); exit(); });
     root.querySelector('[data-act="music"]').addEventListener('click', e => { e.stopPropagation(); setMusic(!musicWanted); });
+    root.querySelector('[data-act="auto"]').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.blur(); toggleAuto(); });
     scr.addEventListener('click', e => { e.stopPropagation(); next(); });
     paintMusic();
   }
@@ -274,14 +276,61 @@
     else if (animate) { reveal(); }
     scrollEnd(animate);
     if (animate) later(120, () => scrollEnd(true));
+    paintAuto();
   }
   function next() {
     Music.resume();
-    if (typingT) { clearT(); render(false); return; }   // đang hiện dở: hiện xong ngay
-    if (n < beats.length - 1) { n++; render(true); }
+    if (typingT) { clearT(); render(false); if (auto) planAuto(dwell(beats[n], false)); return; }   // đang hiện dở: hiện xong ngay
+    if (n < beats.length - 1) { n++; render(true); if (auto) planAuto(dwell(beats[n], true)); }
+    else if (auto) setAuto(false);                              // đang tự chạy mà hết: chỉ dừng
     else exit();                                                // hết demo: bấm thêm là về slide
   }
-  function prev() { if (n > 0) { n--; render(false); } }
+  function prev() { if (auto) setAuto(false); if (n > 0) { n--; render(false); } }
+
+  /* ---------- Tự chạy như video (người dùng yêu cầu 17/11/2026) ----------
+     Nút "Tự chạy" hoặc phím Space: tin tự hiện lần lượt, thời gian dừng theo độ dài tin (đủ đọc). Space lần nữa: tạm dừng, Space: chạy tiếp.
+     Bấm → / nhấp màn hình khi đang tự chạy: sang tin kế ngay, rồi tự chạy tiếp. ← : lùi và dừng. Hết demo thì dừng ở tin cuối (không tự về slide).
+     Lựa chọn tự chạy được nhớ trên máy: lần sau mở demo sẽ tự chạy luôn. */
+  const AKEY = 'preny-doc-tu-chay';
+  let auto = false, autoT = null, autoPref = false;
+  try { autoPref = localStorage.getItem(AKEY) === '1'; } catch (_) {}
+  const plainLen = s => String(s || '').replace(/\*\*|<[^>]+>/g, '').length;
+  function dwell(b, withTyping) {   // thời gian từ lúc bắt đầu hiện beat b tới lúc sang beat kế
+    if (!b) return 1500;
+    const st = b.st || {}, typ = withTyping && AI_SIDE.has(b.k) ? (st.fast ? 550 : 950) : 0;
+    const pre = (b.pre || []).length ? 500 : 0;
+    const read = b.k === 'start' ? 2200 : b.k === 'cmt' || b.k === 'rep' ? 1700 : b.k === 'open' ? 2000
+      : b.k === 'kh' ? Math.min(4200, 1100 + 32 * plainLen(st.kh))
+      : b.k === 'ai' ? Math.min(6500, 1300 + 34 * plainLen(st.ai))
+      : b.k === 'img' || b.k === 'aiImg' ? 1800 : b.k === 'aiImgs' ? 2600 : b.k === 'catalog' ? 3800
+      : b.k === 'card' ? Math.min(6000, 1600 + 26 * plainLen((st.card.lines || []).join(' ') + (st.card.intro || '')))
+      : 1800;
+    return pre + typ + read;
+  }
+  function planAuto(ms) { clearTimeout(autoT); autoT = setTimeout(tickAuto, ms); }
+  function tickAuto() {
+    autoT = null;
+    if (!auto) return;
+    if (n >= beats.length - 1) return setAuto(false);
+    n++; render(true); planAuto(dwell(beats[n], true));
+  }
+  function setAuto(v, byUser) {
+    auto = v; clearTimeout(autoT); autoT = null;
+    if (byUser) { autoPref = v; try { localStorage.setItem(AKEY, v ? '1' : '0'); } catch (_) {} }
+    if (v) {
+      Music.resume();
+      if (n >= beats.length - 1) { n = 0; render(false); }   // đang ở cuối: chạy lại từ đầu
+      planAuto(typingT ? 1400 : 700);
+    }
+    paintAuto();
+  }
+  function toggleAuto() { setAuto(!auto, true); }
+  function paintAuto() {
+    const b = root && root.querySelector('[data-act="auto"]'); if (!b) return;
+    const end = n >= beats.length - 1;
+    b.classList.toggle('on', auto);
+    b.innerHTML = auto ? '<span>⏸</span><em>Tạm dừng · Space</em>' : end ? '<span>↻</span><em>Chạy lại từ đầu · Space</em>' : '<span>▶</span><em>Tự chạy · Space</em>';
+  }
   function setMusic(v) {
     musicWanted = v;
     try { localStorage.setItem(MKEY, v ? '1' : '0'); } catch (_) {}
@@ -290,12 +339,13 @@
   }
   function paintMusic() { const l = root && root.querySelector('.dd-mlbl'); if (l) l.textContent = musicWanted ? 'Nhạc nhẹ: bật' : 'Nhạc nhẹ: tắt'; }
   function open(kb, el, opts = {}) {
-    K = kb; root = el; onExit = opts.onExit || null; n = 0;
-    build(); render(false);
+    K = kb; root = el; onExit = opts.onExit || null; n = 0; auto = false;
+    build(); render(false); paintAuto();
     if (musicWanted) Music.start();
+    if (autoPref) { auto = true; paintAuto(); planAuto(1200); }   // lần trước để chế độ tự chạy: mở là chạy luôn
   }
   function exit() { close(); if (onExit) onExit(); }
-  function close() { clearT(); Music.stop(); }
+  function close() { clearT(); auto = false; clearTimeout(autoT); autoT = null; Music.stop(); }
 
-  window.DemoDoc = { open, close, next, prev, exit, get step() { return n; }, get steps() { return beats.length; } };
+  window.DemoDoc = { open, close, next, prev, exit, toggleAuto, get auto() { return auto; }, get step() { return n; }, get steps() { return beats.length; } };
 })();

@@ -701,8 +701,9 @@
   addEventListener('keydown', e => {
     if (e.metaKey || e.ctrlKey || e.altKey || view === 'demo') return;
     const k = e.key;
-    if (view === 'doc') {   // demo chat dọc: → tin kế, ← lùi, Esc / M về slide, F toàn màn hình
-      if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter' || k === 'ArrowDown') { e.preventDefault(); window.DemoDoc.next(); }
+    if (view === 'doc') {   // demo chat dọc: → tin kế, Space tự chạy / tạm dừng, ← lùi, Esc / M về slide, F toàn màn hình
+      if (k === ' ') { e.preventDefault(); window.DemoDoc.toggleAuto(); }
+      else if (k === 'ArrowRight' || k === 'PageDown' || k === 'Enter' || k === 'ArrowDown') { e.preventDefault(); window.DemoDoc.next(); }
       else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); window.DemoDoc.prev(); }
       else if (k === 'Escape' || k === 'm' || k === 'M') { e.preventDefault(); window.DemoDoc.exit(); }
       else if (k === 'f' || k === 'F') toggleFS();
