@@ -41,9 +41,26 @@
     mail: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>',
     eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
     eyeoff: '<path d="M3 3l18 18"/><path d="M10.6 5.1A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.7 8.4 2 12 2 12s3.6 7 10 7a9.8 9.8 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/>',
+    moon: '<path d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11z"/>',
   };
   const paint = (root = document) => $$('i[data-i]', root).forEach(el => { el.innerHTML = `<svg viewBox="0 0 24 24">${ICON[el.dataset.i] || ''}</svg>`; });
   paint();
+
+  /* ---------- Giao diện sáng / tối: nút ☀/☾ trên thanh trên (cả ở trang chủ), phím T khi chiếu; nhớ trên máy ---------- */
+  const TKEY = 'preny-giao-dien', btnTheme = $('#btnTheme');
+  function paintTheme() {
+    const sang = document.documentElement.classList.contains('sang');
+    btnTheme.innerHTML = `<i data-i="${sang ? 'moon' : 'sun'}"></i>`; paint(btnTheme);
+    btnTheme.title = sang ? 'Đổi sang slide tối (phím T)' : 'Đổi sang slide sáng (phím T)';
+  }
+  function toggleTheme() {
+    const sang = document.documentElement.classList.toggle('sang');
+    try { localStorage.setItem(TKEY, sang ? 'sang' : 'toi'); } catch (_) {}
+    paintTheme();
+  }
+  btnTheme.addEventListener('click', e => { e.stopPropagation(); e.currentTarget.blur(); toggleTheme(); });
+  paintTheme();
 
   /* ---------- Logo khách hàng (slide 2) ---------- */
   const LOGOS = ['dien_linh', 'toshiko', 'aeg_auto', 'benh_vien_gia_dinh', 'nakawa', 'tan_dai_duong_education', 'winpi_baby', 'benh_vien_hung_viet', 'tavigo',
@@ -520,6 +537,16 @@
     bind(); renderPipe(); renderTags(); renderDash(); renderBot(); renderS50(); renderCapi(); renderAfter(); layoutFeats(); applyType(loai);
     typeSlides = ALL.filter(s => (!s.dataset.loai || s.dataset.loai === loai) && (!s.dataset.need || get(D, s.dataset.need) != null));
     applyHidden();
+    fitF5(); if (document.fonts) document.fonts.ready.then(fitF5);
+  }
+  // Slide tổng kết 5 ô (cân nhắc nhiều): ngành nào chữ dài quá ô (ô cao cố định, che phần thừa) thì thu nhỏ cả 5 ô cùng một cỡ tới khi vừa.
+  // Đo bằng kích thước bố cục (không dùng getBoundingClientRect) nên không lệch vì hiệu ứng trượt lên của [data-f].
+  function fitF5() {
+    const s = $('#vDeck .s11c'); if (!s) return;
+    const cols = $$('.f5', s);
+    const over = () => cols.some(c => { const u = $('ul', c), h = $('.f5h', c); return u && u.scrollHeight > c.clientHeight - (h ? h.offsetHeight : 0) + 16; });
+    let fs = 24; s.style.setProperty('--f5fs', fs + 'px');
+    while (fs > 17 && over()) s.style.setProperty('--f5fs', --fs + 'px');
   }
 
   /* ---------- Ẩn slide trong phiên này ----------
@@ -732,6 +759,7 @@
     if (panelOpen()) { if (k === 'Escape' || k === 's' || k === 'S') { e.preventDefault(); closePanel(); } return; }
     if (k === 's' || k === 'S') return openPanel();
     if (k === 'f' || k === 'F') return toggleFS();
+    if (k === 't' || k === 'T') return toggleTheme();
     if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'Enter' || k === 'ArrowDown') { e.preventDefault(); next(); }
     else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); prev(); }
     else if (/^[1-9]$/.test(k) && +k <= N) goSlide(+k - 1, 0);

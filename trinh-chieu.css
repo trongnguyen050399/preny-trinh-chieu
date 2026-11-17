@@ -573,7 +573,7 @@ body.demo-on .progress span::before { inset: -16px -3.5px; }
 .tp-g .tg { font-size: 16px; padding: 6px 12px; }
 
 /* ============ SLIDE 11 (cân nhắc nhiều): dùng chung khung 5 ô ============ */
-.s11c .f5 li { font-size: 24px; }
+.s11c .f5 li { font-size: var(--f5fs, 24px); }   /* --f5fs: trinh-chieu.js fitF5() thu nhỏ khi chữ dài quá ô */
 
 /* --- chỉnh sau khi xem ảnh chụp --- */
 .pcard h3 { font-size: 23px; min-height: 2.4em; }
@@ -1097,3 +1097,125 @@ body.menu-on .tb-demo { display: none; }
 .dd-ket li i { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-style: normal; font-size: 13px; font-weight: 800; background: linear-gradient(135deg, #EC4899, #A855F7); }
 .dd-kweb { font-size: 26px; font-weight: 800; background: linear-gradient(100deg, #F9A8D4, #D8B4FE, #A5B4FC); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .dd-capi { justify-content: center; padding: 40px 30px 90px; }
+
+/* ============ GIAO DIỆN SÁNG (17/11/2026) ============
+   Nút ☀/☾ trên thanh trên (phím T), nhớ trên máy (localStorage "preny-giao-dien"). Class "sang" đặt ở <html>.
+   Nền trắng ngà ánh tím hồng, thẻ trắng đổ bóng tím nhạt, chữ tím than. Màn hình điện thoại, bảng Preny (nền trắng sẵn) giữ nguyên.
+   Demo chat dọc (#vDoc) vẫn nền đen kiểu quay màn hình. */
+.tb-theme { width: 40px; height: 40px; opacity: .5; transition: opacity .2s, color .2s, border-color .2s; }
+.tb-theme i { font-size: 19px; }
+.tb-theme:hover { opacity: 1; }
+
+html.sang {
+  --bg0: #FBFAFF; --txt: #1E1538; --mut: #4F4772; --dim: #7D769C;
+  --card: rgba(255, 255, 255, .86); --line: rgba(91, 33, 182, .13);
+  --grad: linear-gradient(100deg, #DB2777 0%, #9333EA 48%, #4F46E5 100%);
+  --sh: 0 18px 44px rgba(76, 29, 149, .10), 0 2px 6px rgba(76, 29, 149, .05);
+}
+html.sang, html.sang body { background: #ECE8F6; }
+html.sang:fullscreen, html.sang ::backdrop { background: #ECE8F6; }
+
+/* nền */
+html.sang .bg { background:
+    radial-gradient(1100px 760px at 8% 4%, rgba(221, 214, 254, .75), transparent 62%),
+    radial-gradient(1000px 700px at 96% 98%, rgba(252, 231, 243, .95), transparent 60%),
+    radial-gradient(900px 600px at 80% 2%, rgba(224, 231, 255, .8), transparent 60%),
+    linear-gradient(160deg, #FFFFFF 0%, #F9F7FF 55%, #FFF9FC 100%); }
+html.sang .bg::after { background-image: radial-gradient(rgba(91, 33, 182, .10) 1.3px, transparent 1.3px); }
+html.sang .blob { opacity: .2; }
+html.sang .blob.b1 { background: #C4B5FD; } html.sang .blob.b2 { background: #F9A8D4; opacity: .22; } html.sang .blob.b3 { background: #A5B4FC; opacity: .18; }
+
+/* logo trắng → logo màu (logo trong quả cầu tím giữ trắng) */
+html.sang .tlogo, html.sang .thx-logo { content: url(assets/img/logo-preny.svg); }
+
+/* thanh trên, tiến độ, nút */
+html.sang .progress span { background: rgba(91, 33, 182, .14); }
+html.sang .progress span.done { background: rgba(147, 51, 234, .42); }
+html.sang .progress span:not(.on):hover { background: rgba(91, 33, 182, .38); }
+html.sang .progress span::after { color: var(--txt); background: #fff; box-shadow: var(--sh); }
+html.sang .tb-btn:hover, html.sang .hp-x:hover { color: #9D174D; }
+html.sang .tb-btn.has { color: #BE185D; background: rgba(236, 72, 153, .1); }
+html.sang .tb-demo:hover { color: var(--txt); }
+
+/* chữ, thẻ kính */
+html.sang .glass { background: rgba(255, 255, 255, .86); border-color: rgba(91, 33, 182, .10); box-shadow: var(--sh); }
+html.sang .eyebrow { color: #6D28D9; border-color: rgba(147, 51, 234, .25); background: rgba(168, 85, 247, .08); }
+html.sang .eyebrow i, html.sang .banner i, html.sang .chips i, html.sang .thx-c i, html.sang .tg-end i { color: #C026D3; }
+html.sang .lead b, html.sang .tg-lead b, html.sang .tg-ch b, html.sang .s50-p b, html.sang .f5h b { color: var(--txt); }
+html.sang .banner { background: linear-gradient(120deg, rgba(236, 72, 153, .10), rgba(124, 58, 237, .10) 50%, rgba(99, 102, 241, .10));
+  border-color: rgba(147, 51, 234, .22); box-shadow: 0 18px 50px rgba(168, 85, 247, .16); }
+html.sang .banner b, html.sang .feat span, html.sang .act b, html.sang .sale small, html.sang .bd-stat span b, html.sang .tg-end b,
+html.sang .sbd .cmp li b, html.sang .cp-arr span { color: #DB2777; }
+html.sang .i2o b, html.sang .chips span, html.sang .m-keys b, html.sang .bd-stat small b, html.sang .as-ch { color: #6D28D9; }
+html.sang .m-keys b { background: rgba(91, 33, 182, .07); }
+html.sang .gn { color: rgba(91, 33, 182, .22); }
+
+/* nút, ô có nền gradient: chữ trắng */
+html.sang .cta, html.sang .gi, html.sang .kpi .ki, html.sang .feat em, html.sang .cb.me, html.sang .sale .sa, html.sang .cbi,
+html.sang .core, html.sang .hub-core, html.sang .as-ai, html.sang .nc, html.sang .pl-box em { color: #fff; }
+html.sang .cta { box-shadow: 0 16px 44px rgba(168, 85, 247, .35); }
+
+/* menu chọn ngành */
+html.sang .m-search i { color: #9333EA; }
+html.sang .m-search input { color: var(--txt); }
+html.sang .toggle .sw { background: rgba(91, 33, 182, .16); }
+html.sang .mc .mi { background: linear-gradient(140deg, rgba(236, 72, 153, .14), rgba(99, 102, 241, .14)); border-color: rgba(147, 51, 234, .16); }
+html.sang .mc:hover, html.sang .mc.sel { border-color: rgba(219, 39, 119, .45); box-shadow: 0 0 0 1px rgba(219, 39, 119, .25), 0 22px 50px rgba(236, 72, 153, .16); }
+html.sang .mc .mg.cnn { color: #BE185D; }
+html.sang .mc .mg:hover, html.sang .mc .direct:hover { color: #9D174D; background: rgba(236, 72, 153, .1); }
+html.sang .mc .direct { background: rgba(255, 255, 255, .7); }
+html.sang .m-filters button.on, html.sang .m-filters button.on b { color: #fff; }
+html.sang .m-list { scrollbar-color: rgba(147, 51, 234, .3) transparent; }
+
+/* slide mở đầu, quy trình, thống kê */
+html.sang .cb.bot { background: rgba(91, 33, 182, .07); color: var(--txt); }
+html.sang .lt { box-shadow: 0 10px 28px rgba(76, 29, 149, .10); border: 1px solid rgba(91, 33, 182, .08); }
+html.sang .lt.more { border-color: rgba(91, 33, 182, .25); }
+html.sang .track { background: rgba(91, 33, 182, .10); }
+html.sang .track .fill { box-shadow: 0 0 14px rgba(236, 72, 153, .45); }
+html.sang .nc { border-color: rgba(255, 255, 255, .8); box-shadow: 0 0 0 10px rgba(168, 85, 247, .10), 0 16px 34px rgba(124, 58, 237, .30); }
+html.sang .mini span { background: rgba(255, 255, 255, .8); }
+html.sang .mini .ok, html.sang .own .o-hu, html.sang .hp-s { color: #047857; background: rgba(16, 185, 129, .10); border-color: rgba(16, 185, 129, .35); }
+html.sang .mini .ev { color: #1D4ED8; background: rgba(59, 130, 246, .10); border-color: rgba(59, 130, 246, .35); }
+html.sang .mini .ck i, html.sang .dk em, html.sang .cmp.good h4 { color: #059669; }
+html.sang .mini .day, html.sang .own .o-ai, html.sang .pl-ai { color: #BE185D; background: rgba(236, 72, 153, .09); border-color: rgba(236, 72, 153, .32); }
+html.sang .cmp.bad h4 { color: #DC2626; }
+html.sang .cmp li::before { color: #9333EA; }
+html.sang .rbg { stroke: rgba(91, 33, 182, .09); }
+html.sang .halo, html.sang .hub-ring { border-color: rgba(147, 51, 234, .38); }
+html.sang .core { box-shadow: 0 0 70px rgba(168, 85, 247, .45), inset 0 0 40px rgba(255, 255, 255, .18); }
+html.sang .feat.now { border-color: rgba(219, 39, 119, .5); box-shadow: 0 0 0 1px rgba(219, 39, 119, .3), 0 22px 54px rgba(236, 72, 153, .18); }
+html.sang .act { background: rgba(168, 85, 247, .08); border-color: rgba(147, 51, 234, .25); }
+html.sang .dk, html.sang .d-chart, html.sang .d-side { background: rgba(255, 255, 255, .7); }
+html.sang .hb i { background: rgba(91, 33, 182, .08); }
+html.sang .role p span { background: rgba(91, 33, 182, .05); }
+html.sang .ri { background: linear-gradient(140deg, rgba(236, 72, 153, .14), rgba(99, 102, 241, .14)); }
+html.sang .as-ai { box-shadow: 0 0 50px rgba(168, 85, 247, .4); }
+
+/* 5 tính năng, pipeline, bám đuổi */
+html.sang .f5 { background: linear-gradient(180deg, rgba(var(--c), .14), rgba(var(--c), .05) 55%, rgba(255, 255, 255, .9)); box-shadow: var(--sh); }
+html.sang .f5 li { color: var(--mut); }
+html.sang .f5.now { box-shadow: 0 0 0 2px rgba(var(--c), .8), 0 0 44px rgba(var(--c), .25), var(--sh); }
+html.sang .f5a span { background: linear-gradient(90deg, rgba(91, 33, 182, .2), #C026D3); }
+html.sang .pcard { background: linear-gradient(180deg, rgba(var(--c), .12), rgba(255, 255, 255, .92) 60%); box-shadow: var(--sh); }
+html.sang .pcard.now { box-shadow: 0 0 0 2px rgba(var(--c), .8), 0 0 40px rgba(var(--c), .25), var(--sh); }
+html.sang .pcard.chot { box-shadow: 0 0 0 1px rgba(234, 179, 8, .45), 0 0 40px rgba(250, 204, 21, .22), var(--sh); }
+html.sang .pcard.ai .pown { color: #BE185D; } html.sang .pcard.hu .pown { color: #047857; } html.sang .pcard.dn .pown { color: #475569; }
+html.sang .pm { box-shadow: 0 0 0 1px rgba(91, 33, 182, .08); }
+html.sang .parr::before { background: rgba(91, 33, 182, .3); }
+html.sang .parr::after { border-color: rgba(91, 33, 182, .45); }
+html.sang .tg-end { background: linear-gradient(120deg, rgba(236, 72, 153, .09), rgba(99, 102, 241, .09)); border-color: rgba(147, 51, 234, .22); }
+
+/* bảng trắng (điện thoại, Preny, Tạo đơn, CAPI): bóng nhẹ trên nền sáng */
+html.sang .mphone { box-shadow: 0 34px 70px rgba(46, 16, 101, .22), 0 0 0 2px rgba(91, 33, 182, .06); }
+html.sang .fbpost, html.sang .odp, html.sang .cp-card, html.sang .pw, html.sang .s50-tab, html.sang .tg-inbox, html.sang .tg-prof {
+  box-shadow: 0 28px 64px rgba(46, 16, 101, .14), 0 0 0 1px rgba(91, 33, 182, .07); }
+
+/* bảng ẩn slide */
+html.sang .hp { background: rgba(255, 255, 255, .97); }
+html.sang .hp-row:hover { background: rgba(91, 33, 182, .05); }
+html.sang .hp-row.off .hp-s { color: var(--dim); background: rgba(91, 33, 182, .04); border-color: var(--line); }
+
+/* Hàng công cụ trang chủ: nút lọc và nhãn công tắc không xuống dòng (trước đây chữ bị bẻ 2 dòng trong nút cao 56px) */
+.m-search { width: 520px; flex: none; }
+.m-filters button, .m-tools .toggle { white-space: nowrap; flex: none; }

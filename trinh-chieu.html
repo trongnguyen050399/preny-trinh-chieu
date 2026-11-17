@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Preny AI · Trình chiếu</title>
+<!-- giao diện sáng / tối đã chọn trên máy này: đặt trước khi vẽ trang để không chớp nền tối -->
+<script>try { if (localStorage.getItem('preny-giao-dien') === 'sang') document.documentElement.classList.add('sang'); } catch (e) {}</script>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="trinh-chieu.css?v=202611171340">
+<link rel="stylesheet" href="trinh-chieu.css?v=202611171345">
 </head>
 <body>
 <!-- Trang trình chiếu: menu chọn ngành → 6 slide mở đầu → demo AI chat (index.html nhúng bên dưới).
@@ -16,7 +18,7 @@
 
   <div class="topbar">
     <img class="tlogo" src="assets/img/logo-white.png" alt="Preny">
-    <div class="tright"><span id="kbName"></span><button id="btnDemo" class="tb-demo" title="Mở demo chat bất cứ lúc nào (phím D)"><i data-i="chat"></i>Demo chat</button><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button></div>
+    <div class="tright"><span id="kbName"></span><button id="btnDemo" class="tb-demo" title="Mở demo chat bất cứ lúc nào (phím D)"><i data-i="chat"></i>Demo chat</button><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button><button id="btnTheme" class="tb-btn tb-theme" title="Đổi slide sáng / tối (phím T)"><i data-i="sun"></i></button></div>
   </div>
 
   <!-- ============ MENU ============ -->
@@ -465,10 +467,10 @@
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
 
 <!-- Mã phiên bản ?v=…: đổi mỗi lần đẩy lên mạng (preny-demo/doi-phien-ban.sh) để trình duyệt không dùng file cũ trong bộ nhớ đệm -->
-<script>window.PRENY_V = '202611171340';</script>
-<script src="kich-ban/danh-sach.js?v=202611171340"></script>
-<script src="assets/offline.js?v=202611171340"></script>
-<script src="demo-doc.js?v=202611171340"></script>
-<script src="trinh-chieu.js?v=202611171340"></script>
+<script>window.PRENY_V = '202611171345';</script>
+<script src="kich-ban/danh-sach.js?v=202611171345"></script>
+<script src="assets/offline.js?v=202611171345"></script>
+<script src="demo-doc.js?v=202611171345"></script>
+<script src="trinh-chieu.js?v=202611171345"></script>
 </body>
 </html>
