@@ -61,6 +61,9 @@ body.menu-on .progress, body.menu-on #counter { display: none; }
 /* ---------- Khung chung ---------- */
 .view { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .5s, visibility 0s .5s; }
 .view.on { opacity: 1; visibility: visible; transition: opacity .5s; }
+/* View đang ẩn không được nhận chuột. Slide đang chiếu (.slide.on) có visibility: visible riêng nên vẫn "hiện" dù view cha đã ẩn:
+   về trang chủ xong, slide trong suốt đó nằm đè lên menu, ăn mất cú bấm (nhảy vào slide) và cuộn chuột. */
+.view:not(.on), .view:not(.on) * { pointer-events: none !important; }
 .slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .55s, visibility 0s .55s; }
 .slide.on { opacity: 1; visibility: visible; transition: opacity .55s; }
 .eyebrow { display: inline-flex; gap: 12px; align-items: center; padding: 10px 22px; border-radius: 999px;

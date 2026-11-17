@@ -78,6 +78,13 @@
     const c = $$('.mc', grid)[sel]; if (c) c.scrollIntoView({ block: 'nearest' });
   }
   filtersEl.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; filter = b.dataset.k; sel = 0; renderFilters(); renderMenu(); });
+  // Cuộn chuột ở bất cứ đâu trên trang chủ (tiêu đề, ô tìm, khoảng trống) cũng kéo danh sách ngành
+  const mList = $('#mList');
+  $('#vMenu').addEventListener('wheel', e => {
+    if (mList.contains(e.target)) return;   // trên danh sách: để trình duyệt tự cuộn
+    e.preventDefault();
+    mList.scrollTop += e.deltaMode === 1 ? e.deltaY * 40 : e.deltaY;
+  }, { passive: false });
   search.addEventListener('input', () => { sel = 0; renderMenu(); });
   // Bấm chuột: tính theo chỗ NHẤN xuống. Nhấn trên nút "Vào thẳng chat" mà nhả chuột lệch ra ngoài nút vẫn vào thẳng chat.
   let downDirect = false;
