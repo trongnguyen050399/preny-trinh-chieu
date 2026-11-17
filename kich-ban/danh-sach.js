@@ -33,6 +33,7 @@ window.DANH_SACH = [
   { kb: 'tuyen-dung-tc', ten: 'Tuyển dụng nhân sự', loai: 'cnn', icon: '🧑‍💼' },
   { kb: 'phong-kham-tc', ten: 'Y tế, phòng khám', loai: 'cnn', icon: '🏥' },
   { kb: 'nha-khoa-tc', ten: 'Nha khoa', loai: 'cnn', icon: '🦷' },
+  { kb: 'ielts-giao-tiep-tc', ten: 'Khóa học IELTS & Giao tiếp', loai: 'cnn', icon: '🎓' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
