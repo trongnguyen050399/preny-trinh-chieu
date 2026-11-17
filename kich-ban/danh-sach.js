@@ -15,6 +15,7 @@ window.DANH_SACH = [
   { kb: 'duoc-pham-tc', ten: 'Dược phẩm', loai: 'tmdt', icon: '💊' },
   { kb: 'nha-hang-khach-san-tc', ten: 'Nhà hàng, khách sạn', loai: 'tmdt', icon: '🏨' },
   { kb: 'du-lich-tc', ten: 'Du lịch, du thuyền', loai: 'tmdt', icon: '🛳️' },
+  { kb: 'may-nong-nghiep-tc', ten: 'Máy nông nghiệp', loai: 'tmdt', icon: '🚜' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️' },
