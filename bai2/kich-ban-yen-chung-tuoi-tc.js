@@ -1,8 +1,9 @@
 /* Bài 2 (video demo ngang tự chạy): YẾN CHƯNG TƯƠI, nhóm thương mại điện tử. Làm 18/11/2026 theo mạch YaMe người dùng chốt cùng ngày:
    - 1 cảnh duy nhất: bài quảng cáo, 2 khách bình luận (hỏi giá, hỏi để được mấy ngày) → trả lời cả 2 "Mình check ib shop nha"
-     → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi 1 điều (dùng hay biếu, có kiêng đường không) → khách im
-     → gắn thẻ (3 hashtag quảng cáo + #baogia) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách quay lại: biếu mẹ bị tiểu đường
-     → AI chọn bản không đường, không hứa chữa bệnh, hỏi vị → xin SĐT + địa chỉ (ca khó: thiếu số nhà) → tóm tắt đơn → Purchase lên Facebook
+     → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi 1 điều (dùng hay biếu, có kiêng đường không) → khách trả lời: biếu mẹ bị tiểu đường
+     → AI chọn bản không đường, không hứa chữa bệnh, hỏi vị → khách chọn → AI xin SĐT + địa chỉ → khách im (sửa theo YaMe 18/11/2026)
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + vị khách chọn) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT + địa chỉ
+     (ca khó: thiếu số nhà) → tóm tắt đơn → Purchase lên Facebook
      → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 sản phẩm giảm giá → Zalo: hỏi thăm, bán chạy, khuyến mãi → tổng kết → logo.
    - Chỉ 1 sản phẩm từ đầu tới cuối (set 6 hũ yến chưng tươi), không có đoạn khách hỏi sản phẩm khác.
    Tham khảo fanpage Yến Tươi Công Hậu (Thủ Đức). Tên shop, giá, khách, SĐT, địa chỉ: minh họa. Ảnh: Unsplash dùng chung với bài 1. */
@@ -42,38 +43,39 @@ window.VN_KB = {
     { k: 'ai', img: 'hu-yen' },
     { k: 'ai', text: 'Chị mua dùng hay biếu ạ, người dùng có cần kiêng đường không để em chọn đúng bản nha?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: 'Biếu mẹ bị tiểu đường → bản không đường', s: 'Không hứa chữa bệnh, dặn hỏi bác sĩ' },
+    { k: 'kh', text: 'c mua biếu mẹ, mẹ c bị tiểu đường e' },
+    { k: 'ai', text: 'Dạ vậy chị lấy **bản không đường**, dùng đường cỏ ngọt ạ, cùng giá **330.000đ**. Yến là thực phẩm, không phải thuốc, chị hỏi bác sĩ lượng dùng cho mẹ giúp em nha.' },
+    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Có bản rồi: AI hỏi tiếp vị yến', s: 'Gửi ảnh để khách chọn nhanh' },
+    { k: 'ai', text: 'Bản không đường có 2 vị **nguyên chất** và **táo đỏ, kỷ tử** ạ. Chị lấy vị nào ạ?' },
+    { k: 'ai', imgs: ['chen-yen-2', 'tao-do'] },
+    { k: 'kh', text: 'Táo đỏ kỷ tử nha e' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ em ghi **set 6 hũ không đường, vị táo đỏ kỷ tử**, 330.000đ. Chị gửi em **SĐT và địa chỉ** người nhận để em lên đơn nha.' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng sản phẩm khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
-    { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 900 },
+    { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng set yến khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng set yến khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Chị Thảo ơi, mẻ yến chưng sáng nay còn ít set lắm ạ. Chị báo em người dùng để em giữ đúng bản cho chị nha 😊' },
+    { k: 'ai', text: 'Chị Thảo ơi, em giữ cho chị **set không đường vị táo đỏ kỷ tử** mẻ sáng nay rồi ạ. Chị gửi em SĐT, địa chỉ để em giao kịp cho mẹ nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
     { k: 'ai', text: 'Em gửi chị ảnh thật mẻ yến bên em chưng sáng nay nha 📸 Yến tinh chế, chưng cách thủy, đóng hũ trong ngày.' },
     { k: 'ai', imgs: ['yen-tinh-che', 'tho-chung', 'chen-yen'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Set yến **330.000đ** vẫn còn ạ. Chốt hôm nay em **tặng hộp quà + thiệp**, giao nội thành trong ngày nha ⚡' },
+    { k: 'ai', text: 'Chị chỉ cần gửi **SĐT và địa chỉ** người nhận là em lên đơn liền, tặng **hộp quà + thiệp**, giao nội thành trong ngày ạ ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'AI tư vấn ngay khi khách nhắn' },
-    { k: 'kh', text: 'c mua biếu mẹ, mẹ c bị tiểu đường e' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: '0906284351, đường số 9 linh xuân thủ đức' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Tư vấn đúng người dùng', t: 'Người tiểu đường → bản không đường', s: 'Không hứa chữa bệnh, dặn hỏi bác sĩ' },
-    { k: 'ai', text: 'Dạ vậy chị lấy **bản không đường**, dùng đường cỏ ngọt ạ, cùng giá **330.000đ**. Yến là thực phẩm, không phải thuốc, chị hỏi bác sĩ lượng dùng cho mẹ giúp em nha.' },
-    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Có bản rồi: AI hỏi tiếp vị yến', s: 'Gửi ảnh để khách chọn nhanh' },
-    { k: 'ai', text: 'Bản không đường có 2 vị **nguyên chất** và **táo đỏ, kỷ tử** ạ. Chị lấy vị nào ạ?' },
-    { k: 'ai', imgs: ['chen-yen-2', 'tao-do'] },
-    { k: 'kh', text: 'Táo đỏ kỷ tử nha e' },
-    { k: 'ai', text: 'Dạ em ghi **set 6 hũ không đường, vị táo đỏ kỷ tử**, 330.000đ. Chị gửi em **SĐT và địa chỉ** người nhận nha.' },
     { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Thiếu số nhà → hỏi lại ngay lập tức' },
-    { k: 'kh', text: '0906284351, đường số 9 linh xuân thủ đức' },
     { k: 'ai', text: 'Dạ em ghi SĐT rồi ạ. Địa chỉ **đường số 9** chị cho em xin thêm **số nhà** để shipper giao đúng nha.' },
     { k: 'kh', text: '56 nha e, người nhận tên Hoa' },
     { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: sản phẩm, vị, SĐT, địa chỉ' },
@@ -145,11 +147,11 @@ window.VN_KB = {
   panels: {
     tag: { av: 'MT', ten: 'Trần Minh Thảo', sub: 'Messenger · bình luận quảng cáo Yến chưng tươi',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#yenchungtuoi', 'qt hot'], ['#quabieu', 'qt hot'], ['#khongduong', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #yenchungtuoi', tieuDe: '3 tin ngắn về set yến chưng tươi',
-              dong: [['15 phút', 'Nhắc mẻ sáng nay còn ít set'], ['3 tiếng', 'Gửi ảnh thật mẻ yến'], ['20 tiếng', 'Nhắc giá, tặng hộp quà']] },
-      reply: 'Khách trả lời "c mua biếu mẹ" · dừng bám đuổi' },
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#TaoDoKyTu', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #yenchungtuoi', tieuDe: '3 tin ngắn về set yến khách đã chọn',
+              dong: [['15 phút', 'Đã giữ set không đường cho khách'], ['3 tiếng', 'Gửi ảnh thật mẻ yến'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '330.000đ', pk: 'Purchase · 330.000đ',
       dong: [['Đơn hàng', '#AK19118 · Set 6 hũ không đường'], ['Nguồn khách', 'Bình luận quảng cáo Yến chưng tươi → Messenger'], ['Giá trị', '330.000 VND'], ['Event ID', 'AK19118-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
