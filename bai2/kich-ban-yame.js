@@ -2,13 +2,11 @@
    Bố cục người dùng chọn: chú thích nhỏ bên trái, điện thoại cao full màn hình ở giữa, màn hình phụ bật ra bên phải điện thoại.
    Mạch:
    - Mở đầu: logo Preny "AGENTIC AI SALES" như video mẫu (bỏ đoạn chữ chạy 5–12 giây).
-   - Cảnh 1: bài viết Facebook, khách hỏi giá ở bình luận, khách thứ hai hỏi tư vấn size → AI trả lời cả 2
-     → AI nhắn inbox trước: báo giá, gửi ảnh thật, hỏi size → khách trả lời → xin SĐT, địa chỉ → khách đưa đủ → lên đơn.
-   - Cảnh 2 (sửa lần 2, 18/11/2026): bài quảng cáo, khách bấm "Gửi tin nhắn" → khách nhắn trước hỏi giá → AI gửi đúng ảnh trên
-     quảng cáo kèm giá → khách im sau khi AI xin chiều cao cân nặng (sửa 18/11/2026: bỏ đoạn khách chụp mẫu khác hỏi
-     "Này thì sao", chỉ 1 mẫu áo thun NEVER SLEEPS từ đầu tới cuối)
+   - Sửa 18/11/2026 (người dùng): bỏ tình huống 1 (bài viết Parka 048). Chỉ còn 1 cảnh: ngay dưới bài quảng cáo có 2 bình luận
+     (hỏi giá, hỏi size) → trả lời cả 2 "Mình check ib shop nha" → AI nhắn inbox trước. Thẩm mỹ viện thì ngược lại (khách nhắn trước).
+   - Sau đó: AI báo giá, gửi đúng ảnh trên quảng cáo, xin chiều cao cân nặng → khách im (chỉ 1 mẫu áo thun NEVER SLEEPS)
      → màn hình phụ gắn thẻ, bám đuổi theo thẻ → chốt đơn → màn hình phụ gửi sự kiện mua hàng lên Facebook → đơn tự động
-     → tin cảm ơn kèm carousel 5 mẫu đang giảm giá → chuyển sang Zalo: chăm sóc sau bán, hỏi dùng ổn không, khách chấm 5 sao → logo kết.
+     → tin cảm ơn kèm carousel 5 mẫu đang giảm giá → chuyển sang Zalo: hỏi dùng ổn không, tin bán chạy, tin khuyến mãi → tổng kết → logo kết.
    Sản phẩm, giá, ảnh: lấy thật trên yame.vn (18/11/2026). Tên khách, SĐT, địa chỉ: minh họa (theo video mẫu).
    Thời lượng mỗi bước tự tính theo độ dài tin; muốn chỉnh nhịp thì thêm d: <ms> (thời gian giữ sau khi hiện) vào bước đó. */
 window.VN_KB = {
@@ -17,45 +15,22 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '21:14' },
-    { k: 'fb', post: {
-        gio: '2 giờ', img: 'p048-a', likes: '1,2K', soCmt: '86 bình luận',
-        text: 'Nắng không lọt, gió không cản ☀️ Áo khoác chống nắng Parka Anti-UV™ UPF 50+, tay xỏ ngón che mu bàn tay khi chạy xe. Giá chỉ còn 299K!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi tư vấn size ở bình luận kế bên' },
-    { k: 'cmt', i: 0, ten: 'Ngọc Hân', av: 'NH', text: 'Giá sao shop ơi?' },
-    { k: 'cmt', i: 1, ten: 'Minh Khoa', av: 'MK', text: '1m75 68kg mặc size gì vừa shop, tư vấn giúp mình với' },
-    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
-    { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
-    { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'p048-a', dong1: 'Bạn đã bình luận về bài viết của YaMe', dong2: '"Giá sao shop ơi?"' }, gio: '21:16' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào chị Hân, áo khoác chống nắng Parka 048 giá **299.000đ** ạ (giá gốc 497.000đ).' },
-    { k: 'ai', card: { title: 'Áo Khoác Thun Chống Nắng Parka Anti-UV™ UPF 50+ Tay Xỏ Ngón - Non Branded 048', gia: '299.000đ', cu: '497.000đ' } },
-    { k: 'ai', imgs: ['p048-be', 'p048-0', 'p048-e'] },
-    { k: 'ai', text: 'Áo có 4 màu **Be, Xám, Đen, Xanh Lá Đậm**, chống tia UV, có xỏ ngón che tay khi chạy xe. Chị mặc size gì để em check hàng nha?' },
-    { k: 'cap', e: 'Tư vấn size', t: 'Khách trả lời 1 câu, AI chọn đúng size', s: 'Kiểm tra luôn màu khách chọn còn hàng' },
-    { k: 'kh', text: 'c hay mặc S, cao 1m58 nặng 48kg. lấy màu be nha e' },
-    { k: 'ai', text: 'Dạ 1m58, 48kg chị mặc **size S** vừa đẹp ạ, Be size S còn hàng. Chị gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0916 284 517, 25 ngõ 102 Trường Chinh, Đống Đa, HN' },
-    { k: 'ai', text: 'Dạ em lên đơn cho chị rồi nha:\n– Áo khoác chống nắng Parka 048, Be, size S\n– **299.000đ**\n– 0916 284 517\n– 25 ngõ 102 Trường Chinh, Đống Đa, HN\nShop gọi chị xác nhận rồi giao liền ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER =================
-       Sửa 18/11/2026 theo người dùng: khách nhắn trước hỏi giá; AI gửi đúng ảnh trên bài quảng cáo kèm giá; khách chụp mẫu khác
-       hỏi "Này thì sao" (đã bỏ 18/11/2026, chỉ 1 mẫu); rồi như cũ. Mua xong: tin cảm ơn kèm 5 mẫu đang giảm giá; chăm sóc sau bán qua Zalo (hỏi dùng ổn không, xin đánh giá). */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất từ 18/11/2026) =================
+       Khách hỏi giá dưới quảng cáo → AI nhắn trước, gửi đúng ảnh quảng cáo kèm giá → khách im → bám đuổi → chốt đơn → đơn tự động
+       → tin cảm ơn kèm 5 mẫu đang giảm giá → Zalo sau bán. Chỉ 1 mẫu áo thun NEVER SLEEPS từ đầu tới cuối. */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'p207-model', nhan: 'MESSENGER', tieuDe: 'Streetwear F4 · Nhắn shop tư vấn size', nut: 'Gửi tin nhắn',
         text: 'NEVER SLEEPS 🌙 Áo thun vải lưới AirDry™ 240gsm thoát nhiệt siêu thoáng, phom rộng F4. Mặc đi chơi cuối tuần mát cả ngày. #neversleep #aothun #mobile',
       }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'p207-model', dong1: 'Thanh đã trả lời một quảng cáo', dong2: 'Streetwear F4 · NEVER SLEEPS' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Áo này giá bao nhiêu shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng mẫu trên quảng cáo kèm giá', s: 'Khách không cần mô tả lại sản phẩm' },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi tư vấn size ở bình luận kế bên' },
+    { k: 'cmt', i: 0, ten: 'Nguyễn Thanh', av: 'NT', text: 'Áo này giá bao nhiêu shop?' },
+    { k: 'cmt', i: 1, ten: 'Quốc Bảo', av: 'QB', text: '1m75 68kg mặc size gì vừa shop, tư vấn giúp mình với' },
+    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
+    { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
+    { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'p207-model', dong1: 'Bạn đã bình luận về quảng cáo của YaMe', dong2: '"Áo này giá bao nhiêu shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại sản phẩm' },
     { k: 'ai', text: 'Dạ chào anh Thanh, áo **NEVER SLEEPS** trên quảng cáo giá **263.150đ** ạ (giá gốc 277.000đ), đủ size S đến XXL.' },
     { k: 'ai', img: 'p207-model' },
     { k: 'ai', text: 'Anh cho em xin chiều cao, cân nặng để em tư vấn size nha.' },
@@ -161,7 +136,7 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'NT', ten: 'Nguyễn Văn Thanh', sub: 'Messenger · từ quảng cáo NEVER SLEEPS',
+    tag: { av: 'NT', ten: 'Nguyễn Văn Thanh', sub: 'Messenger · bình luận quảng cáo NEVER SLEEPS',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#neversleep', 'qt hot'], ['#aothun', 'qt hot'], ['#mobile', 'ng']]],
              ['Thẻ từ cuộc chat', [['#baogia', 'ht']]]],
       im: 'Khách im từ 14:49, sau khi được báo giá',
@@ -169,7 +144,7 @@ window.VN_KB = {
               dong: [['15 phút', 'Nhắc size M, L còn ít'], ['3 tiếng', 'Gửi ảnh mặc thật'], ['20 tiếng', 'Nhắc giá, giữ size']] },
       reply: 'Khách trả lời "M69 60kg e" · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '263.150đ', pk: 'Purchase · 263.150đ',
-      dong: [['Đơn hàng', '#YM18112 · The No Style 207 · M'], ['Nguồn khách', 'Quảng cáo Streetwear F4 → Messenger'], ['Giá trị', '263.150 VND'], ['Event ID', 'YM18112-PURCHASE (chống trùng)']],
+      dong: [['Đơn hàng', '#YM18112 · The No Style 207 · M'], ['Nguồn khách', 'Bình luận quảng cáo Streetwear F4 → Messenger'], ['Giá trị', '263.150 VND'], ['Event ID', 'YM18112-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {

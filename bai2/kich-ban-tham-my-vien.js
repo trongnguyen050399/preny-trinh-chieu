@@ -3,8 +3,8 @@
    thông báo cho nhân viên sale vào gọi và chăm sóc ngay. Không có lên đơn tự động, vẫn có soft follow-up nuôi khách cách nhau
    15 phút, 30 phút, 20 tiếng (không gian thẩm mỹ viện, feedback, chứng chỉ…), vẫn có sự kiện gửi thông tin Lead lên Facebook."
    Sửa 18/11/2026: bỏ cảnh bình luận → inbox (video YaMe vẫn giữ), bỏ đoạn khách hỏi dịch vụ khác: chỉ 1 dịch vụ trị nám từ đầu tới cuối.
-   Sửa tiếp 18/11/2026: ngay trên bài quảng cáo có 2 bình luận, trả lời cả 2 "Mình check ib nha", rồi AI nhắn inbox trước.
-   Mạch: logo → quảng cáo → 2 bình luận → AI trả lời cả 2 → AI nhắn trước: giá + đúng ảnh quảng cáo → hỏi tình trạng nám → mời soi da miễn phí, xin tên + SĐT
+   Chốt 18/11/2026 (người dùng): thẩm mỹ viện KHÔNG có bình luận; khách bấm "Gửi tin nhắn" trên quảng cáo và nhắn trước. YaMe thì ngược lại.
+   Mạch: logo → quảng cáo → khách hỏi giá → AI gửi đúng ảnh quảng cáo + giá → hỏi tình trạng nám → mời soi da miễn phí, xin tên + SĐT
    → khách im → gắn thẻ + bám đuổi 5 tin
    → khách hẹn soi da → xin SĐT → báo Sale gọi ngay → gửi Lead lên Facebook → logo.
    AI không chẩn đoán, không hứa kết quả khi chưa soi da. Không có tin nhắc lịch trước buổi hẹn (Preny chưa có tính năng này).
@@ -30,21 +30,18 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (sửa 18/11/2026: chỉ 1 cảnh, 1 dịch vụ trị nám từ đầu tới cuối) ================= */
-    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
+    /* ================= QUẢNG CÁO → MESSENGER (sửa 18/11/2026: bỏ cảnh bình luận, chỉ 1 dịch vụ trị nám từ đầu tới cuối) ================= */
+    { k: 'canh', nhan: 'Khách từ quảng cáo → Messenger', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'tri-nam', nhan: 'MESSENGER', tieuDe: 'Trị nám Pico · Soi da miễn phí', nut: 'Gửi tin nhắn',
         text: 'Nám, sạm, tàn nhang lâu năm? ✨ Trị nám công nghệ Pico tại Thẩm Mỹ Viện Lam Khuê, bác sĩ da liễu soi da miễn phí trước khi làm. #trinam #pico #soidamienphi',
       }, d: 1500 },
-    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Khách khác hỏi "làm có hết hẳn không"' },
-    { k: 'cmt', i: 0, ten: 'Lan Anh', av: 'LA', text: 'Trị nám giá bao nhiêu vậy shop?' },
-    { k: 'cmt', i: 1, ten: 'Minh Thư', av: 'MT', text: 'Nám lâu năm làm có hết hẳn không ạ?' },
-    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Không tư vấn công khai dưới quảng cáo' },
-    { k: 'rep', i: 0, text: 'Mình check ib nha 💬' },
-    { k: 'rep', i: 1, text: 'Mình check ib nha 💬' },
-    { k: 'ms', ref: { loai: 'cmt', img: 'tri-nam', dong1: 'Bạn đã bình luận về quảng cáo của Thẩm Mỹ Viện Lam Khuê', dong2: '"Trị nám giá bao nhiêu vậy shop?"' }, gio: '14:47' },
-    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: giá tham khảo, đúng ảnh quảng cáo', s: 'Khách chưa cần nhắn gì' },
-    { k: 'ai', text: 'Dạ chào chị Lan Anh, trị nám Pico bên em giá **từ 1.500.000đ/buổi** ạ, số buổi tùy tình trạng da.' },
+    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
+    { k: 'tap', d: 1100 },
+    { k: 'ms', ref: { loai: 'ad', img: 'tri-nam', dong1: 'Lan Anh đã trả lời một quảng cáo', dong2: 'Trị nám Pico · Soi da miễn phí' }, gio: '14:47', d: 900 },
+    { k: 'kh', text: 'Trị nám giá bao nhiêu vậy em?' },
+    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng ảnh trên quảng cáo kèm giá', s: 'Giá tham khảo, nói rõ cần soi da' },
+    { k: 'ai', text: 'Dạ chào chị Lan Anh, trị nám Pico giá **từ 1.500.000đ/buổi** ạ, số buổi tùy tình trạng da.' },
     { k: 'ai', img: 'tri-nam' },
     { k: 'cap', e: 'Hỏi đúng tình trạng', t: 'Hỏi nám bao lâu, nám mảng hay chân sâu', s: 'Giá chính xác cần bác sĩ soi da' },
     { k: 'ai', text: 'Chị bị nám lâu chưa, nám mảng hay chân sâu ạ? Bác sĩ soi da rồi mới báo chính xác được.' },
@@ -134,7 +131,7 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo'] },
   ] },
   panels: {
-    tag: { av: 'LA', ten: 'Trần Lan Anh', sub: 'Messenger · bình luận quảng cáo Trị nám Pico',
+    tag: { av: 'LA', ten: 'Trần Lan Anh', sub: 'Messenger · từ quảng cáo Trị nám Pico',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#trinam', 'qt hot'], ['#pico', 'qt hot'], ['#soidamienphi', 'ng']]],
              ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#NamMang', 'qt']]]],
       im: 'Khách im từ 14:49, chưa để lại SĐT',
@@ -142,12 +139,12 @@ window.VN_KB = {
               dong: [['15 phút', 'Ảnh không gian thẩm mỹ viện'], ['1 ngày', 'Feedback khách trị nám'], ['1 ngày', 'Bác sĩ, giấy phép, máy chính hãng'],
                      ['1 ngày', 'Quy trình: soi da trước, không ép làm'], ['2 ngày', 'Mời giữ suất soi da miễn phí']] },
       reply: 'Khách giữ suất soi da thứ Bảy · dừng bám đuổi' },
-    sale: { nguon: 'Bình luận quảng cáo Trị nám Pico → Messenger', ten: 'Trần Lan Anh', sdt: '0938 274 615',
+    sale: { nguon: 'Quảng cáo Trị nám Pico → Messenger', ten: 'Trần Lan Anh', sdt: '0938 274 615',
       nhuCau: 'Nám mảng 2 bên má hơn 2 năm, bôi kem không đỡ', lich: 'Soi da miễn phí · 9:00 Thứ Bảy 28/11',
       the: [['#trinam', 'qt'], ['#NamMang', 'qt'], ['Đã cho SĐT', 'ok']],
       sale: { av: 'HM', ten: 'Sale Hồng Mai', sub: 'Đang trực · nhận khách tự động' }, ok: 'Sale Hồng Mai đã nhận khách, gọi tư vấn ngay' },
     capi: { tieuDe: 'Gửi khách tiềm năng cho Facebook', event: 'Lead', nhan: 'SỰ KIỆN KHÁCH TIỀM NĂNG', giaTri: 'Có SĐT', pk: 'Lead · khách để lại SĐT',
-      dong: [['Khách', 'Trần Lan Anh · đã để lại SĐT'], ['Nguồn khách', 'Bình luận quảng cáo Trị nám Pico → Messenger'], ['Nhu cầu', 'Soi da, trị nám'], ['Event ID', 'LK1911-LEAD (chống trùng)']],
+      dong: [['Khách', 'Trần Lan Anh · đã để lại SĐT'], ['Nguồn khách', 'Quảng cáo Trị nám Pico → Messenger'], ['Nhu cầu', 'Soi da, trị nám'], ['Event ID', 'LK1911-LEAD (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện Lead', khong: 'Không gửi Purchase khi khách chưa làm dịch vụ.' },
   },
 };
