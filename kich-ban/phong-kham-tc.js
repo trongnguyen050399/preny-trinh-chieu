@@ -273,7 +273,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng gói khám, không chẩn đoán bừa', 'Xử lý băn khoăn: sợ đau, chi phí, BHYT', 'Lấy SĐT, đặt lịch khám']],
-        ['SOFT FOLLOW‑UP', ['Gửi bác sĩ, quy trình nội soi, phòng khám thật', 'Nuôi khách để phòng khám nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: bác sĩ, quy trình nội soi, phòng khám thật', 'Nuôi khách để phòng khám nằm đầu danh sách']],
         ['KHÁM TẠI CHỖ', ['Điều dưỡng xác nhận lịch', 'Bác sĩ khám, chỉ định điều trị']],
         ['TÁI KHÁM', ['Nhắc tái khám theo chỉ định, mời khám định kỳ qua FB và Zalo']],
       ],

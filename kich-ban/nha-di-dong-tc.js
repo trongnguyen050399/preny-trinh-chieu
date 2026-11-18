@@ -269,7 +269,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn mẫu nhà, số căn theo đất', 'Xử lý băn khoăn: pháp lý, phát sinh', 'Lấy SĐT khách']],
-        ['SOFT FOLLOW‑UP', ['Gửi video công trình đã bàn giao, bản bố trí, ưu đãi', 'Nuôi khách để công ty nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video công trình đã bàn giao, bản bố trí, ưu đãi', 'Nuôi khách để công ty nằm đầu danh sách']],
         ['KHẢO SÁT', ['Hẹn khảo sát đất, xem khu mẫu', 'Sale chốt hợp đồng thi công']],
         ['MUA LẠI', ['Mời khách cũ làm thêm căn, giới thiệu khách qua FB và Zalo']],
       ],

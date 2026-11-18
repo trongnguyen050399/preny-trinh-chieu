@@ -266,7 +266,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng khóa, lịch học', 'Xử lý băn khoăn: học phí, học bù', 'Lấy SĐT học viên']],
-        ['SOFT FOLLOW‑UP', ['Gửi video lớp học, thành phẩm học viên, lịch khai giảng', 'Nuôi học viên để trung tâm nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video lớp học, thành phẩm học viên, lịch khai giảng', 'Nuôi học viên để trung tâm nằm đầu danh sách']],
         ['HỌC THỬ', ['Hẹn học thử, tham quan lớp', 'Tư vấn viên chốt học phí']],
         ['MUA LẠI', ['Mời học viên cũ học khóa nâng cao qua FB và Zalo']],
       ],

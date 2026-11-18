@@ -273,7 +273,7 @@
       chotLai: [
         ['ỨNG VIÊN', ['Data thô', 'Hội chợ việc làm', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng vị trí, lương, chỗ ở', 'Xử lý băn khoăn: phí, kinh nghiệm', 'Lấy SĐT, hẹn phỏng vấn']],
-        ['SOFT FOLLOW‑UP', ['Gửi video nhà máy, ký túc xá, đợt tuyển mới', 'Nuôi ứng viên để công ty nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video nhà máy, ký túc xá, đợt tuyển mới', 'Nuôi ứng viên để công ty nằm đầu danh sách']],
         ['PHỎNG VẤN', ['HR xác nhận lịch, xe đón', 'Phỏng vấn tại nhà máy, ký hợp đồng']],
         ['GIỚI THIỆU', ['Mời ứng viên cũ giới thiệu bạn bè, gửi đợt tuyển mới qua FB và Zalo']],
       ],

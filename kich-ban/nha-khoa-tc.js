@@ -275,7 +275,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng dịch vụ, không báo giá bừa', 'Xử lý băn khoăn: sợ đau, giá, thời gian', 'Lấy SĐT, mời khám, cạo vôi miễn phí']],
-        ['SOFT FOLLOW‑UP', ['Gửi bác sĩ, ca điều trị, phòng khám thật', 'Nuôi khách để nha khoa nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: bác sĩ, ca điều trị, phòng khám thật', 'Nuôi khách để nha khoa nằm đầu danh sách']],
         ['KHÁM TẠI CHỖ', ['Khám, chụp phim, cạo vôi miễn phí', 'Bác sĩ chốt kế hoạch điều trị']],
         ['MUA LẠI', ['Mời khách cũ cạo vôi định kỳ, làm thêm dịch vụ qua FB và Zalo']],
       ],

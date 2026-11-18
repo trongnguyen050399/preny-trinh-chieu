@@ -334,7 +334,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Hỏi mục tiêu, hạn thi, trình độ', 'Không hứa bừa điểm đầu ra', 'Lấy SĐT, mời làm bài test miễn phí']],
-        ['SOFT FOLLOW‑UP', ['Gửi lộ trình, lớp học, học viên thật', 'Nuôi khách để trung tâm nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: lộ trình, lớp học, học viên thật', 'Nuôi khách để trung tâm nằm đầu danh sách']],
         ['TEST & CHỐT', ['Test đầu vào online hoặc tại trung tâm', 'Tư vấn lộ trình, tư vấn viên chốt đăng ký']],
         ['MUA LẠI', ['Mời học viên cũ học khóa tiếp, giới thiệu bạn qua FB và Zalo']],
       ],

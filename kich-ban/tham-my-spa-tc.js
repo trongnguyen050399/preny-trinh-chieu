@@ -324,7 +324,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn khách', 'Kêu gọi khách tới dùng thử dịch vụ', 'Lấy số điện thoại nếu khách chưa có']],
-        ['SOFT FOLLOW‑UP', ['Gửi tin nhắn giới thiệu dịch vụ, before–after, giải thích quy trình', 'Nuôi khách để spa nằm đầu danh sách khi khách quyết định']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: giới thiệu dịch vụ, before–after, giải thích quy trình', 'Nuôi khách để spa nằm đầu danh sách khi khách quyết định']],
         ['CHỐT LỊCH HẸN', ['Chốt lịch hẹn đến spa thử dịch vụ', 'Spa chốt đơn']],
         ['MUA LẠI', ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo']],
       ],

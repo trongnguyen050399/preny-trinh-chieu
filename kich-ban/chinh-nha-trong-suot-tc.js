@@ -334,7 +334,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Hỏi chuyên môn, số ca đã làm', 'Không hứa bừa kết quả điều trị', 'Lấy SĐT Zalo, mời học thử miễn phí']],
-        ['SOFT FOLLOW‑UP', ['Gửi đúng ca bác sĩ vướng, bài học thử', 'Nuôi khách để học viện nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: đúng ca bác sĩ vướng, bài học thử', 'Nuôi khách để học viện nằm đầu danh sách']],
         ['HỌC THỬ & CHỐT', ['Học thử 3 bài, Q&A với giảng viên', 'Tư vấn gói học, tư vấn viên chốt đăng ký']],
         ['MUA LẠI', ['Mời bác sĩ học khóa nâng cao, giới thiệu đồng nghiệp qua FB và Zalo']],
       ],
