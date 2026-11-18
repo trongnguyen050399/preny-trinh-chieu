@@ -1,16 +1,17 @@
-/* Kịch bản video demo NGANG 16:9: ĐÈN TRANG TRÍ NỘI THẤT (nhóm thương mại điện tử), làm 18/11/2026 theo mẫu YaMe (kich-ban-yame.js).
-   Nội dung lấy từ bài 1 (demo/kich-ban/den-trang-tri-tc.js):
-   - Cảnh 1 lấy deck.binhLuan: đèn tường ngoài trời mẫu mới 450.000đ (giá gốc 520.000đ), chống nước IP65, anh Long treo 2 bên cổng.
-   - Cảnh 2 lấy deck.demoDoc (kịch bản 120 giây người dùng gửi, fanpage Nội Thất Ánh Sáng Test): quảng cáo đèn Wabi-Sabi bộ 3
-     1.399.000đ → anh Nam hỏi giá → AI báo giá trước, hỏi chỗ lắp → trần thạch cao: không tự cam kết lắp được, hỏi điểm chờ điện
-     → gửi ảnh tổng thể, lắp thực tế, chi tiết chóa vải + thông số → khách lấy 1 bộ → xin SĐT, địa chỉ → bám đuổi đúng 3 mốc
-     15 phút, 3 tiếng, 20 tiếng (3 tiếng gửi ảnh đèn lắp trên bàn ăn) → tổng COD 1.499.000đ (đã gồm phí giao 100.000đ)
-     → khách xác nhận → lên đơn → gửi sự kiện Lead (KHÔNG gửi Purchase khi đơn COD chưa giao, chưa thanh toán, đúng kịch bản 120 giây).
-   Ghép vào mạch YaMe: khách hỏi giá → AI gửi đúng ảnh quảng cáo → khách chụp đèn chóa xếp ly "Này thì sao" (690.000đ/chiếc,
-   deck.chatbot.anh) → khách im → gắn thẻ, bám đuổi 3 tin → khách quay lại hỏi trần thạch cao → chọn bộ Wabi-Sabi → chốt COD
-   → Lead lên Facebook → đơn tự động → cảm ơn + 5 mẫu giảm giá → Zalo: hỏi thăm, bán chạy, hàng mới cho khách cũ.
-   Tên fanpage, giá, khách, SĐT, địa chỉ, phí giao: dữ liệu demo của bài 1. Tự đặt thêm: khách cảnh 1 (Phạm Long: SĐT, địa chỉ),
-   giá giảm 10% trong carousel cho khách vừa mua. Ảnh: ảnh Unsplash có sẵn trong máy của bài 1. */
+/* Bài 2 (video demo ngang tự chạy): ĐÈN TRANG TRÍ NỘI THẤT, nhóm thương mại điện tử.
+   Viết lại 18/11/2026 theo mạch mới người dùng chốt (file mẫu kich-ban-yen-chung-tuoi-tc.js), nội dung theo kịch bản 120 giây
+   người dùng gửi (bài 1 demo/kich-ban/den-trang-tri-tc.js, fanpage Nội Thất Ánh Sáng Test, đèn Wabi-Sabi bộ 3):
+   - 1 cảnh duy nhất: quảng cáo đèn Wabi-Sabi bộ 3 1.399.000đ, 2 khách bình luận (hỏi giá, hỏi ship Bình Dương)
+     → trả lời cả 2 "Mình check ib shop nha" → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi lắp phòng khách hay bàn ăn
+     → anh Nam: lắp bàn ăn, trần thạch cao (ca khó) → AI không tự cam kết lắp được, hỏi điểm chờ điện → gửi ảnh tổng thể,
+       lắp thực tế, chi tiết chóa vải + thông số → khách lấy 1 bộ → AI xin SĐT, địa chỉ → khách im
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + #LapBanAn) → bám đuổi đúng 3 mốc 15 phút, 3 tiếng, 20 tiếng
+       (3 tiếng gửi ảnh đèn lắp trên bàn ăn) → khách gửi SĐT, địa chỉ (ca khó: SĐT dư 1 số) → tổng COD 1.499.000đ
+       (đã gồm phí giao 100.000đ) → gửi sự kiện Lead (KHÔNG gửi Purchase khi đơn COD chưa giao, chưa thanh toán, đúng kịch bản 120 giây)
+     → đơn tự động, nhân viên xác nhận → cảm ơn + 5 mẫu giảm giá → Zalo: hỏi thăm, bán chạy, hàng mới cho khách cũ.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (đèn Wabi-Sabi bộ 3), không có đoạn khách hỏi sản phẩm khác.
+   Tên fanpage, giá, khách, SĐT, địa chỉ, phí giao: dữ liệu demo của bài 1. Giá giảm 10% trong carousel: tự đặt.
+   Ảnh: ảnh Unsplash có sẵn trong máy của bài 1. */
 window.VN_KB = {
   ten: 'Đèn trang trí nội thất video ngang',
   ketSub: 'Để AI bán đèn trang trí cho shop của bạn',
@@ -30,90 +31,62 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '20:05' },
-    { k: 'fb', post: {
-        gio: '5 giờ', img: 'den-tuong', likes: '980', soCmt: '63 bình luận',
-        text: 'Đèn tường ngoài trời mẫu mới 💡 Ánh sáng ấm, chống nước IP65, treo cổng hay tường rào đều đẹp. Giao tận nhà, thanh toán COD!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi đèn có chịu mưa không' },
-    { k: 'cmt', i: 0, ten: 'Phạm Long', av: 'PL', text: 'Giá sao shop ơi?' },
-    { k: 'cmt', i: 1, ten: 'Thu Hà', av: 'TH', text: 'Treo ngoài cổng mưa tạt có sao không shop, tư vấn giúp mình với' },
-    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
-    { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
-    { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'den-tuong', dong1: 'Bạn đã bình luận về bài viết của Nội Thất Ánh Sáng Test', dong2: '"Giá sao shop ơi?"' }, gio: '20:07' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào anh Long, đèn tường ngoài trời mẫu mới giá **450.000đ/chiếc** ạ (giá gốc 520.000đ).' },
-    { k: 'ai', card: { title: 'Đèn tường ngoài trời chống nước IP65 · Ánh sáng ấm, treo cổng, tường rào', gia: '450.000đ', cu: '520.000đ' } },
-    { k: 'ai', img: 'den-tuong' },
-    { k: 'ai', text: 'Đèn chuẩn **IP65**, mưa tạt không sao ạ. Anh treo **ngoài cổng hay tường rào** để em tư vấn số đèn nha?' },
-    { k: 'cap', e: 'Tư vấn số đèn', t: 'Khách trả lời 1 câu, AI chọn đúng số đèn', s: 'Treo 2 bên cổng: lấy 2 chiếc cho cân đối' },
-    { k: 'kh', text: 'Anh treo 2 bên cổng em' },
-    { k: 'ai', text: 'Dạ 2 bên cổng anh lấy **2 chiếc** là cân đối ạ, tổng **900.000đ**. Anh gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0908 152 637, 62 Lê Văn Việt, Tăng Nhơn Phú, Thủ Đức' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh rồi nha:\n– 2 đèn tường ngoài trời IP65\n– **900.000đ**, thanh toán khi nhận hàng\n– 0908 152 637\n– 62 Lê Văn Việt, Tăng Nhơn Phú, Thủ Đức\nShop gọi anh xác nhận rồi giao liền ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER (kịch bản 120 giây: đèn Wabi-Sabi bộ 3, COD) ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'bo-3', nhan: 'MESSENGER', tieuDe: 'Đèn Wabi-Sabi bộ 3 · 1.399.000đ', nut: 'Gửi tin nhắn',
         text: 'ĐÈN THẢ WABI-SABI BỘ 3 – phong cách nội thất tối giản 💡 Ánh sáng dịu cho góc bàn ăn. Giao tận nhà, thanh toán khi nhận hàng. #wabisabi #denthabo3 #mobile',
       }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'bo-3', dong1: 'Nam đã trả lời một quảng cáo', dong2: 'Đèn thả Wabi-Sabi bộ 3' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Em ơi, bộ đèn này giá bao nhiêu?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng mẫu trên quảng cáo kèm giá', s: 'Báo giá trước, rồi mới hỏi chỗ lắp' },
-    { k: 'ai', text: 'Dạ chào anh Nam, bộ **Wabi-Sabi 3 chóa vải** trên quảng cáo giá **1.399.000đ** anh nhé!' },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi có ship tỉnh không' },
+    { k: 'cmt', i: 0, ten: 'Nguyễn Nam', av: 'NN', text: 'Em ơi, bộ đèn này giá bao nhiêu?' },
+    { k: 'cmt', i: 1, ten: 'Thu Hà', av: 'TH', text: 'Ship Bình Dương được không shop?' },
+    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
+    { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
+    { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'bo-3', dong1: 'Bạn đã bình luận về quảng cáo của Nội Thất Ánh Sáng Test', dong2: '"Em ơi, bộ đèn này giá bao nhiêu?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Báo giá trước, rồi mới hỏi chỗ lắp' },
+    { k: 'ai', text: 'Dạ chào anh Nam, bộ **Wabi-Sabi 3 chóa vải** giá **1.399.000đ** anh nhé!' },
     { k: 'ai', img: 'bo-3' },
     { k: 'ai', text: 'Anh định lắp ở **phòng khách hay bàn ăn** ạ?' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp mẫu khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên mẫu' },
-    { k: 'kh', shot: { img: 'chao-xep-ly', cap: 'Đèn thả chóa vải xếp ly ✨ Ánh sáng dịu, treo bàn ăn dài cực xinh' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng mẫu. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là **đèn thả chóa vải xếp ly** màu trắng ạ, giá **690.000đ/chiếc**, còn hàng anh nha.' },
-    { k: 'ai', card: { title: 'Đèn thả chóa vải xếp ly màu trắng · Treo 2–3 chiếc cho bàn ăn dài', gia: '690.000đ' } },
-    { k: 'ai', img: 'chao-xep-ly' },
-    { k: 'ai', text: 'Anh cho em biết chỗ lắp để em tư vấn cả 2 mẫu nha.' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi đúng 3 mốc của kịch bản 120 giây
+    { k: 'cap', e: 'Khách trả lời', t: 'Lắp bàn ăn, hỏi trần thạch cao', s: 'Không tự hứa lắp được khi chưa kiểm tra' },
+    { k: 'kh', text: 'Anh lắp bàn ăn. Trần thạch cao có lắp được không em?' },
+    { k: 'ai', text: 'Dạ có thể lắp nếu có phương án cố định phù hợp anh nhé. Anh có sẵn **điểm chờ điện** chưa ạ?' },
+    { k: 'kh', text: 'Có rồi em.' },
+    { k: 'cap', e: 'Gửi ảnh, thông số', t: 'Tổng thể, lắp thực tế, chi tiết chóa vải', s: 'Rồi hỏi khách lấy luôn không' },
+    { k: 'ai', text: 'Dạ em gửi anh thêm hình và thông số bộ đèn nhé!' },
+    { k: 'ai', imgs: ['bo-3', 'ban-an', 'chi-tiet'] },
+    { k: 'ai', checks: { tieuDe: 'Thông số bộ Wabi-Sabi', dong: ['Chóa vải **Ø30 × 40cm**', 'Dây treo **1,2m**, chỉnh được', 'Đui đèn **E27 × 3**', 'Bộ gồm **3 chóa**'] }, d: 2800 },
+    { k: 'ai', text: 'Anh muốn lấy **một bộ** này luôn không ạ?' },
+    { k: 'kh', text: 'Ừ em, lấy anh một bộ.' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Khách đồng ý: AI xin SĐT, địa chỉ liền' },
+    { k: 'ai', text: 'Dạ em ghi **1 bộ Wabi-Sabi** lắp bàn ăn, 1.399.000đ. Anh cho em xin **SĐT và địa chỉ** nhận hàng nhé?' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi đúng 3 mốc
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng mẫu khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng mẫu đèn khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng bộ đèn khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Nam ơi, bộ đèn **Wabi-Sabi** anh hỏi vẫn còn hàng ạ. Anh lắp phòng khách hay bàn ăn để em tư vấn nha 😊' },
+    { k: 'ai', text: 'Anh Nam ơi, em đang **giữ 1 bộ Wabi-Sabi** anh vừa chọn ạ. Anh gửi em SĐT, địa chỉ để em lên đơn nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
     { k: 'ai', text: 'Em gửi anh thêm hình đèn lắp trên bàn ăn để mình dễ hình dung nhé 📸' },
-    { k: 'ai', img: 'ban-an-2' },
+    { k: 'ai', imgs: ['ban-an-2', 'ban-an'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Bộ **Wabi-Sabi** giao tận nhà, **thanh toán khi nhận hàng** ạ. Anh nhắn em chỗ lắp là em tư vấn liền nha ⚡' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ** nhận hàng là em lên đơn liền, giao tận nhà, **thanh toán khi nhận hàng** ạ ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'Có ca khó: trần thạch cao' },
-    { k: 'kh', text: 'Anh lắp bàn ăn. Trần thạch cao có lắp được không em?' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: 'Nguyễn Nam, 0900 000 2866.\nGiao 125 Nguyễn Thị Thập, Quận 7, TP.HCM nha em.' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Không cam kết bừa', t: 'Trần thạch cao: hỏi điểm chờ điện trước', s: 'Không tự hứa lắp được khi chưa kiểm tra' },
-    { k: 'ai', text: 'Dạ có thể lắp nếu có phương án cố định phù hợp anh nhé. Anh có sẵn **điểm chờ điện** chưa ạ?' },
-    { k: 'kh', text: 'Có rồi em.' },
-    { k: 'cap', e: 'Tư vấn mẫu', t: 'Gửi ảnh, thông số rồi hỏi khách chọn mẫu', s: 'Tổng thể, lắp thực tế, chi tiết chóa vải' },
-    { k: 'ai', text: 'Dạ em gửi anh thêm hình và thông số bộ đèn nhé!' },
-    { k: 'ai', imgs: ['bo-3', 'ban-an', 'chi-tiet'] },
-    { k: 'ai', checks: { tieuDe: 'Thông số bộ Wabi-Sabi', dong: ['Chóa vải **Ø30 × 40cm**', 'Dây treo **1,2m**, chỉnh được', 'Đui đèn **E27 × 3**', 'Bộ gồm **3 chóa**'] }, d: 2800 },
-    { k: 'ai', text: 'Anh lấy bộ **Wabi-Sabi** hay đèn **chóa xếp ly** để em lên đơn nha?' },
-    { k: 'kh', text: 'Ừ em, lấy anh một bộ Wabi-Sabi.' },
-    { k: 'cap', e: 'Xin thông tin ngay', t: 'Khách đồng ý là xin SĐT, địa chỉ liền' },
-    { k: 'ai', text: 'Dạ anh cho em xin **SĐT và địa chỉ** nhận hàng nhé?' },
-    { k: 'kh', text: 'Anh Nguyễn Nam, SĐT 0900 000 286.\nGiao 125 Nguyễn Thị Thập, Quận 7, TP.HCM nha em.' },
+    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'SĐT dư 1 số → hỏi lại ngay lập tức' },
+    { k: 'ai', text: 'Dạ em ghi địa chỉ rồi ạ. SĐT anh gửi có **11 số**, anh xem lại giúp em để shipper gọi được nha.' },
+    { k: 'kh', text: '0900 000 286 em, gõ dư 1 số.' },
     { k: 'cap', e: 'Chốt đơn COD', t: 'Báo tổng COD đã gồm phí giao, chờ xác nhận', s: 'Tự tổng hợp: mẫu, số lượng, SĐT, địa chỉ' },
     { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Đèn Wabi-Sabi bộ 3 chóa vải, 1 bộ\n– Phí giao: 100.000đ\n– Tổng COD: **1.499.000đ**\n– Nguyễn Nam · 0900 000 286\n– 125 Nguyễn Thị Thập, Quận 7, TP.HCM\nAnh xác nhận em lên đơn nhé?', nut: 'Quản lý đơn hàng', d: 3600 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok em"' },
@@ -135,7 +108,7 @@ window.VN_KB = {
 
     // Mua xong: tin cảm ơn kèm 5 mẫu đang giảm giá (deck.afterSale.sp của bài 1)
     { k: 'cap', e: 'Bán thêm sau mua', t: 'Cảm ơn khách, gửi kèm 5 mẫu đang giảm giá', s: 'Khách bấm "Mua ngay" ngay trong Messenger' },
-    { k: 'ai', text: 'Dạ cảm ơn anh Nam nha 🎉 Đơn đã được xác nhận, shop giao sớm cho anh. Nhà lắp đèn bàn ăn hay chọn thêm mấy mẫu này cho đồng bộ, đang giảm giá ạ:' },
+    { k: 'ai', text: 'Dạ cảm ơn anh Nam nha 💡 Đơn đã được xác nhận, shop giao sớm cho anh. Nhà lắp đèn bàn ăn hay chọn thêm mấy mẫu này cho đồng bộ, đang giảm giá ạ:' },
     { k: 'car', sp: [
         { img: 'den-dung', ten: 'Đèn cây đứng chóa vải', gia: '1.071.000đ', cu: '1.190.000đ', giam: '-10%' },
         { img: 'chao-xep-ly', ten: 'Đèn thả chóa xếp ly', gia: '621.000đ', cu: '690.000đ', giam: '-10%' },
@@ -172,23 +145,23 @@ window.VN_KB = {
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: giống hệt YaMe
+  // Slide tổng kết cuối video (theo slide "Chốt lại 5 ô" nhóm thương mại điện tử; bám đuổi = 5 tin trong 7 ngày)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
     { ten: 'Bám đuổi', icon: 'bell', dong: ['Gửi 5 tin nhắn trong 7 ngày để bám đuổi khách hàng'] },
-    { ten: 'Chốt đơn', icon: 'check', dong: ['Lên đơn', 'Gửi sự kiện mua hàng lên Facebook'] },
+    { ten: 'Chốt đơn', icon: 'check', dong: ['Lên đơn', 'Gửi sự kiện khách tiềm năng (Lead) lên Facebook'] },
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'NN', ten: 'Nguyễn Nam', sub: 'Messenger · từ quảng cáo đèn Wabi-Sabi bộ 3',
+    tag: { av: 'NN', ten: 'Nguyễn Nam', sub: 'Messenger · bình luận quảng cáo đèn Wabi-Sabi bộ 3',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#wabisabi', 'qt hot'], ['#denthabo3', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#DenXepLy', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #wabisabi', tieuDe: '3 tin ngắn về đèn Wabi-Sabi bộ 3',
-              dong: [['15 phút', 'Nhắc bộ đèn còn hàng'], ['3 tiếng', 'Gửi ảnh đèn lắp bàn ăn'], ['20 tiếng', 'Nhắc giao tận nhà, COD']] },
-      reply: 'Khách trả lời "Anh lắp bàn ăn…" · dừng bám đuổi' },
-    // Kịch bản 120 giây: đơn COD chưa giao thì chỉ gửi Lead, không gửi Purchase
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#LapBanAn', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #wabisabi', tieuDe: '3 tin ngắn về bộ đèn khách đã chọn',
+              dong: [['15 phút', 'Đã giữ 1 bộ Wabi-Sabi cho khách'], ['3 tiếng', 'Gửi ảnh thật đèn lắp bàn ăn'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
+    // Kịch bản 120 giây: đơn COD chưa giao thì chỉ gửi Lead, không gửi Purchase (giữ nguyên như bản trước)
     capi: { tieuDe: 'Gửi khách tiềm năng cho Facebook', event: 'Lead', nhan: 'SỰ KIỆN KHÁCH TIỀM NĂNG', giaTri: 'Đơn COD', pk: 'Lead · khách xác nhận đơn COD',
       dong: [['Event ID', 'LIGHTING-COD-LEAD-001'], ['Nguồn khách', 'Facebook Ads → Messenger'], ['SĐT', 'Đã thu thập trong Preny'], ['Trạng thái', 'Khách đã xác nhận đơn COD']],
       ok: 'Facebook đã nhận sự kiện Lead', khong: 'Không gửi Purchase khi đơn COD chưa giao và chưa thanh toán thành công.' },

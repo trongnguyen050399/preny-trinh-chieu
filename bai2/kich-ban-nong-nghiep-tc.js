@@ -1,15 +1,18 @@
-/* Kịch bản video demo NGANG 16:9: BÁN LẺ NÔNG NGHIỆP (thuốc bảo vệ thực vật, phân bón, cây giống), nhóm thương mại điện tử.
-   Làm 18/11/2026 theo mẫu YaMe (kich-ban-yame.js), nội dung lấy từ bài 1 (demo/kich-ban/nong-nghiep-tc.js).
-   Mạch:
-   - Cảnh 1: bài viết phân bón hạt cho rau, khách hỏi giá, khách khác hỏi rau vàng lá dùng phân gì → AI trả lời cả 2
-     → inbox: báo giá, gửi ảnh thật, hỏi số sào → khách trả lời → xin SĐT, địa chỉ → lên đơn.
-   - Cảnh 2: quảng cáo thuốc trừ sâu sinh học → khách hỏi giá → AI gửi đúng ảnh quảng cáo, nói rõ cách ly 3 ngày
-     → khách chụp bộ 4 chai hỏi "Này thì sao" → khách im → gắn thẻ, bám đuổi 3 tin → anh Lộc quay lại: chục ngày nữa cắt rau,
-     đòi thuốc mạnh diệt sạch nhanh (ca khó bài 1) → AI không khuyên thuốc hóa học mạnh, nói rõ cách ly, không hứa sạch 100%,
-     dặn pha đúng liều trên nhãn, hỏi đồ bảo hộ → chốt 2 chai + 1 bộ bảo hộ → gửi Purchase → đơn tự động
-     → cảm ơn + 5 món đang giảm → Zalo: hỏi thăm sau khi phun, dặn cách ly; bán chạy; ưu đãi chưng Tết.
-   Ngành nông dược: AI không chẩn đoán bừa, không hứa diệt sạch 100%, không nêu tên hoạt chất, luôn dặn đọc nhãn, cách ly, bảo hộ.
-   Tên shop, sản phẩm, giá, khách, SĐT: dữ liệu minh họa của bài 1. Khách cảnh 1 (Thu Hà), giá bình phun giảm còn 617.000đ: tự đặt.
+/* Bài 2 (video demo ngang tự chạy): BÁN LẺ NÔNG NGHIỆP (thuốc bảo vệ thực vật, phân bón, cây giống), nhóm thương mại điện tử.
+   Viết lại 18/11/2026 theo mạch tmdt người dùng chốt cùng ngày (mẫu: kich-ban-yen-chung-tuoi-tc.js):
+   - 1 cảnh duy nhất: quảng cáo thuốc trừ sâu sinh học, 2 khách bình luận (hỏi giá, hỏi phun xong mấy ngày cắt được) → trả lời cả 2
+     "Mình check ib shop nha" → AI nhắn inbox trước: giá, cách ly 3 ngày + đúng ảnh quảng cáo, hỏi 1 điều (mấy ngày nữa cắt rau)
+     → anh Lộc: 3 sào cải bị bọ ăn lá, chục ngày nữa cắt, đòi thuốc mạnh diệt sạch nhanh (ca khó bài 1)
+     → AI không khuyên thuốc hóa học mạnh, nói rõ cách ly, không hứa sạch 100%, tính 2 chai, dặn pha đúng liều trên nhãn,
+       hỏi đồ bảo hộ → khách lấy thêm 1 bộ bảo hộ → AI xin SĐT + địa chỉ vườn → khách im
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + #2ChaiKemBaoHo) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT + địa chỉ
+     (ca khó: thiếu tên thôn) → tóm tắt đơn → Purchase lên Facebook → đơn tự động, kỹ sư bấm xác nhận
+     → cảm ơn + 5 món đang giảm → Zalo: hỏi thăm sau khi phun, dặn cách ly; bán chạy; ưu đãi chưng Tết → tổng kết → logo.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (thuốc trừ sâu sinh học 500ml, kèm bộ bảo hộ để phun an toàn), không có đoạn khách hỏi sản phẩm khác.
+   Ngành nông dược: AI không chẩn đoán bừa, không hứa diệt sạch 100%, không nêu tên hoạt chất, luôn dặn liều trên nhãn, cách ly, bảo hộ.
+   Nội dung lấy từ bài 1 (demo/kich-ban/nong-nghiep-tc.js): shop Nông Gia Phú Điền, chai 145.000đ, 2 chai + 1 bộ bảo hộ 345.000đ,
+   tặng phân hữu cơ, anh Lộc ở Đức Trọng, đơn #PD52107, sản phẩm bán thêm, voucher PHUDIEN50.
+   Tên shop, sản phẩm, giá, khách, SĐT: minh họa. Tự đặt thêm: câu hỏi bình luận của khách thứ 2, giá bình phun giảm còn 617.000đ.
    Ảnh: ảnh có sẵn của bài 1 (Unsplash, không phải hàng của shop). */
 window.VN_KB = {
   ten: 'Nông nghiệp video ngang',
@@ -27,98 +30,66 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '20:12' },
-    { k: 'fb', post: {
-        gio: '2 giờ', img: 'vuon-rau', likes: '1,1K', soCmt: '74 bình luận',
-        text: 'Rau xanh mướt, lá dày, ít vàng lá 🌱 Phân bón hạt chuyên cho rau ăn lá, bao 25kg, hàng chính hãng, kỹ thuật tư vấn miễn phí. Giá chỉ 395K/bao!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi rau vàng lá dùng phân gì' },
-    { k: 'cmt', i: 0, ten: 'Thu Hà', av: 'TH', text: 'Phân này bao nhiêu 1 bao shop?' },
-    { k: 'cmt', i: 1, ten: 'Hoàng Nam', av: 'HN', text: 'Rau muống nhà mình bị vàng lá, dùng phân gì shop?' },
-    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
-    { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
-    { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'vuon-rau', dong1: 'Bạn đã bình luận về bài viết của Nông Gia Phú Điền', dong2: '"Phân này bao nhiêu 1 bao shop?"' }, gio: '20:14' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào chị Hà, phân bón hạt cho rau bao 25kg giá **395.000đ** ạ.' },
-    { k: 'ai', card: { title: 'Phân bón hạt chuyên cho rau ăn lá · bao 25kg · hàng chính hãng', gia: '395.000đ' } },
-    { k: 'ai', img: 'phan-bon' },
-    { k: 'ai', text: 'Phân tan đều, hợp rau ăn lá. Chị trồng **mấy sào** để em tính số bao nha?' },
-    { k: 'cap', e: 'Tư vấn số lượng', t: 'Khách trả lời 1 câu, AI tính đúng số bao', s: 'Dặn bón đúng liều in trên bao' },
-    { k: 'kh', text: 'c trồng 2 sào cải ngọt e' },
-    { k: 'ai', text: 'Dạ 2 sào chị lấy **2 bao** là đủ bón cả lứa ạ, nhớ bón đúng liều in trên bao. Chị gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0915 362 048, thôn Tân Phú, xã Tân Hội, Đức Trọng' },
-    { k: 'ai', text: 'Dạ em lên đơn cho chị rồi nha:\n– Phân bón hạt cho rau 25kg x2\n– **790.000đ**\n– 0915 362 048\n– Thôn Tân Phú, xã Tân Hội, Đức Trọng\nShop gọi chị xác nhận rồi giao trong ngày ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'chai-thuoc', nhan: 'MESSENGER', tieuDe: 'Thuốc sinh học · Nhắn kỹ thuật tư vấn', nut: 'Gửi tin nhắn',
         text: 'Rau ăn lá bị sâu, bọ cắn phá? 🌿 Thuốc trừ sâu sinh học chai 500ml, nhãn ghi rõ thời gian cách ly, hàng chính hãng có tem, giao trong ngày. #thuocsinhhoc #rauanla #mobile',
       }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'chai-thuoc', dong1: 'Lộc đã trả lời một quảng cáo', dong2: 'Thuốc sinh học · Nhắn kỹ thuật tư vấn' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Thuốc này giá bao nhiêu shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng sản phẩm quảng cáo kèm giá', s: 'Nói rõ thời gian cách ly ngay từ đầu' },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi phun xong mấy ngày cắt được' },
+    { k: 'cmt', i: 0, ten: 'Văn Lộc', av: 'VL', text: 'Thuốc này bao nhiêu 1 chai shop?' },
+    { k: 'cmt', i: 1, ten: 'Hoàng Nam', av: 'HN', text: 'Phun xong mấy ngày cắt rau được shop? Ship Bảo Lộc k?' },
+    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
+    { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
+    { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'chai-thuoc', dong1: 'Bạn đã bình luận về quảng cáo của Nông Gia Phú Điền', dong2: '"Thuốc này bao nhiêu 1 chai shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Nói rõ thời gian cách ly ngay từ đầu' },
     { k: 'ai', text: 'Dạ chào anh Lộc, thuốc trừ sâu sinh học chai 500ml giá **145.000đ** ạ, nhãn ghi **cách ly 3 ngày**.' },
     { k: 'ai', img: 'chai-thuoc' },
-    { k: 'ai', text: 'Anh cho em xin **số sào** và **mấy ngày nữa cắt rau** để em tính thuốc cho đúng nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp sản phẩm khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên sản phẩm' },
-    { k: 'kh', shot: { img: 'chai-thuoc-2', cap: 'Bộ 4 chai thuốc sinh học 🌱 Đủ dòng cho rau, cây ăn trái' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng sản phẩm. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là **bộ 4 chai thuốc sinh học** ạ, shop còn hàng anh nha.' },
-    { k: 'ai', card: { title: 'Bộ 4 chai thuốc trừ sâu sinh học 500ml · đủ dòng cho rau, cây ăn trái', gia: '520.000đ', cu: '580.000đ' } },
-    { k: 'ai', img: 'chai-thuoc-2' },
-    { k: 'ai', text: 'Anh cho em xin số sào, ngày cắt rau để em tư vấn nên lấy chai lẻ hay cả bộ nha.' },
+    { k: 'ai', text: 'Rau nhà mình **còn mấy ngày nữa cắt** để em dặn phun, cách ly cho đúng nha anh?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: 'Sắp cắt rau mà đòi thuốc mạnh diệt sạch', s: 'Không khuyên thuốc hóa học mạnh, không hứa sạch 100%' },
+    { k: 'kh', text: '3 sào cải bị bọ ăn lá, chục ngày nữa a cắt. Có thuốc nào mạnh hơn diệt sạch nhanh k e?' },
+    { k: 'ai', text: 'Dạ chục ngày nữa cắt thì em **không khuyên thuốc hóa học mạnh** ạ, dễ **tồn dư thuốc** khi bán. Thuốc sinh học **cách ly 3 ngày**, bọ giảm rõ sau 2–3 ngày, không sạch 100% đâu anh.' },
+    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Tính đủ 2 chai, hỏi đồ bảo hộ khi phun', s: 'Dặn pha đúng liều ghi trên nhãn' },
+    { k: 'ai', text: '3 sào anh lấy **2 chai** là đủ, **pha đúng liều trên nhãn**, phun chiều mát. Nhà mình có sẵn **khẩu trang, găng tay** để phun chưa anh?' },
+    { k: 'ai', img: 'phun-thuoc' },
+    { k: 'kh', text: 'Chưa có, lấy a 1 bộ bảo hộ luôn' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin SĐT, địa chỉ vườn' },
+    { k: 'ai', text: 'Dạ em ghi **2 chai sinh học + 1 bộ bảo hộ**, tổng **345.000đ**. Anh gửi em **SĐT và địa chỉ vườn** để em lên đơn nha.' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng sản phẩm khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng sản phẩm khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng đơn thuốc khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Lộc ơi, sâu bọ để lâu dễ lan sang luống khác đó anh. Anh nhắn em số sào để em tính thuốc nha 🌱' },
+    { k: 'ai', text: 'Anh Lộc ơi, em giữ **2 chai sinh học + 1 bộ bảo hộ** cho anh rồi ạ. Bọ để lâu dễ lan luống khác, anh gửi SĐT, địa chỉ để em giao nha 🌱' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Em gửi anh ảnh phun thật nha 📸 Thuốc **chính hãng, có tem** ạ.' },
-    { k: 'ai', img: 'phun-thuoc' },
+    { k: 'ai', text: 'Em gửi anh ảnh thật chai thuốc nha 📸 Hàng **chính hãng, có tem**, nhãn ghi rõ liều pha và **cách ly 3 ngày**.' },
+    { k: 'ai', imgs: ['chai-thuoc', 'phun-thuoc', 'vuon-rau'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Lấy **2 chai** trong hôm nay em giảm còn **260.000đ** + tặng **1 gói phân bón hữu cơ** ạ 🎁' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ vườn** là em lên đơn liền, tặng **1 gói phân bón hữu cơ**, giao trong ngày ạ ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'Nhưng đòi thuốc mạnh trong khi sắp cắt rau' },
-    { k: 'kh', text: '3 sào cải bị bọ ăn lá, chục ngày nữa a cắt. Có thuốc nào mạnh hơn diệt sạch nhanh k e?' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: '0976 418 253, xã Hiệp An, Đức Trọng' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Tư vấn đúng mùa vụ', t: 'Sắp cắt rau: không khuyên thuốc hóa học mạnh', s: 'Nói rõ thời gian cách ly, không hứa diệt sạch 100%' },
-    { k: 'ai', text: 'Dạ chục ngày nữa cắt thì em **không khuyên thuốc hóa học mạnh** ạ, dễ **tồn dư thuốc** khi bán.' },
-    { k: 'ai', text: 'Thuốc sinh học nhãn ghi **cách ly 3 ngày**, bọ giảm rõ sau 2–3 ngày, không sạch 100% đâu anh.' },
-    { k: 'ai', text: '3 sào anh lấy **2 chai lẻ** là đủ ạ. Anh lấy chai lẻ hay cả bộ để em lên đơn nha?' },
-    { k: 'kh', text: 'Lấy 2 chai lẻ thôi e' },
-    { k: 'cap', e: 'Dặn đồ bảo hộ', t: 'Dặn liều trên nhãn, hỏi bình phun, đồ bảo hộ', s: 'Thiếu thì bán kèm luôn trong đơn' },
-    { k: 'ai', text: 'Dạ anh **pha đúng liều trên nhãn**, phun chiều mát nha. Nhà mình có sẵn **bình phun, khẩu trang, găng tay** chưa anh?' },
-    { k: 'kh', text: 'Bình có rồi, lấy thêm a 1 bộ bảo hộ' },
-    { k: 'ai', text: 'Dạ em ghi **2 chai + 1 bộ bảo hộ**, tổng **345.000đ**, tặng 1 gói phân hữu cơ. Anh gửi em **SĐT và địa chỉ vườn** nha.' },
     { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Thiếu tên thôn → hỏi lại ngay lập tức' },
-    { k: 'kh', text: '0976 418 253, xã Hiệp An, Đức Trọng' },
     { k: 'ai', text: 'Dạ em ghi SĐT rồi ạ. Anh cho em xin thêm **tên thôn** để shipper tìm đúng vườn nha.' },
     { k: 'kh', text: 'Thôn Phú Thạnh e' },
     { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: sản phẩm, quà tặng, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– 2 chai thuốc trừ sâu sinh học 500ml + 1 bộ bảo hộ\n– Tặng 1 gói phân bón hữu cơ\n– Tổng: **345.000đ**, giao trong ngày\n– 0976 418 253\n– Thôn Phú Thạnh, xã Hiệp An, Đức Trọng\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
+    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– 2 chai thuốc trừ sâu sinh học 500ml + 1 bộ bảo hộ\n– Tặng 1 gói phân bón hữu cơ\n– Tổng: **345.000đ**, giao trong ngày\n– Người nhận: Lộc · 0976 418 253\n– Thôn Phú Thạnh, xã Hiệp An, Đức Trọng\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok em"' },
     { k: 'kh', text: 'Ok em' },
     { k: 'ai', text: 'Dạ em lên đơn, chiều nay giao cho anh liền nha ⚡', d: 1300 },
 
-    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động
+    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động → nhân viên xác nhận
     { k: 'cap', e: 'Gửi đơn về Facebook', t: 'Sự kiện mua hàng gửi ngay lên Facebook', s: 'Quảng cáo tối ưu theo đơn thật' },
     { k: 'panel', v: 'capi', d: 900 },
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 2200 },
@@ -170,7 +141,7 @@ window.VN_KB = {
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: giống hệt YaMe (nhóm thương mại điện tử; bám đuổi = 5 tin trong 7 ngày)
+  // Slide tổng kết cuối video (giống hệt file mẫu Yến chưng tươi)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
@@ -179,15 +150,15 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'TL', ten: 'Trần Văn Lộc', sub: 'Messenger · từ quảng cáo Thuốc sinh học',
+    tag: { av: 'VL', ten: 'Trần Văn Lộc', sub: 'Messenger · bình luận quảng cáo Thuốc sinh học',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#thuocsinhhoc', 'qt hot'], ['#rauanla', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#Bo4ChaiSinhHoc', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #thuocsinhhoc', tieuDe: '3 tin ngắn về thuốc sinh học',
-              dong: [['15 phút', 'Nhắc sâu dễ lan, xin số sào'], ['3 tiếng', 'Gửi ảnh phun thật, hàng có tem'], ['20 tiếng', 'Ưu đãi 2 chai, tặng phân bón']] },
-      reply: 'Khách trả lời "3 sào cải…" · dừng bám đuổi' },
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#2ChaiKemBaoHo', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #thuocsinhhoc', tieuDe: '3 tin ngắn về đơn thuốc khách đã chọn',
+              dong: [['15 phút', 'Đã giữ 2 chai + bảo hộ cho khách'], ['3 tiếng', 'Gửi ảnh thật chai thuốc, có tem'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '345.000đ', pk: 'Purchase · 345.000đ',
-      dong: [['Đơn hàng', '#PD52107 · 2 chai sinh học + bảo hộ'], ['Nguồn khách', 'Quảng cáo Thuốc sinh học → Messenger'], ['Giá trị', '345.000 VND'], ['Event ID', 'PD52107-PURCHASE (chống trùng)']],
+      dong: [['Đơn hàng', '#PD52107 · 2 chai sinh học + bảo hộ'], ['Nguồn khách', 'Bình luận quảng cáo Thuốc sinh học → Messenger'], ['Giá trị', '345.000 VND'], ['Event ID', 'PD52107-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {

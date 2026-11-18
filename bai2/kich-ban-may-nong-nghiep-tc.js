@@ -1,18 +1,17 @@
-/* Kịch bản Bài 2 (video demo NGANG 16:9 tự chạy): MÁY NÔNG NGHIỆP (Nông Cơ Đồng Xanh), nhóm thương mại điện tử, giao hàng tận vườn.
-   Làm 18/11/2026 theo mạch mẫu YaMe (demo/bai2/kich-ban-yame.js) và video-ngang/HUONG-DAN-BAI2.md. Nội dung lấy từ bài 1 (demo/kich-ban/may-nong-nghiep-tc.js).
-   Mạch:
-   - Tình huống 1: bài viết bình phun thuốc chạy điện → khách hỏi giá, khách khác hỏi phun 1ha sạc mấy lần → trả lời 1 câu chung → inbox: giá, card, ảnh
-     → hỏi diện tích vườn → khách trả lời → xin SĐT, địa chỉ → tóm tắt đơn.
-   - Tình huống 2: quảng cáo máy xới dầu 7HP → anh Dũng hỏi giá → AI gửi đúng ảnh quảng cáo + giá, hỏi diện tích, loại đất → khách chụp máy bơm
-     "Này thì sao" → AI nhận ra → khách im → gắn thẻ, bám đuổi 3 tin → khách quay lại, so với máy xăng 6,9 triệu (ca khó) → AI khuyên máy dầu,
-     hỏi chọn máy, chọn dàn tặng kèm → xin SĐT, địa chỉ vườn (thiếu SĐT → hỏi lại) → đơn → sự kiện mua hàng → nhân viên xác nhận
-     → cảm ơn + 5 máy đang giảm giá → Zalo sau khi nhận máy (hỏi thăm + dặn thay nhớt, bán chạy mùa khô, voucher) → tổng kết → logo.
-   Không có tin "đơn đang giao".
-   Tên shop, giá, chính sách, khách, SĐT: dữ liệu minh họa của bài 1. Tự đặt thêm: khách tình huống 1 (anh Hùng, 0978 452 136, Chư Sê, Gia Lai),
-   lựa chọn tặng dàn vun gốc hoặc bánh lồng, giá gốc máy cày 195.000.000đ. Ảnh: ảnh Unsplash có sẵn của bài 1 (demo/assets/img/u/). */
+/* Bài 2 (video demo ngang tự chạy): MÁY NÔNG NGHIỆP (Nông Cơ Đồng Xanh), nhóm thương mại điện tử. Viết lại 18/11/2026 theo mạch mới
+   người dùng chốt cùng ngày (mẫu demo/bai2/kich-ban-yen-chung-tuoi-tc.js, video-ngang/HUONG-DAN-BAI2.md mục "Mạch tmdt"):
+   - 1 cảnh duy nhất: quảng cáo máy xới dầu 7HP, 2 khách bình luận (hỏi giá, hỏi xới ruộng lúa + giao Đồng Tháp) → trả lời cả 2 "Mình check ib shop nha"
+     → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi vườn gì, rộng bao nhiêu → anh Dũng: 1,5ha cà phê đất đỏ, so với máy xăng 6,9 triệu (ca khó)
+     → AI khuyên máy dầu, hỏi dàn tặng kèm (vun gốc hay bánh lồng) → khách chọn dàn vun gốc → AI xin SĐT + địa chỉ vườn → khách im
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + #DanVunGoc) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng (tin 3: giảm 500.000đ của bài 1)
+     → khách gửi SĐT + địa chỉ (ca khó: SĐT thiếu 1 số) → tóm tắt đơn → Purchase lên Facebook → đơn tự động, nhân viên bấm xác nhận
+     → cảm ơn + 5 máy giảm giá → Zalo: hỏi thăm, dặn thay nhớt, bán chạy mùa khô, voucher → tổng kết → logo.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (máy xới dầu 7HP), không có đoạn khách hỏi sản phẩm khác.
+   Tên shop, giá, chính sách, khách, SĐT, địa chỉ: minh họa của bài 1 (demo/kich-ban/may-nong-nghiep-tc.js). Tự đặt thêm: lựa chọn dàn tặng kèm
+   (vun gốc hoặc bánh lồng), giá gốc máy cày 195.000.000đ. Ảnh: ảnh Unsplash có sẵn trong máy của bài 1. */
 window.VN_KB = {
   ten: 'Máy nông nghiệp video ngang',
-  ketSub: 'Để AI tư vấn và chốt đơn cho cửa hàng máy nông nghiệp của bạn',
+  ketSub: 'Để AI tư vấn, bám đuổi và lên đơn cho cửa hàng máy nông nghiệp của bạn',
   shop: { ten: 'Nông Cơ Đồng Xanh', av: 'ĐX', mau: '#4D7C0F', sub: 'Thường trả lời ngay' },
   anh: {
     'may-xoi': '../assets/img/u/1609992285716-5f33f03379ec_800x800.jpg',       // máy xới đỏ (cận cảnh)
@@ -28,98 +27,66 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= TÌNH HUỐNG 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '20:16' },
-    { k: 'fb', post: {
-        gio: '5 giờ', img: 'phun-thuoc', likes: '942', soCmt: '63 bình luận',
-        text: 'Phun thuốc không còn mỏi tay 💪 Bình phun chạy điện 20 lít đeo vai, pin phun liên tục 5–6 tiếng, hợp vườn cà phê, hồ tiêu, ruộng lúa.',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi về pin ở bình luận kế bên' },
-    { k: 'cmt', i: 0, ten: 'Quốc Hùng', av: 'QH', text: 'Bình này giá sao shop?' },
-    { k: 'cmt', i: 1, ten: 'Nguyễn Thắng', av: 'NT', text: 'Phun 1ha lúa thì sạc mấy lần vậy shop?' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
+    { k: 'ad', ad: {
+        img: 'may-xoi', nhan: 'MESSENGER', tieuDe: 'Máy xới dầu 7HP · Nhắn shop tư vấn', nut: 'Gửi tin nhắn',
+        text: 'Vườn rộng, đất chặt cứ để máy dầu lo 🚜 Máy xới đa năng chạy dầu 7HP khỏe, ít nóng máy, đi lọt hàng cà phê 3m. Giao tận vườn, chạy thử tại chỗ. #mayxoidau #7hp #mobile',
+      }, d: 1500 },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi xới ruộng lúa được không' },
+    { k: 'cmt', i: 0, ten: 'Dũng Phan', av: 'DP', text: 'Máy xới này giá sao shop?' },
+    { k: 'cmt', i: 1, ten: 'Nguyễn Thắng', av: 'NT', text: 'Xới ruộng lúa được không, giao Đồng Tháp bao lâu shop?' },
     { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
     { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
     { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'phun-thuoc', dong1: 'Bạn đã bình luận về bài viết của Nông Cơ Đồng Xanh', dong2: '"Bình này giá sao shop?"' }, gio: '20:18' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào anh Hùng, bình phun thuốc chạy điện **20 lít** giá **1.490.000đ** ạ, pin phun liên tục **5–6 tiếng**.' },
-    { k: 'ai', card: { title: 'Bình Phun Thuốc Chạy Điện 20 Lít Đeo Vai · Pin Phun Liên Tục 5–6 Tiếng', gia: '1.490.000đ' } },
-    { k: 'ai', img: 'phun-thuoc' },
-    { k: 'ai', text: 'Anh phun **vườn rộng bao nhiêu** để em tư vấn cho vừa nha?' },
-    { k: 'cap', e: 'Hỏi diện tích vườn', t: 'Khách trả lời 1 câu, AI chọn đúng bình', s: 'Kiểm tra luôn bình còn hàng' },
-    { k: 'kh', text: 'vườn tiêu nhà a 1ha, phun buổi sáng thôi e' },
-    { k: 'ai', text: 'Dạ 1ha thì bình **20 lít** là vừa, pin phun hết trong buổi sáng ạ. Anh gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0978 452 136, thôn 4 xã Chư Sê, Gia Lai' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh rồi nha:\n– Bình phun thuốc chạy điện 20L\n– **1.490.000đ**\n– 0978 452 136\n– Thôn 4, xã Chư Sê, Gia Lai\nShop gọi anh xác nhận rồi giao liền ạ 🎉', d: 3800 },
-
-    /* ================= TÌNH HUỐNG 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
-    { k: 'ad', ad: {
-        img: 'may-xoi', nhan: 'MESSENGER', tieuDe: 'Máy xới dầu 7HP · Nhắn shop tư vấn', nut: 'Gửi tin nhắn',
-        text: 'Vườn rộng, đất chặt cứ để máy dầu lo 🚜 Máy xới đa năng chạy dầu 7HP khỏe, ít nóng máy, đi lọt hàng cà phê 3m. #mayxoidau #7hp #mobile',
-      }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'may-xoi', dong1: 'Dũng đã trả lời một quảng cáo', dong2: 'Máy xới dầu 7HP · Đi lọt hàng cà phê' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Máy xới này giá sao shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng máy trên quảng cáo kèm giá', s: 'Khách không cần mô tả lại máy' },
-    { k: 'ai', text: 'Dạ chào anh Dũng, **máy xới đất chạy dầu 7HP** trên quảng cáo giá **11.900.000đ** ạ, bảo hành 12 tháng.' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'may-xoi', dong1: 'Bạn đã bình luận về quảng cáo của Nông Cơ Đồng Xanh', dong2: '"Máy xới này giá sao shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại máy' },
+    { k: 'ai', text: 'Dạ chào anh Dũng, máy xới đất chạy dầu **7HP** giá **11.900.000đ** ạ, bảo hành 12 tháng, giao tận vườn.' },
     { k: 'ai', img: 'may-xoi' },
-    { k: 'ai', text: 'Anh cho em xin **diện tích vườn** và **loại đất** để em tư vấn đúng máy nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp máy khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên máy' },
-    { k: 'kh', shot: { img: 'bom-nuoc', cap: 'Mùa khô tưới cà phê 💧 Máy bơm nước chạy dầu hút sâu, đẩy xa, chạy cả ngày' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng máy. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là **máy bơm nước chạy dầu** ạ, giá **4.700.000đ**, còn hàng anh nha.' },
-    { k: 'ai', card: { title: 'Máy Bơm Nước Chạy Dầu · Tưới Cà Phê, Hồ Tiêu · Giao Tận Vườn', gia: '4.700.000đ' } },
-    { k: 'ai', img: 'bom-nuoc' },
-    { k: 'ai', text: 'Anh cho em xin **diện tích vườn** và **loại đất** để em tư vấn cả 2 máy nha.' },
+    { k: 'ai', text: 'Anh xới **vườn gì, rộng bao nhiêu** để em tư vấn đúng máy nha?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: 'So với máy xăng 6,9 triệu → khuyên máy dầu', s: 'Vườn rộng, đất chặt: máy xăng dễ nóng máy' },
+    { k: 'kh', text: 'Vườn cà phê a 1,5ha đất đỏ hơi dốc. Trên mạng có máy xăng 6,9tr, mua loại đó được k?' },
+    { k: 'ai', text: 'Dạ **1,5ha đất đỏ** chạy cả buổi thì anh nên lấy **máy dầu**: khỏe, ít nóng máy ạ. Máy xăng 6,9 triệu chỉ hợp vườn **dưới 3 sào** thôi anh.' },
+    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Chọn máy rồi: AI hỏi dàn tặng kèm', s: 'Gửi ảnh để khách chọn nhanh' },
+    { k: 'ai', text: 'Máy tặng kèm 1 dàn: **dàn vun gốc** làm cỏ cà phê hay **bánh lồng** đi ruộng ngập ạ. Anh lấy dàn nào ạ?' },
+    { k: 'ai', imgs: ['may-xoi-xanh', 'xoi-ruong'] },
+    { k: 'kh', text: 'Dàn vun gốc em, vườn cà phê mà' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin SĐT, địa chỉ vườn' },
+    { k: 'ai', text: 'Dạ em ghi **máy xới dầu 7HP, tặng dàn vun gốc**, 11.900.000đ. Anh gửi em **SĐT và địa chỉ vườn** để em lên đơn nha.' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng máy khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng máy khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng máy khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Dũng ơi, máy xới 7HP **đi lọt hàng cà phê 3m**, làm được quanh năm ạ. Anh nhắn em diện tích vườn nha 😊' },
+    { k: 'ai', text: 'Anh Dũng ơi, em giữ cho anh **1 máy xới 7HP kèm dàn vun gốc** rồi ạ. Anh gửi em SĐT, địa chỉ vườn để em xếp xe giao nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Em gửi anh ảnh máy chạy thật ở vườn khách nha 📸 Đất chặt vẫn xới ngọt.' },
+    { k: 'ai', text: 'Em gửi anh ảnh thật máy chạy ở vườn khách nha 📸 Đất đỏ chặt vẫn xới ngọt, lắp dàn vun gốc làm cỏ quanh năm.' },
     { k: 'ai', imgs: ['may-xoi-2', 'may-xoi-3'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Chốt trong hôm nay em **giảm 500.000đ còn 11.400.000đ**, **tặng dàn vun gốc** ạ 🎁' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ vườn** là em lên đơn liền ạ. Chốt hôm nay em **giảm 500.000đ còn 11.400.000đ** 🎁' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời diện tích vườn', s: 'Ca khó: so với máy xăng 6,9 triệu trên mạng' },
-    { k: 'kh', text: 'Vườn cà phê a 1,5ha đất đỏ hơi dốc. Trên mạng có máy xăng 6,9tr, mua loại đó được k?' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: '090531246, thôn 3 xã Ea Tu, Buôn Ma Thuột em' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Tư vấn đúng máy', t: '1,5ha đất đỏ → máy dầu, không phải máy xăng', s: 'Rồi chủ động hỏi: lấy máy xới hay máy bơm?' },
-    { k: 'ai', text: 'Dạ vườn **1,5ha đất đỏ** chạy cả buổi thì anh nên lấy **máy dầu**: khỏe, ít nóng máy ạ. Máy xăng 6,9 triệu chỉ hợp vườn **dưới 3 sào**.' },
-    { k: 'ai', text: 'Anh lấy **máy xới** trước hay lấy luôn **máy bơm** cho mùa khô ạ?' },
-    { k: 'kh', text: 'Lấy máy xới trước em' },
-    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Khách chọn máy xới: AI hỏi dàn tặng kèm', s: 'Gửi ảnh 2 loại dàn để khách chọn nhanh' },
-    { k: 'ai', text: 'Dạ máy xới **11.400.000đ** em tặng kèm 1 dàn: **dàn vun gốc** làm cỏ cà phê hay **bánh lồng** đi ruộng ngập ạ?' },
-    { k: 'ai', imgs: ['may-xoi-xanh', 'xoi-ruong'] },
-    { k: 'kh', text: 'Dàn vun gốc em, vườn cà phê mà' },
-    { k: 'ai', text: 'Dạ em ghi máy xới 7HP + tặng **dàn vun gốc**. Anh gửi em **SĐT, địa chỉ vườn** nha, xe tải nhỏ vào tới vườn không anh?' },
-    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Thiếu SĐT → hỏi lại ngay lập tức' },
-    { k: 'kh', text: 'Thôn 3, xã Ea Tu, Buôn Ma Thuột. Xe tải nhỏ vào tới vườn được em' },
-    { k: 'ai', text: 'Dạ em ghi địa chỉ rồi ạ, anh cho em xin thêm **SĐT** để kỹ thuật gọi trước khi giao nha.' },
-    { k: 'kh', text: '0905312468' },
+    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'SĐT thiếu 1 số → hỏi lại ngay lập tức' },
+    { k: 'ai', text: 'Dạ em ghi địa chỉ vườn rồi ạ. Số **090531246** mới có 9 số, anh kiểm tra lại giúp em nha.' },
+    { k: 'kh', text: '0905312468 em' },
     { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: máy, quà tặng, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Máy xới đất chạy dầu 7HP\n– Tặng: 1 dàn vun gốc\n– Tổng: **11.400.000đ** · nhận máy mới trả tiền\n– 0905 312 468\n– Thôn 3, xã Ea Tu, TP. Buôn Ma Thuột\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
+    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Máy xới đất chạy dầu 7HP\n– Tặng: 1 dàn vun gốc\n– Tổng: **11.400.000đ** · nhận máy mới trả tiền\n– Người nhận: Dũng · 0905 312 468\n– Thôn 3, xã Ea Tu, TP. Buôn Ma Thuột\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok em"' },
     { k: 'kh', text: 'Ok em' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh liền nha ⚡', d: 1300 },
+    { k: 'ai', text: 'Dạ em lên đơn, xếp xe giao tận vườn cho anh liền nha ⚡', d: 1300 },
 
-    // Chốt đơn → màn hình phụ: gửi sự kiện mua hàng lên Facebook → đơn tự động → nhân viên xác nhận
+    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động → nhân viên xác nhận
     { k: 'cap', e: 'Gửi đơn về Facebook', t: 'Sự kiện mua hàng gửi ngay lên Facebook', s: 'Quảng cáo tối ưu theo đơn thật' },
     { k: 'panel', v: 'capi', d: 900 },
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 2200 },
@@ -134,7 +101,7 @@ window.VN_KB = {
 
     // Mua xong: tin cảm ơn kèm 5 máy đang giảm giá (deck.afterSale.sp của bài 1)
     { k: 'cap', e: 'Bán thêm sau mua', t: 'Cảm ơn khách, gửi kèm 5 máy đang giảm giá', s: 'Khách bấm "Mua ngay" ngay trong Messenger' },
-    { k: 'ai', text: 'Dạ cảm ơn anh Dũng nha 🎉 Đơn đã xác nhận, kỹ thuật giao và chạy thử tận vườn. Mấy máy này đang giảm giá ạ:' },
+    { k: 'ai', text: 'Dạ cảm ơn anh Dũng nha 🎉 Đơn đã được xác nhận, kỹ thuật giao và chạy thử tận vườn. Shop đang giảm giá mấy máy này, anh xem thử nha:' },
     { k: 'car', sp: [
         { img: 'bom-nuoc', ten: 'Máy bơm nước chạy dầu', gia: '4.465.000đ', cu: '4.700.000đ', giam: '-5%' },
         { img: 'phun-thuoc', ten: 'Bình phun thuốc chạy điện 20L', gia: '1.415.500đ', cu: '1.490.000đ', giam: '-5%' },
@@ -148,7 +115,7 @@ window.VN_KB = {
     { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Khách nhận máy: AI hỏi thăm, dặn bảo dưỡng', s: 'Xin đánh giá ngay trong tin Zalo OA của shop' },
     { k: 'zns', zns: {
         img: 'may-xoi-3', tieuDe: 'Anh Dũng ơi, máy xới chạy ổn không ạ?',
-        noiDung: 'Đồng Xanh cảm ơn anh đã nhận đơn **#DX31207** (Máy xới dầu 7HP). **20 giờ chạy đầu** anh nhớ thay nhớt máy nha. Anh đánh giá giúp shop nha!',
+        noiDung: 'Đồng Xanh cảm ơn anh đã nhận đơn **#DX31207** (Máy xới dầu 7HP · dàn vun gốc). **20 giờ chạy đầu** anh nhớ thay nhớt máy nha. Anh đánh giá giúp shop nha!',
         nut: 'Đánh giá sản phẩm',
       }, d: 4200 },
     { k: 'cap', e: 'ZBS · Sản phẩm bán chạy', t: '1 tuần sau: gửi máy bán chạy mùa khô', s: 'Khách không cần trả lời' },
@@ -158,7 +125,7 @@ window.VN_KB = {
         tieuDe: '🔥 Máy bán chạy mùa khô tại Đồng Xanh',
         noiDung: '**Máy bơm nước chạy dầu**, bình phun thuốc chạy điện và máy cắt cỏ đang được bà con làm vườn chọn nhiều nhất tuần qua.',
         nut: 'Xem ngay',
-      }, d: 4200 },
+      }, d: 4600 },
     { k: 'cap', e: 'ZBS · Khuyến mãi', t: '1 tuần sau nữa: gửi voucher cho khách cũ', s: 'Kéo khách quay lại mua tiếp, không cần khách nhắn' },
     { k: 'zstamp', gio: '19:30', ngay: 'CN 06/12/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
@@ -166,12 +133,12 @@ window.VN_KB = {
         tieuDe: 'Tặng anh Dũng voucher 300.000đ',
         noiDung: 'Nhập mã **DONGXANH300** giảm **300.000đ** cho đơn từ 3.000.000đ. Hạn dùng đến 31/03/2027.',
         nut: 'Dùng voucher ngay',
-      }, d: 4400 },
+      }, d: 4800 },
 
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: giống hệt YaMe (nhóm thương mại điện tử)
+  // Slide tổng kết cuối video (giống hệt file mẫu Yến chưng tươi, nhóm thương mại điện tử)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
@@ -180,15 +147,15 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'PD', ten: 'Phan Văn Dũng', sub: 'Messenger · từ quảng cáo Máy xới dầu 7HP',
+    tag: { av: 'DP', ten: 'Phan Văn Dũng', sub: 'Messenger · bình luận quảng cáo Máy xới dầu 7HP',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#mayxoidau', 'qt hot'], ['#7hp', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#MayBomDau', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #mayxoidau', tieuDe: '3 tin ngắn về máy xới dầu 7HP',
-              dong: [['15 phút', 'Đi lọt hàng cà phê 3m'], ['3 tiếng', 'Gửi ảnh máy chạy thật'], ['20 tiếng', 'Giảm 500K, tặng dàn vun gốc']] },
-      reply: 'Khách trả lời diện tích vườn · dừng bám đuổi' },
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#DanVunGoc', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #mayxoidau', tieuDe: '3 tin ngắn về máy xới khách đã chọn',
+              dong: [['15 phút', 'Đã giữ máy kèm dàn vun gốc'], ['3 tiếng', 'Gửi ảnh thật máy chạy ở vườn'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '11.400.000đ', pk: 'Purchase · 11.400.000đ',
-      dong: [['Đơn hàng', '#DX31207 · Máy xới dầu 7HP · x1'], ['Nguồn khách', 'Quảng cáo Máy xới dầu 7HP → Messenger'], ['Giá trị', '11.400.000 VND'], ['Event ID', 'DX31207-PURCHASE (chống trùng)']],
+      dong: [['Đơn hàng', '#DX31207 · Máy xới dầu 7HP · x1'], ['Nguồn khách', 'Bình luận quảng cáo Máy xới dầu 7HP → Messenger'], ['Giá trị', '11.400.000 VND'], ['Event ID', 'DX31207-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {

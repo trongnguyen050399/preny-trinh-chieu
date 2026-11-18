@@ -1,8 +1,13 @@
-/* Kịch bản video demo NGANG 16:9: DUNG DỊCH VỆ SINH Ô TÔ (nhóm thương mại điện tử), làm 18/11/2026 theo mạch mẫu YaMe.
-   Nội dung lấy từ bài 1 (demo/kich-ban/ve-sinh-o-to-tc.js): shop Xe Sạch Store, combo nội thất 3 món 371.000đ (deck.binhLuan, anh Khoa),
-   nước rửa xe bọt tuyết 1 lít 159.000đ, phủ bóng nano 249.000đ, mua 2 chai 219.000đ/chai (deck.bamDuoi), khách anh Phong (Q.7),
-   voucher XESACH15 (afterSale.zbs). Ca khó: SĐT thiếu số → hỏi lại.
-   Tên shop, sản phẩm, giá, khách, SĐT: dữ liệu minh họa. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
+/* Bài 2 (video demo ngang tự chạy): DUNG DỊCH VỆ SINH Ô TÔ, nhóm thương mại điện tử. Viết lại 18/11/2026 theo mạch mẫu Yến chưng tươi:
+   - 1 cảnh duy nhất: bài quảng cáo nước rửa xe bọt tuyết 1 lít, 2 khách bình luận (hỏi giá, hỏi rửa xe máy được không)
+     → trả lời cả 2 "Mình check ib shop nha" → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi rửa tại nhà hay ngoài tiệm
+     → khách rửa tại nhà, xe đen, không có máy phun bọt (ca khó) → AI chỉ pha xô, lau nhẹ không xước → khách lấy 1 can
+     → AI xin SĐT + địa chỉ → khách im → gắn thẻ (3 hashtag quảng cáo + #baogia + #RuaTaiNha)
+     → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT + địa chỉ (ca khó: SĐT thiếu số) → tóm tắt đơn → Purchase lên Facebook
+     → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 món chăm xe đang giảm giá → Zalo: hỏi thăm, bán chạy, voucher → tổng kết → logo.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (can bọt tuyết 1 lít), không có đoạn khách hỏi sản phẩm khác.
+   Nội dung lấy từ bài 1 (demo/kich-ban/ve-sinh-o-to-tc.js): shop Xe Sạch Store, bọt tuyết 159.000đ pha 1:100 rửa 20–25 lần (deck.bamDuoi),
+   khách anh Phong (Q.7), afterSale.sp, voucher XESACH15. Tên shop, sản phẩm, giá, khách, SĐT: minh họa. Ảnh: ảnh có sẵn của bài 1. */
 window.VN_KB = {
   ten: 'Dung dịch vệ sinh ô tô video ngang',
   ketSub: 'Để AI bán hàng cho shop chăm sóc xe của bạn',
@@ -20,97 +25,63 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '21:05' },
-    { k: 'fb', post: {
-        gio: '3 giờ', img: 'lau-noi-that', likes: '2,3K', soCmt: '112 bình luận',
-        text: 'Nội thất sạch bong, ghế da lên màu lại 🚗 Combo vệ sinh nội thất 3 món: xịt đa năng, dưỡng da ghế, khăn microfiber. Dùng cho da, nỉ, nhựa taplo, đang giảm 15%!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi cách dùng ở bình luận kế bên' },
-    { k: 'cmt', i: 0, ten: 'Trần Khoa', av: 'TK', text: 'Combo giá sao shop?' },
-    { k: 'cmt', i: 1, ten: 'Bảo Long', av: 'BL', text: 'Ghế da bò dùng được không shop, có bị bạc màu không?' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
+    { k: 'ad', ad: {
+        img: 'bot-tuyet', nhan: 'MESSENGER', tieuDe: 'Rửa xe bọt tuyết · Can 1 lít', nut: 'Gửi tin nhắn',
+        text: 'Rửa xe tại nhà sạch như ra tiệm 🚿 Nước rửa xe bọt tuyết 1 lít bọt dày, không cần chà mạnh nên không xước sơn. Pha 1:100, rửa được 20–25 lần. #ruaxebottuyet #ruaxe #mobile',
+      }, d: 1500 },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi rửa xe máy được không' },
+    { k: 'cmt', i: 0, ten: 'Lê Phong', av: 'LP', text: 'Can 1 lít giá sao shop?' },
+    { k: 'cmt', i: 1, ten: 'Bảo Long', av: 'BL', text: 'Rửa xe máy được không shop?' },
     { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
     { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
     { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'lau-noi-that', dong1: 'Bạn đã bình luận về bài viết của Xe Sạch Store', dong2: '"Combo giá sao shop?"' }, gio: '21:07' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào anh Khoa, combo nội thất 3 món giá **371.000đ** ạ (giá gốc 437.000đ), freeship.' },
-    { k: 'ai', card: { title: 'Combo Vệ Sinh Nội Thất Ô Tô 3 Món: Xịt Đa Năng 500ml, Dưỡng Da Ghế 250ml, Bộ 3 Khăn Microfiber', gia: '371.000đ', cu: '437.000đ' } },
-    { k: 'ai', imgs: ['duong-da', 'xit-da-nang', 'khan'] },
-    { k: 'ai', text: 'Combo dùng được cho **da, nỉ, nhựa taplo**, không bạc màu. Ghế xe anh bằng da hay nỉ để em chỉ cách dùng cho đúng nha?' },
-    { k: 'cap', e: 'Hỏi chất liệu ghế', t: 'Khách trả lời 1 câu, AI tư vấn đúng cách dùng', s: 'Báo luôn combo hợp với xe của khách' },
-    { k: 'kh', text: 'ghế da màu be e' },
-    { k: 'ai', text: 'Dạ ghế da be anh lau bằng xịt đa năng rồi **dưỡng da** là sáng màu, không ố ạ, combo này hợp nhất. Anh gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0977 315 862, 27 Lê Lợi, Q.1, HCM' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh rồi nha:\n– Combo nội thất 3 món (xịt, dưỡng da, khăn)\n– **371.000đ**, freeship\n– 0977 315 862\n– 27 Lê Lợi, Q.1, TP.HCM\nShop gọi anh xác nhận rồi giao liền ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
-    { k: 'ad', ad: {
-        img: 'bot-tuyet', nhan: 'MESSENGER', tieuDe: 'Rửa xe tại nhà · Nhắn shop tư vấn', nut: 'Gửi tin nhắn',
-        text: 'Rửa xe tại nhà sạch như ra tiệm 🚿 Nước rửa xe bọt tuyết 1 lít bọt dày, không cần chà mạnh nên không xước sơn. Pha 1:100, rửa được 20–25 lần. #ruaxebottuyet #ruaxe #mobile',
-      }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'bot-tuyet', dong1: 'Phong đã trả lời một quảng cáo', dong2: 'Nước rửa xe bọt tuyết 1 lít' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Chai này giá bao nhiêu shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng mẫu trên quảng cáo kèm giá', s: 'Khách không cần mô tả lại sản phẩm' },
-    { k: 'ai', text: 'Dạ chào anh Phong, **nước rửa xe bọt tuyết 1 lít** trên quảng cáo giá **159.000đ** ạ, rửa được 20–25 lần.' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'bot-tuyet', dong1: 'Bạn đã bình luận về quảng cáo của Xe Sạch Store', dong2: '"Can 1 lít giá sao shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại sản phẩm' },
+    { k: 'ai', text: 'Dạ chào anh Phong, **nước rửa xe bọt tuyết 1 lít** giá **159.000đ** ạ, pha 1:100 rửa được 20–25 lần, freeship.' },
     { k: 'ai', img: 'bot-tuyet' },
-    { k: 'ai', text: 'Anh rửa xe **tại nhà hay ngoài tiệm** để em tư vấn cách pha cho đúng nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp mẫu khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên mẫu' },
-    { k: 'kh', shot: { img: 'phu-bong', cap: 'Phủ bóng nano: sơn bóng như mới, giữ bóng 4–6 tuần ✨' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng mẫu. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là **phủ bóng nano 500ml** ạ, giữ bóng khoảng 4–6 tuần, còn hàng anh nha.' },
-    { k: 'ai', card: { title: 'Phủ Bóng Nano 500ml, Sơn Bóng Như Mới, Giữ Bóng 4–6 Tuần Mỗi Lần Phủ', gia: '249.000đ', cu: '289.000đ' } },
-    { k: 'ai', img: 'phu-bong' },
-    { k: 'ai', text: 'Anh rửa xe tại nhà hay ngoài tiệm để em tư vấn cách dùng cả 2 nha.' },
+    { k: 'ai', text: 'Anh rửa xe **tại nhà** hay ngoài tiệm ạ, để em chỉ cách pha cho đúng nha?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: 'Xe đen, không có máy → AI chỉ cách rửa', s: 'Pha xô, lau nhẹ tay: không lo xước sơn' },
+    { k: 'kh', text: 'Rửa ở nhà e, xe màu đen. K có máy phun bọt dùng đc k?' },
+    { k: 'ai', text: 'Dạ được ạ. Không có máy anh pha **1:100 vào xô**, lau bằng khăn mềm nhẹ tay, bọt dày nên **xe đen không lo xước** nha.' },
+    { k: 'kh', text: 'Ok vậy lấy a 1 can' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Khách chọn xong: AI xin SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ em ghi **1 can bọt tuyết 1 lít**, **159.000đ**, freeship. Anh gửi em **SĐT và địa chỉ** nhận hàng để em lên đơn nha.' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng mẫu khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng mẫu khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng can bọt tuyết khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Phong ơi, **bọt tuyết** bọt dày, không cần chà mạnh nên **không xước sơn** ạ. Anh nhắn em rửa tại nhà hay ngoài tiệm để em chỉ cách pha nha 😊' },
+    { k: 'ai', text: 'Anh Phong ơi, em giữ cho anh **1 can bọt tuyết 1 lít** rồi ạ. Anh gửi em SĐT, địa chỉ để cuối tuần anh **rửa xe tại nhà** luôn nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Em gửi anh ảnh rửa thật nha 📸 Bọt phủ kín cả xe, xả nước là sạch bùn đất.' },
-    { k: 'ai', img: 'rua-xe' },
+    { k: 'ai', text: 'Em gửi anh ảnh thật khách rửa bằng bọt tuyết bên em nha 📸 Bọt phủ kín xe, lau nhẹ bằng khăn mềm là sạch bùn đất.' },
+    { k: 'ai', imgs: ['rua-xe', 'khan'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: '**Bọt tuyết 1 lít** vẫn đang **159.000đ**, freeship ạ. Anh nhắn em là em gửi hàng liền nha ⚡' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ** là em lên đơn liền, **freeship**, giao 1–2 ngày ạ ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'AI tư vấn ngay khi khách nhắn' },
-    { k: 'kh', text: 'Rửa ở nhà e, xe màu đen' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: '091288824, 88 nguyễn văn linh q7' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Tư vấn cách dùng', t: 'Rửa tại nhà, xe đen → pha 1:100, không xước', s: 'Rồi chủ động hỏi: lấy bọt tuyết hay cả phủ bóng?' },
-    { k: 'ai', text: 'Dạ rửa tại nhà anh pha **1:100** là đủ bọt, xe đen cũng không lo xước ạ. Anh lấy bọt tuyết hay lấy kèm phủ bóng để em lên đơn nha?' },
-    { k: 'kh', text: 'Lấy kèm phủ bóng luôn' },
-    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Khách lấy kèm phủ bóng: AI hỏi số lượng', s: 'Báo luôn ưu đãi mua 2 chai' },
-    { k: 'ai', text: 'Dạ phủ bóng 1 chai **249.000đ**, mua **2 chai** chỉ **219.000đ/chai** ạ. Anh lấy 1 hay 2 chai ạ?' },
-    { k: 'ai', imgs: ['bot-tuyet', 'phu-bong'] },
-    { k: 'kh', text: '2 chai đi e' },
-    { k: 'ai', text: 'Dạ em ghi 1 bọt tuyết 1 lít + 2 phủ bóng nano, tổng **597.000đ**, freeship. Anh gửi em **SĐT và địa chỉ** nhận hàng nha.' },
     { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'SĐT thiếu số → hỏi lại ngay lập tức' },
-    { k: 'kh', text: '091288824, 88 nguyễn văn linh q7' },
     { k: 'ai', text: 'Dạ em ghi địa chỉ rồi ạ, nhưng số **091288824** mới có 9 số, anh kiểm tra lại giúp em nha.' },
-    { k: 'kh', text: '0912888246' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: sản phẩm, số lượng, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Nước rửa xe bọt tuyết 1 lít x1\n– Phủ bóng nano 500ml x2\n– Tổng: **597.000đ** (freeship)\n– 0912 888 246\n– 88 Nguyễn Văn Linh, Q.7, TP.HCM\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
+    { k: 'kh', text: '0912888246 e' },
+    { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: sản phẩm, SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Nước rửa xe bọt tuyết 1 lít x1\n– Tổng: **159.000đ** (freeship)\n– Người nhận: Phong · 0912 888 246\n– 88 Nguyễn Văn Linh, Q.7, TP.HCM\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok e"' },
     { k: 'kh', text: 'Ok e' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh liền nha ⚡', d: 1300 },
+    { k: 'ai', text: 'Dạ em lên đơn, gửi hàng cho anh liền nha ⚡', d: 1300 },
 
-    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động
+    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động → nhân viên xác nhận
     { k: 'cap', e: 'Gửi đơn về Facebook', t: 'Sự kiện mua hàng gửi ngay lên Facebook', s: 'Quảng cáo tối ưu theo đơn thật' },
     { k: 'panel', v: 'capi', d: 900 },
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 2200 },
@@ -123,27 +94,27 @@ window.VN_KB = {
     { k: 'p', a: 'xn', d: 3000 },
     { k: 'panel', v: null, d: 500 },
 
-    // Mua xong: tin cảm ơn kèm 5 món chăm xe đang giảm giá (theo afterSale.sp của bài 1)
+    // Mua xong: tin cảm ơn kèm 5 món chăm xe đang giảm giá (theo afterSale.sp của bài 1, bỏ bọt tuyết khách vừa mua)
     { k: 'cap', e: 'Bán thêm sau mua', t: 'Cảm ơn khách, gửi kèm 5 món đang giảm giá', s: 'Khách bấm "Mua ngay" ngay trong Messenger' },
-    { k: 'ai', text: 'Dạ cảm ơn anh Phong nha 🎉 Đơn đã được xác nhận, shop giao sớm cho anh. Shop đang giảm giá mấy món chăm nội thất, anh xem thử nha:' },
+    { k: 'ai', text: 'Dạ cảm ơn anh Phong nha 🎉 Đơn đã được xác nhận, shop gửi hàng sớm cho anh. Shop đang giảm giá mấy món chăm xe hay dùng kèm, anh xem thử nha:' },
     { k: 'car', sp: [
+        { img: 'phu-bong', ten: 'Phủ bóng nano 500ml', gia: '249.000đ', cu: '289.000đ', giam: '-14%' },
+        { img: 'khan', ten: 'Bộ 3 khăn microfiber', gia: '79.000đ', cu: '99.000đ', giam: '-20%' },
         { img: 'xit-da-nang', ten: 'Xịt nội thất đa năng 500ml', gia: '169.000đ', cu: '189.000đ', giam: '-11%' },
         { img: 'duong-da', ten: 'Dưỡng da ghế ô tô 250ml', gia: '149.000đ', cu: '169.000đ', giam: '-12%' },
         { img: 'lau-noi-that', ten: 'Dung dịch lau taplo', gia: '109.000đ', cu: '129.000đ', giam: '-16%' },
-        { img: 'khan', ten: 'Bộ 3 khăn microfiber', gia: '79.000đ', cu: '99.000đ', giam: '-20%' },
-        { img: 'rua-xe', ten: 'Combo rửa xe tại nhà', gia: '399.000đ', cu: '459.000đ', giam: '-13%' },
       ], d: 5200 },
 
-    // Chăm sóc sau bán: tin sau bán gửi qua Zalo → chuyển màn hình sang Zalo
-    { k: 'zalo', gio: '19:30', ngay: 'CN 22/11/2026', chip: '3 ngày sau · khách đã nhận hàng', d: 1500 },
-    { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Khách nhận hàng: AI hỏi dùng có ổn không', s: 'Xin đánh giá ngay trong tin Zalo OA của shop' },
+    // Chăm sóc sau bán qua Zalo
+    { k: 'zalo', gio: '19:30', ngay: 'T7 21/11/2026', chip: 'Tối hôm nhận · anh đã nhận hàng', d: 1500 },
+    { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Khách nhận hàng: AI hỏi rửa có sạch không', s: 'Dặn cách rửa, xin đánh giá ngay trong tin Zalo OA' },
     { k: 'zns', zns: {
         img: 'rua-xe', tieuDe: 'Anh Phong ơi, rửa xe bọt tuyết có sạch không ạ?',
-        noiDung: 'Xe Sạch cảm ơn anh đã nhận đơn **#XS51836** (Bọt tuyết 1 lít · Phủ bóng nano x2). Anh dùng thấy ổn không, đánh giá giúp shop nha!',
+        noiDung: 'Xe Sạch cảm ơn anh đã nhận đơn **#XS51836** (Bọt tuyết 1 lít). Anh rửa trong bóng râm, đừng để bọt khô trên sơn nha!',
         nut: 'Đánh giá sản phẩm',
       }, d: 4200 },
     { k: 'cap', e: 'ZBS · Sản phẩm bán chạy', t: '1 tuần sau: gửi mẫu bán chạy qua Zalo', s: 'Khách không cần trả lời' },
-    { k: 'zstamp', gio: '19:30', ngay: 'CN 29/11/2026', chip: '1 tuần sau', d: 800 },
+    { k: 'zstamp', gio: '19:30', ngay: 'T7 28/11/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
         banner: ['xit-da-nang', 'phu-bong', 'khan', 'lau-noi-that'], nhan: 'TOP BÁN CHẠY TUẦN NÀY', mau: '#F97316',
         tieuDe: '🔥 Top bán chạy tuần này tại Xe Sạch',
@@ -151,7 +122,7 @@ window.VN_KB = {
         nut: 'Xem ngay',
       }, d: 4600 },
     { k: 'cap', e: 'ZBS · Khuyến mãi', t: '1 tuần sau nữa: gửi ưu đãi cho khách cũ', s: 'Kéo khách quay lại mua tiếp, không cần khách nhắn' },
-    { k: 'zstamp', gio: '19:30', ngay: 'CN 06/12/2026', chip: '1 tuần sau', d: 800 },
+    { k: 'zstamp', gio: '19:30', ngay: 'T7 05/12/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
         banner: ['duong-da', 'xit-da-nang', 'bot-tuyet', 'khan'], nhan: 'VOUCHER 15% CHO KHÁCH CŨ',
         tieuDe: 'Tặng anh Phong voucher 15%',
@@ -162,7 +133,7 @@ window.VN_KB = {
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: 5 cột giống hệt YaMe
+  // Slide tổng kết cuối video (theo slide "Chốt lại 5 ô" nhóm thương mại điện tử; bám đuổi = 5 tin trong 7 ngày)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
@@ -171,19 +142,19 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'LP', ten: 'Lê Phong', sub: 'Messenger · từ quảng cáo Rửa xe bọt tuyết',
+    tag: { av: 'LP', ten: 'Lê Phong', sub: 'Messenger · bình luận quảng cáo Rửa xe bọt tuyết',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#ruaxebottuyet', 'qt hot'], ['#ruaxe', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#PhuBongNano', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #ruaxebottuyet', tieuDe: '3 tin ngắn về bọt tuyết 1 lít',
-              dong: [['15 phút', 'Nhắc bọt dày, không xước sơn'], ['3 tiếng', 'Gửi ảnh rửa thật'], ['20 tiếng', 'Nhắc giá, freeship']] },
-      reply: 'Khách trả lời "Rửa ở nhà e, xe màu đen" · dừng bám đuổi' },
-    capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '597.000đ', pk: 'Purchase · 597.000đ',
-      dong: [['Đơn hàng', '#XS51836 · Bọt tuyết + phủ bóng x2'], ['Nguồn khách', 'Quảng cáo Rửa xe bọt tuyết → Messenger'], ['Giá trị', '597.000 VND'], ['Event ID', 'XS51836-PURCHASE (chống trùng)']],
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#RuaTaiNha', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #ruaxebottuyet', tieuDe: '3 tin ngắn về can bọt tuyết khách đã chọn',
+              dong: [['15 phút', 'Đã giữ can bọt tuyết cho khách'], ['3 tiếng', 'Gửi ảnh thật rửa bằng bọt tuyết'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
+    capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '159.000đ', pk: 'Purchase · 159.000đ',
+      dong: [['Đơn hàng', '#XS51836 · Bọt tuyết 1 lít'], ['Nguồn khách', 'Bình luận quảng cáo Rửa xe bọt tuyết → Messenger'], ['Giá trị', '159.000 VND'], ['Event ID', 'XS51836-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {
-    ma: '#XS51836', sp: 'Bọt tuyết 1 lít + phủ bóng nano 500ml', bien: 'Bọt tuyết x1 · Phủ bóng x2', img: 'bot-tuyet', gia: '597.000đ',
+    ma: '#XS51836', sp: 'Nước rửa xe bọt tuyết 1 lít', bien: 'Pha 1:100 · rửa 20–25 lần · x1', img: 'bot-tuyet', gia: '159.000đ',
     phi: ['Phí vận chuyển', 'freeship'],
     nv: { ten: 'Nhân viên Minh', av: 'M' },
     ten: 'Lê Phong', sdt: '0912 888 246', dc: '88 Nguyễn Văn Linh, Q.7, TP.HCM', gio: '11:05 · 19/11/2026',

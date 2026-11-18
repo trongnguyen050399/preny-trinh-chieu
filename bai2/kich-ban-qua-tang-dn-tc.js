@@ -1,9 +1,14 @@
-/* Kịch bản video demo NGANG 16:9: QUÀ TẶNG DOANH NGHIỆP (nhóm thương mại điện tử), làm 18/11/2026 theo mạch mẫu YaMe.
-   Nội dung lấy từ bài 1 (demo/kich-ban/qua-tang-dn-tc.js): Quà Tặng Mộc An, hộp quà trà & hạt 690.000đ (deck.binhLuan, chị Thu),
-   giỏ trái cây nhập khẩu 790.000đ, hộp quà gỗ bánh & mứt 850.000đ, đơn 30 phần chốt trước 15/12 giảm 15% = 20.655.000đ,
-   khách chị Lan (Cty CP Minh An, 25 Lý Thường Kiệt, xuất VAT), 5 món bán thêm (afterSale.sp), mã MOCAN5 (afterSale.zbs).
-   Ca khó: 10 phần gửi Đà Nẵng, TP.HCM → trái cây đi xa dễ dập, gợi ý đổi sang hộp quà khô; xuất VAT → hỏi thêm mã số thuế.
-   Tên shop, giá, khách, công ty, SĐT, mã số thuế: dữ liệu minh họa. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
+/* Bài 2 (video demo ngang tự chạy): QUÀ TẶNG DOANH NGHIỆP, nhóm thương mại điện tử. Viết lại 18/11/2026 theo mạch Yến chưng tươi người dùng chốt cùng ngày:
+   - 1 cảnh duy nhất: bài quảng cáo giỏ trái cây, 2 khách bình luận (hỏi giá, hỏi gửi tỉnh có dập không) → trả lời cả 2 "Mình check ib shop nha"
+     → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi 1 điều (công ty cần bao nhiêu giỏ) → khách trả lời: 30 giỏ, cần xuất VAT
+     → AI báo giá số lượng (giảm 10% còn 711.000đ/giỏ), hỏi in logo lên thiệp hay ruy băng → khách chọn thiệp → AI xin SĐT + địa chỉ → khách im
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + #InLogoThiep) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT, địa chỉ, thông tin VAT
+     (ca khó: xuất VAT thiếu mã số thuế) → tóm tắt đơn → Purchase lên Facebook
+     → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 mẫu quà giảm giá → Zalo: hỏi thăm, bán chạy, khuyến mãi → tổng kết → logo.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (giỏ trái cây nhập khẩu); in logo, xuất VAT nằm trong cùng đơn này.
+   Nội dung lấy từ bài 1 (demo/kich-ban/qua-tang-dn-tc.js): Quà Tặng Mộc An, giỏ trái cây 790.000đ, từ 30 phần giảm 10% (711.000đ),
+   khách chị Lan (Cty CP Minh An, 25 Lý Thường Kiệt), 5 món bán thêm (afterSale.sp), mã MOCAN5 (afterSale.zbs).
+   Tên shop, giá, khách, công ty, SĐT, mã số thuế: minh họa. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
 window.VN_KB = {
   ten: 'Quà tặng doanh nghiệp video ngang',
   ketSub: 'Để AI báo giá, chốt đơn quà tặng cho doanh nghiệp của bạn',
@@ -19,96 +24,65 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '10:20' },
-    { k: 'fb', post: {
-        gio: '2 giờ', img: 'hop-den', likes: '932', soCmt: '58 bình luận',
-        text: 'Quà cuối năm sang mà tinh tế 🎁 Hộp quà trà & hạt cao cấp, in logo công ty miễn phí, xuất VAT, giao tận tay từng đối tác. Giá chỉ 690.000đ/hộp!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi in logo ở bình luận kế bên' },
-    { k: 'cmt', i: 0, ten: 'Phạm Thu', av: 'PT', text: 'Giá sao shop ơi?' },
-    { k: 'cmt', i: 1, ten: 'Hoàng Yến', av: 'HY', text: 'In logo công ty lên hộp được không shop, đặt 20 hộp thôi?' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
+    { k: 'ad', ad: {
+        img: 'gio-trai-cay', nhan: 'MESSENGER', tieuDe: 'Giỏ trái cây nhập khẩu · In logo, xuất VAT', nut: 'Gửi tin nhắn',
+        text: 'Quà cuối năm gửi đối tác 🍇 Giỏ trái cây nhập khẩu nho, lê, mận tươi, in logo lên thiệp, ruy băng, xuất VAT cho công ty. Giao tận tay từng người nhận. #giotraicay #quadoanhnghiep #mobile',
+      }, d: 1500 },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi gửi tỉnh có dập không' },
+    { k: 'cmt', i: 0, ten: 'Lan Phạm', av: 'LP', text: 'Giỏ này giá sao shop?' },
+    { k: 'cmt', i: 1, ten: 'Hoàng Yến', av: 'HY', text: 'Gửi Đà Nẵng trái cây có bị dập không shop?' },
     { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
     { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
     { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'hop-den', dong1: 'Bạn đã bình luận về bài viết của Quà Tặng Mộc An', dong2: '"Giá sao shop ơi?"' }, gio: '10:22' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào chị Thu, hộp quà trà & hạt giá **690.000đ/hộp** ạ (giá gốc 750.000đ), in logo miễn phí.' },
-    { k: 'ai', card: { title: 'Hộp Quà Trà & Hạt Cao Cấp, In Logo Doanh Nghiệp Miễn Phí, Xuất Hóa Đơn VAT', gia: '690.000đ', cu: '750.000đ' } },
-    { k: 'ai', img: 'hop-den' },
-    { k: 'ai', text: 'Hộp để được lâu, gửi đi tỉnh cũng được ạ. Công ty mình cần **bao nhiêu hộp** để em báo giá số lượng nha?' },
-    { k: 'cap', e: 'Hỏi số lượng', t: 'Khách trả lời 1 câu, AI báo đúng giá sỉ', s: 'Đơn từ 30 hộp tự giảm 10%' },
-    { k: 'kh', text: '50 hộp nha e, giao HN' },
-    { k: 'ai', text: 'Dạ 50 hộp bên em **giảm 10%**, còn **621.000đ/hộp** ạ, đủ hàng giao trong tuần. Chị gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0912 476 380, tầng 8, 39 Trần Hưng Đạo, Hoàn Kiếm' },
-    { k: 'ai', text: 'Dạ em lên đơn cho chị rồi nha:\n– 50 hộp quà trà & hạt, in logo\n– **31.050.000đ** (đã giảm 10%)\n– 0912 476 380\n– Tầng 8, 39 Trần Hưng Đạo, Hoàn Kiếm, HN\nShop gọi chị xác nhận, nhận file logo rồi giao ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
-    { k: 'ad', ad: {
-        img: 'gio-trai-cay', nhan: 'MESSENGER', tieuDe: 'Quà tặng đối tác · Nhắn shop báo giá', nut: 'Gửi tin nhắn',
-        text: 'Quà cuối năm gửi đối tác 🍇 Giỏ trái cây nhập khẩu nho, lê, mận tươi, in logo lên thiệp, ruy băng, xuất VAT cho công ty. Giao tận tay từng người nhận. #giotraicay #quadoanhnghiep #mobile',
-      }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'gio-trai-cay', dong1: 'Lan đã trả lời một quảng cáo', dong2: 'Giỏ trái cây nhập khẩu' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Giỏ này giá bao nhiêu shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng mẫu trên quảng cáo kèm giá', s: 'Khách không cần mô tả lại sản phẩm' },
-    { k: 'ai', text: 'Dạ chào chị Lan, **giỏ trái cây nhập khẩu** trên quảng cáo giá **790.000đ/giỏ** ạ (giá gốc 850.000đ).' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'gio-trai-cay', dong1: 'Bạn đã bình luận về quảng cáo của Quà Tặng Mộc An', dong2: '"Giỏ này giá sao shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại sản phẩm' },
+    { k: 'ai', text: 'Dạ chào chị Lan, giỏ trái cây nhập khẩu trên quảng cáo giá **790.000đ/giỏ** ạ, in logo công ty miễn phí.' },
     { k: 'ai', img: 'gio-trai-cay' },
-    { k: 'ai', text: 'Chị cho em xin **số lượng** và **nơi giao** để em báo giá nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp mẫu khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên mẫu' },
-    { k: 'kh', shot: { img: 'hop-go', cap: 'Hộp quà gỗ bánh & mứt, in logo lên nắp hộp, để được 2–3 tuần 🎁' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng mẫu. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là **hộp quà gỗ bánh & mứt** ạ, để được 2–3 tuần, còn hàng chị nha.' },
-    { k: 'ai', card: { title: 'Hộp Quà Gỗ Bánh & Mứt Cao Cấp, In Logo Lên Nắp Hộp, Giữ Được 2–3 Tuần', gia: '850.000đ', cu: '950.000đ' } },
-    { k: 'ai', img: 'hop-go' },
-    { k: 'ai', text: 'Chị cho em xin số lượng và nơi giao để em tư vấn cả 2 mẫu nha.' },
+    { k: 'ai', text: 'Công ty mình cần **bao nhiêu giỏ** để em báo giá số lượng nha chị?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: '30 giỏ, cần xuất VAT → báo giá sỉ', s: 'Đơn từ 30 giỏ tự giảm 10%' },
+    { k: 'kh', text: '30 giỏ tặng đối tác e, có xuất VAT k?' },
+    { k: 'ai', text: 'Dạ 30 giỏ bên em **giảm 10%**, còn **711.000đ/giỏ** ạ, có **xuất VAT** cho công ty mình nha.' },
+    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Có số lượng rồi: AI hỏi chỗ in logo', s: 'In lên thiệp hay ruy băng đều miễn phí' },
+    { k: 'ai', text: 'Logo công ty mình in lên **thiệp** hay **ruy băng** ạ? Kiểu nào bên em cũng in miễn phí.' },
+    { k: 'kh', text: 'In lên thiệp nha e' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ em ghi **30 giỏ trái cây, in logo lên thiệp**, tổng **21.330.000đ** ạ. Chị gửi em **SĐT và địa chỉ** nhận quà để em lên đơn nha.' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng mẫu khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng mẫu khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng 30 giỏ khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Chị Lan ơi, giỏ trái cây bên em **in logo lên thiệp, ruy băng** và **xuất VAT** cho công ty ạ. Chị nhắn em số lượng để em báo giá nha 😊' },
+    { k: 'ai', text: 'Chị Lan ơi, em giữ cho chị **30 giỏ trái cây in logo lên thiệp** rồi ạ. Chị gửi em SĐT, địa chỉ để em xếp lịch giao nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Em gửi chị ảnh thật để chị trình sếp duyệt cho nhanh nha 📸' },
-    { k: 'ai', img: 'gio-trai-cay-2' },
+    { k: 'ai', text: 'Em gửi chị ảnh thật giỏ bên em vừa giao cho công ty khác nha 📸 Trái cây nhập trong tuần, thiệp in logo, thắt ruy băng.' },
+    { k: 'ai', imgs: ['gio-trai-cay-2', 'gio-trai-cay'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Đơn từ **30 phần** bên em giảm 10%, chốt trước **15/12** em **giảm 15%** luôn ạ. Cuối năm lịch giao kín nhanh, chị nhắn em để giữ lịch nha ⚡' },
+    { k: 'ai', text: 'Chị chỉ cần gửi **SĐT và địa chỉ** là em lên đơn, **xuất VAT** luôn ạ. Cuối năm lịch giao kín nhanh, em giữ lịch cho công ty mình nha ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'AI tư vấn ngay khi khách nhắn' },
-    { k: 'kh', text: 'Cty cần 30 phần e, 20 giao HN, 10 gửi Đà Nẵng với HCM' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: 'Chị Lan 0904223456, 25 Lý Thường Kiệt Hoàn Kiếm. Xuất VAT cty CP Minh An nhé' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Ca khó: gửi tỉnh xa', t: 'Trái cây đi xa dễ dập → đổi sang hộp quà khô', s: 'Rồi hỏi khách chọn hộp nào cho 10 phần gửi tỉnh' },
-    { k: 'ai', text: 'Dạ 20 phần giao HN chị lấy giỏ trái cây được ạ. Riêng **10 phần gửi Đà Nẵng, HCM**, trái cây đi xa dễ dập, em gợi ý đổi sang **hộp quà khô** nha.' },
-    { k: 'ai', text: '10 phần gửi tỉnh chị chọn **hộp quà gỗ 850.000đ** hay **hộp trà & hạt 690.000đ** ạ?' },
-    { k: 'ai', imgs: ['hop-go', 'hop-den'] },
-    { k: 'kh', text: 'Hộp gỗ nhé' },
-    { k: 'cap', e: 'Báo giá cả đơn', t: '20 giỏ + 10 hộp gỗ, tự trừ ưu đãi 15%', s: 'Xin SĐT, địa chỉ; danh sách người nhận gửi sau' },
-    { k: 'ai', text: 'Dạ 20 giỏ trái cây + 10 hộp quà gỗ, giảm 15% còn **20.655.000đ** ạ. Chị gửi em **SĐT và địa chỉ** văn phòng, danh sách người nhận gửi file sau cũng được nha.' },
-    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Cần xuất VAT → hỏi thêm mã số thuế' },
-    { k: 'kh', text: 'Chị Lan 0904 223 456, 25 Lý Thường Kiệt, Hoàn Kiếm. Xuất VAT cho Cty CP Minh An nhé' },
-    { k: 'ai', text: 'Dạ em ghi rồi ạ. Chị cho em xin thêm **mã số thuế** Cty CP Minh An để em xuất hóa đơn đúng nha.' },
-    { k: 'kh', text: '0108457692 e' },
+    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Xuất VAT thiếu mã số thuế → hỏi lại ngay' },
+    { k: 'ai', text: 'Dạ em ghi SĐT, địa chỉ rồi ạ. Chị cho em xin thêm **mã số thuế** Cty CP Minh An để em xuất hóa đơn đúng nha.' },
+    { k: 'kh', text: '0108457692 e, file logo c gửi sau nha' },
     { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: số lượng, VAT, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ chị kiểm tra lại đơn giúp em nha:\n– 20 giỏ trái cây nhập khẩu · giao HN\n– 10 hộp quà gỗ · gửi Đà Nẵng, HCM\n– Tổng: **20.655.000đ** (đã giảm 15%)\n– Xuất VAT: Cty CP Minh An\n– 0904 223 456 · 25 Lý Thường Kiệt, Hoàn Kiếm\nChị xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3800 },
+    { k: 'ai', text: 'Dạ chị kiểm tra lại đơn giúp em nha:\n– 30 giỏ trái cây nhập khẩu, in logo lên thiệp\n– Tổng: **21.330.000đ** (đã giảm 10%)\n– Xuất VAT: Cty CP Minh An · MST 0108457692\n– Chị Lan · 0904 223 456\n– 25 Lý Thường Kiệt, Hoàn Kiếm, HN\nChị xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3800 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok e"' },
     { k: 'kh', text: 'Ok e' },
-    { k: 'ai', text: 'Dạ em lên đơn cho chị liền nha ⚡', d: 1300 },
+    { k: 'ai', text: 'Dạ em lên đơn, chị gửi file logo là em in thiệp liền nha ⚡', d: 1300 },
 
-    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động
+    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động → nhân viên xác nhận
     { k: 'cap', e: 'Gửi đơn về Facebook', t: 'Sự kiện mua hàng gửi ngay lên Facebook', s: 'Quảng cáo tối ưu theo đơn thật' },
     { k: 'panel', v: 'capi', d: 900 },
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 2200 },
@@ -132,12 +106,12 @@ window.VN_KB = {
         { img: 'hop-go', ten: 'Hộp quà gỗ bánh & mứt', gia: '850.000đ', cu: '950.000đ', giam: '-11%' },
       ], d: 5200 },
 
-    // Chăm sóc sau bán: tin sau bán gửi qua Zalo → chuyển màn hình sang Zalo
-    { k: 'zalo', gio: '19:30', ngay: 'CN 22/11/2026', chip: '3 ngày sau · đối tác đã nhận quà', d: 1500 },
+    // Chăm sóc sau bán qua Zalo
+    { k: 'zalo', gio: '19:30', ngay: 'CN 22/11/2026', chip: '3 ngày sau · công ty đã nhận quà', d: 1500 },
     { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Giao xong: AI hỏi đối tác có ưng không', s: 'Xin đánh giá ngay trong tin Zalo OA của shop' },
     { k: 'zns', zns: {
         img: 'gio-trai-cay', tieuDe: 'Chị Lan ơi, đối tác có ưng quà không ạ?',
-        noiDung: 'Mộc An cảm ơn chị đã đặt đơn **#MA20512** (20 giỏ trái cây · 10 hộp quà gỗ). 30/30 phần đã giao đủ, chị đánh giá giúp shop nha!',
+        noiDung: 'Mộc An cảm ơn chị đã đặt đơn **#MA20512** (30 giỏ trái cây · in logo lên thiệp). 30/30 giỏ đã giao đủ, chị đánh giá giúp shop nha!',
         nut: 'Đánh giá dịch vụ',
       }, d: 4200 },
     { k: 'cap', e: 'ZBS · Sản phẩm bán chạy', t: '1 tuần sau: gửi mẫu bán chạy qua Zalo', s: 'Khách không cần trả lời' },
@@ -160,7 +134,7 @@ window.VN_KB = {
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: 5 cột giống hệt YaMe
+  // Slide tổng kết cuối video (giống hệt file mẫu Yến chưng tươi)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
@@ -169,20 +143,20 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'LP', ten: 'Lan Phạm', sub: 'Messenger · từ quảng cáo Giỏ trái cây nhập khẩu',
+    tag: { av: 'LP', ten: 'Lan Phạm', sub: 'Messenger · bình luận quảng cáo Giỏ trái cây nhập khẩu',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#giotraicay', 'qt hot'], ['#quadoanhnghiep', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#HopQuaGo', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #giotraicay', tieuDe: '3 tin ngắn về giỏ trái cây nhập khẩu',
-              dong: [['15 phút', 'Nhắc in logo, xuất VAT'], ['3 tiếng', 'Gửi ảnh thật để trình sếp'], ['20 tiếng', 'Ưu đãi 30 phần, giữ lịch giao']] },
-      reply: 'Khách trả lời "Cty cần 30 phần e…" · dừng bám đuổi' },
-    capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '20.655.000đ', pk: 'Purchase · 20.655.000đ',
-      dong: [['Đơn hàng', '#MA20512 · 20 giỏ + 10 hộp quà gỗ'], ['Nguồn khách', 'Quảng cáo Giỏ trái cây → Messenger'], ['Giá trị', '20.655.000 VND'], ['Event ID', 'MA20512-PURCHASE (chống trùng)']],
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#InLogoThiep', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #giotraicay', tieuDe: '3 tin ngắn về 30 giỏ khách đã chọn',
+              dong: [['15 phút', 'Đã giữ 30 giỏ in logo cho khách'], ['3 tiếng', 'Gửi ảnh thật giỏ vừa giao'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
+    capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '21.330.000đ', pk: 'Purchase · 21.330.000đ',
+      dong: [['Đơn hàng', '#MA20512 · 30 giỏ trái cây in logo'], ['Nguồn khách', 'Bình luận quảng cáo Giỏ trái cây → Messenger'], ['Giá trị', '21.330.000 VND'], ['Event ID', 'MA20512-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {
-    ma: '#MA20512', sp: 'Giỏ trái cây nhập khẩu + hộp quà gỗ', bien: '20 giỏ · 10 hộp gỗ · in logo', img: 'gio-trai-cay', gia: '20.655.000đ',
-    phi: ['Giao hàng', '30 địa chỉ · tận tay'],
+    ma: '#MA20512', sp: 'Giỏ trái cây nhập khẩu', bien: 'In logo lên thiệp · x30 · xuất VAT', img: 'gio-trai-cay', gia: '21.330.000đ',
+    phi: ['Giao hàng', 'miễn phí nội thành HN'],
     nv: { ten: 'Nhân viên Hà', av: 'H' },
     ten: 'Lan · Cty CP Minh An', sdt: '0904 223 456', dc: '25 Lý Thường Kiệt, P. Hoàn Kiếm, Hà Nội · xuất VAT', gio: '11:05 · 19/11/2026',
   },

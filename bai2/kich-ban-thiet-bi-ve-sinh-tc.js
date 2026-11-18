@@ -1,8 +1,13 @@
-/* Kịch bản video demo NGANG 16:9: THIẾT BỊ VỆ SINH (nhóm thương mại điện tử), làm 18/11/2026 theo mạch mẫu YaMe.
-   Nội dung lấy từ bài 1 (demo/kich-ban/thiet-bi-ve-sinh-tc.js): shop TBVS An Phát, bồn cầu một khối AP-1688, lavabo AP-L12, AP-L08,
-   khách anh Tuấn (Thủ Đức), giao và lắp miễn phí, 5 món bán thêm (afterSale.sp), voucher ANPHAT300 (afterSale.zbs).
-   Ca khó: hỏi tâm xả để chọn đúng loại bồn cầu; địa chỉ lắp đặt thiếu số nhà → hỏi lại.
-   Tên shop, mã sản phẩm, giá, khách, SĐT: dữ liệu minh họa. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
+/* Bài 2 (video demo ngang tự chạy): THIẾT BỊ VỆ SINH, nhóm thương mại điện tử. Viết lại 18/11/2026 theo mạch mẫu Yến chưng tươi:
+   - 1 cảnh duy nhất: bài quảng cáo bồn cầu một khối AP-1688, 2 khách bình luận (hỏi giá, hỏi lắp tận nơi ở Bình Dương)
+     → trả lời cả 2 "Mình check ib shop nha" → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi tâm xả
+     → khách không rành tâm xả (ca khó) → AI chỉ cách đo → khách đo được 30 phân → AI chốt loại 305mm, xin SĐT + địa chỉ → khách im
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + #TamXa305) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT + địa chỉ
+     (ca khó: thiếu số nhà) → tóm tắt đơn → Purchase lên Facebook
+     → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 món hợp tông đang giảm giá → Zalo: hỏi thăm, bán chạy, voucher → tổng kết → logo.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (bồn cầu AP-1688), không có đoạn khách hỏi sản phẩm khác.
+   Nội dung lấy từ bài 1 (demo/kich-ban/thiet-bi-ve-sinh-tc.js): shop TBVS An Phát, khách anh Tuấn (Thủ Đức), giao và lắp miễn phí,
+   afterSale.sp, voucher ANPHAT300. Tên shop, mã sản phẩm, giá, khách, SĐT: minh họa. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
 window.VN_KB = {
   ten: 'Thiết bị vệ sinh video ngang',
   ketSub: 'Để AI bán hàng cho showroom của bạn',
@@ -21,94 +26,63 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '20:32' },
-    { k: 'fb', post: {
-        gio: '2 giờ', img: 'lavabo-tron', likes: '1,1K', soCmt: '64 bình luận',
-        text: 'Lavabo đặt bàn tròn AP-L08 💧 Sứ trắng men nano, chống bám bẩn, lau một lần là sạch. Bảo hành men 5 năm, đang giảm chỉ còn 990.000đ!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi lắp đặt ở bình luận kế bên' },
-    { k: 'cmt', i: 0, ten: 'Hằng Lê', av: 'HL', text: 'Giá sao shop ơi?' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
+    { k: 'ad', ad: {
+        img: 'bon-cau', nhan: 'MESSENGER', tieuDe: 'Bồn cầu một khối · AP-1688', nut: 'Gửi tin nhắn',
+        text: 'Xả êm, sạch, cả nhà đều ưng 🚽 Bồn cầu một khối AP-1688 nắp đóng êm, xả xoáy, men sứ bảo hành 5 năm. Giao và lắp miễn phí nội thành TP.HCM. #boncaumotkhoi #boncau #mobile',
+      }, d: 1500 },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi có lắp tận nơi không' },
+    { k: 'cmt', i: 0, ten: 'Nguyễn Tuấn', av: 'NT', text: 'Bồn cầu này giá bao nhiêu shop?' },
     { k: 'cmt', i: 1, ten: 'Lê Nam', av: 'LN', text: 'Nhà mình ở Bình Dương có lắp tận nơi không shop?' },
     { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
     { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
     { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'lavabo-tron', dong1: 'Bạn đã bình luận về bài viết của TBVS An Phát', dong2: '"Giá sao shop ơi?"' }, gio: '20:34' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, tự nhiên như người bán' },
-    { k: 'ai', text: 'Dạ chào chị Hằng, lavabo đặt bàn tròn **AP-L08** giá **990.000đ** ạ (giá gốc 1.090.000đ).' },
-    { k: 'ai', card: { title: 'Lavabo Đặt Bàn Tròn AP-L08 Sứ Trắng Men Nano, Chống Bám Bẩn, Bảo Hành Men 5 Năm', gia: '990.000đ', cu: '1.090.000đ' } },
-    { k: 'ai', imgs: ['lavabo-tron', 'phong-tam-3', 'phong-tam-2'] },
-    { k: 'ai', text: 'Lavabo sứ trắng, lắp hợp cả bàn đá lẫn tủ gỗ. Chị cho em xin **chiều rộng mặt bàn** để em check đặt có vừa không nha?' },
-    { k: 'cap', e: 'Hỏi kích thước', t: 'Khách trả lời 1 câu, AI chọn đúng mẫu', s: 'Kiểm tra luôn mẫu khách hỏi còn hàng' },
-    { k: 'kh', text: 'bàn rộng 60 e, lấy 1 cái nha' },
-    { k: 'ai', text: 'Dạ bàn 60cm đặt **AP-L08** vừa đẹp ạ, còn hàng. Chị gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0938 214 657, 18 Phan Xích Long, Phú Nhuận' },
-    { k: 'ai', text: 'Dạ em lên đơn cho chị rồi nha:\n– Lavabo đặt bàn tròn AP-L08\n– **990.000đ**\n– 0938 214 657\n– 18 Phan Xích Long, Phú Nhuận\nShop gọi chị xác nhận rồi giao liền ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
-    { k: 'ad', ad: {
-        img: 'bon-cau', nhan: 'MESSENGER', tieuDe: 'Bồn cầu một khối · Nhắn shop tư vấn', nut: 'Gửi tin nhắn',
-        text: 'Xả êm, sạch, cả nhà đều ưng 🚽 Bồn cầu một khối AP-1688 nắp đóng êm, xả xoáy, men sứ bảo hành 5 năm. Giao và lắp miễn phí nội thành. #boncaumotkhoi #boncau #mobile',
-      }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'bon-cau', dong1: 'Tuấn đã trả lời một quảng cáo', dong2: 'Bồn cầu một khối AP-1688' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Bồn cầu này giá bao nhiêu shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng mẫu trên quảng cáo kèm giá', s: 'Khách không cần mô tả lại sản phẩm' },
-    { k: 'ai', text: 'Dạ chào anh Tuấn, bồn cầu một khối **AP-1688** trên quảng cáo giá **4.290.000đ** ạ (đang giảm 15%).' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'bon-cau', dong1: 'Bạn đã bình luận về quảng cáo của TBVS An Phát', dong2: '"Bồn cầu này giá bao nhiêu shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại sản phẩm' },
+    { k: 'ai', text: 'Dạ chào anh Tuấn, bồn cầu một khối **AP-1688** giá **4.290.000đ** ạ (đang giảm 15%), giao và lắp miễn phí nội thành.' },
     { k: 'ai', img: 'bon-cau' },
-    { k: 'ai', text: 'Anh cho em xin **tâm xả** (từ tường tới tâm lỗ thoát) để em chọn đúng loại nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp mẫu khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên mẫu' },
-    { k: 'kh', shot: { img: 'lavabo-vuong', cap: 'Lavabo đặt bàn vuông AP-L12, sứ trắng men nano, hợp mọi phòng tắm ✨' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng mẫu. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là lavabo đặt bàn vuông **AP-L12** ạ, mua kèm bồn cầu **giảm thêm 300.000đ** anh nha.' },
-    { k: 'ai', card: { title: 'Lavabo Đặt Bàn Vuông AP-L12 Sứ Trắng Men Nano, Hợp Tông Bồn Cầu AP-1688', gia: '1.150.000đ', cu: '1.350.000đ' } },
-    { k: 'ai', img: 'lavabo-vuong' },
-    { k: 'ai', text: 'Anh cho em xin **tâm xả** và **chiều rộng mặt bàn** để em tư vấn cả 2 mẫu nha.' },
+    { k: 'ai', text: 'Mẫu này có loại **tâm xả 305mm** và **400mm**. Anh cho em xin tâm xả nhà mình để em chọn đúng loại nha?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: 'Không rành tâm xả → AI chỉ cách đo', s: 'Một câu dễ hiểu, khách tự đo được' },
+    { k: 'kh', text: 'tâm xả là sao e, a k rành' },
+    { k: 'ai', text: 'Dạ anh đo từ **mặt tường** tới **tâm lỗ thoát** dưới sàn nha. Khoảng 30 phân là loại **305mm**, khoảng 40 phân là loại **400mm** ạ.' },
+    { k: 'kh', text: 'đo được 30 phân e, nhà a ở Thủ Đức' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Đo xong: AI chốt loại 305mm, xin SĐT', s: 'Báo luôn Thủ Đức được lắp miễn phí' },
+    { k: 'ai', text: 'Dạ vậy là **tâm xả 305mm** ạ. Em ghi **bồn cầu AP-1688 tâm 305mm**, 4.290.000đ, Thủ Đức lắp miễn phí. Anh gửi em **SĐT và địa chỉ** lắp đặt để em lên đơn nha.' },
+
+    // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng mẫu khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng mẫu khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng bồn cầu khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Tuấn ơi, **AP-1688** có loại **tâm xả 305mm** và **400mm** ạ. Anh đo giúp em tâm xả để em giữ đúng loại nha 😊' },
+    { k: 'ai', text: 'Anh Tuấn ơi, em giữ cho anh **bồn cầu AP-1688 tâm xả 305mm** rồi ạ. Anh gửi em SĐT, địa chỉ để em hẹn thợ qua lắp nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Em gửi anh ảnh lắp thật nha 📸 Bồn cầu một khối nhìn gọn, lau chùi cũng dễ hơn.' },
-    { k: 'ai', img: 'phong-tam-2' },
+    { k: 'ai', text: 'Em gửi anh ảnh thật phòng tắm khách vừa lắp bên em nha 📸 Bồn một khối nhìn gọn, lau chùi cũng dễ hơn.' },
+    { k: 'ai', imgs: ['phong-tam-2', 'bon-cau'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Bồn cầu **AP-1688** vẫn đang **4.290.000đ**, giao và lắp miễn phí ạ. Anh nhắn em tâm xả là em giữ hàng liền nha ⚡' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ** là em lên đơn liền, **giao và lắp miễn phí**, men sứ bảo hành 5 năm ạ ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'AI tư vấn ngay khi khách nhắn' },
-    { k: 'kh', text: 'Tâm 305 e, nhà a ở Thủ Đức' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: '0903456789, đường Võ Văn Ngân, Thủ Đức' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Tư vấn đúng loại', t: 'Tâm xả 305mm → lắp vừa AP-1688', s: 'Rồi chủ động hỏi: lấy bồn cầu hay cả lavabo?' },
-    { k: 'ai', text: 'Dạ tâm **305mm** lắp vừa AP-1688 ạ, Thủ Đức bên em **giao và lắp miễn phí**. Anh lấy bồn cầu hay lấy kèm lavabo để em lên đơn nha?' },
-    { k: 'kh', text: 'Lấy bồn cầu trước đã e' },
-    { k: 'cap', e: 'Chốt đúng mẫu', t: 'Ghi đúng mẫu, đúng tâm xả rồi xin SĐT', s: 'Lavabo để dành bán thêm sau khi mua' },
-    { k: 'ai', text: 'Dạ em ghi bồn cầu **AP-1688**, tâm xả **305mm**, giá **4.290.000đ**. Anh gửi em **SĐT và địa chỉ** lắp đặt nha.' },
-    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Địa chỉ thiếu số nhà → hỏi lại ngay' },
-    { k: 'kh', text: '0903456789, đường Võ Văn Ngân, Thủ Đức' },
-    { k: 'ai', text: 'Dạ em ghi SĐT rồi ạ. Anh cho em xin thêm **số nhà** trên đường Võ Văn Ngân để thợ tới lắp đúng chỗ nha.' },
+    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Thiếu số nhà → hỏi lại ngay lập tức' },
+    { k: 'ai', text: 'Dạ em ghi SĐT rồi ạ. Đường **Võ Văn Ngân** anh cho em xin thêm **số nhà** để thợ tới lắp đúng chỗ nha.' },
     { k: 'kh', text: 'Số 12 e' },
     { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: mẫu, tâm xả, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Bồn cầu một khối AP-1688, tâm xả 305mm\n– Tổng: **4.290.000đ** (giao và lắp miễn phí)\n– 0903 456 789\n– 12 Võ Văn Ngân, Thủ Đức\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
+    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Bồn cầu một khối AP-1688, tâm xả 305mm\n– Tổng: **4.290.000đ** (giao và lắp miễn phí)\n– Người nhận: Tuấn · 0903 456 789\n– 12 Võ Văn Ngân, TP. Thủ Đức\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok e"' },
     { k: 'kh', text: 'Ok e' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh liền nha ⚡', d: 1300 },
+    { k: 'ai', text: 'Dạ em lên đơn, hẹn thợ qua lắp cho anh liền nha ⚡', d: 1300 },
 
-    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động
+    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động → nhân viên xác nhận
     { k: 'cap', e: 'Gửi đơn về Facebook', t: 'Sự kiện mua hàng gửi ngay lên Facebook', s: 'Quảng cáo tối ưu theo đơn thật' },
     { k: 'panel', v: 'capi', d: 900 },
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 2200 },
@@ -132,16 +106,16 @@ window.VN_KB = {
         { img: 'guong', ten: 'Gương phòng tắm 60 × 80 cm', gia: '1.071.000đ', cu: '1.190.000đ', giam: '-10%' },
       ], d: 5200 },
 
-    // Chăm sóc sau bán: tin sau bán gửi qua Zalo → chuyển màn hình sang Zalo
-    { k: 'zalo', gio: '19:30', ngay: 'CN 22/11/2026', chip: '3 ngày sau · đã giao và lắp', d: 1500 },
-    { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Lắp xong: AI hỏi dùng có ổn không', s: 'Xin đánh giá ngay trong tin Zalo OA của shop' },
+    // Chăm sóc sau bán qua Zalo
+    { k: 'zalo', gio: '19:30', ngay: 'T7 21/11/2026', chip: 'Tối hôm lắp · bồn cầu đã lắp xong', d: 1500 },
+    { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Lắp xong: AI hỏi dùng có êm không', s: 'Dặn giữ men sứ, xin đánh giá ngay trong tin Zalo OA' },
     { k: 'zns', zns: {
         img: 'bon-cau', tieuDe: 'Anh Tuấn ơi, bồn cầu dùng có êm không ạ?',
-        noiDung: 'An Phát cảm ơn anh đã nhận đơn **#AP30217** (Bồn cầu AP-1688 · tâm xả 305mm). Anh dùng thấy ổn không, đánh giá giúp shop nha!',
+        noiDung: 'An Phát cảm ơn anh đã nhận đơn **#AP30217** (Bồn cầu AP-1688 · tâm xả 305mm). Anh lau men bằng khăn mềm, không dùng chất tẩy có axit nha!',
         nut: 'Đánh giá sản phẩm',
       }, d: 4200 },
     { k: 'cap', e: 'ZBS · Sản phẩm bán chạy', t: '1 tuần sau: gửi mẫu bán chạy qua Zalo', s: 'Khách không cần trả lời' },
-    { k: 'zstamp', gio: '19:30', ngay: 'CN 29/11/2026', chip: '1 tuần sau', d: 800 },
+    { k: 'zstamp', gio: '19:30', ngay: 'T7 28/11/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
         banner: ['sen-tam', 'lavabo-vuong', 'guong', 'voi'], nhan: 'TOP BÁN CHẠY TUẦN NÀY', mau: '#F97316',
         tieuDe: '🔥 Top bán chạy tuần này tại An Phát',
@@ -149,7 +123,7 @@ window.VN_KB = {
         nut: 'Xem ngay',
       }, d: 4600 },
     { k: 'cap', e: 'ZBS · Khuyến mãi', t: '1 tuần sau nữa: gửi ưu đãi cho khách cũ', s: 'Kéo khách quay lại mua tiếp, không cần khách nhắn' },
-    { k: 'zstamp', gio: '19:30', ngay: 'CN 06/12/2026', chip: '1 tuần sau', d: 800 },
+    { k: 'zstamp', gio: '19:30', ngay: 'T7 05/12/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
         banner: ['lavabo-tron', 'sen-tam', 'phong-tam-1', 'guong'], nhan: 'VOUCHER 300.000Đ CHO KHÁCH CŨ',
         tieuDe: 'Tặng anh Tuấn voucher 300.000đ',
@@ -160,7 +134,7 @@ window.VN_KB = {
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: 5 cột giống hệt YaMe
+  // Slide tổng kết cuối video (theo slide "Chốt lại 5 ô" nhóm thương mại điện tử; bám đuổi = 5 tin trong 7 ngày)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
@@ -169,15 +143,15 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'NT', ten: 'Nguyễn Tuấn', sub: 'Messenger · từ quảng cáo Bồn cầu một khối',
+    tag: { av: 'NT', ten: 'Nguyễn Tuấn', sub: 'Messenger · bình luận quảng cáo Bồn cầu một khối',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#boncaumotkhoi', 'qt hot'], ['#boncau', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#LavaboVuong', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #boncaumotkhoi', tieuDe: '3 tin ngắn về bồn cầu AP-1688',
-              dong: [['15 phút', 'Nhắc đo tâm xả để giữ đúng loại'], ['3 tiếng', 'Gửi ảnh lắp thật'], ['20 tiếng', 'Nhắc giá, lắp miễn phí']] },
-      reply: 'Khách trả lời "Tâm 305 e, nhà a ở Thủ Đức" · dừng bám đuổi' },
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#TamXa305', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #boncaumotkhoi', tieuDe: '3 tin ngắn về bồn cầu khách đã chọn',
+              dong: [['15 phút', 'Đã giữ AP-1688 tâm 305mm cho khách'], ['3 tiếng', 'Gửi ảnh lắp thật'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '4.290.000đ', pk: 'Purchase · 4.290.000đ',
-      dong: [['Đơn hàng', '#AP30217 · Bồn cầu AP-1688 · 305mm'], ['Nguồn khách', 'Quảng cáo Bồn cầu một khối → Messenger'], ['Giá trị', '4.290.000 VND'], ['Event ID', 'AP30217-PURCHASE (chống trùng)']],
+      dong: [['Đơn hàng', '#AP30217 · Bồn cầu AP-1688 · 305mm'], ['Nguồn khách', 'Bình luận quảng cáo Bồn cầu một khối → Messenger'], ['Giá trị', '4.290.000 VND'], ['Event ID', 'AP30217-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {

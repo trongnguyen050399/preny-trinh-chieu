@@ -1,9 +1,15 @@
-/* Kịch bản video demo NGANG 16:9: SERVO THÁO MÁY (nhóm thương mại điện tử), làm 18/11/2026 theo mạch mẫu YaMe.
-   Nội dung lấy từ bài 1 (demo/kich-ban/servo-thao-may-tc.js): Kho Servo Bắc Ninh, driver Yaskawa 750W (deck.binhLuan, anh Quang,
-   motor SGMJV-08ADE6S), driver Panasonic MINAS A5 400W 2.400.000đ → 2.200.000đ + tặng cáp encoder (bám đuổi #HoiGia),
-   khách anh Hùng (Cty TNHH Bao Bì Minh Phát, Lô C5 KCN Quế Võ, xuất VAT), 5 món bán thêm (afterSale.sp), mã SERVO5 (afterSale.zbs).
-   Ca khó: khách hỏi lắp driver A6 cho motor A5 (khác chuẩn encoder, không chạy); địa chỉ thiếu số lô → hỏi lại.
-   Tên shop, giá, khách, SĐT: dữ liệu minh họa. Mã motor Panasonic, Yaskawa là mã thật. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
+/* Bài 2 (video demo ngang tự chạy): SERVO THÁO MÁY, nhóm thương mại điện tử. Viết lại 18/11/2026 theo mạch mẫu Yến chưng tươi:
+   - 1 cảnh duy nhất: bài quảng cáo driver Panasonic MINAS A5 400W, 2 khách bình luận (hỏi giá, hỏi giao Hải Phòng mấy ngày)
+     → trả lời cả 2 "Mình check ib shop nha" → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi mã tem motor
+     → khách gửi MSME042G1U, hỏi lắp driver A6 cho rẻ (ca khó: khác chuẩn encoder, không chạy) → AI chốt đúng driver A5
+     → hỏi xuất VAT, khách chọn có → AI xin tên công ty, SĐT, địa chỉ xưởng → khách im
+     → gắn thẻ (3 hashtag quảng cáo + #baogia + #MSME042G1U) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng (tin 3: 2.200.000đ + tặng cáp encoder)
+     → khách gửi thông tin (ca khó: thiếu số lô trong KCN) → tóm tắt đơn → Purchase lên Facebook
+     → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 món xưởng hay dùng kèm đang giảm giá → Zalo: hỏi thăm, bán chạy, mã SERVO5 → tổng kết → logo.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (driver A5 400W), không có đoạn khách hỏi sản phẩm khác.
+   Nội dung lấy từ bài 1 (demo/kich-ban/servo-thao-may-tc.js): Kho Servo Bắc Ninh, khách anh Hùng (Cty TNHH Bao Bì Minh Phát, Lô C5 KCN Quế Võ),
+   giá 2.400.000đ → 2.200.000đ + cáp encoder (bám đuổi #HoiGia), afterSale.sp, mã SERVO5. Tên shop, giá, khách, SĐT: minh họa.
+   Mã motor Panasonic là mã thật. Ảnh: ảnh có sẵn của bài 1 (demo/assets/img/u/). */
 window.VN_KB = {
   ten: 'Servo tháo máy video ngang',
   ketSub: 'Để AI tư vấn đúng mã, chốt đơn cho kho hàng của bạn',
@@ -21,98 +27,65 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận xin giá → Inbox', gio: '09:12' },
-    { k: 'fb', post: {
-        gio: '2 giờ', img: 'lo-servo', likes: '486', soCmt: '37 bình luận',
-        text: 'Driver, motor servo tháo máy Nhật đủ đời A4, A5, A6, Yaskawa Sigma ⚙️ Test chạy có tải trước khi gửi, bảo hành 3 tháng, lỗi 1 đổi 1. Giao nhanh KCN trong ngày!',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận xin giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Một khách khác hỏi lắp khác đời ở bình luận kế bên' },
-    { k: 'cmt', i: 0, ten: 'Trần Quang', av: 'TQ', text: 'Driver Yaskawa 750W giá sao shop?' },
-    { k: 'cmt', i: 1, ten: 'Đức Mạnh', av: 'ĐM', text: 'Motor A5 lắp driver A6 được không shop?' },
+    /* ================= BÌNH LUẬN QUẢNG CÁO → INBOX (cảnh duy nhất) ================= */
+    { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
+    { k: 'ad', ad: {
+        img: 'tu-driver', nhan: 'MESSENGER', tieuDe: 'Driver servo A5 · 400W tháo máy', nut: 'Gửi tin nhắn',
+        text: 'Máy dừng vì driver báo lỗi? ⚙️ Driver Panasonic MINAS A5 400W tháo máy Nhật, test chạy có tải, bảo hành 3 tháng, lỗi 1 đổi 1. Giao nhanh trong ngày tới KCN. #servoa5 #driverservo #mobile',
+      }, d: 1500 },
+    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới quảng cáo', s: 'Một khách khác hỏi giao Hải Phòng mấy ngày' },
+    { k: 'cmt', i: 0, ten: 'Hùng Nguyễn', av: 'HN', text: 'Driver này giá sao shop?' },
+    { k: 'cmt', i: 1, ten: 'Trần Quang', av: 'TQ', text: 'Giao Hải Phòng mất mấy ngày vậy shop?' },
     { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Tư vấn chi tiết trong tin nhắn riêng' },
     { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
     { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'lo-servo', dong1: 'Bạn đã bình luận về bài viết của Kho Servo Bắc Ninh', dong2: '"Driver Yaskawa 750W giá sao shop?"' }, gio: '09:14' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: báo giá, gửi ảnh thật', s: 'Viết ngắn gọn, đúng nghề như người bán' },
-    { k: 'ai', text: 'Dạ chào anh Quang, driver **Yaskawa 750W** tháo máy bên em giá **từ 1.800.000đ** ạ.' },
-    { k: 'ai', card: { title: 'Driver Servo Yaskawa 750W Tháo Máy Nhật, Đã Test Có Tải, Bảo Hành 3 Tháng, Lỗi 1 Đổi 1', gia: 'từ 1.800.000đ' } },
-    { k: 'ai', imgs: ['tu-dien', 'lo-servo', 'tho-lap'] },
-    { k: 'ai', text: 'Anh đọc giúp em **mã trên tem motor** để em lấy đúng đời nha?' },
-    { k: 'cap', e: 'Hỏi mã tem motor', t: 'Khách trả lời 1 câu, AI đọc đúng mã', s: 'Báo luôn còn hàng, giá đúng con' },
-    { k: 'kh', text: 'SGMJV-08ADE6S e, giao Hải Phòng nhé' },
-    { k: 'ai', text: 'Dạ **SGMJV-08ADE6S** là motor **Yaskawa Sigma-5, 750W, 200V** ạ, driver đúng đời còn hàng, giá **1.800.000đ**. Anh gửi em **SĐT và địa chỉ** để em lên đơn nha 😊' },
-    { k: 'cap', e: 'Chốt đơn', t: 'Xin SĐT, địa chỉ: khách đưa đủ', s: 'AI tóm tắt đơn ngay trong chat' },
-    { k: 'kh', text: '0936 512 478, Lô B2 KCN Đình Vũ, Hải An, Hải Phòng' },
-    { k: 'ai', text: 'Dạ em lên đơn cho anh rồi nha:\n– Driver Yaskawa Sigma-5 750W (tháo máy, đã test)\n– **1.800.000đ**\n– 0936 512 478\n– Lô B2 KCN Đình Vũ, Hải An, Hải Phòng\nShop gọi anh xác nhận rồi giao liền, 1–2 ngày tới ạ 🎉', d: 3800 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
-    { k: 'ad', ad: {
-        img: 'tu-driver', nhan: 'MESSENGER', tieuDe: 'Driver servo A5 · Nhắn shop báo giá', nut: 'Gửi tin nhắn',
-        text: 'Máy dừng vì driver báo lỗi? ⚙️ Driver Panasonic MINAS A5 400W tháo máy Nhật, test chạy có tải, bảo hành 3 tháng, lỗi 1 đổi 1. Giao nhanh trong ngày tới KCN. #servoa5 #driverservo #mobile',
-      }, d: 1500 },
-    { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
-    { k: 'tap', d: 1100 },
-    { k: 'ms', ref: { loai: 'ad', img: 'tu-driver', dong1: 'Hùng đã trả lời một quảng cáo', dong2: 'Driver Panasonic A5 400W' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Driver này giá bao nhiêu shop?' },
-    { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng mẫu trên quảng cáo kèm giá', s: 'Khách không cần mô tả lại sản phẩm' },
-    { k: 'ai', text: 'Dạ chào anh Hùng, driver **Panasonic A5 400W** trên quảng cáo giá **2.400.000đ** ạ, bảo hành 3 tháng.' },
+    { k: 'ms', ref: { loai: 'cmt', img: 'tu-driver', dong1: 'Bạn đã bình luận về quảng cáo của Kho Servo Bắc Ninh', dong2: '"Driver này giá sao shop?"' }, gio: '14:47' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại sản phẩm' },
+    { k: 'ai', text: 'Dạ chào anh Hùng, driver **Panasonic A5 400W** tháo máy giá **2.400.000đ** ạ, đã test có tải, bảo hành 3 tháng.' },
     { k: 'ai', img: 'tu-driver' },
-    { k: 'ai', text: 'Anh đọc giúp em **mã trên tem motor** để em lấy đúng đời, đúng công suất nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp mẫu khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên mẫu' },
-    { k: 'kh', shot: { img: 'plc', cap: 'PLC Mitsubishi FX3G tháo máy, test đủ cổng I/O trước khi gửi 🔧' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng mẫu. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là **PLC Mitsubishi FX3G-24M** tháo máy ạ, đã test đủ cổng, còn hàng anh nha.' },
-    { k: 'ai', card: { title: 'PLC Mitsubishi FX3G-24M Tháo Máy Nhật, Đã Test Đủ Cổng I/O, Bảo Hành 3 Tháng', gia: '3.200.000đ', cu: '3.600.000đ' } },
-    { k: 'ai', img: 'plc' },
-    { k: 'ai', text: 'Anh gửi em mã tem motor để em báo đúng cả 2 món nha.' },
+    { k: 'ai', text: 'Anh đọc giúp em **mã trên tem motor** để em lấy đúng đời, đúng công suất nha?' },
 
-    // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
+    { k: 'cap', e: 'Khách trả lời', t: 'Motor A5 hỏi lắp A6 → AI báo không chạy', s: 'Đọc mã tem ra đời, công suất, điện áp' },
+    { k: 'kh', text: 'Tem ghi MSME042G1U. Lắp con A6 được k e, rẻ hơn' },
+    { k: 'ai', text: 'Dạ **MSME042G1U** là motor **Panasonic A5, 400W, 200V** ạ. Driver A6 **khác chuẩn encoder**, lắp vào sẽ báo lỗi, anh lấy đúng **driver A5** là cắm lại cáp cũ chạy luôn nha.' },
+    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Khách doanh nghiệp: AI hỏi xuất VAT', s: 'Hỏi 1 câu, khách chỉ cần chọn' },
+    { k: 'ai', text: 'Anh lấy cho xưởng thì có cần **xuất VAT** không ạ?' },
+    { k: 'kh', text: 'Có xuất VAT nhé' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin công ty, SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ em ghi **driver A5 400W**, 2.400.000đ, có xuất VAT. Anh gửi em **tên công ty, SĐT và địa chỉ xưởng** để em lên đơn nha.' },
+
+    // Khách im sau khi được xin thông tin → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
-    { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng mã khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
+    { k: 'cap', e: 'Khách im', t: 'Chưa gửi SĐT: Preny tự gắn thẻ khách', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
     { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
-    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng mã hàng khách quan tâm' },
+    { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng driver khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Hùng ơi, driver **A5** phải **cùng đời** với motor mới chạy ạ. Anh nhắn em mã tem motor để em lấy đúng con nha 😊' },
+    { k: 'ai', text: 'Anh Hùng ơi, em giữ cho anh **driver A5 400W** đúng motor **MSME042G1U** rồi ạ. Anh gửi em thông tin để em giao nhanh trong ngày nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 18/11/2026', d: 700 },
-    { k: 'ai', text: 'Em gửi anh ảnh test có tải nha 📸 Driver A5 bên em chạy êm, không báo lỗi.' },
-    { k: 'ai', img: 'tu-dien' },
+    { k: 'ai', text: 'Em gửi anh ảnh thật test có tải con driver A5 này nha 📸 Chạy êm, không báo lỗi.' },
+    { k: 'ai', imgs: ['tu-dien', 'may-cnc', 'tho-lap'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 19/11/2026', d: 700 },
-    { k: 'ai', text: 'Driver **A5 400W** chỉ còn **2 con** ạ. Anh chốt hôm nay em để **2.200.000đ**, tặng cáp encoder dự phòng nha 🎁' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ xưởng** là em lên đơn liền. Chốt hôm nay em để **2.200.000đ**, tặng **cáp encoder** dự phòng ạ 🎁' },
     { k: 'p', a: 'r3', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách trả lời để chốt đơn', s: 'AI đọc mã, tư vấn ngay khi khách nhắn' },
-    { k: 'kh', text: 'Tem ghi MSME042G1U. Lắp con A6 được k e, rẻ hơn' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI kiểm tra ngay thông tin khách gửi' },
+    { k: 'kh', text: 'Cty TNHH Bao Bì Minh Phát, a Hùng 0987654321, KCN Quế Võ' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-
-    { k: 'cap', e: 'Ca khó: khác đời', t: 'Motor A5 → phải đi driver A5, không lắp A6', s: 'Rồi chủ động hỏi: lấy driver hay cả PLC?' },
-    { k: 'ai', text: 'Dạ **MSME042G1U** là motor **Panasonic A5 400W** ạ. Driver A6 **khác chuẩn encoder**, lắp vào sẽ báo lỗi, anh lấy đúng **driver A5** nha.' },
-    { k: 'ai', text: 'Anh lấy driver hay lấy kèm PLC ạ?' },
-    { k: 'kh', text: 'Lấy driver thôi, máy đang dừng e' },
-    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Khách doanh nghiệp: AI hỏi xuất VAT', s: 'Gửi ảnh đúng con driver và cáp tặng kèm' },
-    { k: 'ai', text: 'Dạ em giữ driver A5 400W giá **2.200.000đ**, tặng cáp encoder. Anh có cần **xuất VAT** không ạ?' },
-    { k: 'ai', imgs: ['tu-driver', 'cap-encoder'] },
-    { k: 'kh', text: 'Có xuất VAT nhé' },
-    { k: 'ai', text: 'Dạ em ghi có xuất VAT ạ. Anh gửi em **tên công ty, SĐT và địa chỉ xưởng** nha.' },
-    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Địa chỉ thiếu số lô → hỏi lại ngay' },
-    { k: 'kh', text: 'Cty TNHH Bao Bì Minh Phát, a Hùng 0987654321, KCN Quế Võ' },
+    { k: 'cap', e: 'Kiểm tra dữ liệu', t: 'Thiếu số lô trong KCN → hỏi lại ngay' },
     { k: 'ai', text: 'Dạ em ghi rồi ạ. Anh cho em xin thêm **số lô** trong KCN Quế Võ để giao đúng xưởng nha.' },
     { k: 'kh', text: 'Lô C5 e' },
     { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: mã hàng, VAT, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Driver Panasonic A5 400W (tháo máy, đã test)\n– Tặng 1 cáp encoder dự phòng\n– Tổng: **2.200.000đ**, có xuất VAT\n– Cty TNHH Bao Bì Minh Phát · 0987 654 321\n– Lô C5, KCN Quế Võ, Bắc Ninh\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
+    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Driver Panasonic A5 400W (tháo máy, đã test)\n– Tặng 1 cáp encoder dự phòng\n– Tổng: **2.200.000đ**, có xuất VAT\n– Cty TNHH Bao Bì Minh Phát\n– Người nhận: Hùng · 0987 654 321\n– Lô C5, KCN Quế Võ, Bắc Ninh\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3600 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok e"' },
     { k: 'kh', text: 'Ok e' },
     { k: 'ai', text: 'Dạ em lên đơn, giao nhanh trong ngày cho anh nha ⚡', d: 1300 },
 
-    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động
+    // Chốt đơn → màn hình phụ: gửi đơn hàng cho Facebook → đơn tự động → nhân viên xác nhận
     { k: 'cap', e: 'Gửi đơn về Facebook', t: 'Sự kiện mua hàng gửi ngay lên Facebook', s: 'Quảng cáo tối ưu theo đơn thật' },
     { k: 'panel', v: 'capi', d: 900 },
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 2200 },
@@ -136,16 +109,16 @@ window.VN_KB = {
         { img: 'tu-dien', ten: 'Lắp tủ điện servo trọn gói', gia: '8.075.000đ', cu: '8.500.000đ', giam: '-5%' },
       ], d: 5200 },
 
-    // Chăm sóc sau bán: tin sau bán gửi qua Zalo → chuyển màn hình sang Zalo
-    { k: 'zalo', gio: '19:30', ngay: 'CN 22/11/2026', chip: '3 ngày sau · khách đã nhận hàng', d: 1500 },
-    { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Lắp xong: AI hỏi máy chạy có ổn không', s: 'Xin đánh giá ngay trong tin Zalo OA của shop' },
+    // Chăm sóc sau bán qua Zalo
+    { k: 'zalo', gio: '19:30', ngay: 'T7 21/11/2026', chip: '2 ngày sau · driver đã lắp lên máy', d: 1500 },
+    { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Lắp xong: AI hỏi máy chạy có ổn không', s: 'Nhắc cài thông số, xin đánh giá ngay trong tin Zalo OA' },
     { k: 'zns', zns: {
         img: 'tu-driver', tieuDe: 'Anh Hùng ơi, máy cắt chạy ổn chưa ạ?',
-        noiDung: 'Kho Servo cảm ơn anh đã nhận đơn **#KS10842** (Driver Panasonic A5 400W). Máy chạy ổn không, anh đánh giá giúp kho nha!',
+        noiDung: 'Kho Servo cảm ơn anh đã nhận đơn **#KS10842** (Driver Panasonic A5 400W). Anh nhớ cài lại **thông số Pr** theo máy cũ, cần hướng dẫn kho gửi ngay nha!',
         nut: 'Đánh giá sản phẩm',
       }, d: 4200 },
     { k: 'cap', e: 'ZBS · Sản phẩm bán chạy', t: '1 tuần sau: gửi mẫu bán chạy qua Zalo', s: 'Khách không cần trả lời' },
-    { k: 'zstamp', gio: '19:30', ngay: 'CN 29/11/2026', chip: '1 tuần sau', d: 800 },
+    { k: 'zstamp', gio: '19:30', ngay: 'T7 28/11/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
         banner: ['tu-driver', 'plc', 'bien-tan', 'lo-servo'], nhan: 'TOP BÁN CHẠY TUẦN NÀY', mau: '#F97316',
         tieuDe: '🔥 Top bán chạy tuần này tại Kho Servo',
@@ -153,7 +126,7 @@ window.VN_KB = {
         nut: 'Xem ngay',
       }, d: 4600 },
     { k: 'cap', e: 'ZBS · Khuyến mãi', t: '1 tuần sau nữa: gửi ưu đãi cho khách cũ', s: 'Kéo khách quay lại mua tiếp, không cần khách nhắn' },
-    { k: 'zstamp', gio: '19:30', ngay: 'CN 06/12/2026', chip: '1 tuần sau', d: 800 },
+    { k: 'zstamp', gio: '19:30', ngay: 'T7 05/12/2026', chip: '1 tuần sau', d: 800 },
     { k: 'zns', zns: {
         banner: ['lo-servo', 'tu-dien', 'plc', 'cap-encoder'], nhan: 'KHÁCH CŨ GIẢM 5% · MÃ SERVO5',
         tieuDe: 'Ưu đãi riêng cho Cty Bao Bì Minh Phát',
@@ -164,7 +137,7 @@ window.VN_KB = {
     { k: 'tongket', d: 8500 },
     { k: 'outro', d: 5200 },
   ],
-  // Slide tổng kết cuối video: 5 cột giống hệt YaMe
+  // Slide tổng kết cuối video (theo slide "Chốt lại 5 ô" nhóm thương mại điện tử; bám đuổi = 5 tin trong 7 ngày)
   tongKet: { tieuDe: 'Quy trình Preny AI giúp', em: 'tăng tỷ lệ chốt đơn', cot: [
     { ten: 'Khách hàng', icon: 'users', dong: ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến'] },
     { ten: 'AI Chatbot', icon: 'bot', dong: ['Phản hồi nhanh tức thì', 'Kêu gọi khách hàng mua hàng', 'Lấy thông tin và chốt đơn'] },
@@ -173,15 +146,15 @@ window.VN_KB = {
     { ten: 'Mua lại', icon: 'refresh', dong: ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo', 'Sản phẩm bán chạy, giảm giá, sản phẩm mới'] },
   ] },
   panels: {
-    tag: { av: 'HN', ten: 'Hùng Nguyễn', sub: 'Messenger · từ quảng cáo Driver servo A5',
+    tag: { av: 'HN', ten: 'Hùng Nguyễn', sub: 'Messenger · bình luận quảng cáo Driver servo A5',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#servoa5', 'qt hot'], ['#driverservo', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#PLCMitsubishi', 'qt']]]],
-      im: 'Khách im từ 14:49, sau khi được báo giá',
-      rule: { lb: 'Bám đuổi theo thẻ #servoa5', tieuDe: '3 tin ngắn về driver Panasonic A5 400W',
-              dong: [['15 phút', 'Nhắc gửi mã tem motor'], ['3 tiếng', 'Gửi ảnh test có tải'], ['20 tiếng', 'Ưu đãi giá, tặng cáp encoder']] },
-      reply: 'Khách gửi mã motor "MSME042G1U" · dừng bám đuổi' },
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#MSME042G1U', 'qt']]]],
+      im: 'Khách im từ 14:49, sau khi được xin SĐT, địa chỉ',
+      rule: { lb: 'Bám đuổi theo thẻ #servoa5', tieuDe: '3 tin ngắn về driver khách đã chọn',
+              dong: [['15 phút', 'Đã giữ driver A5 400W cho khách'], ['3 tiếng', 'Gửi ảnh thật test có tải'], ['20 tiếng', 'Chỉ cần SĐT, địa chỉ là lên đơn']] },
+      reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '2.200.000đ', pk: 'Purchase · 2.200.000đ',
-      dong: [['Đơn hàng', '#KS10842 · Driver Panasonic A5 400W'], ['Nguồn khách', 'Quảng cáo Driver servo A5 → Messenger'], ['Giá trị', '2.200.000 VND'], ['Event ID', 'KS10842-PURCHASE (chống trùng)']],
+      dong: [['Đơn hàng', '#KS10842 · Driver Panasonic A5 400W'], ['Nguồn khách', 'Bình luận quảng cáo Driver servo A5 → Messenger'], ['Giá trị', '2.200.000 VND'], ['Event ID', 'KS10842-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {

@@ -1,9 +1,10 @@
-/* Kịch bản video demo NGANG 16:9: Y TẾ, PHÒNG KHÁM (phòng khám đa khoa có nội soi, xét nghiệm, siêu âm), nhóm cân nhắc nhiều,
-   làm 18/11/2026 theo mẫu thẩm mỹ viện đã duyệt.
-   Mạch: logo → cảnh 1 bình luận hỏi giá + hỏi "nội soi gây mê có đau không" → AI trả lời cả 2 → inbox: giá tham khảo, ảnh phòng khám thật,
-   hỏi khám cho ai, có bệnh nền không → bác sĩ khám, đánh giá trước; xin tên + SĐT → báo điều dưỡng → cảnh 2 quảng cáo → khách hỏi giá
-   → AI gửi đúng ảnh quảng cáo + giá → khách chụp gói khác "Này thì sao" → AI nhận ra → xin SĐT → khách im → gắn thẻ + bám đuổi 5 tin
-   → khách giữ suất khám → xin SĐT → báo điều dưỡng gọi ngay (không lên đơn tự động) → gửi Lead lên Facebook → Zalo 3 tin → tổng kết → logo.
+/* Kịch bản video demo NGANG 16:9: Y TẾ, PHÒNG KHÁM (phòng khám đa khoa có nội soi, xét nghiệm, siêu âm), nhóm cân nhắc nhiều.
+   Viết lại 18/11/2026 theo mạch cnn người dùng chốt (mẫu thẩm mỹ viện): 1 cảnh, KHÔNG có bình luận, chỉ 1 gói khám tiêu hóa
+   từ đầu tới cuối, không có đoạn khách chụp gói khác hỏi "Này thì sao".
+   Mạch: logo → quảng cáo khám tiêu hóa → khách bấm "Gửi tin nhắn", hỏi giá → AI gửi đúng ảnh quảng cáo + giá tham khảo
+   → hỏi khó chịu ở đâu, bị bao lâu → khách đau thượng vị, sợ nội soi đau → mời bác sĩ khám trực tiếp, xin tên + SĐT
+   → khách im → gắn thẻ + bám đuổi 5 tin → khách giữ suất khám → xin SĐT → báo điều dưỡng gọi ngay (không lên đơn tự động)
+   → gửi Lead lên Facebook → Zalo 3 tin → tổng kết → logo.
    AI không chẩn đoán, không hứa kết quả, không bảo bỏ thuốc; nội soi làm hay không do bác sĩ chỉ định (như bài 1). Feedback có ghi "Kết quả tùy …".
    Không gửi triệu chứng, thông tin sức khỏe lên Facebook. Không có tin nhắc trước giờ khám (Preny chưa có tính năng này); Zalo chỉ gửi sau buổi khám.
    Không dùng ảnh giấy phép giả: tin "giấy tờ" là ảnh bác sĩ + thẻ liệt kê.
@@ -24,38 +25,8 @@ window.VN_KB = {
   beats: [
     { k: 'intro', d: 4200 },
 
-    /* ================= CẢNH 1 · BÀI VIẾT → BÌNH LUẬN → INBOX ================= */
-    { k: 'canh', nhan: 'Tình huống 1 · Bình luận hỏi giá → Inbox', gio: '19:38' },
-    { k: 'fb', post: {
-        gio: '4 giờ', img: 'bac-si-2', likes: '1,2K', soCmt: '87 bình luận',
-        text: 'Gói khám tiêu hóa 🩺 Khám với bác sĩ chuyên khoa, nội soi dạ dày gây mê khi bác sĩ chỉ định, có kết quả trong ngày. #khamtieuhoa #noisoi',
-      }, d: 1600 },
-    { k: 'cap', e: 'Bình luận hỏi giá', t: 'Khách hỏi giá ngay dưới bài viết', s: 'Khách khác hỏi "nội soi gây mê có đau không"' },
-    { k: 'cmt', i: 0, ten: 'Trần Thị Lan', av: 'TL', text: 'Gói này giá bao nhiêu vậy ạ?' },
-    { k: 'cmt', i: 1, ten: 'Quốc Huy', av: 'QH', text: 'Nội soi gây mê có đau không ạ?' },
-    { k: 'cap', e: 'Trả lời cả 2 bình luận', t: 'Trả lời ngắn gọn, mời khách vào inbox', s: 'Không tư vấn công khai dưới bài' },
-    { k: 'rep', i: 0, text: 'Mình check ib nha 💬' },
-    { k: 'rep', i: 1, text: 'Mình check ib nha 💬' },
-
-    { k: 'ms', ref: { loai: 'cmt', img: 'bac-si-2', dong1: 'Bạn đã bình luận về bài viết của Đa Khoa Mộc Lan', dong2: '"Gói này giá bao nhiêu vậy ạ?"' }, gio: '19:40' },
-    { k: 'cap', e: 'Tự động báo giá', t: 'Inbox trước: giá tham khảo, ảnh thật', s: 'Viết ngắn gọn, tự nhiên như điều dưỡng tư vấn' },
-    { k: 'ai', text: 'Dạ chào chị Lan, gói khám tiêu hóa có nội soi gây mê giá tham khảo **1.850.000đ** ạ, nội soi hay không do **bác sĩ chỉ định**.' },
-    { k: 'ai', imgs: ['le-tan', 'bac-si', 'hanh-lang'] },
-    { k: 'cap', e: 'Hỏi đúng người khám', t: 'Hỏi khám cho ai, có bệnh nền không', s: 'Không đoán bệnh qua tin nhắn' },
-    { k: 'ai', text: 'Chị khám cho mình hay cho người nhà, có bệnh nền gì không ạ?' },
-    { k: 'kh', text: 'khám cho bố c, 65t, bị huyết áp. nội soi gây mê đc k e' },
-    { k: 'cap', e: 'Lấy SĐT', t: 'Mời bác sĩ khám trước, xin tên và SĐT', s: 'AI không chẩn đoán, không trả lời chắc thay bác sĩ' },
-    { k: 'ai', text: 'Dạ người lớn tuổi có huyết áp thì **bác sĩ khám, đánh giá trước** rồi mới quyết định gây mê được không ạ, em không dám trả lời chắc. Chị cho em xin **tên và SĐT** để giữ lịch khám cho bác nha 😊' },
-    { k: 'kh', text: 'Lan, 0912 778 064. sáng CN c đưa bố đi đc' },
-    { k: 'ai', text: 'Dạ em giữ lịch khám **sáng Chủ nhật 22/11** cho bác rồi ạ. Lát điều dưỡng gọi chị dặn cách chuẩn bị nha 💙', d: 1800 },
-    { k: 'cap', e: 'Báo ngay cho điều dưỡng', t: 'Có SĐT: điều dưỡng nhận khách, gọi ngay', s: 'AI chuyển đủ thông tin, không phải hỏi lại' },
-    { k: 'panel', v: 'sale1', d: 800 },
-    { k: 'p', a: 's1', d: 700 }, { k: 'p', a: 's2', d: 500 }, { k: 'p', a: 's3', d: 500 }, { k: 'p', a: 's4', d: 600 },
-    { k: 'p', a: 's5', d: 1500 }, { k: 'p', a: 's6', d: 2600 },
-    { k: 'panel', v: null, d: 500 },
-
-    /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER ================= */
-    { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
+    /* ================= QUẢNG CÁO → MESSENGER (1 cảnh, không có bình luận, chỉ gói khám tiêu hóa) ================= */
+    { k: 'canh', nhan: 'Khách từ quảng cáo → Messenger', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'bac-si', nhan: 'MESSENGER', tieuDe: 'Khám tiêu hóa · Nội soi gây mê', nut: 'Gửi tin nhắn',
         text: 'Khám tiêu hóa với bác sĩ chuyên khoa tại Đa Khoa Mộc Lan 🩺 Nội soi dạ dày gây mê không đau khi bác sĩ chỉ định. #khamtieuhoa #noisoidaday #gayme',
@@ -63,17 +34,15 @@ window.VN_KB = {
     { k: 'cap', e: 'Quảng cáo Facebook', t: 'Khách bấm "Gửi tin nhắn" từ quảng cáo', s: 'Hỏi gì, AI trả lời ngay lập tức' },
     { k: 'tap', d: 1100 },
     { k: 'ms', ref: { loai: 'ad', img: 'bac-si', dong1: 'Thanh Mai đã trả lời một quảng cáo', dong2: 'Khám tiêu hóa · Nội soi gây mê' }, gio: '14:47', d: 900 },
-    { k: 'kh', text: 'Gói này giá bao nhiêu vậy em?' },
+    { k: 'kh', text: 'Gói khám tiêu hóa giá bao nhiêu vậy em?' },
     { k: 'cap', e: 'Khách hỏi giá', t: 'AI gửi đúng ảnh trên quảng cáo kèm giá', s: 'Giá tham khảo, nói rõ bác sĩ chỉ định' },
-    { k: 'ai', text: 'Dạ chào chị Mai, gói khám tiêu hóa có nội soi gây mê giá tham khảo **1.850.000đ** ạ.' },
+    { k: 'ai', text: 'Dạ chào chị Mai, gói khám tiêu hóa có nội soi gây mê giá tham khảo **1.850.000đ** ạ, nội soi hay không do **bác sĩ chỉ định**.' },
     { k: 'ai', img: 'bac-si' },
-    { k: 'ai', text: 'Chị khó chịu lâu chưa ạ? Nội soi hay không do **bác sĩ chỉ định** sau khi khám nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp gói khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên gói' },
-    { k: 'kh', shot: { img: 'kham-tong-quat', cap: 'Khám sức khỏe tổng quát, có kết quả trong ngày 💙 Đa Khoa Mộc Lan' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện gói khám từ ảnh', t: 'Đúng gói khám. Đúng giá tham khảo.', s: 'AI đọc ảnh khách gửi, khớp với bảng dịch vụ của phòng khám' },
-    { k: 'ai', text: 'Dạ đây là **Khám sức khỏe tổng quát**, giá **1.650.000đ** ạ. Có thể làm cùng buổi khám tiêu hóa, bác sĩ tư vấn cho chị.' },
-    { k: 'ai', text: 'Chị cho em xin **tên và SĐT** để giữ lịch khám nha 😊' },
+    { k: 'cap', e: 'Hỏi đúng tình trạng', t: 'Hỏi khó chịu ở đâu, bị bao lâu', s: 'Không đoán bệnh qua tin nhắn' },
+    { k: 'ai', text: 'Chị đang khó chịu ở đâu, bị lâu chưa ạ? Em xếp đúng bác sĩ tiêu hóa cho chị.' },
+    { k: 'kh', text: 'c hay đau thượng vị, ợ chua mấy tháng nay. c sợ nội soi đau lắm' },
+    { k: 'cap', e: 'Mời bác sĩ khám', t: 'Mời khám trực tiếp, xin tên và SĐT', s: 'AI không chẩn đoán, không trả lời chắc thay bác sĩ' },
+    { k: 'ai', text: 'Dạ đau thượng vị kéo dài thì chị nên để **bác sĩ khám trực tiếp** ạ, em không dám đoán bệnh qua tin nhắn. Nếu bác sĩ chỉ định nội soi thì có **gây mê**, chị ngủ trong lúc soi nên đỡ sợ. Chị cho em xin **tên và SĐT** để giữ lịch khám nha 💙' },
 
     // Khách im → màn hình phụ: gắn thẻ (hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 5 tin nuôi khách
     { k: 'seen', d: 1200 },
@@ -105,7 +74,7 @@ window.VN_KB = {
     { k: 'time', nhan: '2 ngày sau', gio: '15:04', ngay: 'T2 23/11/2026', d: 700 },
     { k: 'ai', text: 'Sáng thứ Bảy này bác sĩ tiêu hóa còn **3 suất**, chưa cần đặt cọc ạ. Chị muốn em giữ một suất không?' },
     { k: 'p', a: 'r5', d: 1000 },
-    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 5, khách đặt lịch khám', s: 'AI giữ suất, xin SĐT ngay' },
+    { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 5, khách giữ suất khám', s: 'AI giữ suất, xin SĐT ngay' },
     { k: 'kh', text: 'Thứ 7 này c qua được, giữ giúp c 1 suất sáng sớm nha' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
@@ -124,23 +93,23 @@ window.VN_KB = {
     { k: 'p', a: 'flow', d: 1500 }, { k: 'p', a: 'event', d: 1300 }, { k: 'p', a: 'ok', d: 3200 },
     { k: 'panel', v: null, d: 600 },
 
-    // Sau khám qua Zalo: 3 tin (hỏi thăm + lưu ý theo chỉ định bác sĩ, mời đặt lịch tái khám, ưu đãi khám định kỳ)
+    // Sau khám qua Zalo: 3 tin (hỏi thăm + lưu ý theo chỉ định bác sĩ, mời đặt lịch tái khám, ưu đãi gói khám tiêu hóa)
     { k: 'cap', e: 'Chăm sóc qua Zalo', t: 'Sau buổi khám: hỏi thăm, dặn theo chỉ định', s: 'Tin gửi qua Zalo OA của phòng khám' },
-    { k: 'zalo', gio: '19:30', ngay: 'T7 28/11/2026', chip: 'Sau buổi khám', d: 1500 },
+    { k: 'zalo', gio: '19:30', ngay: 'T7 28/11/2026', chip: 'Sau buổi khám tiêu hóa', d: 1500 },
     { k: 'zns', zns: { img: 'bac-si-2', sao: false, tieuDe: 'Chị Mai ơi, sau buổi khám chị thấy trong người sao rồi ạ?',
         noiDung: 'Mộc Lan gửi chị vài lưu ý nha:',
         dong: ['Dùng thuốc, tái khám **đúng chỉ định của bác sĩ**', 'Không tự ý ngưng thuốc khi chưa hỏi bác sĩ', 'Có gì bất thường, chị nhắn ngay để bác sĩ hỗ trợ'],
         nut: 'Nhắn cho phòng khám' }, d: 5000 },
     { k: 'cap', e: 'Mời đặt lịch tái khám', t: 'Đến hạn bác sĩ hẹn: mời khách đặt lịch', s: 'Khách bấm đặt lịch, điều dưỡng giữ giờ' },
     { k: 'zstamp', gio: '09:00', ngay: 'T7 12/12/2026', chip: '2 tuần sau', d: 800 },
-    { k: 'zns', zns: { img: 'le-tan', sao: false, tieuDe: 'Đã đến hạn tái khám bác sĩ hẹn chị ạ',
+    { k: 'zns', zns: { img: 'le-tan', sao: false, tieuDe: 'Đã đến hạn tái khám tiêu hóa bác sĩ hẹn chị ạ',
         noiDung: 'Theo hẹn của bác sĩ, chị nên tái khám trong tuần này. Chị bấm đặt lịch, em giữ suất sáng cho chị nha 💙',
         nut: 'Đặt lịch tái khám' }, d: 4400 },
-    { k: 'cap', e: 'Ưu đãi khách quen', t: 'Gửi ưu đãi khám định kỳ cho cả nhà', s: 'Khách không cần trả lời' },
+    { k: 'cap', e: 'Ưu đãi khách quen', t: 'Gửi ưu đãi khám tiêu hóa cho người nhà', s: 'Khách không cần trả lời' },
     { k: 'zstamp', gio: '19:30', ngay: 'CN 03/01/2027', chip: 'Đầu năm mới', d: 800 },
-    { k: 'zns', zns: { banner: ['kham-tong-quat', 'xet-nghiem', 'sieu-am', 'bac-si-2'], nhan: 'ƯU ĐÃI KHÁM ĐỊNH KỲ · GIẢM 15%', mau: '#0891B2',
-        tieuDe: 'Ưu đãi khám định kỳ cho chị Mai',
-        noiDung: 'Giảm **15%** gói khám định kỳ cho chị và người nhà, mã **MOCLAN15**. Áp dụng đến hết 31/03/2027.',
+    { k: 'zns', zns: { banner: ['bac-si', 'hanh-lang', 'bac-si-2', 'sieu-am'], nhan: 'ƯU ĐÃI KHÁCH QUEN · GIẢM 15%', mau: '#0891B2',
+        tieuDe: 'Ưu đãi khám tiêu hóa cho người nhà chị Mai',
+        noiDung: 'Giảm **15%** gói khám tiêu hóa cho người nhà chị, mã **MOCLAN15**. Áp dụng đến hết 31/03/2027.',
         nut: 'Đặt lịch khám' }, d: 4800 },
 
     { k: 'tongket', d: 8500 },
@@ -155,21 +124,17 @@ window.VN_KB = {
     { ten: 'Tái khám', icon: 'refresh', dong: ['Mời tái khám theo chỉ định, mời khám định kỳ qua FB và Zalo'] },
   ] },
   panels: {
-    sale1: { kieu: 'sale', tieuDe: 'Báo khách mới cho điều dưỡng', nguon: 'Bình luận bài viết → Messenger', ten: 'Trần Thị Lan', sdt: '0912 778 064',
-      nhuCau: 'Đặt khám cho bố 65 tuổi, có huyết áp, hỏi gây mê', lich: 'Khám tiêu hóa · sáng Chủ nhật 22/11',
-      the: [['#khamtieuhoa', 'qt'], ['Bình luận bài viết', 'ng'], ['Đã cho SĐT', 'ok']],
-      sale: { av: 'TH', ten: 'Điều dưỡng Thanh Hà', sub: 'Đang trực · nhận khách tự động' }, ok: 'Điều dưỡng Thanh Hà đã nhận khách, gọi ngay' },
     tag: { av: 'TM', ten: 'Nguyễn Thanh Mai', sub: 'Messenger · từ quảng cáo Khám tiêu hóa',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#khamtieuhoa', 'qt hot'], ['#noisoidaday', 'qt hot'], ['#gayme', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#KhamTongQuat', 'qt']]]],
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#DauThuongVi', 'qt']]]],
       im: 'Khách im từ 14:49, chưa để lại SĐT',
       rule: { lb: 'Bám đuổi theo thẻ #noisoidaday', tieuDe: 'Nuôi khách bằng 5 tin ngắn',
               dong: [['15 phút', 'Ảnh phòng khám thật'], ['1 ngày', 'Chia sẻ của khách nội soi gây mê'], ['1 ngày', 'Bác sĩ chuyên khoa, giấy phép, BHYT'],
                      ['1 ngày', 'Quy trình: khám trước, báo chi phí trước'], ['2 ngày', 'Mời giữ suất khám sáng thứ Bảy']] },
       reply: 'Khách giữ suất khám thứ Bảy · dừng bám đuổi' },
     sale: { tieuDe: 'Báo khách mới cho điều dưỡng', nguon: 'Quảng cáo Khám tiêu hóa → Messenger', ten: 'Nguyễn Thanh Mai', sdt: '0936 482 175',
-      nhuCau: 'Khám tiêu hóa, hỏi thêm khám sức khỏe tổng quát', lich: 'Khám tiêu hóa · 7:30 Thứ Bảy 28/11',
-      the: [['#noisoidaday', 'qt'], ['#KhamTongQuat', 'qt'], ['Đã cho SĐT', 'ok']],
+      nhuCau: 'Đau thượng vị, ợ chua mấy tháng, sợ nội soi đau', lich: 'Khám tiêu hóa · 7:30 Thứ Bảy 28/11',
+      the: [['#noisoidaday', 'qt'], ['#DauThuongVi', 'qt'], ['Đã cho SĐT', 'ok']],
       sale: { av: 'H', ten: 'Điều dưỡng Hằng', sub: 'Đang trực · nhận khách tự động' }, ok: 'Điều dưỡng Hằng đã nhận khách, gọi ngay' },
     capi: { tieuDe: 'Gửi khách tiềm năng cho Facebook', event: 'Lead', nhan: 'SỰ KIỆN KHÁCH TIỀM NĂNG', giaTri: 'Có SĐT', pk: 'Lead · khách để lại SĐT',
       dong: [['Khách', 'Nguyễn Thanh Mai · đã để lại SĐT'], ['Nguồn khách', 'Quảng cáo Khám tiêu hóa → Messenger'], ['Sự kiện', 'Đặt lịch khám'], ['Event ID', 'ML2811-LEAD (chống trùng)']],
