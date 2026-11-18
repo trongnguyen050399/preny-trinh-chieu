@@ -34,6 +34,7 @@ window.DANH_SACH = [
   { kb: 'phong-kham-tc', ten: 'Y tế, phòng khám', loai: 'cnn', icon: '🏥' },
   { kb: 'nha-khoa-tc', ten: 'Nha khoa', loai: 'cnn', icon: '🦷' },
   { kb: 'ielts-giao-tiep-tc', ten: 'Khóa học IELTS & Giao tiếp', loai: 'cnn', icon: '🎓' },
+  { kb: 'chinh-nha-trong-suot-tc', ten: 'Khóa học chỉnh nha trong suốt', loai: 'cnn', icon: '😁' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
