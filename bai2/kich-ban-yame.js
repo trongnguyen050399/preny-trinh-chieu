@@ -5,7 +5,8 @@
    - Cảnh 1: bài viết Facebook, khách hỏi giá ở bình luận, khách thứ hai hỏi tư vấn size → AI trả lời cả 2
      → AI nhắn inbox trước: báo giá, gửi ảnh thật, hỏi size → khách trả lời → xin SĐT, địa chỉ → khách đưa đủ → lên đơn.
    - Cảnh 2 (sửa lần 2, 18/11/2026): bài quảng cáo, khách bấm "Gửi tin nhắn" → khách nhắn trước hỏi giá → AI gửi đúng ảnh trên
-     quảng cáo kèm giá → khách chụp mẫu khác hỏi "Này thì sao" → như video mẫu; khách im sau khi AI xin chiều cao cân nặng
+     quảng cáo kèm giá → khách im sau khi AI xin chiều cao cân nặng (sửa 18/11/2026: bỏ đoạn khách chụp mẫu khác hỏi
+     "Này thì sao", chỉ 1 mẫu áo thun NEVER SLEEPS từ đầu tới cuối)
      → màn hình phụ gắn thẻ, bám đuổi theo thẻ → chốt đơn → màn hình phụ gửi sự kiện mua hàng lên Facebook → đơn tự động
      → tin cảm ơn kèm carousel 5 mẫu đang giảm giá → chuyển sang Zalo: chăm sóc sau bán, hỏi dùng ổn không, khách chấm 5 sao → logo kết.
    Sản phẩm, giá, ảnh: lấy thật trên yame.vn (18/11/2026). Tên khách, SĐT, địa chỉ: minh họa (theo video mẫu).
@@ -44,7 +45,7 @@ window.VN_KB = {
 
     /* ================= CẢNH 2 · QUẢNG CÁO → MESSENGER =================
        Sửa 18/11/2026 theo người dùng: khách nhắn trước hỏi giá; AI gửi đúng ảnh trên bài quảng cáo kèm giá; khách chụp mẫu khác
-       hỏi "Này thì sao"; rồi như cũ. Mua xong: tin cảm ơn kèm 5 mẫu đang giảm giá; chăm sóc sau bán qua Zalo (hỏi dùng ổn không, xin đánh giá). */
+       hỏi "Này thì sao" (đã bỏ 18/11/2026, chỉ 1 mẫu); rồi như cũ. Mua xong: tin cảm ơn kèm 5 mẫu đang giảm giá; chăm sóc sau bán qua Zalo (hỏi dùng ổn không, xin đánh giá). */
     { k: 'canh', nhan: 'Tình huống 2 · Quảng cáo → Messenger', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'p207-model', nhan: 'MESSENGER', tieuDe: 'Streetwear F4 · Nhắn shop tư vấn size', nut: 'Gửi tin nhắn',
@@ -58,20 +59,12 @@ window.VN_KB = {
     { k: 'ai', text: 'Dạ chào anh Thanh, áo **NEVER SLEEPS** trên quảng cáo giá **263.150đ** ạ (giá gốc 277.000đ), đủ size S đến XXL.' },
     { k: 'ai', img: 'p207-model' },
     { k: 'ai', text: 'Anh cho em xin chiều cao, cân nặng để em tư vấn size nha.' },
-    { k: 'cap', e: 'Không hỏi lại khách', t: 'Khách chụp mẫu khác hỏi "Này thì sao"', s: 'Chỉ một câu cộc lốc, không ghi tên mẫu' },
-    { k: 'kh', shot: { img: 'p052-1', cap: 'Áo khoác jean có nón rộng chống nắng 🔥 The Original 052' } },
-    { k: 'kh', text: 'Này thì sao' },
-    { k: 'cap', e: 'Nhận diện sản phẩm từ ảnh', t: 'Đúng mẫu. Đúng giá. Đúng tồn kho.', s: 'AI đọc ảnh khách gửi, khớp với kho sản phẩm của shop' },
-    { k: 'ai', text: 'Dạ đây là áo khoác jean **The Original 052** ạ, size L còn hàng anh nha.' },
-    { k: 'ai', card: { title: 'Áo Khoác Jean Bụi Bặm DurableTex™ Nón Rộng Chống Nắng The Original 052 Màu Xanh Dương Nhạt Dáng Rộng Rãi F4', gia: '757.150đ' } },
-    { k: 'ai', img: 'p052-1' },
-    { k: 'ai', text: 'Anh cho em xin chiều cao, cân nặng để em tư vấn size cả 2 mẫu nha.' },
 
     // Khách im → màn hình phụ: gắn thẻ (3 hashtag của bài quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin theo thẻ
     { k: 'seen', d: 1200 },
     { k: 'cap', e: 'Khách im', t: 'Preny tự gắn thẻ đúng mẫu khách quan tâm', s: 'Hashtag của bài quảng cáo thành thẻ của khách' },
     { k: 'panel', v: 'tag', d: 900 },
-    { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 650 }, { k: 'p', a: 'tag5', d: 900 },
+    { k: 'p', a: 'tag1', d: 450 }, { k: 'p', a: 'tag2', d: 450 }, { k: 'p', a: 'tag3', d: 750 }, { k: 'p', a: 'tag4', d: 900 },
     { k: 'p', a: 'im', d: 1300 },
     { k: 'p', a: 'rule', d: 2600 },
     { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng mẫu khách quan tâm' },
@@ -90,11 +83,10 @@ window.VN_KB = {
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
 
-    { k: 'cap', e: 'Tư vấn size', t: '1m69, 60kg → size M. Size L sẽ hơi rộng.', s: 'Rồi chủ động hỏi: lấy áo khoác hay áo thun?' },
-    { k: 'ai', text: 'Dạ 1m69, 60kg anh mặc **size M** vừa nhất, L sẽ hơi rộng ạ. Anh lấy áo khoác jean hay áo thun để em lên đơn nha?' },
-    { k: 'kh', text: 'Lấy cái áo thun' },
-    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Khách chọn áo thun: AI hỏi tiếp màu', s: 'Gửi ảnh 2 màu để khách chọn nhanh' },
-    { k: 'ai', text: 'Dạ áo thun có 2 màu **Xanh Dương Đậm** và **Xám**, cùng giá **263.150đ**. Anh lấy màu nào ạ?' },
+    { k: 'cap', e: 'Tư vấn size', t: '1m69, 60kg → size M. Size L sẽ hơi rộng.', s: 'Rồi hỏi tiếp đúng thứ còn thiếu: màu' },
+    { k: 'ai', text: 'Dạ 1m69, 60kg anh mặc **size M** vừa nhất, L sẽ hơi rộng ạ.' },
+    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Có size rồi: AI hỏi tiếp màu', s: 'Gửi ảnh 2 màu để khách chọn nhanh' },
+    { k: 'ai', text: 'Áo có 2 màu **Xanh Dương Đậm** và **Xám**, cùng giá **263.150đ**. Anh lấy màu nào ạ?' },
     { k: 'ai', imgs: ['p207-navy', 'p207-xam1'] },
     { k: 'kh', text: 'Xanh á em' },
     { k: 'ai', text: 'Dạ em ghi áo thun **Xanh Dương Đậm size M**, 263.150đ. Anh gửi em **SĐT và địa chỉ** nhận hàng nha.' },
@@ -171,7 +163,7 @@ window.VN_KB = {
   panels: {
     tag: { av: 'NT', ten: 'Nguyễn Văn Thanh', sub: 'Messenger · từ quảng cáo NEVER SLEEPS',
       nhom: [['Thẻ từ hashtag bài quảng cáo', [['#neversleep', 'qt hot'], ['#aothun', 'qt hot'], ['#mobile', 'ng']]],
-             ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#AokhoacJean052', 'qt']]]],
+             ['Thẻ từ cuộc chat', [['#baogia', 'ht']]]],
       im: 'Khách im từ 14:49, sau khi được báo giá',
       rule: { lb: 'Bám đuổi theo thẻ #neversleep', tieuDe: '3 tin ngắn về áo NEVER SLEEPS',
               dong: [['15 phút', 'Nhắc size M, L còn ít'], ['3 tiếng', 'Gửi ảnh mặc thật'], ['20 tiếng', 'Nhắc giá, giữ size']] },
