@@ -1098,6 +1098,28 @@ body.menu-on .tb-demo { display: none; }
 .dd-kweb { font-size: 26px; font-weight: 800; background: linear-gradient(100deg, #F9A8D4, #D8B4FE, #A5B4FC); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .dd-capi { justify-content: center; padding: 40px 30px 90px; }
 
+/* ---------- Chọn bài thuyết trình: Bài 1 (slide) / Bài 2 (video demo) ---------- */
+.bch { position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(8, 3, 24, .55); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.bch.on { opacity: 1; pointer-events: auto; }
+.bch-box { width: 1060px; padding: 40px 44px 30px; transform: translateY(16px); transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+.bch.on .bch-box { transform: none; }
+.bch-t { display: flex; align-items: center; gap: 20px; }
+.bch-t .mi { width: 66px; height: 66px; border-radius: 20px; display: grid; place-items: center; font-size: 36px; background: rgba(255, 255, 255, .08); }
+.bch-t small { display: block; font-size: 18px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim); font-weight: 600; }
+.bch-t b { font-size: 36px; font-weight: 800; color: var(--txt); }
+.bch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 30px; }
+.bch-o { position: relative; text-align: left; cursor: pointer; font: inherit; color: var(--txt); padding: 26px 28px 26px 92px; border-radius: 24px; background: rgba(255, 255, 255, .05);
+  border: 1.5px solid var(--line); transition: border-color .2s, background .2s, transform .2s; }
+.bch-o em { position: absolute; left: 26px; top: 26px; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 22px;
+  background: rgba(255, 255, 255, .1); }
+.bch-o b { display: block; font-size: 25px; font-weight: 700; }
+.bch-o span { display: block; margin-top: 8px; font-size: 18px; line-height: 1.4; color: var(--mut); }
+.bch-o:hover, .bch-o.sel { border-color: rgba(244, 114, 182, .7); background: rgba(236, 72, 153, .1); transform: translateY(-3px); }
+.bch-o.sel em { background: linear-gradient(135deg, #EC4899, #8B5CF6); color: #fff; }
+.bch-k { margin-top: 22px; text-align: center; font-size: 16px; color: var(--dim); }
+:where(html.sang) .bch { background: rgba(240, 235, 255, .6); }
+:where(html.sang) .bch-o { background: rgba(255, 255, 255, .7); }
+
 /* ============ GIAO DIỆN SÁNG (17/11/2026) ============
    Nút ☀/☾ trên thanh trên (phím T), nhớ trên máy (localStorage "preny-giao-dien"). Class "sang" đặt ở <html>.
    Nền trắng ngà ánh tím hồng, thẻ trắng đổ bóng tím nhạt, chữ tím than. Màn hình điện thoại, bảng Preny (nền trắng sẵn) giữ nguyên.

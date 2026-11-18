@@ -113,9 +113,41 @@
     const c = e.target.closest('.mc'); if (!c) return;
     const direct = downDirect || !!e.target.closest('[data-direct]');
     downDirect = false;
-    choose(c.dataset.kb, direct || !$('#optSlides').checked);
+    open1(c.dataset.kb, direct);
   });
   renderFilters(); renderMenu();
+
+  /* ---------- Chọn bài thuyết trình (18/11/2026): Bài 1 = slide như cũ, Bài 2 = video demo ngang tự chạy (bai2/) ---------- */
+  const bch = document.createElement('div'); bch.id = 'bChoose'; bch.className = 'bch';
+  $('#vMenu').appendChild(bch);
+  let bchKb = null, bchSel = 0;
+  function open1(k, direct) {
+    const it = LIST.find(x => x.kb === k);
+    if (direct || !it || !it.bai2) return choose(k, direct || !$('#optSlides').checked);
+    bchKb = it; bchSel = 0;
+    bch.innerHTML = `<div class="bch-box glass"><div class="bch-t"><span class="mi">${it.icon || '💬'}</span><div><small>Chọn bài thuyết trình</small><b>${it.ten}</b></div></div>
+      <div class="bch-row">
+        <button class="bch-o" data-b="1"><em>1</em><b>Bài 1 · Slide thuyết trình</b><span>Bộ slide như cũ, bấm → để đi từng bước</span></button>
+        <button class="bch-o" data-b="2"><em>2</em><b>Bài 2 · Video demo tự chạy</b><span>Điện thoại + chú thích, chạy như video, có nhạc nền</span></button>
+      </div><div class="bch-k">Phím 1 / 2 · ← → chọn · Enter mở · Esc đóng</div></div>`;
+    bch.classList.add('on'); paintB();
+  }
+  function paintB() { $$('.bch-o', bch).forEach((b, i) => b.classList.toggle('sel', i === bchSel)); }
+  function closeB() { bch.classList.remove('on'); bchKb = null; }
+  function goB(n) {
+    const it = bchKb; closeB(); if (!it) return;
+    if (n === 2) location.href = 'bai2/index.html?kb=' + encodeURIComponent(it.bai2);
+    else choose(it.kb, !$('#optSlides').checked);
+  }
+  bch.addEventListener('click', e => { const o = e.target.closest('.bch-o'); if (o) return goB(+o.dataset.b); if (!e.target.closest('.bch-box')) closeB(); });
+  addEventListener('keydown', e => {
+    if (!bchKb) return;
+    const k = e.key; e.stopImmediatePropagation();
+    if (k === '1' || k === '2') { e.preventDefault(); goB(+k); }
+    else if (k === 'ArrowLeft' || k === 'ArrowRight') { e.preventDefault(); bchSel = k === 'ArrowLeft' ? 0 : 1; paintB(); }
+    else if (k === 'Enter') { e.preventDefault(); goB(bchSel + 1); }
+    else if (k === 'Escape') { e.preventDefault(); closeB(); }
+  }, true);
 
   /* ---------- Trạng thái ---------- */
   // ALL: mọi slide trong HTML. slides: các slide của ngành đang chọn (lọc theo data-loai / data-need).
@@ -750,7 +782,7 @@
       if (k === 'ArrowDown') { e.preventDefault(); move(COLS); }
       else if (k === 'ArrowUp') { e.preventDefault(); move(-COLS); }
       else if ((k === 'ArrowRight' || k === 'ArrowLeft') && (!typing || !search.value)) { e.preventDefault(); move(k === 'ArrowRight' ? 1 : -1); }
-      else if (k === 'Enter') { e.preventDefault(); if (shown[sel]) choose(shown[sel].kb, !$('#optSlides').checked); }
+      else if (k === 'Enter') { e.preventDefault(); if (shown[sel]) open1(shown[sel].kb, false); }
       else if (k === 'Escape') { if (search.value) { search.value = ''; renderMenu(); } else search.blur(); }
       else if (!typing && (k === 'f' || k === 'F')) toggleFS();
       else if (!typing && k.length === 1) search.focus();   // gõ chữ bất kỳ là tìm luôn
