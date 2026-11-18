@@ -12,7 +12,7 @@
    Không dùng ảnh giấy phép, chứng chỉ giả: tin "chứng chỉ" là ảnh bác sĩ + thẻ liệt kê giấy tờ. */
 window.VN_KB = {
   ten: 'Thẩm mỹ viện video ngang',
-  ketSub: 'Để AI tư vấn và lấy SĐT khách cho thẩm mỹ viện của bạn',
+  ketSub: 'Để AI tư vấn và giúp thẩm mỹ viện bạn đặt lịch với khách',   // sửa 18/11/2026 theo người dùng
   shop: { ten: 'Thẩm Mỹ Viện Lam Khuê', av: 'LK', mau: '#9D174D', sub: 'Thường trả lời ngay' },
   anh: {
     'khong-gian': 'assets/tmv/1648775507324-b48dd3791fa5.jpg',  // sảnh trắng có cây
