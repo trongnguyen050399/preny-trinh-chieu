@@ -420,6 +420,8 @@
     sk.innerHTML = '<i></i>' + MARKS.map(m => `<em style="left:${m.t / TOTAL * 100}%" title="${esc(m.nhan)}"></em>`).join('');
     sk.addEventListener('click', e => { const r = sk.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * TOTAL); });
     document.getElementById('pp').onclick = () => playing ? pause() : play();
+    // Bấm chuột vào bất kỳ đâu trên khung video: dừng / chạy tiếp (người dùng dặn 19/11/2026)
+    document.getElementById('wrap').addEventListener('click', e => { if (e.button === 0) playing ? pause() : play(); });
     document.getElementById('rs').onclick = () => { seek(0); play(); };
     const mb = document.getElementById('mu');
     const pm = () => { mb.textContent = musicOn ? '♪ Nhạc: bật' : '♪ Nhạc: tắt'; };

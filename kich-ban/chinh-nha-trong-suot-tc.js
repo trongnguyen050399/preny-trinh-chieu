@@ -82,7 +82,7 @@
 
       { feature: 3 },
       { sep: '— 2 ngày sau · BS. Tuấn chưa nhắn lại —' },
-      { ai: 'Bác sĩ Tuấn ơi, em gửi bác sĩ thêm **1 ca hở kẽ sau aligner** được dựng lại plan trong khóa: sai ở khoảng và neo chặn, sửa thế nào ạ 🦷 Bác sĩ xem tới bài 2 chưa ạ?', meta: '💬 Tự động · Soft follow-up theo thẻ #HoKe', kw: 0 },
+      { ai: 'Bác sĩ Tuấn ơi, em gửi bác sĩ thêm **1 ca hở kẽ sau aligner** được dựng lại plan trong khóa: sai ở khoảng và neo chặn, sửa thế nào ạ 🦷 Bác sĩ xem tới bài 2 chưa ạ?', meta: '💬 Tự động · Bám đuổi theo thẻ #HoKe', kw: 0 },
       { kh: 'a xem hết 3 bài rồi, dễ hiểu. mà học xong làm ca thật thì phần mềm có mất phí k e? học k theo đc có hoàn tiền k' },
       { ai: 'Dạ phần mềm **không có phí hàng tháng** ạ. Cài đặt và luyện trên ca mẫu không mất phí, chỉ khi **xuất file ca thật** mới tính phí theo ca của phần mềm, khoảng **30–50 USD/ca** ạ.', kw: 1 },
       { ai: 'Em cũng nói rõ trước: chương trình **không hoàn tiền**, nên bên em mới mời bác sĩ học thử trước ạ. Học phí gói hiện tại **12.960.000đ**, học trọn đời, kèm **voucher trợ giá máy ép máng** và **review ca đầu tiên**. Bác sĩ muốn em giữ suất không ạ?', kw: 1 },
@@ -231,7 +231,7 @@
       // Không lên đơn tự động (học thử, Q&A rồi tư vấn viên mới chốt đăng ký, thanh toán QR) → 5 tính năng
       tinhNang: [
         ['AI tư vấn, chủ động lấy lead', 'Hỏi chuyên môn, mời học thử miễn phí'],
-        ['Soft follow-up nuôi học viên', 'Gửi đúng ca bác sĩ vướng, bài học thử'],
+        ['Bám đuổi học viên cân nhắc lâu', 'Gửi đúng ca bác sĩ vướng, bài học thử'],
         ['AI chăm sóc học viên sau bán', 'Hỏi thăm sau Q&A, mời khóa tiếp theo'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu bác sĩ cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -254,7 +254,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Học viện B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Học viện B',
         cmpSai: ['Khách im → gửi “Bác sĩ còn quan tâm khóa học không ạ?”', 'Không biết bác sĩ vướng ca nào, vì sao im', 'Bác sĩ thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Bác sĩ nhắn xong im → gửi đúng ca đang vướng (thẻ <b>#HoKe</b> từ nội dung chat)',
                   'Báo học phí xong im → bám đuổi theo giá: suất ưu đãi, voucher máy ép máng (thẻ <b>#HoiGia</b>)',
@@ -314,7 +314,7 @@
           { ten: 'Đỗ Hải Yến', av: 'HY', kenh: 'fb', msg: 'Chưa có máy scan học được không?', gio: '14:36',
             tags: [['Bình luận bài viết', 'ng'], ['#ThuVienSTL', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Lê Quốc Bảo', av: 'QB', kenh: 'tiktok', msg: 'Ca Hạng II khóa có dạy không?', gio: '09:05',
-            tags: [['TikTok · Video phân tích ca', 'ng'], ['#HangII', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['TikTok · Video phân tích ca', 'ng'], ['#HangII', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Phạm Thu Trang', av: 'TT', kenh: 'zalo', msg: 'Đăng ký thêm cho bác sĩ phòng khám em', gio: 'Hôm qua',
             tags: [['Zalo · Học viên cũ giới thiệu', 'ng'], ['#3DPlanning', 'qt'], ['Đã đăng ký', 'ht'], ['Gọi lần 2 · đã chốt ✓', 'sa']] },
         ],
@@ -334,7 +334,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Hỏi chuyên môn, số ca đã làm', 'Không hứa bừa kết quả điều trị', 'Lấy SĐT Zalo, mời học thử miễn phí']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: đúng ca bác sĩ vướng, bài học thử', 'Nuôi khách để học viện nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: đúng ca bác sĩ vướng, bài học thử']],
         ['HỌC THỬ & CHỐT', ['Học thử 3 bài, Q&A với giảng viên', 'Tư vấn gói học, tư vấn viên chốt đăng ký']],
         ['MUA LẠI', ['Mời bác sĩ học khóa nâng cao, giới thiệu đồng nghiệp qua FB và Zalo']],
       ],

@@ -163,7 +163,7 @@
       // Không bán hàng vật lý, không lên đơn → 5 tính năng (ngành có lên đơn thì giữ 6 như thường)
       tinhNang: [
         ['AI tư vấn, chủ động lấy lead', 'Lead chất lượng, rủ học thử, chốt khóa'],
-        ['Soft follow-up nuôi học viên', 'Gửi video lớp, thành phẩm học viên'],
+        ['Bám đuổi học viên cân nhắc lâu', 'Gửi video lớp, thành phẩm học viên'],
         ['AI chăm sóc học viên sau bán', 'Nhắc lịch học, mời học khóa nâng cao'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu học viên cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -186,7 +186,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Trung tâm B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Trung tâm B',
         cmpSai: ['Khách im → gửi “Bạn còn quan tâm khóa học không ạ?”', 'Không biết khách quan tâm khóa nào, vì sao im', 'Khách thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Khách nhắn xong im → nhắc đúng khóa khách quan tâm (thẻ <b>#BanhKem</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi đăng ký sớm, chia 2 lần (thẻ <b>#HoiGia</b>)',
@@ -242,7 +242,7 @@
           { ten: 'Nguyễn Hồng Ngọc', av: 'HN', kenh: 'fb', msg: 'Mình muốn học bánh kem lớp tối', gio: '13:58',
             tags: [['FB Ads · Lớp bánh kem T11', 'ng'], ['#BanhKem', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 1 ✓', 'sa']] },
           { ten: 'Trần Thu Trang', av: 'TT', kenh: 'zalo', msg: 'Có lớp bánh mì không ạ?', gio: '11:20',
-            tags: [['Zalo OA', 'ng'], ['#BanhMi', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['Zalo OA', 'ng'], ['#BanhMi', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Lê Minh Châu', av: 'MC', kenh: 'tiktok', msg: 'Khóa online học được không?', gio: '09:41',
             tags: [['TikTok · Video học viên', 'ng'], ['#KhoaOnline', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Phạm Quỳnh Anh', av: 'QA', kenh: 'fb', msg: 'Cuối tuần còn chỗ không ạ?', gio: 'Hôm qua',
@@ -266,7 +266,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng khóa, lịch học', 'Xử lý băn khoăn: học phí, học bù', 'Lấy SĐT học viên']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video lớp học, thành phẩm học viên, lịch khai giảng', 'Nuôi học viên để trung tâm nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video lớp học, thành phẩm học viên, lịch khai giảng']],
         ['HỌC THỬ', ['Hẹn học thử, tham quan lớp', 'Tư vấn viên chốt học phí']],
         ['MUA LẠI', ['Mời học viên cũ học khóa nâng cao qua FB và Zalo']],
       ],

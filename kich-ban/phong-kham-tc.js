@@ -170,7 +170,7 @@
       // Không lên đơn tự động (bác sĩ khám rồi mới chỉ định, khách thanh toán tại quầy) → 5 tính năng
       tinhNang: [
         ['AI tư vấn, chủ động đặt lịch khám', 'Lấy SĐT, giữ suất, không chẩn đoán bừa'],
-        ['Soft follow-up nuôi khách', 'Gửi bác sĩ, quy trình, phòng khám thật'],
+        ['Bám đuổi khách cân nhắc lâu', 'Gửi bác sĩ, quy trình, phòng khám thật'],
         ['AI chăm sóc khách sau khám', 'Hỏi thăm, nhắc tái khám theo chỉ định'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu khách cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -193,7 +193,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Phòng khám B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Phòng khám B',
         cmpSai: ['Khách im → gửi “Chị còn quan tâm gói khám không ạ?”', 'Không biết khách quan tâm gói khám nào, vì sao im', 'Khách thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Khách nhắn xong im → nhắc đúng dịch vụ khách hỏi (thẻ <b>#NoiSoiDaDay</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi trong tuần, chi phí báo trước (thẻ <b>#HoiGia</b>)',
@@ -253,7 +253,7 @@
           { ten: 'Lê Quốc Huy', av: 'QH', kenh: 'tiktok', msg: 'Khám tổng quát gồm những gì ạ?', gio: '10:42',
             tags: [['TikTok · Video quy trình khám', 'ng'], ['#KhamTongQuat', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Phạm Ngọc Ánh', av: 'NA', kenh: 'zalo', msg: 'Siêu âm có cần nhịn ăn không?', gio: 'Hôm qua',
-            tags: [['Zalo OA', 'ng'], ['#SieuAm', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['Zalo OA', 'ng'], ['#SieuAm', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Đỗ Văn Khải', av: 'VK', kenh: 'zalo', msg: 'Đặt thêm gói khám cho vợ mình', gio: 'Hôm qua',
             tags: [['Zalo · Khách cũ', 'ng'], ['#XetNghiemMau', 'qt'], ['Đã khám xong', 'ht'], ['Gọi lần 2 · đã chốt ✓', 'sa']] },
         ],
@@ -273,7 +273,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng gói khám, không chẩn đoán bừa', 'Xử lý băn khoăn: sợ đau, chi phí, BHYT', 'Lấy SĐT, đặt lịch khám']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: bác sĩ, quy trình nội soi, phòng khám thật', 'Nuôi khách để phòng khám nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: bác sĩ, quy trình nội soi, phòng khám thật']],
         ['KHÁM TẠI CHỖ', ['Điều dưỡng xác nhận lịch', 'Bác sĩ khám, chỉ định điều trị']],
         ['TÁI KHÁM', ['Nhắc tái khám theo chỉ định, mời khám định kỳ qua FB và Zalo']],
       ],

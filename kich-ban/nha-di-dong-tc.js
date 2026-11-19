@@ -166,7 +166,7 @@
       // Không lên đơn tự động (ký hợp đồng thi công với sale) → 5 tính năng, giống khóa học
       tinhNang: [
         ['AI tư vấn, chủ động lấy lead', 'Lọc nhu cầu, lấy SĐT, hẹn khảo sát'],
-        ['Soft follow-up nuôi khách', 'Gửi mẫu nhà, công trình đã bàn giao'],
+        ['Bám đuổi khách cân nhắc lâu', 'Gửi mẫu nhà, công trình đã bàn giao'],
         ['AI chăm sóc khách sau bán', 'Hỏi thăm vận hành, xin giới thiệu'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu khách cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -189,7 +189,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Công ty B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Công ty B',
         cmpSai: ['Khách im → gửi “Anh còn quan tâm nhà di động không ạ?”', 'Không biết khách quan tâm mẫu nào, vì sao im', 'Khách thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Khách nhắn xong im → nhắc đúng mẫu nhà khách xem (thẻ <b>#CabinChuA</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi làm nhiều căn, khảo sát miễn phí (thẻ <b>#HoiGia</b>)',
@@ -245,7 +245,7 @@
           { ten: 'Nguyễn Văn Hùng', av: 'VH', kenh: 'fb', msg: 'Đất Ba Vì 1.200m² làm được mấy căn?', gio: '14:05',
             tags: [['FB Ads · Cabin homestay', 'ng'], ['#CabinChuA', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 1 ✓', 'sa']] },
           { ten: 'Trần Thị Mai', av: 'TM', kenh: 'zalo', msg: 'Có mẫu 2 phòng ngủ không em?', gio: '11:32',
-            tags: [['Zalo OA', 'ng'], ['#Nha2PhongNgu', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['Zalo OA', 'ng'], ['#Nha2PhongNgu', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Lê Quốc Bảo', av: 'QB', kenh: 'tiktok', msg: 'Lắp ở Phú Quốc được không?', gio: '09:18',
             tags: [['TikTok · Video lắp nhà', 'ng'], ['#Resort', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Phạm Long', av: 'PL', kenh: 'fb', msg: 'Đất dốc Mộc Châu lắp được không?', gio: 'Hôm qua',
@@ -269,7 +269,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn mẫu nhà, số căn theo đất', 'Xử lý băn khoăn: pháp lý, phát sinh', 'Lấy SĐT khách']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video công trình đã bàn giao, bản bố trí, ưu đãi', 'Nuôi khách để công ty nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video công trình đã bàn giao, bản bố trí, ưu đãi']],
         ['KHẢO SÁT', ['Hẹn khảo sát đất, xem khu mẫu', 'Sale chốt hợp đồng thi công']],
         ['MUA LẠI', ['Mời khách cũ làm thêm căn, giới thiệu khách qua FB và Zalo']],
       ],

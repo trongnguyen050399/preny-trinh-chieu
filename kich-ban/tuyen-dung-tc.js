@@ -170,7 +170,7 @@
       // Không lên đơn tự động (ứng viên ký hợp đồng tại nhà máy) → 5 tính năng
       tinhNang: [
         ['AI tư vấn, chủ động lấy SĐT ứng viên', 'Lọc ứng viên, hẹn lịch phỏng vấn'],
-        ['Soft follow-up nuôi ứng viên', 'Gửi ảnh nhà máy, ký túc xá, đợt tuyển mới'],
+        ['Bám đuổi ứng viên cân nhắc lâu', 'Gửi ảnh nhà máy, ký túc xá, đợt tuyển mới'],
         ['AI chăm sóc ứng viên sau nhận việc', 'Hỏi thăm, mời giới thiệu bạn bè'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu ứng viên cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -193,7 +193,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Công ty B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Công ty B',
         cmpSai: ['Ứng viên im → gửi “Bạn còn quan tâm việc làm không ạ?”', 'Không biết ứng viên quan tâm vị trí nào, vì sao im', 'Ứng viên thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Ứng viên nhắn xong im → nhắc đúng vị trí đã hỏi (thẻ <b>#CongNhanDienTu</b> từ quảng cáo)',
                   'Hỏi lương xong im → bám đuổi theo thu nhập: thưởng nhận việc, ký túc xá miễn phí (thẻ <b>#HoiLuong</b>)',
@@ -253,7 +253,7 @@
           { ten: 'Phạm Minh Đức', av: 'MĐ', kenh: 'tiktok', msg: 'Làm kho có phải bốc vác không?', gio: '11:05',
             tags: [['TikTok · Video ký túc xá', 'ng'], ['#NhanVienKho', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Trần Thị Thu', av: 'TT', kenh: 'zalo', msg: 'Đóng gói có tăng ca không ạ?', gio: 'Hôm qua',
-            tags: [['Zalo OA', 'ng'], ['#DongGoi', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['Zalo OA', 'ng'], ['#DongGoi', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Hoàng Văn Nam', av: 'VN', kenh: 'zalo', msg: 'Em giới thiệu thêm 2 bạn nữa', gio: 'Hôm qua',
             tags: [['Zalo · Công nhân giới thiệu', 'ng'], ['#LapRapOTo', 'qt'], ['Đã nhận việc', 'ht'], ['Gọi lần 2 · đã chốt ✓', 'sa']] },
         ],
@@ -273,7 +273,7 @@
       chotLai: [
         ['ỨNG VIÊN', ['Data thô', 'Hội chợ việc làm', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng vị trí, lương, chỗ ở', 'Xử lý băn khoăn: phí, kinh nghiệm', 'Lấy SĐT, hẹn phỏng vấn']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video nhà máy, ký túc xá, đợt tuyển mới', 'Nuôi ứng viên để công ty nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: video nhà máy, ký túc xá, đợt tuyển mới']],
         ['PHỎNG VẤN', ['HR xác nhận lịch, xe đón', 'Phỏng vấn tại nhà máy, ký hợp đồng']],
         ['GIỚI THIỆU', ['Mời ứng viên cũ giới thiệu bạn bè, gửi đợt tuyển mới qua FB và Zalo']],
       ],

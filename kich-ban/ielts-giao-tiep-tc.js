@@ -231,7 +231,7 @@
       // Không lên đơn tự động (test, tư vấn lộ trình rồi tư vấn viên mới chốt đăng ký) → 5 tính năng
       tinhNang: [
         ['AI tư vấn, chủ động lấy lead', 'Hỏi mục tiêu, mời làm bài test miễn phí'],
-        ['Soft follow-up nuôi học viên', 'Gửi lộ trình, lớp học, học viên thật'],
+        ['Bám đuổi học viên cân nhắc lâu', 'Gửi lộ trình, lớp học, học viên thật'],
         ['AI chăm sóc học viên sau bán', 'Hỏi thăm sau test, mời khóa tiếp theo'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu học viên cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -254,7 +254,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Trung tâm B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Trung tâm B',
         cmpSai: ['Khách im → gửi “Anh còn quan tâm khóa học không ạ?”', 'Không biết khách cần IELTS hay giao tiếp, vì sao im', 'Khách thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Khách nhắn xong im → nhắc đúng khóa khách hỏi (thẻ <b>#IELTS</b> từ quảng cáo)',
                   'Báo học phí xong im → bám đuổi theo giá: ưu đãi trong tuần, quà học kèm (thẻ <b>#HoiGia</b>)',
@@ -314,7 +314,7 @@
           { ten: 'Phạm Ngọc Lan', av: 'NL', kenh: 'fb', msg: 'Mất gốc học được không ạ?', gio: '15:42',
             tags: [['Bình luận bài viết', 'ng'], ['#MatGoc', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Lê Hoàng Nam', av: 'HN', kenh: 'tiktok', msg: 'Học IELTS online được không?', gio: '09:18',
-            tags: [['TikTok · Video lớp học', 'ng'], ['#HocOnline', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['TikTok · Video lớp học', 'ng'], ['#HocOnline', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Vũ Bảo Châu', av: 'BC', kenh: 'zalo', msg: 'Đăng ký thêm cho em gái nhé', gio: 'Hôm qua',
             tags: [['Zalo · Học viên cũ giới thiệu', 'ng'], ['#IELTS', 'qt'], ['Đã đăng ký', 'ht'], ['Gọi lần 2 · đã chốt ✓', 'sa']] },
         ],
@@ -334,7 +334,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Hỏi mục tiêu, hạn thi, trình độ', 'Không hứa bừa điểm đầu ra', 'Lấy SĐT, mời làm bài test miễn phí']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: lộ trình, lớp học, học viên thật', 'Nuôi khách để trung tâm nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: lộ trình, lớp học, học viên thật']],
         ['TEST & CHỐT', ['Test đầu vào online hoặc tại trung tâm', 'Tư vấn lộ trình, tư vấn viên chốt đăng ký']],
         ['MUA LẠI', ['Mời học viên cũ học khóa tiếp, giới thiệu bạn qua FB và Zalo']],
       ],

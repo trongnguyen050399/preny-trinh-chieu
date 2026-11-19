@@ -172,7 +172,7 @@
       // Không lên đơn tự động (bác sĩ khám, chụp phim rồi mới chốt kế hoạch điều trị) → 5 tính năng
       tinhNang: [
         ['AI tư vấn, chủ động lấy lịch hẹn', 'Lấy SĐT, mời khám, cạo vôi miễn phí'],
-        ['Soft follow-up nuôi khách', 'Gửi bác sĩ, ca điều trị, phòng khám thật'],
+        ['Bám đuổi khách cân nhắc lâu', 'Gửi bác sĩ, ca điều trị, phòng khám thật'],
         ['AI chăm sóc khách sau điều trị', 'Hỏi thăm, mời cạo vôi định kỳ'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác lại dữ liệu khách cũ'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -195,7 +195,7 @@
       },
 
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Nha khoa B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Nha khoa B',
         cmpSai: ['Khách im → gửi “Anh còn quan tâm làm răng không ạ?”', 'Không biết khách quan tâm dịch vụ nào, vì sao im', 'Khách thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Khách nhắn xong im → nhắc đúng dịch vụ khách hỏi (thẻ <b>#Implant</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: khám, chụp phim miễn phí, ưu đãi trong tháng (thẻ <b>#HoiGia</b>)',
@@ -255,7 +255,7 @@
           { ten: 'Lý Gia Hân', av: 'GH', kenh: 'tiktok', msg: 'Niềng răng trong suốt giá sao ạ?', gio: '10:16',
             tags: [['TikTok · Video niềng răng', 'ng'], ['#NiengRang', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Phan Thùy Linh', av: 'TL', kenh: 'zalo', msg: 'Tẩy trắng giữ được bao lâu?', gio: 'Hôm qua',
-            tags: [['Zalo OA', 'ng'], ['#TayTrang', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['Zalo OA', 'ng'], ['#TayTrang', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Võ Đức Tài', av: 'ĐT', kenh: 'zalo', msg: 'Bọc sứ thêm 2 răng cửa nhé', gio: 'Hôm qua',
             tags: [['Zalo · Khách cũ giới thiệu', 'ng'], ['#BocSu', 'qt'], ['Đã điều trị', 'ht'], ['Gọi lần 2 · đã chốt ✓', 'sa']] },
         ],
@@ -275,7 +275,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn đúng dịch vụ, không báo giá bừa', 'Xử lý băn khoăn: sợ đau, giá, thời gian', 'Lấy SĐT, mời khám, cạo vôi miễn phí']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: bác sĩ, ca điều trị, phòng khám thật', 'Nuôi khách để nha khoa nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: bác sĩ, ca điều trị, phòng khám thật']],
         ['KHÁM TẠI CHỖ', ['Khám, chụp phim, cạo vôi miễn phí', 'Bác sĩ chốt kế hoạch điều trị']],
         ['MUA LẠI', ['Mời khách cũ cạo vôi định kỳ, làm thêm dịch vụ qua FB và Zalo']],
       ],

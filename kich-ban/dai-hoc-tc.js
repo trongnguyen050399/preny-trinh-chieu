@@ -252,7 +252,7 @@
             msgs: [['kh', 'Em 24 điểm A00 vô ngành AI được không ạ?'], ['ai', 'Điểm chuẩn 2026 là 23,5, em xem tham khảo nha 🎓']] },
           { t: 'Mời Open Day', d: 'Xin tên, SĐT, giữ suất cho thí sinh và ba mẹ', icon: 'phone', ai: true, chot: true, mock: 'form', fields: ['Minh Quân · AI, 24 điểm', '0912 384 207'], ok: 'Đã giữ suất 28/11' },
           { t: 'Tham quan trường', d: 'Xem lab AI, ký túc xá, gặp thầy cô', icon: 'calendar', own: 'Phòng Tuyển sinh', mock: 'lich', ten: 'Open Day · 2 suất', gio: '8:00 · Thứ Bảy 28/11', ok: 'Quân và ba đã tới' },
-          { t: 'Nuôi thí sinh', d: 'Gửi học bổng, hồ sơ xét tuyển, hạn nộp', icon: 'chat', ai: true, mock: 'img', img: L(IMG['giang-duong']), cap: 'Hồ sơ: học bạ, CCCD, giấy báo điểm' },
+          { t: 'Bám đuổi thí sinh', d: 'Gửi học bổng, hồ sơ xét tuyển, hạn nộp', icon: 'chat', ai: true, mock: 'img', img: L(IMG['giang-duong']), cap: 'Hồ sơ: học bạ, CCCD, giấy báo điểm' },
           { t: 'Nhập học', d: 'Cán bộ tuyển sinh chốt hồ sơ, nhập học', icon: 'check', mock: 'img', img: L(IMG['sv-vui']), cap: '✓ Quân nhập học ngành AI, 9/2027' },
         ],
         vong: { t: 'Đồng hành sinh viên & Remarketing', d: 'Học tập, hành chính, tâm lý, việc làm, đời sống qua Zalo OA; gửi lịch nhập học, học bổng, ngày hội việc làm' },
@@ -323,7 +323,7 @@
           { ten: 'Nguyễn Đức Anh', av: 'ĐA', kenh: 'zalo', msg: 'Xét học bạ cần điểm bao nhiêu ạ?', gio: '11:03',
             tags: [['Zalo OA · Tư vấn tuyển sinh', 'ng'], ['#XetHocBa', 'qt'], ['#HocBong', 'qt'], ['Đã kết nối Zalo', 'za']] },
           { ten: 'Trần Khánh Linh', av: 'KL', kenh: 'fb', msg: 'Em ở Gia Lai, ktx còn chỗ ko ạ', gio: 'Hôm qua',
-            tags: [['FB Ads · Ký túc xá', 'ng'], ['#TriTueNhanTao', 'qt'], ['Tỉnh xa · cần KTX', 'qt'], ['Đang nuôi · bám đuổi', 'ht']] },
+            tags: [['FB Ads · Ký túc xá', 'ng'], ['#TriTueNhanTao', 'qt'], ['Tỉnh xa · cần KTX', 'qt'], ['Đang bám đuổi', 'ht']] },
         ],
         chanDung: {
           ten: 'Lê Minh Quân', av: 'MQ', kenh: 'fb', sub: 'Facebook Messenger · 0912 384 207',
@@ -341,7 +341,7 @@
       chotLai: [
         ['THÍ SINH', ['Quảng cáo tuyển sinh', 'Fanpage, Zalo OA', 'Ngày hội tư vấn', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì 24/7', 'Tư vấn ngành, học phí, học bổng, KTX', 'Không hứa đậu, không trả lời bừa', 'Lấy SĐT, mời Open Day']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: lab học, sinh viên chia sẻ, hồ sơ xét tuyển', 'Nuôi thí sinh để trường nằm đầu danh sách']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: lab học, sinh viên chia sẻ, hồ sơ xét tuyển']],
         ['CHỐT LỊCH HẸN', ['Open Day hoặc tư vấn 1-1 với thầy cô', 'Cán bộ tuyển sinh chốt hồ sơ, nhập học']],
         ['ĐỒNG HÀNH SINH VIÊN', ['Học tập, hành chính, tâm lý, việc làm, đời sống qua FB và Zalo']],
       ],

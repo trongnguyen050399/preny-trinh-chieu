@@ -27,7 +27,7 @@
     badge: 'AI CHATBOT · THẨM MỸ & SPA',
     shop: { name: 'An Nhiên Spa', initials: 'AN' },
     headline: { pre: 'AI chatbot tư vấn, lấy SĐT và', em: 'chốt lịch hẹn ngành Spa' },
-    sub: 'Lọc khách, mời soi da, chốt lịch hẹn và nuôi khách cân nhắc lâu bằng soft follow-up.',
+    sub: 'Lọc khách, mời soi da, chốt lịch hẹn và bám đuổi khách cân nhắc lâu.',
     cta: 'Dùng thử miễn phí tại **preny.ai**\nHotline **0389 647 778**',
     speed: 1.13,
     timing: { read0: 1000, readPerChar: 28, readMax: 4500, type0: 800, typePerChar: 3, typeMax: 1500, fastType: 500,
@@ -40,7 +40,7 @@
         kws: ['Trả lời ngay giá, dịch vụ', 'Xin hình, hỏi tình trạng da, bị bao lâu', 'Hỏi đã điều trị chưa, mong muốn gì'] },
       { title: 'AI lấy SĐT và chốt lịch hẹn', desc: 'Lead nóng chuyển ngay cho chuyên viên.',
         kws: ['Xin SĐT để chuyên viên tư vấn kỹ', 'Mời ghé soi da miễn phí', 'Gửi xác nhận lịch hẹn'] },
-      { title: 'Soft follow-up: nuôi khách cân nhắc lâu', desc: 'Spa nằm đầu danh sách khi khách quyết định.',
+      { title: 'Bám đuổi khách cân nhắc lâu', desc: 'Spa nằm đầu danh sách khi khách quyết định.',
         kws: ['Khách cho SĐT nhưng chưa đặt lịch', 'Giới thiệu cơ sở, công nghệ', 'Gửi feedback, kết quả khách thật', 'Giải thích quy trình, ưu đãi đúng lúc'] },
       { title: 'AI tự động chăm sóc sau liệu trình', desc: 'Tăng tỷ lệ khách quay lại.',
         kws: ['Hỏi thăm da sau buổi làm', 'Nhắc buổi tiếp theo của liệu trình', 'Chuyên viên tư vấn thêm dịch vụ hợp'] },
@@ -99,7 +99,7 @@
       { sep: 'Khách đã cho SĐT nhưng chưa đặt lịch…', style: 'silent', kw: 0, hold: 1600 },
 
       { sep: '— 2 ngày sau —' },
-      { ai: 'Chị Vy ơi, em gửi chị vài hình **không gian và công nghệ** ở An Nhiên Spa để chị tham khảo nha 🌿', meta: '🌿 Tự động · Soft follow-up', kw: 1 },
+      { ai: 'Chị Vy ơi, em gửi chị vài hình **không gian và công nghệ** ở An Nhiên Spa để chị tham khảo nha 🌿', meta: '🌿 Tự động · Bám đuổi', kw: 1 },
       { aiImgs: [{ img: 'phong-dv', label: 'Phòng dịch vụ riêng' }, { img: 'may-soi-da', label: 'Máy soi da' },
                  { img: 'massage-mat', label: 'Chăm sóc da mặt' }, { img: 'tu-van', label: 'Chuyên viên tư vấn' }], hold: 3200 },
       { sep: '— 5 ngày sau —' },
@@ -107,9 +107,9 @@
           tag: '⭐ Feedback khách hàng',
           intro: 'Chị Vy ơi, em gửi chị cảm nhận của một khách vừa làm xong liệu trình trẻ hóa RF ạ:',
           lines: ['“Sau 5 buổi da săn lại rõ, chuyên viên tư vấn rất kỹ, không ép mua thêm.”', 'Chị Thảo, 34 tuổi, Q.3'],
-        }, meta: '🌿 Tự động · Soft follow-up', kw: 2, hold: 4200 },
+        }, meta: '🌿 Tự động · Bám đuổi', kw: 2, hold: 4200 },
       { sep: '— 9 ngày sau —' },
-      { ai: 'Một buổi trẻ hóa RF ở spa gồm **4 bước**: soi da → làm sạch sâu → RF nâng cơ → mặt nạ phục hồi, khoảng **60 phút**, làm xong đi làm luôn được ạ. Tuần này khách mới được **tặng buổi soi da + mặt nạ phục hồi** nha chị 🎁', meta: '🌿 Tự động · Soft follow-up', kw: 3 },
+      { ai: 'Một buổi trẻ hóa RF ở spa gồm **4 bước**: soi da → làm sạch sâu → RF nâng cơ → mặt nạ phục hồi, khoảng **60 phút**, làm xong đi làm luôn được ạ. Tuần này khách mới được **tặng buổi soi da + mặt nạ phục hồi** nha chị 🎁', meta: '🌿 Tự động · Bám đuổi', kw: 3 },
       { kh: 'Thứ Bảy này chị qua làm thử được không em?' },
       { ai: 'Dạ được ạ! Chị muốn ghé **sáng hay chiều thứ Bảy** ạ? Em giữ lịch cho chị liền nha 💜', fast: true },
 
@@ -216,7 +216,7 @@
       tinhNang: [
         ['AI tư vấn và lọc khách 24/7', 'Trả lời ngay, không bỏ lỡ khách'],
         ['AI lấy SĐT, chốt lịch hẹn', 'Lead nóng chuyển ngay cho chuyên viên'],
-        ['Soft follow-up nuôi khách', 'Spa nằm đầu danh sách khi khách chốt'],
+        ['Bám đuổi khách cân nhắc lâu', 'Spa nằm đầu danh sách khi khách chốt'],
         ['AI chăm sóc sau liệu trình', 'Tăng tỷ lệ khách quay lại'],
         ['Bộ công cụ Remarketing FMM và ZBS', 'Khai thác hiệu quả dữ liệu khách hàng'],
         ['Gửi sự kiện Lead qua Meta CAPI', 'Hỗ trợ tối ưu quảng cáo Facebook'],
@@ -266,7 +266,7 @@
 
       // Slide bám đuổi theo thẻ tag (ngay sau demo): bên khác nhắn chung chung → 2 ví dụ Preny
       bamDuoi: {
-        nhan: 'Vì sao soft follow-up của Preny đặc biệt', shopB: 'Spa B',
+        nhan: 'Vì sao bám đuổi của Preny đặc biệt', shopB: 'Spa B',
         cmpSai: ['Khách im → gửi “Chị còn quan tâm dịch vụ không ạ?”', 'Không biết khách quan tâm gì, vì sao im', 'Khách thấy phiền, bỏ qua tin nhắn'],
         cmpDung: ['Khách nhắn xong im → nhắc đúng dịch vụ khách quan tâm (thẻ <b>#TriMun</b> từ quảng cáo)',
                   'Báo giá xong im → bám đuổi theo giá: ưu đãi, quà tặng (thẻ <b>#HoiGia</b>)',
@@ -301,7 +301,7 @@
           { ten: 'Lê Minh Thư', av: 'MT', kenh: 'zalo', msg: 'Gói trẻ hóa da giá sao em?', gio: '11:20',
             tags: [['Zalo OA', 'ng'], ['#TreHoaDa', 'qt'], ['Đã cho SĐT', 'ht'], ['Gọi lần 2 · không bắt máy', 'sa']] },
           { ten: 'Phạm Ngọc Vy', av: 'NV', kenh: 'tiktok', msg: 'Có trị nám không ạ?', gio: '09:41',
-            tags: [['TikTok · Video trị nám', 'ng'], ['#TriNam', 'qt'], ['Đang nuôi · Soft follow-up', 'ht']] },
+            tags: [['TikTok · Video trị nám', 'ng'], ['#TriNam', 'qt'], ['Đang bám đuổi', 'ht']] },
           { ten: 'Trần Bảo Ngọc', av: 'BN', kenh: 'fb', msg: 'Cuối tuần còn lịch không spa?', gio: 'Hôm qua',
             tags: [['Bình luận bài viết', 'ng'], ['#ChamSocDa', 'qt'], ['Đã đến spa', 'ht'], ['Đã kết nối Zalo', 'za']] },
           { ten: 'Đỗ Hoàng Yến', av: 'HY', kenh: 'zalo', msg: 'Mình muốn đặt lịch triệt lông', gio: 'Hôm qua',
@@ -324,7 +324,7 @@
       chotLai: [
         ['KHÁCH HÀNG', ['Data thô', 'Sự kiện', 'Ads', 'Giới thiệu', 'Tự tìm đến']],
         ['AI CHATBOT', ['Phản hồi nhanh tức thì', 'Tư vấn khách', 'Kêu gọi khách tới dùng thử dịch vụ', 'Lấy số điện thoại nếu khách chưa có']],
-        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: giới thiệu dịch vụ, before–after, giải thích quy trình', 'Nuôi khách để spa nằm đầu danh sách khi khách quyết định']],
+        ['BÁM ĐUỔI', ['Gửi 5 tin nhắn trong 7 ngày: giới thiệu dịch vụ, before–after, giải thích quy trình']],
         ['CHỐT LỊCH HẸN', ['Chốt lịch hẹn đến spa thử dịch vụ', 'Spa chốt đơn']],
         ['MUA LẠI', ['Tự động gửi 1 tin nhắn mỗi tuần qua FB và Zalo']],
       ],
