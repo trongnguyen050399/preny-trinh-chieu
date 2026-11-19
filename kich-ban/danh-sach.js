@@ -37,6 +37,8 @@ window.DANH_SACH = [
   { kb: 'ielts-giao-tiep-tc', ten: 'Khóa học IELTS & Giao tiếp', loai: 'cnn', icon: '🎓', bai2: 'ielts-giao-tiep-tc' },
   { kb: 'chinh-nha-trong-suot-tc', ten: 'Khóa học chỉnh nha trong suốt', loai: 'cnn', icon: '😁', bai2: 'chinh-nha-trong-suot-tc' },
   { kb: 'dai-hoc-tc', ten: 'Trường đại học', loai: 'cnn', icon: '🏫', bai2: 'dai-hoc-tc' },
+  { kb: 'dan-am-thanh-tc', ten: 'Dàn âm thanh', loai: 'cnn', icon: '🔊', bai2: 'dan-am-thanh-tc' },
+  { kb: 'xay-dung-tc', ten: 'Thi công xây dựng', loai: 'cnn', icon: '🏗️', bai2: 'xay-dung-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
