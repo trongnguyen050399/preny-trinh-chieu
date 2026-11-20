@@ -45,6 +45,7 @@ window.DANH_SACH = [
   { kb: 'boxing-tc', ten: 'Khóa học boxing', loai: 'cnn', icon: '🥊', bai2: 'boxing-tc' },
   { kb: 'tiec-luu-dong-tc', ten: 'Nấu cỗ, tiệc lưu động', loai: 'cnn', icon: '🍲', bai2: 'tiec-luu-dong-tc' },
   { kb: 'bat-dong-san-tc', ten: 'Bất động sản, đất nền', loai: 'cnn', icon: '🏡', bai2: 'bat-dong-san-tc' },
+  { kb: 'chung-cu-tc', ten: 'Bất động sản, chung cư', loai: 'cnn', icon: '🏢', bai2: 'chung-cu-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
