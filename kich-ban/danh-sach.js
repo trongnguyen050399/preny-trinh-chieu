@@ -28,6 +28,7 @@ window.DANH_SACH = [
   { kb: 'banh-keo-tc', ten: 'Bánh kẹo', loai: 'tmdt', icon: '🍬', bai2: 'banh-keo-tc' },
   { kb: 'den-trang-tri-tc', ten: 'Đèn trang trí nội thất', loai: 'tmdt', icon: '💡', bai2: 'den-trang-tri-tc' },
   { kb: 'yen-chung-tuoi-tc', ten: 'Yến chưng tươi', loai: 'tmdt', icon: '🥣', bai2: 'yen-chung-tuoi-tc' },
+  { kb: 'cua-ca-mau-tc', ten: 'Cua Cà Mau', loai: 'tmdt', icon: '🦀', bai2: 'cua-ca-mau-tc' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨', bai2: 'tham-my-vien' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂', bai2: 'lam-banh-tc' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️', bai2: 'nha-di-dong-tc' },
