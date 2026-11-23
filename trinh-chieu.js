@@ -1,7 +1,8 @@
 /* Trang trình chiếu Preny:
      menu chọn ngành → slide 1–6 → demo AI chat (index.html trong iframe, giữ được toàn màn hình) → slide 7–12.
-   Phím: → / Space / bấm chuột = tiếp · ← = lùi · 1–9 = tới slide · Home/End · F = toàn màn hình · M / Esc = menu · D = vào demo.
-   Mở thẳng một ngành: trinh-chieu.html#kb=thoi-trang-tc (thêm &demo để vào thẳng phần chat). */
+   Phím: → / Space / bấm chuột = tiếp · ← = lùi · 1–9 = tới slide · Home/End · F = toàn màn hình · M / Esc = menu 
+   Mở thẳng một ngành: trinh-chieu.html#kb=thoi-trang-tc. Từ 23/11/2026 bỏ lối vào thẳng chat (&demo, nút Demo chat, phím D):
+   mỗi ngành chỉ còn 2 bài thuyết trình (Bài 1 slide, Bài 2 video). Link cũ có &demo mở slide như thường. */
 (function () {
   'use strict';
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -86,7 +87,7 @@
     sel = Math.min(sel, Math.max(0, shown.length - 1));
     grid.innerHTML = shown.map((x, i) => `<button class="mc glass" style="--i:${i}" data-kb="${x.kb}"><span class="mi">${x.icon || '💬'}</span>`
       + `<span><span class="mt">${x.ten.replace(/ (\S+)$/, ' $1')}</span><span class="mg ${x.loai}" data-loai="${x.loai}" title="${filter === x.loai ? 'Bấm để hiện lại tất cả ngành' : 'Bấm để lọc ngành ' + (LOAI[x.loai] || '')}">${LOAI[x.loai] || ''}</span></span>`
-      + `<span class="direct" data-direct="1">Vào thẳng chat ▸</span></button>`).join('');
+      + `</button>`).join('');
     empty.classList.toggle('on', !shown.length);
     markSel();
   }
@@ -103,17 +104,12 @@
     mList.scrollTop += e.deltaMode === 1 ? e.deltaY * 40 : e.deltaY;
   }, { passive: false });
   search.addEventListener('input', () => { sel = 0; renderMenu(); });
-  // Bấm chuột: tính theo chỗ NHẤN xuống. Nhấn trên nút "Vào thẳng chat" mà nhả chuột lệch ra ngoài nút vẫn vào thẳng chat.
-  let downDirect = false;
-  grid.addEventListener('pointerdown', e => { downDirect = !!e.target.closest('[data-direct]'); });
   grid.addEventListener('click', e => {
     // Bấm nhãn loại ngành trên thẻ (Thương mại điện tử / Cân nhắc nhiều) → lọc theo loại đó; bấm lại lần nữa → hiện tất cả
     const tag = e.target.closest('.mg[data-loai]');
-    if (tag) { downDirect = false; filter = filter === tag.dataset.loai ? 'all' : tag.dataset.loai; sel = 0; renderFilters(); renderMenu(); return; }
+    if (tag) { filter = filter === tag.dataset.loai ? 'all' : tag.dataset.loai; sel = 0; renderFilters(); renderMenu(); return; }
     const c = e.target.closest('.mc'); if (!c) return;
-    const direct = downDirect || !!e.target.closest('[data-direct]');
-    downDirect = false;
-    open1(c.dataset.kb, direct);
+    open1(c.dataset.kb);
   });
   renderFilters(); renderMenu();
 
@@ -121,9 +117,9 @@
   const bch = document.createElement('div'); bch.id = 'bChoose'; bch.className = 'bch';
   $('#vMenu').appendChild(bch);
   let bchKb = null, bchSel = 0;
-  function open1(k, direct) {
+  function open1(k) {
     const it = LIST.find(x => x.kb === k);
-    if (direct || !it || !it.bai2) return choose(k, direct || !$('#optSlides').checked);
+    if (!it || !it.bai2) return choose(k);
     bchKb = it; bchSel = 0;
     bch.innerHTML = `<div class="bch-box glass"><div class="bch-t"><span class="mi">${it.icon || '💬'}</span><div><small>Chọn bài thuyết trình</small><b>${it.ten}</b></div></div>
       <div class="bch-row">
@@ -137,7 +133,7 @@
   function goB(n) {
     const it = bchKb; closeB(); if (!it) return;
     if (n === 2) location.href = 'bai2/index.html?kb=' + encodeURIComponent(it.bai2);
-    else choose(it.kb, !$('#optSlides').checked);
+    else choose(it.kb);
   }
   bch.addEventListener('click', e => { const o = e.target.closest('.bch-o'); if (o) return goB(+o.dataset.b); if (!e.target.closest('.bch-box')) closeB(); });
   addEventListener('keydown', e => {
@@ -730,7 +726,6 @@
     const t = slides[si]; t.classList.add('instant'); setView('deck'); render();
     requestAnimationFrame(() => requestAnimationFrame(() => t.classList.remove('instant')));
   }
-  $('#btnDemo').addEventListener('click', e => { e.stopPropagation(); openDoc(); });
   addEventListener('message', e => {
     const m = e.data && e.data.preny;
     if (m === 'back') { if (DEMO_AFTER > 0) goSlideFull(DEMO_AFTER - 1); else showMenu(); }
@@ -740,17 +735,17 @@
   });
 
   let chooseSeq = 0;
-  function choose(k, direct) {
+  function choose(k) {
     const seq = ++chooseSeq;
     kb = k;
     const it = (window.DANH_SACH || []).find(x => x.kb === k);
     $('#kbName').textContent = it ? it.ten : k;
     $('#ctaKb').textContent = it ? it.ten : '';
-    history.replaceState(null, '', '#kb=' + k + (direct ? '&demo' : ''));
+    history.replaceState(null, '', '#kb=' + k);
     loadKB(k).then(() => {
       if (seq !== chooseSeq) return;
       applyDeck(it);
-      if (direct || DEMO_AFTER === 0) enterDemo(); else goSlide(0, 0);
+      goSlide(0, 0);
     });
   }
   function showMenu() {
@@ -798,12 +793,11 @@
     else if (k === 'Home') goSlide(0, 0);
     else if (k === 'End') goSlideFull(N - 1);
     else if (k === 'm' || k === 'M' || k === 'Escape') showMenu();
-    else if (k === 'd' || k === 'D') enterDemo();
   });
   $('#vDeck').addEventListener('click', () => next());
 
   /* ---------- Mở theo địa chỉ ---------- */
   const h = new URLSearchParams(location.hash.slice(1));
-  if (h.get('kb') && (window.DANH_SACH || []).some(x => x.kb === h.get('kb'))) choose(h.get('kb'), h.has('demo'));
+  if (h.get('kb') && (window.DANH_SACH || []).some(x => x.kb === h.get('kb'))) choose(h.get('kb'));
   else setView('menu');
 })();

@@ -34,6 +34,8 @@ window.DANH_SACH = [
   { kb: 'do-choi-nguoi-lon-tc', ten: 'Đồ chơi người lớn', loai: 'tmdt', icon: '🌹', bai2: 'do-choi-nguoi-lon-tc' },
   { kb: 'tui-xach-nu-tc', ten: 'Thời trang túi xách nữ', loai: 'tmdt', icon: '👜', bai2: 'tui-xach-nu-tc' },
   { kb: 'noi-that-oto-tc', ten: 'Nội thất ô tô', loai: 'tmdt', icon: '🚗', bai2: 'noi-that-oto-tc' },
+  { kb: 'noi-that-gia-dinh-tc', ten: 'Nội thất (gương, bàn ghế, tủ)', loai: 'tmdt', icon: '🪞', bai2: 'noi-that-gia-dinh-tc' },
+  { kb: 'rem-cua-tc', ten: 'Rèm cửa may sẵn', loai: 'tmdt', icon: '🪟', bai2: 'rem-cua-tc' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨', bai2: 'tham-my-vien' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂', bai2: 'lam-banh-tc' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️', bai2: 'nha-di-dong-tc' },
@@ -51,6 +53,9 @@ window.DANH_SACH = [
   { kb: 'bat-dong-san-tc', ten: 'Bất động sản, đất nền', loai: 'cnn', icon: '🏡', bai2: 'bat-dong-san-tc' },
   { kb: 'chung-cu-tc', ten: 'Bất động sản, chung cư', loai: 'cnn', icon: '🏢', bai2: 'chung-cu-tc' },
   { kb: 'bao-hiem-nhan-tho-tc', ten: 'Bảo hiểm nhân thọ', loai: 'cnn', icon: '🛡️', bai2: 'bao-hiem-nhan-tho-tc' },
+  { kb: 'dong-phuc-tc', ten: 'Đồng phục', loai: 'cnn', icon: '👕', bai2: 'dong-phuc-tc' },
+  { kb: 'rem-cua-thiet-ke-tc', ten: 'Rèm cửa thiết kế', loai: 'cnn', icon: '🏛️', bai2: 'rem-cua-thiet-ke-tc' },
+  { kb: 'buffet-tc', ten: 'Nhà hàng buffet', loai: 'cnn', icon: '🍖', bai2: 'buffet-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },

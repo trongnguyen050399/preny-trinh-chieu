@@ -8,17 +8,17 @@
 <script>try { if (localStorage.getItem('preny-giao-dien') === 'sang') document.documentElement.classList.add('sang'); } catch (e) {}</script>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="trinh-chieu.css?v=202611231038">
+<link rel="stylesheet" href="trinh-chieu.css?v=202611231139">
 </head>
 <body>
 <!-- Trang trình chiếu: menu chọn ngành → 6 slide mở đầu → demo AI chat (index.html nhúng bên dưới).
-     Phím: → tiếp · ← lùi · 1–6 tới slide · F toàn màn hình · M menu · D vào demo. -->
+     Phím: → tiếp · ← lùi · 1–6 tới slide · F toàn màn hình · M menu. -->
 <div id="stage">
   <div class="bg"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
 
   <div class="topbar">
     <img class="tlogo" src="assets/img/logo-white.png" alt="Preny">
-    <div class="tright"><span id="kbName"></span><button id="btnDemo" class="tb-demo" title="Mở demo chat bất cứ lúc nào (phím D)"><i data-i="chat"></i>Demo chat</button><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button><button id="btnTheme" class="tb-btn tb-theme" title="Đổi slide sáng / tối (phím T)"><i data-i="sun"></i></button></div>
+    <div class="tright"><span id="kbName"></span><span id="counter"></span><button id="btnHide" class="tb-btn" title="Ẩn / hiện slide trong phiên này (phím S)"><i data-i="eyeoff"></i></button><button id="btnTheme" class="tb-btn tb-theme" title="Đổi slide sáng / tối (phím T)"><i data-i="sun"></i></button></div>
   </div>
 
   <!-- ============ MENU ============ -->
@@ -30,7 +30,6 @@
     <div class="m-tools">
       <label class="m-search glass"><i data-i="search"></i><input id="mSearch" type="text" placeholder="Tìm ngành… (gõ để tìm)" autocomplete="off" spellcheck="false"></label>
       <div class="m-filters" id="mFilters"></div>
-      <label class="toggle"><input type="checkbox" id="optSlides" checked><span class="sw"></span>Bắt đầu bằng slide mở đầu</label>
     </div>
     <div class="m-list" id="mList"><div class="m-grid" id="mGrid"></div><div class="m-empty" id="mEmpty">Không tìm thấy ngành phù hợp</div></div>
     <div class="m-keys">Gõ để tìm · <b>↑ ↓ ← →</b> chọn · <b>Enter</b> mở · Khi trình chiếu: <b>→</b> tiếp · <b>←</b> lùi · <b>F</b> toàn màn hình · <b>S</b> ẩn slide · <b>M</b> về menu</div>
@@ -467,10 +466,10 @@
 <iframe id="demo" title="Demo AI chat" allow="autoplay; fullscreen"></iframe>
 
 <!-- Mã phiên bản ?v=…: đổi mỗi lần đẩy lên mạng (preny-demo/doi-phien-ban.sh) để trình duyệt không dùng file cũ trong bộ nhớ đệm -->
-<script>window.PRENY_V = '202611231038';</script>
-<script src="kich-ban/danh-sach.js?v=202611231038"></script>
-<script src="assets/offline.js?v=202611231038"></script>
-<script src="demo-doc.js?v=202611231038"></script>
-<script src="trinh-chieu.js?v=202611231038"></script>
+<script>window.PRENY_V = '202611231139';</script>
+<script src="kich-ban/danh-sach.js?v=202611231139"></script>
+<script src="assets/offline.js?v=202611231139"></script>
+<script src="demo-doc.js?v=202611231139"></script>
+<script src="trinh-chieu.js?v=202611231139"></script>
 </body>
 </html>
