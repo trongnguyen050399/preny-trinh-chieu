@@ -17,7 +17,8 @@ window.DANH_SACH = [
   { kb: 'du-lich-tc', ten: 'Du lịch, du thuyền', loai: 'tmdt', icon: '🛳️', bai2: 'du-lich-tc' },
   { kb: 'may-nong-nghiep-tc', ten: 'Máy nông nghiệp', loai: 'tmdt', icon: '🚜', bai2: 'may-nong-nghiep-tc' },
   { kb: 'giay-dep-tc', ten: 'Giày dép', loai: 'tmdt', icon: '👟', bai2: 'giay-dep-tc' },
-  { kb: 'du-lich-luu-tru-tc', ten: 'Du lịch, lưu trú', loai: 'tmdt', icon: '🏝️', bai2: 'du-lich-luu-tru-tc' },
+  { kb: 'tour-du-lich-tc', ten: 'Bán tour du lịch', loai: 'tmdt', icon: '🧳', bai2: 'tour-du-lich-tc' },
+  { kb: 'homestay-tc', ten: 'Khách sạn, homestay', loai: 'tmdt', icon: '🏡', bai2: 'homestay-tc' },
   { kb: 'gia-dung-tc', ten: 'Gia dụng', loai: 'tmdt', icon: '🧹', bai2: 'gia-dung-tc' },
   { kb: 'dien-tu-tc', ten: 'Điện tử, điện thoại', loai: 'tmdt', icon: '📱', bai2: 'dien-tu-tc' },
   { kb: 'my-pham-tc', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', bai2: 'my-pham-tc' },
@@ -58,6 +59,7 @@ window.DANH_SACH = [
   { kb: 'buffet-tc', ten: 'Nhà hàng buffet', loai: 'cnn', icon: '🍖', bai2: 'buffet-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
+  { kb: 'du-lich-luu-tru-tc', ten: 'Du lịch, lưu trú', loai: 'tmdt', icon: '🏝️', bai2: 'du-lich-luu-tru-tc', hien: false },   // 23/11/2026 người dùng bỏ, tách thành tour-du-lich-tc + homestay-tc
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
   { kb: 'cay-tet', ten: 'Cây Tết (quất, đào, mai)', loai: 'tmdt', icon: '🍊', hien: false },
   { kb: 'benh-vien', ten: 'Bệnh viện', loai: 'cnn', icon: '🏥', hien: false },
