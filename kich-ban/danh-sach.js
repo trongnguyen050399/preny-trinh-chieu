@@ -30,6 +30,9 @@ window.DANH_SACH = [
   { kb: 'yen-chung-tuoi-tc', ten: 'Yến chưng tươi', loai: 'tmdt', icon: '🥣', bai2: 'yen-chung-tuoi-tc' },
   { kb: 'cua-ca-mau-tc', ten: 'Cua Cà Mau', loai: 'tmdt', icon: '🦀', bai2: 'cua-ca-mau-tc' },
   { kb: 'gia-dung-gia-re-tc', ten: 'Gia dụng giá rẻ', loai: 'tmdt', icon: '🍳', bai2: 'gia-dung-gia-re-tc' },
+  { kb: 'phu-tung-xe-may-tc', ten: 'Phụ tùng xe máy', loai: 'tmdt', icon: '🏍️', bai2: 'phu-tung-xe-may-tc' },
+  { kb: 'do-choi-nguoi-lon-tc', ten: 'Đồ chơi người lớn', loai: 'tmdt', icon: '🌹', bai2: 'do-choi-nguoi-lon-tc' },
+  { kb: 'tui-xach-nu-tc', ten: 'Thời trang túi xách nữ', loai: 'tmdt', icon: '👜', bai2: 'tui-xach-nu-tc' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨', bai2: 'tham-my-vien' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂', bai2: 'lam-banh-tc' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️', bai2: 'nha-di-dong-tc' },
@@ -46,6 +49,7 @@ window.DANH_SACH = [
   { kb: 'tiec-luu-dong-tc', ten: 'Nấu cỗ, tiệc lưu động', loai: 'cnn', icon: '🍲', bai2: 'tiec-luu-dong-tc' },
   { kb: 'bat-dong-san-tc', ten: 'Bất động sản, đất nền', loai: 'cnn', icon: '🏡', bai2: 'bat-dong-san-tc' },
   { kb: 'chung-cu-tc', ten: 'Bất động sản, chung cư', loai: 'cnn', icon: '🏢', bai2: 'chung-cu-tc' },
+  { kb: 'bao-hiem-nhan-tho-tc', ten: 'Bảo hiểm nhân thọ', loai: 'cnn', icon: '🛡️', bai2: 'bao-hiem-nhan-tho-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'my-pham', ten: 'Mỹ phẩm', loai: 'tmdt', icon: '💄', hien: false },
