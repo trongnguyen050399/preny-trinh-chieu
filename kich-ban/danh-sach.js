@@ -33,6 +33,7 @@ window.DANH_SACH = [
   { kb: 'phu-tung-xe-may-tc', ten: 'Phụ tùng xe máy', loai: 'tmdt', icon: '🏍️', bai2: 'phu-tung-xe-may-tc' },
   { kb: 'do-choi-nguoi-lon-tc', ten: 'Đồ chơi người lớn', loai: 'tmdt', icon: '🌹', bai2: 'do-choi-nguoi-lon-tc' },
   { kb: 'tui-xach-nu-tc', ten: 'Thời trang túi xách nữ', loai: 'tmdt', icon: '👜', bai2: 'tui-xach-nu-tc' },
+  { kb: 'noi-that-oto-tc', ten: 'Nội thất ô tô', loai: 'tmdt', icon: '🚗', bai2: 'noi-that-oto-tc' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨', bai2: 'tham-my-vien' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂', bai2: 'lam-banh-tc' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️', bai2: 'nha-di-dong-tc' },
