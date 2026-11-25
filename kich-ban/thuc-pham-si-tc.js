@@ -3,7 +3,7 @@
    (AI lên kịch bản ngắn gọn, khách xin giá, AI hỏi số lượng, xin sđt và địa chỉ chốt đơn luôn)".
    Từ 23/11/2026 bỏ demo chat vào thẳng (&demo): file chỉ có phần deck cho Bài 1 (slide), không viết steps/features.
    Mạch ngắn trên slide: anh Tài chủ xe bánh mì hỏi giá sỉ chả lụa, pate
-     → AI báo giá sỉ (từ 5kg), hỏi mỗi ngày bán bao nhiêu ổ → 150 ổ/ngày → gợi ý combo bánh mì 5kg 830.000đ
+     → AI báo giá sỉ (từ 5kg), hỏi khách muốn lấy mấy ký → khách lấy combo 5kg 830.000đ (25/11/2026 bỏ hỏi số ổ: AI chưa tự tính số lượng)
      → xin SĐT + địa chỉ → lên đơn luôn → chăm sóc sau bán: gợi ý chả bò, pate hũ, thịt nguội, giò lụa Tết đặt trước.
    Không có tin tự động cập nhật vận chuyển. Không hứa an toàn tuyệt đối: chỉ nói hàng làm mỗi ngày, bảo quản ngăn mát 5–7 ngày.
    Tên xưởng, giá, khách, SĐT, địa chỉ: dữ liệu minh họa (không dùng thương hiệu giò chả thật).
@@ -58,9 +58,9 @@
         chat: [
           { ref: { img: L(IMG['cha-lua']), ten: 'Chả lụa, giò thủ, pate bán sỉ' } },
           { kh: 'Giá sỉ chả lụa vs pate sao shop? a bán xe bánh mì' },
-          { ai: 'Dạ sỉ từ 5kg: **chả lụa 175.000đ/kg**, **pate gan 120.000đ/kg** ạ. Xe anh mỗi ngày bán khoảng **bao nhiêu ổ** để em tính số ký cho vừa nha?', meta: '⚡ Preny AI trả lời sau 2 giây' },
-          { kh: 'tầm 150 ổ/ngày e' },
-          { ai: 'Dạ 150 ổ anh lấy **combo bánh mì 5kg** (2kg chả lụa, 1kg giò thủ, 1kg pate, 1kg thịt nguội) **830.000đ**, dùng 2–3 ngày, giao trong ngày ạ. Anh gửi em SĐT, địa chỉ nha.' },
+          { ai: 'Dạ sỉ từ 5kg: **chả lụa 175.000đ/kg**, **pate gan 120.000đ/kg** ạ. Anh muốn lấy **mấy ký, loại nào** ạ?', meta: '⚡ Preny AI trả lời sau 2 giây' },
+          { kh: 'lấy a combo 5kg nha e' },
+          { ai: 'Dạ em ghi **combo 5kg** (2kg chả lụa, 1kg giò thủ, 1kg pate, 1kg thịt nguội) **830.000đ**, giao trong ngày ạ. Anh gửi em SĐT, địa chỉ để em lên đơn nha.' },
           { kh: 'Tài, 0937 254 816, 112 Quang Trung, Gò Vấp' },
           { ai: 'Dạ em lên đơn combo 5kg, giao trước 3h chiều nay cho anh ạ ⚡' },
           { don: true },
@@ -108,14 +108,14 @@
         refImg: L(IMG['cha-lua']), refTen: 'Chả lụa bán sỉ',
         vd1: {
           kh: 'Chả lụa bên shop có dai, có thơm không? A bán bánh mì',
-          ai: 'Dạ chả bên em giã thịt nạc mỗi sáng, dai giòn ạ. Xe anh mỗi ngày bán bao nhiêu ổ ạ?',
+          ai: 'Dạ chả bên em giã thịt nạc mỗi sáng, dai giòn ạ. Anh muốn lấy mấy ký ạ?',
           tag: '🏷 #ChaLua', tagNote: 'thẻ từ quảng cáo · khách im 1 ngày',
           nhac: 'Anh ơi, em gửi anh <b>ảnh thật mẻ chả lụa</b> sáng nay, cắt lát dày vừa ổ bánh mì ạ 🥖',
           dung: '🎯 Theo thẻ #ChaLua: nhắc đúng món khách hỏi',
-          khach: 'Tầm 150 ổ/ngày e',
+          khach: 'Lấy a 3kg chả lụa nha e',
         },
         vd2: {
-          kh: '150 ổ thì lấy bao nhiêu ký vậy shop?',
+          kh: 'Combo 5kg bao nhiêu vậy shop?',
           ai: 'Dạ anh lấy combo bánh mì 5kg <b>830.000đ</b> ạ.',
           tag: '🏷 #HoiGia', tagNote: 'báo giá xong khách im 1 ngày',
           nhac: 'Anh ơi, combo 5kg anh hỏi hôm qua, đặt trước 11h là em <b>giao trong ngày, miễn phí giao</b> ạ. Em lên đơn cho anh nha?',
@@ -129,7 +129,7 @@
         kav: 'TB', kten: 'Thanh Bình', hoi: 'Pate sỉ cho quán ăn sáng giá sao? Có giao Thủ Đức không?',
         traLoi: 'Dạ chào anh Bình! Shop vừa nhắn tin báo giá chi tiết cho anh, anh xem tin nhắn nhé 💬',
         act2: 'Nhắn tin riêng báo giá sỉ pate',
-        nhan: 'Chào anh Bình! Pate gan sỉ bên em <b>120.000đ/kg</b>, từ 5kg giao Thủ Đức trong ngày ạ. Quán anh mỗi ngày dùng khoảng bao nhiêu ký để em báo đúng nha?',
+        nhan: 'Chào anh Bình! Pate gan sỉ bên em <b>120.000đ/kg</b>, từ 5kg giao Thủ Đức trong ngày ạ. Anh muốn lấy mấy ký ạ?',
         sp: { ten: 'Pate gan bán sỉ', gia: '120.000đ/kg', img: L(IMG['pate']) },
         khach: 'Tầm 3kg/ngày, lấy a 6kg trước',
       },

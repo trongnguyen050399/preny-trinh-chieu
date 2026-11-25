@@ -1,13 +1,13 @@
 /* Bài 2 (video demo ngang tự chạy): THỰC PHẨM BÁN SỈ (chả lụa, giò thủ, pate, thịt nguội, có combo), nhóm thương mại điện tử.
    Làm 25/11/2026 theo người dùng: "AI lên kịch bản ngắn gọn, khách xin giá, AI hỏi số lượng, xin sđt và địa chỉ chốt đơn luôn".
    - 1 cảnh duy nhất: bài quảng cáo, 2 khách bình luận (giá sỉ chả lụa, pate có giao Thủ Đức) → trả lời cả 2 "Mình check ib shop nha"
-     → AI nhắn inbox trước: giá sỉ + đúng ảnh quảng cáo, hỏi 1 điều (mỗi ngày bán bao nhiêu ổ)
-     → ca khó: khách mới nói "lấy như mọi khi nha e" → AI nói rõ đây là đơn đầu, hỏi lại số ổ mỗi ngày (không đoán đơn cũ)
-     → 150 ổ/ngày → AI gợi ý combo bánh mì 5kg 830.000đ → hỏi giao 1 lần hay 2 ngày/lần → khách chọn 2 ngày/lần
+     → AI nhắn inbox trước: báo giá sỉ + combo, gửi đúng ảnh quảng cáo, hỏi khách muốn lấy mấy ký → khách: lấy combo 5kg
+     → AI xin SĐT + địa chỉ (25/11/2026 người dùng bỏ đoạn hỏi xe bán bao nhiêu ổ, "lấy như mọi khi"/đơn đầu, giao 2 ngày/lần:
+       AI chưa check được khách cũ/mới, chưa tự tính số lượng; chỉ báo giá, gửi ảnh, xin số lượng, xin SĐT + địa chỉ lên đơn)
      → AI xin SĐT + địa chỉ → khách im → gắn thẻ → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT + địa chỉ
      → tóm tắt đơn → Purchase lên Facebook → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 sản phẩm giảm giá
      → Zalo: hỏi thăm, bán chạy, đặt trước hàng Tết → tổng kết → logo.
-   - Chỉ 1 sản phẩm từ đầu tới cuối (combo bánh mì 5kg). Không hứa an toàn tuyệt đối, không tin cập nhật vận chuyển.
+   - Chỉ 1 sản phẩm từ đầu tới cuối (combo 5kg). Không hứa an toàn tuyệt đối, không tin cập nhật vận chuyển.
      Tên xưởng, giá, khách, SĐT, địa chỉ: minh họa. Ảnh: Pexels (file px-…) + Unsplash, ảnh thật, dùng chung với bài 1. */
 window.VN_KB = {
   ten: 'Thực phẩm bán sỉ video ngang',
@@ -37,7 +37,7 @@ window.VN_KB = {
     { k: 'canh', nhan: 'Bình luận quảng cáo → Inbox', gio: '14:46' },
     { k: 'ad', ad: {
         img: 'cha-lua', nhan: 'MESSENGER', tieuDe: 'Giò chả, pate bán sỉ · giao trong ngày', nut: 'Gửi tin nhắn',
-        text: 'GIÒ CHẢ, PATE BÁN SỈ CHO XE BÁNH MÌ 🥖 Chả lụa sỉ 175K/kg, giò thủ, pate gan, thịt nguội. Combo bánh mì 5kg chỉ 830K. Hàng làm mỗi ngày, giao trong ngày nội thành. #giochasi #chalua #patebanhmi',
+        text: 'GIÒ CHẢ, PATE BÁN SỈ CHO XE BÁNH MÌ 🥖 Chả lụa sỉ 175K/kg, giò thủ, pate gan, thịt nguội. Combo 5kg chỉ 830K. Hàng làm mỗi ngày, giao trong ngày nội thành. #giochasi #chalua #patebanhmi',
       }, d: 1500 },
     { k: 'cap', e: 'Bình luận hỏi giá', t: 'Chủ xe bánh mì hỏi giá sỉ dưới quảng cáo', s: 'Một khách khác hỏi pate có giao Thủ Đức không' },
     { k: 'cmt', i: 0, ten: 'Văn Tài', av: 'VT', text: 'Giá sỉ chả lụa sao shop?' },
@@ -46,22 +46,14 @@ window.VN_KB = {
     { k: 'rep', i: 0, text: 'Mình check ib shop nha 💬' },
     { k: 'rep', i: 1, text: 'Mình check ib shop nha 💬' },
     { k: 'ms', ref: { loai: 'cmt', img: 'cha-lua', dong1: 'Bạn đã bình luận về quảng cáo của Giò Chả Bà Sáu', dong2: '"Giá sỉ chả lụa sao shop?"' }, gio: '14:47' },
-    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá sỉ, gửi đúng ảnh quảng cáo', s: 'Hỏi ngay số lượng để báo đúng' },
-    { k: 'ai', text: 'Dạ chào anh Tài, giá sỉ bên em từ 5kg: **chả lụa 175.000đ/kg**, giò thủ 210.000đ, pate gan 120.000đ, thịt nguội 190.000đ ạ.' },
+    { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá sỉ, gửi đúng ảnh quảng cáo', s: 'Rồi hỏi khách muốn lấy bao nhiêu' },
+    { k: 'ai', text: 'Dạ chào anh Tài, giá sỉ bên em từ 5kg: **chả lụa 175.000đ/kg**, giò thủ 210.000đ, pate gan 120.000đ, thịt nguội 190.000đ ạ. **Combo 5kg** (2kg chả lụa, 1kg giò thủ, 1kg pate, 1kg thịt nguội) giá **830.000đ**.' },
     { k: 'ai', img: 'cha-lua' },
-    { k: 'ai', text: 'Xe anh mỗi ngày bán khoảng **bao nhiêu ổ** ạ, để em tính số ký cho vừa, không dư hàng nha?' },
-
-    { k: 'cap', e: 'Khách nói chưa rõ', t: 'Khách mới nói "lấy như mọi khi"', s: 'AI không đoán đơn cũ, hỏi lại số lượng' },
-    { k: 'kh', text: 'lấy như mọi khi nha e' },
-    { k: 'ai', text: 'Dạ đây là **đơn đầu tiên** anh đặt bên em nên em chưa có đơn cũ ạ. Anh cho em xin **mỗi ngày bán khoảng bao nhiêu ổ** để em lên đúng số ký nha.' },
-    { k: 'kh', text: 'à tầm 150 ổ/ngày, có chả, pate, thịt nguội' },
-    { k: 'ai', text: 'Dạ 150 ổ anh lấy **combo bánh mì 5kg**: 2kg chả lụa, 1kg giò thủ, 1kg pate, 1kg thịt nguội, giá **830.000đ** (rẻ hơn lấy lẻ), dùng 2–3 ngày ạ.' },
-    { k: 'ai', imgs: ['cha-lua', 'pate', 'thit-nguoi'] },
-    { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'AI hỏi giao 1 lần hay giao định kỳ', s: 'Giao 2 ngày/lần cho hàng luôn mới' },
-    { k: 'ai', text: 'Anh muốn em giao **1 lần 5kg** hay **chia giao 2 ngày/lần** cho hàng luôn mới ạ? Giò chả bên em làm mỗi sáng, bảo quản ngăn mát dùng 5–7 ngày.' },
-    { k: 'kh', text: '2 ngày 1 lần đi e' },
-    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ em ghi **combo bánh mì 5kg** 830.000đ, giao 2 ngày/lần, miễn phí giao nội thành. Anh gửi em **SĐT và địa chỉ** để em lên đơn nha.' },
+    { k: 'ai', text: 'Anh muốn lấy **mấy ký, loại nào** ạ?' },
+    { k: 'cap', e: 'Khách báo số lượng', t: 'Khách tự nói muốn lấy bao nhiêu', s: 'AI ghi đúng số lượng khách đặt' },
+    { k: 'kh', text: 'lấy a combo 5kg nha e' },
+    { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Có số lượng: AI xin SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ em ghi **combo 5kg** (2kg chả lụa, 1kg giò thủ, 1kg pate, 1kg thịt nguội), **830.000đ**, miễn phí giao nội thành. Anh gửi em **SĐT và địa chỉ** để em lên đơn nha.' },
 
     // Khách im sau khi được xin SĐT, địa chỉ → màn hình phụ: gắn thẻ (3 hashtag quảng cáo + thẻ từ cuộc chat), bám đuổi 3 tin
     { k: 'seen', d: 1200 },
@@ -72,21 +64,21 @@ window.VN_KB = {
     { k: 'p', a: 'rule', d: 2600 },
     { k: 'cap', e: 'Bám đuổi theo thẻ', t: '3 tin ngắn: 15 phút, 3 tiếng, 20 tiếng', s: 'Chỉ nói về đúng combo khách đã chọn' },
     { k: 'time', nhan: '15 phút sau', gio: '15:04', ngay: 'T4 25/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh Tài ơi, em giữ cho anh **combo bánh mì 5kg** rồi ạ. Anh gửi em SĐT, địa chỉ để em xếp xe giao kịp chiều nay nha 😊' },
+    { k: 'ai', text: 'Anh Tài ơi, em giữ cho anh **combo 5kg** rồi ạ. Anh gửi em SĐT, địa chỉ để em xếp xe giao kịp chiều nay nha 😊' },
     { k: 'p', a: 'r1', d: 900 },
     { k: 'time', nhan: '3 tiếng sau', gio: '17:49', ngay: 'T4 25/11/2026', d: 700 },
     { k: 'ai', text: 'Em gửi anh ảnh thật mẻ chả lụa, pate làm sáng nay bên em nha 🥖 Cắt lát dày vừa ổ bánh mì, khách xe bánh mì lấy đều mỗi tuần.' },
     { k: 'ai', imgs: ['cha-lat', 'pate-2', 'banh-mi'] },
     { k: 'p', a: 'r2', d: 900 },
     { k: 'time', nhan: '20 tiếng sau', gio: '10:49', ngay: 'T5 26/11/2026', d: 700 },
-    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ** trước 11h là em giao combo trong ngày, **tặng 500g pate** đơn đầu ạ ⚡' },
+    { k: 'ai', text: 'Anh chỉ cần gửi **SĐT và địa chỉ** trước 11h là em giao combo trong ngày, **tặng 500g pate** ạ ⚡' },
     { k: 'p', a: 'r3', d: 1000 },
     { k: 'cap', e: 'Khách quay lại', t: 'Sau tin thứ 3, khách gửi SĐT, địa chỉ', s: 'AI tổng hợp đơn ngay' },
     { k: 'kh', text: 'Tài 0937254816, 112 quang trung p10 gò vấp' },
     { k: 'p', a: 'reply', d: 1600 },
     { k: 'panel', v: null, d: 500 },
-    { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: combo, lịch giao, quà tặng, SĐT, địa chỉ' },
-    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Combo bánh mì 5kg (chả lụa, giò thủ, pate, thịt nguội)\n– Giao 2 ngày/lần · tặng 500g pate đơn đầu\n– Tổng: **830.000đ** (miễn phí giao)\n– Người nhận: Tài · 0937254816\n– 112 Quang Trung, P.10, Gò Vấp\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3400 },
+    { k: 'cap', e: 'Chốt đơn', t: 'Tự tổng hợp đơn: combo, quà tặng, SĐT, địa chỉ' },
+    { k: 'ai', text: 'Dạ anh kiểm tra lại đơn giúp em nha:\n– Combo 5kg (chả lụa, giò thủ, pate, thịt nguội)\n– Tặng 500g pate\n– Tổng: **830.000đ** (miễn phí giao)\n– Người nhận: Tài · 0937254816\n– 112 Quang Trung, P.10, Gò Vấp\nAnh xác nhận giúp em đơn này nha.', nut: 'Quản lý đơn hàng', d: 3400 },
     { k: 'cap', e: 'Xong', t: 'Khách chỉ cần nói "Ok e"' },
     { k: 'kh', text: 'Ok e' },
     { k: 'ai', text: 'Dạ em lên đơn, giao anh trong chiều nay nha ⚡', d: 1300 },
@@ -120,7 +112,7 @@ window.VN_KB = {
     { k: 'cap', e: 'Chăm sóc sau bán qua Zalo', t: 'Khách nhận hàng: AI hỏi chả bán có hợp khách không', s: 'Dặn cách bảo quản, xin đánh giá trong tin Zalo OA' },
     { k: 'zns', zns: {
         img: 'banh-mi', tieuDe: 'Anh Tài ơi, chả bán có hợp khách không ạ?',
-        noiDung: 'Giò Chả Bà Sáu cảm ơn anh đã nhận đơn **#BS25119** (combo bánh mì 5kg). Anh để giò chả ngăn mát, xe không có tủ thì để thùng đá và dùng trong ngày cho ngon nha!',
+        noiDung: 'Giò Chả Bà Sáu cảm ơn anh đã nhận đơn **#BS25119** (combo 5kg). Anh để giò chả ngăn mát, xe không có tủ thì để thùng đá và dùng trong ngày cho ngon nha!',
         nut: 'Đánh giá sản phẩm',
       }, d: 4200 },
     { k: 'cap', e: 'ZBS · Sản phẩm bán chạy', t: '1 tuần sau: gửi sản phẩm bán chạy qua Zalo', s: 'Khách không cần trả lời' },
@@ -157,14 +149,14 @@ window.VN_KB = {
              ['Thẻ từ cuộc chat', [['#baogia', 'ht'], ['#Combo5kg', 'qt']]]],
       im: 'Khách im từ 14:52, sau khi được xin SĐT, địa chỉ',
       rule: { lb: 'Bám đuổi theo thẻ #chalua', tieuDe: '3 tin ngắn về đúng combo khách đã chọn',
-              dong: [['15 phút', 'Đã giữ combo bánh mì 5kg'], ['3 tiếng', 'Gửi ảnh thật mẻ chả, pate sáng nay'], ['20 tiếng', 'Gửi SĐT trước 11h là giao trong ngày']] },
+              dong: [['15 phút', 'Đã giữ combo 5kg'], ['3 tiếng', 'Gửi ảnh thật mẻ chả, pate sáng nay'], ['20 tiếng', 'Gửi SĐT trước 11h là giao trong ngày']] },
       reply: 'Khách gửi SĐT, địa chỉ · dừng bám đuổi' },
     capi: { tieuDe: 'Gửi đơn hàng cho Facebook', event: 'Purchase', nhan: 'SỰ KIỆN MUA HÀNG', giaTri: '830.000đ', pk: 'Purchase · 830.000đ',
-      dong: [['Đơn hàng', '#BS25119 · combo bánh mì 5kg'], ['Nguồn khách', 'Bình luận quảng cáo Giò chả bán sỉ → Messenger'], ['Giá trị', '830.000 VND'], ['Event ID', 'BS25119-PURCHASE (chống trùng)']],
+      dong: [['Đơn hàng', '#BS25119 · combo 5kg'], ['Nguồn khách', 'Bình luận quảng cáo Giò chả bán sỉ → Messenger'], ['Giá trị', '830.000 VND'], ['Event ID', 'BS25119-PURCHASE (chống trùng)']],
       ok: 'Facebook đã nhận sự kiện mua hàng' },
   },
   donHang: {
-    ma: '#BS25119', sp: 'Combo bánh mì 5kg', bien: 'Chả lụa, giò thủ, pate, thịt nguội · giao 2 ngày/lần', img: 'cha-lua', gia: '830.000đ',
+    ma: '#BS25119', sp: 'Combo 5kg', bien: 'Chả lụa, giò thủ, pate, thịt nguội · x1 combo', img: 'cha-lua', gia: '830.000đ',
     nv: { ten: 'Nhân viên Sáu', av: 'NS' },
     ten: 'Nguyễn Văn Tài', sdt: '0937254816', dc: '112 Quang Trung, P.10, Q. Gò Vấp, TP.HCM', gio: '11:02 · 26/11/2026',
   },
