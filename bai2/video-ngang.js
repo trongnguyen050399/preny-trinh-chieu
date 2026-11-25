@@ -148,6 +148,11 @@
     if (b.imgs) return `<div class="album${b.imgs.length === 2 ? ' two' : ''}">${b.imgs.map(k => `<img src="${IMG(k)}" alt="">`).join('')}</div>`;
     if (b.review) { const r = b.review; return `<div class="rv"><div class="rv-h"><span class="av sm" style="background:${r.mau || '#EC4899'}">${esc(r.av)}</span><div><b>${esc(r.ten)}</b><small>${esc(r.sub)}</small></div></div>
       <div class="rv-s">★★★★★</div><p>${md(r.text)}</p>${r.note ? `<small class="rv-n">${esc(r.note)}</small>` : ''}</div>`; }
+    // thực đơn gửi trong chat: { tieuDe, mon: [{ img, ten, gia }] } (25/11/2026, ngành nhà hàng)
+    if (b.menu) return `<div class="mn"><div class="mn-h">${esc(b.menu.tieuDe)}</div>${b.menu.mon.map(x => `<div class="mn-r"><img src="${IMG(x.img)}" alt=""><span>${esc(x.ten)}</span><b>${esc(x.gia)}</b></div>`).join('')}</div>`;
+    // địa chỉ + Google Maps: { img, ten, dc } (bản đồ vẽ bằng CSS, địa chỉ minh họa)
+    if (b.map) return `<div class="mp">${b.map.img ? `<img src="${IMG(b.map.img)}" alt="">` : ''}<div class="mp-m"><i class="mp-pin"></i><span>${esc(b.map.nhan || b.map.ten)}</span></div>
+      <div class="mp-b"><small>📍 Google Maps</small><b>${esc(b.map.ten)}</b><div>${esc(b.map.dc)}</div><em>(địa chỉ minh họa)</em></div><div class="mp-n"><span>Xem bản đồ</span><span>Chỉ đường</span></div></div>`;
     if (b.checks) return `<div class="bb ck2"><b class="ckt">${esc(b.checks.tieuDe)}</b>${b.checks.dong.map(x => `<div class="ckl"><i>✓</i><span>${md(x)}</span></div>`).join('')}</div>`;
     return `<div class="bb">${md(b.text)}${b.nut ? `<span class="btn">${esc(b.nut)}</span>` : ''}</div>`;
   }
@@ -284,7 +289,7 @@
       const ty = b.text ? clamp(650 + len * 4, 800, 1500) : 700;
       at(0, () => aiTyping(true));
       at(ty, () => { aiTyping(false); addRow('ai', aiInner(b)); });
-      const hold = b.text ? clamp(700 + len * 30, 1500, 4600) : b.card ? 1900 : b.imgs ? 2300 : b.review ? 4200 : b.checks ? 3800 : 1500;
+      const hold = b.text ? clamp(700 + len * 30, 1500, 4600) : b.card ? 1900 : b.imgs ? 2300 : b.review ? 4200 : b.checks ? 3800 : b.menu ? 4200 : b.map ? 3600 : 1500;
       return ty + (b.d || hold);
     },
     kh: (b, at) => {
