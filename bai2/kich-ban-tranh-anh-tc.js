@@ -1,7 +1,7 @@
 /* Bài 2 (video demo ngang tự chạy): TRANH ẢNH TRANG TRÍ (bộ 3 tranh canvas giá rẻ), nhóm thương mại điện tử. Làm 25/11/2026 theo file mẫu Rèm cửa may sẵn:
    - 1 cảnh duy nhất: bài quảng cáo, 2 khách bình luận (giá, phòng ngủ treo size nào) → trả lời cả 2 "Mình check ib shop nha"
-     → AI nhắn inbox trước: giá + đúng ảnh quảng cáo, hỏi 1 điều (sofa dài bao nhiêu) → ca khó: khách không biết sofa dài bao nhiêu
-     → AI hướng dẫn ước lượng nhanh (sofa 3 chỗ thường khoảng 2m) → khách: sofa 3 chỗ → AI: bộ 3 tranh 40x60 là cân, đinh 3 chân không khoan, bền màu
+     → AI nhắn inbox trước: giá + đúng ảnh quảng cáo → khách hỏi có những size nào → AI báo gọn 2 size kèm giá (40x60 590k, 50x75 790k)
+     → khách lấy 40x60 (25/11/2026 người dùng bỏ đoạn hỏi sofa dài bao nhiêu: "chỉ cần đơn giản là hỏi kích thước tranh thôi, báo giá đơn giản thôi")
      → hỏi mẫu lá cây / trừu tượng tông kem / đen trắng → khách chọn lá cây → AI xin SĐT + địa chỉ → khách im
      → gắn thẻ (3 hashtag quảng cáo + #baogia + mẫu khách chọn) → bám đuổi 3 tin 15 phút, 3 tiếng, 20 tiếng → khách gửi SĐT + địa chỉ
      → tóm tắt đơn → Purchase lên Facebook → đơn tự động, nhân viên bấm xác nhận → cảm ơn + 5 sản phẩm giảm giá
@@ -48,17 +48,15 @@ window.VN_KB = {
     { k: 'cap', e: 'AI nhắn trước', t: 'Inbox trước: báo giá, gửi đúng ảnh quảng cáo', s: 'Khách không cần mô tả lại sản phẩm' },
     { k: 'ai', text: 'Dạ chào chị Bích Phương, bộ 3 tranh canvas bên em giá **590.000đ/bộ** (mỗi tranh 40x60cm) ạ. Kèm **đinh 3 chân**, tường bê tông **không cần khoan**.' },
     { k: 'ai', img: 'bo-3-truu-tuong' },
-    { k: 'ai', text: 'Chị định treo trên **sofa dài bao nhiêu** ạ, để em gợi ý đúng size cho cân tường nha?' },
 
-    { k: 'cap', e: 'Khách chưa có số đo', t: 'Khách không biết sofa dài bao nhiêu', s: 'AI chỉ cách ước lượng nhanh, không đoán bừa' },
-    { k: 'kh', text: 'c mới dọn nhà, ko biết sofa dài bn nữa e' },
-    { k: 'ai', text: 'Dạ chị đếm giúp em **sofa mấy chỗ ngồi** nha: sofa 2 chỗ thường khoảng 1m6, **sofa 3 chỗ khoảng 2m** ạ. Tranh nên rộng khoảng 2/3 chiều dài sofa là cân.' },
-    { k: 'kh', text: 'sofa 3 chỗ e, tranh có bị phai ko' },
-    { k: 'ai', text: 'Dạ sofa 3 chỗ chị treo **bộ 3 tranh 40x60cm** là cân ạ, tổng ngang khoảng 1m3. Tranh **tráng gương, mực in bền màu** khi treo trong nhà, khung composite nhẹ, đinh 3 chân gõ là xong.' },
+    { k: 'cap', e: 'Khách hỏi kích thước', t: 'AI báo các size kèm giá trong 1 tin', s: 'Ngắn gọn, khách chọn được ngay' },
+    { k: 'kh', text: 'có những size nào e?' },
+    { k: 'ai', text: 'Dạ bên em có 2 size ạ:\n– Bộ 3 tranh **40x60cm**: **590.000đ**\n– Bộ 3 tranh **50x75cm**: **790.000đ**\nĐều tráng gương bền màu, freeship ạ.' },
+    { k: 'kh', text: 'lấy 40x60 nha e' },
     { k: 'cap', e: 'Hỏi đúng thứ còn thiếu', t: 'Có size rồi: AI hỏi khách thích mẫu nào', s: 'Gửi ảnh từng mẫu để khách chọn nhanh' },
-    { k: 'ai', text: 'Chị thích mẫu **lá cây xanh**, **trừu tượng tông kem** hay **đen trắng tối giản** ạ? Lá cây hợp sofa kem, đen trắng hợp sofa xám.' },
+    { k: 'ai', text: 'Chị thích mẫu **lá cây xanh**, **trừu tượng tông kem** hay **đen trắng tối giản** ạ?' },
     { k: 'ai', imgs: ['la-cay', 'truu-tuong-kem', 'bo-3-truu-tuong'] },
-    { k: 'kh', text: 'mẫu lá cây nha e, sofa nhà c màu kem' },
+    { k: 'kh', text: 'mẫu lá cây nha e' },
     { k: 'cap', e: 'Xin thông tin lên đơn', t: 'Chọn xong: AI xin SĐT, địa chỉ' },
     { k: 'ai', text: 'Dạ em ghi **bộ 3 tranh canvas lá cây** 40x60cm, **590.000đ**, freeship. Chị gửi em **SĐT và địa chỉ** để em lên đơn nha.' },
 
