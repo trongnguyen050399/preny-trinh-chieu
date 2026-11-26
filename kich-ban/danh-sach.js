@@ -43,6 +43,12 @@ window.DANH_SACH = [
   { kb: 'nem-tc', ten: 'Nệm', loai: 'tmdt', icon: '🛏️', bai2: 'nem-tc' },
   { kb: 'su-kien-gia-re-tc', ten: 'Dịch vụ sự kiện giá rẻ (sinh nhật)', loai: 'tmdt', icon: '🎈', bai2: 'su-kien-gia-re-tc' },
   { kb: 'camera-tc', ten: 'Camera an ninh (camera wifi)', loai: 'tmdt', icon: '📷', bai2: 'camera-tc' },
+  { kb: 'tra-thai-nguyen-tc', ten: 'Trà Thái Nguyên (trà gói)', loai: 'tmdt', icon: '🍃', bai2: 'tra-thai-nguyen-tc' },
+  { kb: 'am-tra-tc', ten: 'Ấm trà, bộ ấm chén', loai: 'tmdt', icon: '🫖', bai2: 'am-tra-tc' },
+  { kb: 'in-anh-tc', ten: 'Xưởng in ảnh (album, ảnh ép gỗ, khung)', loai: 'tmdt', icon: '🖨️', bai2: 'in-anh-tc' },
+  { kb: 'long-ga-tc', ten: 'Lồng gà', loai: 'tmdt', icon: '🐔', bai2: 'long-ga-tc' },
+  { kb: 'vat-tu-tuoi-tc', ten: 'Vật tư tưới công nghệ cao', loai: 'tmdt', icon: '💦', bai2: 'vat-tu-tuoi-tc' },
+  { kb: 'hat-giong-tc', ten: 'Hạt giống, cây giống', loai: 'tmdt', icon: '🌱', bai2: 'hat-giong-tc' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨', bai2: 'tham-my-vien' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂', bai2: 'lam-banh-tc' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️', bai2: 'nha-di-dong-tc' },
@@ -67,6 +73,7 @@ window.DANH_SACH = [
   { kb: 'cua-hang-dien-thoai-tc', ten: 'Cửa hàng điện thoại (mời tới xem)', loai: 'cnn', icon: '📱', bai2: 'cua-hang-dien-thoai-tc' },
   { kb: 'thiet-ke-website-tc', ten: 'Dịch vụ thiết kế website', loai: 'cnn', icon: '💻', bai2: 'thiet-ke-website-tc' },
   { kb: 'to-chuc-su-kien-tc', ten: 'Dịch vụ tổ chức sự kiện', loai: 'cnn', icon: '🎉', bai2: 'to-chuc-su-kien-tc' },
+  { kb: 'xe-hoi-tc', ten: 'Showroom xe hơi (mời lái thử)', loai: 'cnn', icon: '🚘', bai2: 'xe-hoi-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'du-lich-luu-tru-tc', ten: 'Du lịch, lưu trú', loai: 'tmdt', icon: '🏝️', bai2: 'du-lich-luu-tru-tc', hien: false },   // 23/11/2026 người dùng bỏ, tách thành tour-du-lich-tc + homestay-tc
