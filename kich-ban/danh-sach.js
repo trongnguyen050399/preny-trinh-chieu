@@ -61,6 +61,7 @@ window.DANH_SACH = [
   { kb: 'buffet-tc', ten: 'Nhà hàng buffet', loai: 'cnn', icon: '🍖', bai2: 'buffet-tc' },
   { kb: 'nha-hang-an-tc', ten: 'Nhà hàng ăn uống', loai: 'cnn', icon: '🍣', bai2: 'nha-hang-an-tc' },
   { kb: 'cua-hang-dien-thoai-tc', ten: 'Cửa hàng điện thoại (mời tới xem)', loai: 'cnn', icon: '📱', bai2: 'cua-hang-dien-thoai-tc' },
+  { kb: 'thiet-ke-website-tc', ten: 'Dịch vụ thiết kế website', loai: 'cnn', icon: '💻', bai2: 'thiet-ke-website-tc' },
 
   // Tạm ẩn — đã có video, sẽ làm lại bản trình chiếu từng ngành
   { kb: 'du-lich-luu-tru-tc', ten: 'Du lịch, lưu trú', loai: 'tmdt', icon: '🏝️', bai2: 'du-lich-luu-tru-tc', hien: false },   // 23/11/2026 người dùng bỏ, tách thành tour-du-lich-tc + homestay-tc
