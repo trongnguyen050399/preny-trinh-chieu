@@ -39,6 +39,7 @@ window.DANH_SACH = [
   { kb: 'rem-cua-tc', ten: 'Rèm cửa may sẵn', loai: 'tmdt', icon: '🪟', bai2: 'rem-cua-tc' },
   { kb: 'tranh-anh-tc', ten: 'Tranh ảnh trang trí', loai: 'tmdt', icon: '🖼️', bai2: 'tranh-anh-tc' },
   { kb: 'thuc-pham-si-tc', ten: 'Thực phẩm bán sỉ (giò chả, pate)', loai: 'tmdt', icon: '🥖', bai2: 'thuc-pham-si-tc' },
+  { kb: 'tram-huong-tc', ten: 'Trầm hương (nhang, nụ trầm, vòng tay)', loai: 'tmdt', icon: '🪔', bai2: 'tram-huong-tc' },
   { kb: 'tham-my-spa-tc', ten: 'Thẩm mỹ, Spa', loai: 'cnn', icon: '✨', bai2: 'tham-my-vien' },
   { kb: 'lam-banh-tc', ten: 'Khóa học làm bánh', loai: 'cnn', icon: '🎂', bai2: 'lam-banh-tc' },
   { kb: 'nha-di-dong-tc', ten: 'Nhà di động, resort', loai: 'cnn', icon: '🏕️', bai2: 'nha-di-dong-tc' },
